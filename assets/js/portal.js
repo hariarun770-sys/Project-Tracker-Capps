@@ -9,15 +9,27 @@ const DEFAULT_PROJECTS = [
     id: 'onenex',
     name: 'OneNex',
     icon: '🍽️',
-    release: 'Release 1.1 (Phase 1)',
-    leads: 'Core Cross-Functional Team (6 Developers)',
+    release: 'Release 1.2 (Testing & Assessment)',
+    leads: 'Imthath & Team (4 Developers — 120 Man-Days)',
     description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
-    highlights: 'Release 1.0 Delivered (10 Sep). Release 1.1 In Progress (Target: 17 Sep, 27/93 features complete). Release 1.2 Pilot & Hardening scheduled (21 Sep – 02 Nov 2026).',
+    highlights: 'Release 1.2 Testing & Assessment active (21–25 Sep). 8 API reports complete (Reservation, Auth, Billing, Service, Business, Menu, Payment, Notification). Planned live release: 02 Nov 2026.',
     selectedWeekIndex: 0,
     weeks: [
       {
+        weekNumber: 5,
+        weekLabel: 'W05 · 25 Sep 2026 (Release 1.2)',
+        weekEnding: '25 Sep 2026',
+        status: 'ON TRACK',
+        statusClass: 'green',
+        manDays: '4 Members (120 Man-Days)',
+        consumed: '17% Elapsed (20/120 Man-Days)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_25.09.2026.html',
+        scopeUrl: 'scope document/OneNex_Scope_USP_Document.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+      },
+      {
         weekNumber: 37,
-        weekLabel: 'Week 37 (11 Sep 2026)',
+        weekLabel: 'Week 37 · 11 Sep 2026 (Release 1.1)',
         weekEnding: '11 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
@@ -99,11 +111,12 @@ try {
     'portal_projects_clean_v2',
     'portal_projects_clean_v3',
     'portal_projects_onenex_v1',
-    'portal_projects_onenex_v2'
+    'portal_projects_onenex_v2',
+    'portal_projects_integration_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_integration_v1';
+const STORAGE_KEY = 'portal_projects_onenex_r12_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
