@@ -3,7 +3,7 @@
  * Executive Project Tracker - Complete Portfolio Visibility Hub
  */
 
-// Active projects list with OneNex project from executive briefing
+// Active projects list with OneNex Phase 1 and OneNex Phase 2
 const DEFAULT_PROJECTS = [
   {
     id: 'onenex',
@@ -28,6 +28,30 @@ const DEFAULT_PROJECTS = [
         timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
       }
     ]
+  },
+  {
+    id: 'onenex-phase-2',
+    name: 'OneNex Phase 2',
+    icon: '🏗️',
+    release: 'Phase 0 — Architecture',
+    leads: 'Team B (4 Developers)',
+    description: 'Architecture & System Foundations — Identity, Notification, Business Entity, and Payment engine design for Phase 2.',
+    highlights: 'Sprint 21–25 Sep: User Register, Login, Token APIs complete. Email channel complete. Payment findings review session planned. Phase 0 wraps 30 Sep.',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 39,
+        weekLabel: 'Sprint 21–25 Sep 2026',
+        weekEnding: '25 Sep 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '4 Developers (3,120h Planned)',
+        consumed: '8 Days Used (Phase 0: 8/10d)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_25.09.2026.html',
+        scopeUrl: 'scope document/OneNex_Phase_2_Scope_Architecture.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+      }
+    ]
   }
 ];
 
@@ -49,11 +73,12 @@ try {
     'portal_projects_v13_sep18_updates',
     'portal_projects_clean_v1',
     'portal_projects_clean_v2',
-    'portal_projects_clean_v3'
+    'portal_projects_clean_v3',
+    'portal_projects_onenex_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex_v1';
+const STORAGE_KEY = 'portal_projects_onenex_v2';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
