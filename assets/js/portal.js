@@ -3,7 +3,7 @@
  * Executive Project Tracker - Complete Portfolio Visibility Hub
  */
 
-// Active projects list with OneNex Phase 1 and OneNex Phase 2
+// Active projects list with OneNex Phase 1, OneNex Phase 2, and Integration Configuration
 const DEFAULT_PROJECTS = [
   {
     id: 'onenex',
@@ -52,6 +52,30 @@ const DEFAULT_PROJECTS = [
         timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
       }
     ]
+  },
+  {
+    id: 'integration-configuration',
+    name: 'Integration Configuration',
+    icon: '🔌',
+    release: 'Release 01 (Integration Setup & Monitor)',
+    leads: 'Team Althaf (50 Man-Days)',
+    description: 'Enterprise External Services & API Orchestration — automated integration setup with external systems, web services action UI, and real-time execution monitoring.',
+    highlights: 'Release 01 on track for 12 Sep 2026. 20 of 50 man-days consumed (40%). Setup & Monitor APIs in place; Web services action & monitoring UI in active development.',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 37,
+        weekLabel: 'Week 37 (11 Sep 2026)',
+        weekEnding: '11 Sep 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '50 Man-Days (Team Althaf)',
+        consumed: '40% Consumed (20/50 Man-Days)',
+        weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_11.09.2026.html',
+        scopeUrl: 'scope document/Integration_Configuration_Scope_Document.html',
+        timelineUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_11.09.2026.html'
+      }
+    ]
   }
 ];
 
@@ -74,11 +98,12 @@ try {
     'portal_projects_clean_v1',
     'portal_projects_clean_v2',
     'portal_projects_clean_v3',
-    'portal_projects_onenex_v1'
+    'portal_projects_onenex_v1',
+    'portal_projects_onenex_v2'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex_v2';
+const STORAGE_KEY = 'portal_projects_integration_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
