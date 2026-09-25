@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBC DIGITAL PLATFORM — Executive Scope & USP Specification Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: #0f172a;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      min-height: 1024px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    .scope-hdr {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #0284c7;
+    }
+
+    .hdr-left h1 {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .hdr-left p {
+      font-size: 13px;
+      color: #38bdf8;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .scope-tag {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 16px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* METADATA STRIP */
+    .scope-meta {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      padding: 10px 24px;
+      gap: 12px;
+    }
+
+    .meta-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .meta-val {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    /* BODY */
+    .scope-body {
+      padding: 20px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background: #f1f5f9;
+    }
+
+    .scope-section {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      padding: 16px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .sec-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #091e3a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+    }
+
+    .sec-title i {
+      color: #0284c7;
+    }
+
+    /* USP GRID */
+    .usp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .usp-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .usp-icon {
+      font-size: 22px;
+      color: #0284c7;
+      margin-bottom: 8px;
+    }
+
+    .usp-name {
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .usp-desc {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    /* SCOPE JOURNEY TILES */
+    .journey-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .tile {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #f8fafc;
+    }
+
+    .tile.active-release {
+      border: 2px solid #0284c7;
+      background: #f0f7ff;
+    }
+
+    .tile-header {
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tile-list {
+      list-style: none;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .tile-list li {
+      margin-bottom: 4px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .tile-list li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-size: 10px;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      background: #091e3a;
+      color: #94a3b8;
+      padding: 10px 28px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="card" class="scope-card">
+    
+    <!-- HEADER -->
+    <header class="scope-hdr">
+      <div class="hdr-left">
+        <h1>NBC DIGITAL PLATFORM — SCOPE &amp; USP SPECIFICATION</h1>
+        <p>National Broadcasting Corporation &bull; Enterprise Digital Transformation &amp; Audience Monetization</p>
+      </div>
+      <span class="scope-tag">Release 2 Specification</span>
+    </header>
+
+    <!-- METADATA -->
+    <section class="scope-meta">
+      <div class="meta-box">
+        <span class="meta-lbl">Company</span>
+        <span class="meta-val">GovTech Solutions</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-lbl">Client</span>
+        <span class="meta-val">National Broadcasting Corp.</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-lbl">Project ID</span>
+        <span class="meta-val">OGOV-GTS-002</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-lbl">Target Release</span>
+        <span class="meta-val">Release 2 (MVP+Integrations)</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-lbl">Baseline Effort</span>
+        <span class="meta-val">150 Man-Days (180 Forecast)</span>
+      </div>
+      <div class="meta-box">
+        <span class="meta-lbl">Target Go-Live</span>
+        <span class="meta-val" style="color:#dc2626;">21 October 2026</span>
+      </div>
+    </section>
+
+    <!-- BODY -->
+    <main class="scope-body">
+      
+      <!-- USP SECTION -->
+      <section class="scope-section">
+        <div class="sec-title"><i class="fa-solid fa-gem"></i> Core Unique Selling Propositions (USPs)</div>
+        <div class="usp-grid">
+          
+          <div class="usp-card">
+            <div class="usp-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="usp-name">Omnichannel Membership</div>
+            <div class="usp-desc">Comprehensive viewer registration, subscription tiers, personalized media feeds, and self-service account management across desktop &amp; mobile.</div>
+          </div>
+
+          <div class="usp-card">
+            <div class="usp-icon"><i class="fa-solid fa-cloud"></i></div>
+            <div class="usp-name">Salesforce CRM Integration</div>
+            <div class="usp-desc">Automated bi-directional sync of subscriber activities, complaints, and viewing telemetry into enterprise Salesforce CRM via approved CR-015.</div>
+          </div>
+
+          <div class="usp-card">
+            <div class="usp-icon"><i class="fa-solid fa-credit-card"></i></div>
+            <div class="usp-name">Stripe Global Payments</div>
+            <div class="usp-desc">Seamless recurring recurring subscription billing, localized digital payment methods, zero-fraud tokenization, and instant financial reconciliations.</div>
+          </div>
+
+          <div class="usp-card">
+            <div class="usp-icon"><i class="fa-solid fa-database"></i></div>
+            <div class="usp-name">Automated Data Migration</div>
+            <div class="usp-desc">High-throughput data extraction and sanitization pipeline to transition over 500k legacy NBC records smoothly into modern cloud architectures.</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SCOPE ARCHITECTURE & JOURNEY -->
+      <section class="scope-section" style="flex:1;">
+        <div class="sec-title"><i class="fa-solid fa-sitemap"></i> Release Journey &amp; Deliverables Breakdown</div>
+        <div class="journey-tiles">
+          
+          <!-- Release 1 -->
+          <div class="tile">
+            <div class="tile-header" style="color:#16a34a;">
+              <span><i class="fa-solid fa-circle-check"></i> Release 1 (Delivered)</span>
+              <span style="font-size:10px;">15 May 2026</span>
+            </div>
+            <ul class="tile-list">
+              <li>Core Booking &amp; Event Schedule Engine</li>
+              <li>Customer Management Database</li>
+              <li>One-off Payment Gateways</li>
+              <li>Basic Operational Reporting &amp; Logs</li>
+              <li>Foundation Cloud Infrastructure Deployment</li>
+            </ul>
+          </div>
+
+          <!-- Release 2 -->
+          <div class="tile active-release">
+            <div class="tile-header" style="color:#0284c7;">
+              <span><i class="fa-solid fa-circle-play"></i> Release 2 (Current Focus)</span>
+              <span style="font-size:10px; color:#dc2626;">21 Oct 2026</span>
+            </div>
+            <ul class="tile-list">
+              <li><strong>Membership Management</strong>: Subscription tiers &amp; paywalls</li>
+              <li><strong>Advanced Reporting</strong>: Real-time executive KPI dashboards</li>
+              <li><strong>Stripe Integration</strong>: Automated billing &amp; customer portals</li>
+              <li><strong>Salesforce CRM Sync</strong>: Approved under CR-015 (+30 man-days)</li>
+              <li><strong>Data Migration Tool</strong>: Legacy data validation &amp; import engine</li>
+              <li><strong>Mobile Responsive Portal</strong>: Retina-ready responsive UI</li>
+            </ul>
+          </div>
+
+          <!-- Release 3 -->
+          <div class="tile">
+            <div class="tile-header" style="color:#7c3aed;">
+              <span><i class="fa-solid fa-gem"></i> Release 3 (Future Vision)</span>
+              <span style="font-size:10px;">Nov 2026 (Tentative)</span>
+            </div>
+            <ul class="tile-list">
+              <li>Native Mobile Applications (iOS &amp; Android)</li>
+              <li>Advanced AI Recommendations &amp; Viewer Personalization</li>
+              <li>Next-Gen Content Management System (CMS)</li>
+              <li>Live Stream Broadcast Integration</li>
+              <li>Enterprise Ad-Insertion &amp; Sponsorship Analytics</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="scope-footer">
+      <div>GovTech Solutions &bull; National Broadcasting Corporation &bull; Confidential Executive Briefing</div>
+      <div>Approved by Head of PMO &bull; 4 September 2026</div>
+    </footer>
+
+  </div>
+
+  <!-- Exporter Scripts -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>
