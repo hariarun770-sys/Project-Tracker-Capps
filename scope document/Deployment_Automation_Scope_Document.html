@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deployment Automation (Optimo Deployment Tool) — Scope & Technical Architecture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 25px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #16a34a;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #2563eb;
+    }
+
+    .meta-item-val {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green {
+      color: #15803d;
+    }
+
+    /* 3-COLUMN MAIN LAYOUT */
+    .scope-main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .scope-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 10px;
+      color: #334155;
+    }
+
+    /* MODULE CARDS */
+    .phase-card-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 7px 9px;
+      background: #f8fafc;
+    }
+
+    .phase-card-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .phase-card-title {
+      font-size: 10.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .phase-card-title.green { color: #15803d; }
+    .phase-card-title.purple { color: #7c3aed; }
+    .phase-card-title.orange { color: #c2410c; }
+
+    .phase-pill {
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+    .phase-pill.green { background: #dcfce7; color: #15803d; }
+    .phase-pill.purple { background: #f3e8ff; color: #7c3aed; }
+    .phase-pill.orange { background: #ffedd5; color: #ea580c; }
+
+    .phase-bullets-list {
+      list-style: none;
+      font-size: 9.5px;
+      line-height: 1.35;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .phase-bullets-list li {
+      position: relative;
+      padding-left: 10px;
+      margin-bottom: 2.5px;
+    }
+
+    .phase-bullets-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+    }
+    .phase-bullets-list.green li::before { color: #16a34a; }
+    .phase-bullets-list.purple li::before { color: #7c3aed; }
+    .phase-bullets-list.orange li::before { color: #ea580c; }
+
+    /* EFFORT & RESOURCE TABLE */
+    .effort-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+    }
+
+    .effort-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .effort-table td {
+      padding: 4px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .effort-table tr.total-row td {
+      font-weight: 900;
+      color: #0b2d5c;
+      background: #f8fafc;
+      border-top: 1px solid #cbd5e1;
+    }
+
+    /* ARCHITECTURE PIPELINE */
+    .arch-flow-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .arch-node {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 3px solid #16a34a;
+      border-radius: 4px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .arch-node.purple { border-left-color: #7c3aed; }
+    .arch-node.blue { border-left-color: #2563eb; }
+    .arch-node.orange { border-left-color: #ea580c; }
+
+    .arch-node-title {
+      font-weight: 800;
+      font-size: 9.5px;
+      color: #0f172a;
+    }
+
+    .arch-node-desc {
+      font-size: 8.5px;
+      color: #64748b;
+    }
+
+    .arch-connector {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    /* RISK MATRIX */
+    .risk-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 9px;
+    }
+
+    .risk-item-row:last-child {
+      border-bottom: none;
+    }
+
+    .risk-pill {
+      font-size: 8px;
+      font-weight: 800;
+      padding: 1.5px 5px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+    .risk-pill.medium { background: #ffedd5; color: #ea580c; }
+    .risk-pill.low { background: #dcfce7; color: #166534; }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-rocket"></i>
+            <span>DEPLOYMENT AUTOMATION</span>
+          </div>
+          <div class="brand-tagline">| Optimo Deployment Tool &bull; Release Governance &amp; Environment Integrity</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">TECHNICAL SCOPE &amp; HANDOVER SPECIFICATION</div>
+          <div class="hdr-sub">Company: C Apps &bull; Client: INTERNAL (OPTIMO PLATFORM) &bull; Generated: 10 Sep 2026</div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-code-branch"></i> Current Release</span>
+          <span class="meta-item-val green">Phase 1 &amp; 2 Completed</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Team Lead &amp; Devs</span>
+          <span class="meta-item-val">Gopikrishna, Piragash, Thenuja</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-user-clock"></i> Total Effort</span>
+          <span class="meta-item-val">180 Man-Days</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-chart-pie"></i> Consumed to Date</span>
+          <span class="meta-item-val">180 Man-Days (100%)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-calendar-check"></i> Handover Planned</span>
+          <span class="meta-item-val">08 Sep 2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-shield-halved"></i> Delivery Health</span>
+          <span class="meta-item-val green">ON TRACK (Ready)</span>
+        </div>
+      </section>
+
+      <!-- MAIN 3-COLUMN BODY -->
+      <main class="scope-main-grid">
+
+        <!-- COLUMN 1: PHASE BREAKDOWN & DELIVERABLES -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>1. Functional Scope &amp; Phases</span>
+            </div>
+            <div class="box-body">
+              
+              <!-- Phase 1 -->
+              <div class="phase-card-item">
+                <div class="phase-card-hdr">
+                  <div class="phase-card-title green">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Phase 1: Deployment Governance</span>
+                  </div>
+                  <span class="phase-pill green">Completed 17 Jul</span>
+                </div>
+                <ul class="phase-bullets-list green">
+                  <li>Version Upgrade Management and automated packaging.</li>
+                  <li>Deployment Governance and gate approval checkpoints.</li>
+                  <li>Script Framework for reliable and repeatable runs.</li>
+                  <li>Application Deployment engine with rollback support.</li>
+                  <li>Build Validation &amp; Release Pipeline Integration.</li>
+                  <li>Real-time status tracking &amp; execution reporting.</li>
+                </ul>
+              </div>
+
+              <!-- Phase 2 -->
+              <div class="phase-card-item">
+                <div class="phase-card-hdr">
+                  <div class="phase-card-title purple">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Phase 2: Production-Ready Platform</span>
+                  </div>
+                  <span class="phase-pill purple">Completed 30 Aug</span>
+                </div>
+                <ul class="phase-bullets-list purple">
+                  <li>Unified Configuration Integrity and schema validation.</li>
+                  <li>Comparison &amp; Migration engine across stages.</li>
+                  <li>Full Phase 2 Testing &amp; UAT Buffer completion.</li>
+                  <li>Side-by-side environment comparison inspector.</li>
+                  <li>End-to-end regression testing and validation runs.</li>
+                  <li>UAT sign-off and operational handover readiness.</li>
+                </ul>
+              </div>
+
+              <!-- Phase 3 -->
+              <div class="phase-card-item">
+                <div class="phase-card-hdr">
+                  <div class="phase-card-title orange">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Phase 3: Future Enhancements</span>
+                  </div>
+                  <span class="phase-pill orange">Planning TBD</span>
+                </div>
+                <ul class="phase-bullets-list orange">
+                  <li>Additional automation features and multi-cloud targets.</li>
+                  <li>Extended environment support and containerized runners.</li>
+                  <li>Advanced security, audit compliance &amp; secrets vaulting.</li>
+                  <li>Scalability improvements post-Jon alignment meeting.</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 2: SYSTEM ARCHITECTURE & TEAM -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-cubes"></i>
+              <span>2. System Architecture &amp; Team</span>
+            </div>
+            <div class="box-body">
+              
+              <div class="arch-flow-diagram">
+                <!-- Layer 1 -->
+                <div class="arch-node">
+                  <div>
+                    <div class="arch-node-title"><i class="fa-solid fa-terminal" style="color:#16a34a;"></i> Script Framework &amp; Automation CLI</div>
+                    <div class="arch-node-desc">Repeatable execution scripts, parameters, and version tags</div>
+                  </div>
+                  <span class="phase-pill green">Phase 1</span>
+                </div>
+
+                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                <!-- Layer 2 -->
+                <div class="arch-node blue">
+                  <div>
+                    <div class="arch-node-title"><i class="fa-solid fa-sliders" style="color:#2563eb;"></i> Unified Configuration Integrity Engine</div>
+                    <div class="arch-node-desc">Environment diffing, schema consistency, parameter migration</div>
+                  </div>
+                  <span class="phase-pill purple">Phase 2</span>
+                </div>
+
+                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                <!-- Layer 3 -->
+                <div class="arch-node purple">
+                  <div>
+                    <div class="arch-node-title"><i class="fa-solid fa-code-compare" style="color:#7c3aed;"></i> Side-by-Side Environment Inspector</div>
+                    <div class="arch-node-desc">Visual comparison across Dev, Staging &amp; Production targets</div>
+                  </div>
+                  <span class="phase-pill purple">Phase 2</span>
+                </div>
+
+                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
+
+                <!-- Layer 4 -->
+                <div class="arch-node orange">
+                  <div>
+                    <div class="arch-node-title"><i class="fa-solid fa-cloud-arrow-up" style="color:#ea580c;"></i> Target Optimo Application Platform</div>
+                    <div class="arch-node-desc">Automated release deployment, rollback guardrails &amp; telemetry</div>
+                  </div>
+                  <span class="phase-pill green">Handover</span>
+                </div>
+              </div>
+
+              <!-- Team Allocation Table -->
+              <div style="margin-top:6px;">
+                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
+                  Team Members &amp; Responsibilities (180 Man-Days Total)
+                </div>
+                <table class="effort-table">
+                  <thead>
+                    <tr>
+                      <th>Resource</th>
+                      <th>Role</th>
+                      <th>Responsibility Focus</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="font-weight:800; color:#0f172a;">Gopikrishna</td>
+                      <td style="font-weight:800; color:#2563eb;">Team Lead</td>
+                      <td>Architecture, release governance, pipeline integration</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800; color:#0f172a;">Piragash</td>
+                      <td style="font-weight:800; color:#7c3aed;">Developer</td>
+                      <td>Script framework, environment comparison &amp; migration</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:800; color:#0f172a;">Thenuja</td>
+                      <td style="font-weight:800; color:#7c3aed;">Developer</td>
+                      <td>Configuration integrity, build validation, UAT support</td>
+                    </tr>
+                    <tr class="total-row">
+                      <td colspan="2">Total Effort Consumed</td>
+                      <td><strong>180 Man-Days (100% Complete)</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 3: TIMELINE, RISKS & HANDOVER -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-handshake"></i>
+              <span>3. Handover &amp; Governance</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Timeline -->
+              <div>
+                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
+                  Milestones &amp; Handover Schedule
+                </div>
+                <table class="effort-table">
+                  <thead>
+                    <tr>
+                      <th>Milestone</th>
+                      <th>Schedule</th>
+                      <th>Delivery Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Phase 1 Execution</td>
+                      <td>15 Jun &ndash; 17 Jul 2026</td>
+                      <td style="color:#16a34a; font-weight:800;">Completed</td>
+                    </tr>
+                    <tr>
+                      <td>Phase 2 Execution</td>
+                      <td>21 Jul &ndash; 30 Aug 2026</td>
+                      <td style="color:#16a34a; font-weight:800;">Completed</td>
+                    </tr>
+                    <tr>
+                      <td>Handover to Operations</td>
+                      <td>08 Sep 2026</td>
+                      <td style="color:#2563eb; font-weight:800;">Ready for Handover</td>
+                    </tr>
+                    <tr>
+                      <td>Phase 3 Planning</td>
+                      <td>Post Jon Meeting</td>
+                      <td style="color:#ea580c; font-weight:800;">Target: TBD</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Top Risks -->
+              <div>
+                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
+                  Project Governance &amp; Risk Register
+                </div>
+                <div class="risk-item-row">
+                  <div>
+                    <span style="font-weight:700; color:#0f172a;">Phase 3 Scope Dependency:</span>
+                    <span style="color:#64748b;">Timeline dependent on Jon meeting.</span>
+                  </div>
+                  <span class="risk-pill medium">Medium</span>
+                </div>
+                <div class="risk-item-row">
+                  <div>
+                    <span style="font-weight:700; color:#0f172a;">Resource Availability:</span>
+                    <span style="color:#64748b;">Allocation for Phase 3 requirements.</span>
+                  </div>
+                  <span class="risk-pill medium">Medium</span>
+                </div>
+                <div class="risk-item-row">
+                  <div>
+                    <span style="font-weight:700; color:#0f172a;">Phase 1 &amp; 2 Delivery:</span>
+                    <span style="color:#64748b;">No major issues; handover ready.</span>
+                  </div>
+                  <span class="risk-pill low">Low</span>
+                </div>
+              </div>
+
+              <!-- Actionable Approvals -->
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:6px 8px; margin-top:2px;">
+                <div style="font-size:8.5px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:3px;">
+                  <i class="fa-solid fa-gavel"></i> Decisions &amp; Approvals Required:
+                </div>
+                <div style="font-size:8.5px; color:#1e3a8a; line-height:1.35;">
+                  &bull; Confirm Phase 3 scope, timeline and priorities after meeting with Jon.<br>
+                  &bull; Finalize handover sign-off with Support &amp; Operations teams.<br>
+                  &bull; No escalations for Phase 1 &amp; 2.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>DEPLOYMENT AUTOMATION &bull; OPTIMO DEPLOYMENT TOOL</strong> &bull; Phase 1 &amp; 2 Handover Baseline &bull; 180 Man-Days
+        </div>
+        <div>
+          Executive Project Tracker &bull; Confidential Internal Use Only
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

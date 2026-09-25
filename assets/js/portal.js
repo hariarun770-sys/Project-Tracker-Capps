@@ -88,6 +88,30 @@ const DEFAULT_PROJECTS = [
         timelineUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_11.09.2026.html'
       }
     ]
+  },
+  {
+    id: 'deployment-automation',
+    name: 'Deployment Automation',
+    icon: '🚀',
+    release: 'Phase 1 & 2 (Completed)',
+    leads: 'Gopikrishna (Lead), Piragash, Thenuja (180 Man-Days)',
+    description: 'Enterprise Optimo Deployment Tool — automated version upgrades, deployment governance & validation, side-by-side environment comparison, configuration migration, and release pipeline orchestration.',
+    highlights: 'Phase 1 & 2 100% Completed (180/180 Man-Days consumed). Handover to Support & Operations planned for 08 Sep 2026. Phase 3 planning pending meeting with Jon.',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 37,
+        weekLabel: 'Week 10 Sep 2026 (Phase 1 & 2 Completed)',
+        weekEnding: '10 Sep 2026',
+        status: 'COMPLETED',
+        statusClass: 'green',
+        manDays: '3 Team Members (180 Man-Days)',
+        consumed: '100% Consumed (180/180 Man-Days)',
+        weeklyUrl: 'Incubator Weekly update/Deployment_Automation_Weekly_Visibility_Card_10.09.2026.html',
+        scopeUrl: 'scope document/Deployment_Automation_Scope_Document.html',
+        timelineUrl: 'Incubator Weekly update/Deployment_Automation_Weekly_Visibility_Card_10.09.2026.html'
+      }
+    ]
   }
 ];
 
@@ -112,11 +136,12 @@ try {
     'portal_projects_clean_v3',
     'portal_projects_onenex_v1',
     'portal_projects_onenex_v2',
-    'portal_projects_integration_v1'
+    'portal_projects_integration_v1',
+    'portal_projects_onenex_r12_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex_r12_v1';
+const STORAGE_KEY = 'portal_projects_deploy_auto_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
