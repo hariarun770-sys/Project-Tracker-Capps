@@ -1,10 +1,9 @@
-<!-- Copy of NBC Digital Platform Weekly Card as standard Visibility Card Template -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEEKLY PROJECT VISIBILITY CARD</title>
+  <title>WEEKLY PROJECT VISIBILITY CARD (Blank Template)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -67,7 +66,7 @@
     .header-left .sub-title {
       font-size: 13.5px;
       font-weight: 800;
-      color: #f59e0b;
+      color: #22c55e;
       letter-spacing: 0.5px;
       margin-top: 4px;
       text-transform: uppercase;
@@ -79,8 +78,8 @@
       gap: 18px;
     }
 
-    .status-amber-badge {
-      background: #d97706;
+    .status-green-badge {
+      background: #16a34a;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -90,10 +89,10 @@
       font-size: 20px;
       font-weight: 900;
       letter-spacing: 1px;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
     }
 
-    .status-amber-badge .indicator-circle {
+    .status-green-badge .indicator-circle {
       width: 16px;
       height: 16px;
       background: #ffffff;
@@ -189,7 +188,7 @@
     .resource-section {
       background: #ffffff;
       border-bottom: 2px solid #cbd5e1;
-      padding: 8px 16px 8px 16px;
+      padding: 8px 16px;
     }
 
     .section-banner-title {
@@ -236,28 +235,12 @@
       font-weight: 600;
     }
 
-    .resource-table tr:nth-child(even) td {
-      background: #f8fafc;
-    }
-
     .resource-name {
       font-weight: 800;
       color: #0f172a;
       display: flex;
       align-items: center;
       gap: 5px;
-    }
-
-    .resource-name i {
-      color: #3b82f6;
-      font-size: 10px;
-    }
-
-    .man-days-badge {
-      font-weight: 900;
-      color: #0f172a;
-      text-align: center;
-      display: block;
     }
 
     .total-alloc-card {
@@ -348,423 +331,6 @@
       gap: 6px;
     }
 
-    /* SECTION 1: SCOPE JOURNEY */
-    .journey-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr 1fr;
-      gap: 6px;
-      align-items: stretch;
-      flex: 1;
-    }
-
-    .journey-col {
-      border: 1px solid #e2e8f0;
-      border-radius: 5px;
-      padding: 6px;
-      background: #f8fafc;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .journey-col.current {
-      background: #f0f7ff;
-      border: 1.5px solid #93c5fd;
-    }
-
-    .j-title {
-      font-size: 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-      padding-bottom: 4px;
-      margin-bottom: 4px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .j-title.delivered { color: #16a34a; }
-    .j-title.current-release { color: #2563eb; }
-    .j-title.future { color: #7c3aed; }
-
-    .j-bullets {
-      list-style: none;
-      font-size: 10px;
-      line-height: 1.35;
-      font-weight: 600;
-      color: #334155;
-      flex: 1;
-    }
-    .j-bullets li {
-      margin-bottom: 3px;
-      position: relative;
-      padding-left: 10px;
-    }
-    .j-bullets li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #64748b;
-      font-weight: 900;
-    }
-
-    .j-subhead {
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #0f172a;
-      margin: 4px 0 2px;
-    }
-
-    .j-footer-badge {
-      margin-top: 4px;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 3px 4px;
-      border-radius: 4px;
-      text-align: center;
-    }
-    .badge-delivered { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
-    .badge-future { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
-
-    /* SECTION 2: RELEASE PLAN */
-    .timeline-wrap {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 5px;
-      padding: 6px 10px;
-      margin-bottom: 6px;
-    }
-
-    .tl-row {
-      display: flex;
-      align-items: center;
-      font-size: 9.5px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .tl-label {
-      width: 110px;
-      text-transform: uppercase;
-      color: #334155;
-    }
-    .tl-date-start {
-      width: 65px;
-      color: #475569;
-    }
-    .tl-bar-container {
-      flex: 1;
-      height: 10px;
-      background: #e2e8f0;
-      border-radius: 5px;
-      position: relative;
-      margin: 0 8px;
-    }
-    .tl-bar-green {
-      width: 78%;
-      height: 100%;
-      background: #22c55e;
-      border-radius: 5px;
-    }
-    .tl-bar-red {
-      width: 95%;
-      height: 100%;
-      background: #ef4444;
-      border-radius: 5px;
-    }
-    .tl-date-end {
-      width: 70px;
-      text-align: right;
-      color: #0f172a;
-    }
-
-    .delay-callout {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      background: #fff1f2;
-      border: 1px solid #fecdd3;
-      border-radius: 4px;
-      padding: 4px 10px;
-      margin: 4px 0 6px;
-    }
-    .delay-text {
-      font-size: 12px;
-      font-weight: 900;
-      color: #e11d48;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .tag-off-track {
-      background: #b91c1c;
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .milestone-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 9.5px;
-    }
-    .milestone-table th {
-      background: #091e3a;
-      color: #ffffff;
-      padding: 3px 6px;
-      text-transform: uppercase;
-      font-weight: 800;
-      font-size: 8.5px;
-      text-align: left;
-    }
-    .milestone-table td {
-      padding: 3px 6px;
-      border-bottom: 1px solid #e2e8f0;
-      font-weight: 700;
-      color: #1e293b;
-    }
-    .milestone-table tr:nth-child(even) td {
-      background: #f8fafc;
-    }
-
-    /* SECTION 3: EFFORT SUMMARY */
-    .effort-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
-      margin-bottom: 6px;
-    }
-    .effort-kpi {
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      background: #f8fafc;
-      padding: 4px;
-      text-align: center;
-    }
-    .effort-kpi .k-lbl {
-      font-size: 8px;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #64748b;
-      margin-bottom: 2px;
-    }
-    .effort-kpi .k-val {
-      font-size: 18px;
-      font-weight: 900;
-      line-height: 1;
-      color: #0f172a;
-    }
-    .effort-kpi .k-unit {
-      font-size: 7.5px;
-      font-weight: 800;
-      color: #64748b;
-      text-transform: uppercase;
-    }
-
-    .overrun-banner {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 4px;
-      padding: 4px 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-    .overrun-text {
-      font-size: 11px;
-      font-weight: 900;
-      color: #b91c1c;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .tag-over-budget {
-      background: #991b1b;
-      color: #ffffff;
-      font-size: 9px;
-      font-weight: 900;
-      padding: 2px 6px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-
-    .progress-bar-wrap {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 4px;
-      padding: 6px 8px;
-    }
-    .pb-label {
-      font-size: 9px;
-      font-weight: 800;
-      color: #334155;
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-    .pb-track {
-      height: 12px;
-      background: #e2e8f0;
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-    }
-    .pb-fill {
-      width: 73%;
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #0284c7);
-      border-radius: 6px;
-    }
-    .pb-markers {
-      display: flex;
-      justify-content: space-between;
-      font-size: 8px;
-      font-weight: 700;
-      color: #64748b;
-      margin-top: 2px;
-    }
-
-    /* SECTION 4: WHAT CHANGED */
-    .change-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 4.5px 6px;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 10px;
-    }
-    .change-icon {
-      font-size: 13px;
-      width: 18px;
-      text-align: center;
-      margin-top: 1px;
-    }
-    .change-content {
-      flex: 1;
-      line-height: 1.3;
-    }
-    .change-title {
-      font-size: 9px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 1px;
-    }
-    .change-tag {
-      float: right;
-      font-size: 8px;
-      font-weight: 900;
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
-    .tag-red { background: #fee2e2; color: #dc2626; }
-    .tag-amber { background: #fef3c7; color: #d97706; }
-    .tag-purple { background: #ede9fe; color: #7c3aed; }
-
-    /* SECTION 5: RISKS & ISSUES */
-    .risk-table {
-      width: 100%;
-      font-size: 9.5px;
-      border-collapse: collapse;
-      margin-bottom: 4px;
-    }
-    .risk-table td {
-      padding: 3px 4px;
-      border-bottom: 1px solid #f1f5f9;
-      font-weight: 700;
-    }
-    .badge-pill {
-      font-size: 8px;
-      font-weight: 900;
-      padding: 2px 6px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      text-align: center;
-      display: inline-block;
-    }
-    .pill-high { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-    .pill-med { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-
-    .decision-box {
-      background: #f8fafc;
-      border-left: 3px solid #f59e0b;
-      padding: 4px 6px;
-      font-size: 9.5px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .escalation-box {
-      background: #f0fdf4;
-      border-left: 3px solid #22c55e;
-      padding: 4px 6px;
-      font-size: 9.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #166534;
-    }
-
-    /* SECTION 6: AT A GLANCE (DONUTS) */
-    .donuts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .donut-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .donut-svg-wrap {
-      position: relative;
-      width: 68px;
-      height: 68px;
-    }
-    .donut-pct-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 14px;
-      font-weight: 900;
-      color: #0f172a;
-    }
-    .donut-label {
-      font-size: 8.5px;
-      font-weight: 800;
-      color: #334155;
-      text-transform: uppercase;
-      margin-top: 2px;
-      line-height: 1.1;
-    }
-    .donut-sub {
-      font-size: 7.5px;
-      font-weight: 700;
-      color: #64748b;
-    }
-
-    .insight-callout {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 4px;
-      padding: 4px 8px;
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #1e40af;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* 5. FOOTER RULES */
     .footer-bar {
       background: #091e3a;
       color: #ffffff;
@@ -776,11 +342,6 @@
       font-weight: 700;
       border-top: 1px solid #061528;
     }
-    .footer-bar .rules-list {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
   </style>
 </head>
 <body>
@@ -788,16 +349,16 @@
   <div id="viewport">
     <div id="card">
       
-      <!-- 1. TOP HEADER -->
+      <!-- TOP HEADER -->
       <header class="header-bar">
         <div class="header-left">
           <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
-          <div class="sub-title">WEEK ENDING FRIDAY, 4 SEPTEMBER 2026 &nbsp;|&nbsp; WEEK 36</div>
+          <div class="sub-title">WEEK ENDING [FRIDAY, DATE] &nbsp;|&nbsp; WEEK [XX]</div>
         </div>
         <div class="header-right">
-          <div class="status-amber-badge">
+          <div class="status-green-badge">
             <span class="indicator-circle"></span>
-            AMBER
+            ON TRACK
           </div>
           <div class="status-guide">
             <div class="guide-title">STATUS GUIDE</div>
@@ -810,442 +371,133 @@
         </div>
       </header>
 
-      <!-- 2. METADATA ROW -->
+      <!-- METADATA ROW -->
       <section class="meta-row">
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-building"></i> COMPANY</span>
-          <span class="meta-value">GOVTECH SOLUTIONS</span>
+          <span class="meta-value">[COMPANY NAME]</span>
         </div>
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-tag"></i> PROJECT ID</span>
-          <span class="meta-value">OGOV-GTS-002</span>
+          <span class="meta-value">[PRJ-001]</span>
         </div>
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-user-tie"></i> CLIENT</span>
-          <span class="meta-value">NATIONAL BROADCASTING CORP.</span>
+          <span class="meta-value">[CLIENT NAME]</span>
         </div>
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-folder"></i> PROJECT NAME</span>
-          <span class="meta-value">NBC DIGITAL PLATFORM</span>
+          <span class="meta-value">[PROJECT NAME]</span>
         </div>
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-rocket"></i> CURRENT RELEASE</span>
-          <span class="meta-value">RELEASE 2</span>
+          <span class="meta-value">RELEASE 1</span>
         </div>
         <div class="meta-col">
           <span class="meta-label"><i class="fa-solid fa-calendar-week"></i> WEEK NO.</span>
-          <span class="meta-value">36</span>
+          <span class="meta-value">1</span>
         </div>
         <div class="meta-col">
-          <span class="meta-label"><i class="fa-solid fa-calendar-day"></i> WEEK ENDING (FRIDAY)</span>
-          <span class="meta-value">4 SEPTEMBER 2026</span>
+          <span class="meta-label"><i class="fa-solid fa-calendar-day"></i> WEEK ENDING</span>
+          <span class="meta-value">[DATE]</span>
         </div>
       </section>
 
-      <!-- 3. RESOURCE ALLOCATION BAND -->
+      <!-- RESOURCE ALLOCATION BAND -->
       <section class="resource-section">
         <div class="section-banner-title">
-          RESOURCE ALLOCATION FOR THIS RELEASE (TOTAL ALLOCATED: 150 MAN-DAYS)
+          RESOURCE ALLOCATION FOR THIS RELEASE (TOTAL ALLOCATED: 100 MAN-DAYS)
         </div>
         <div class="resource-grid">
           <table class="resource-table">
             <thead>
               <tr>
-                <th style="width:22%;">RESOURCE NAME</th>
-                <th style="width:22%;">ROLE</th>
-                <th style="width:16%; text-align:center;">ALLOCATION (MAN-DAYS)</th>
-                <th style="width:40%;">MAIN RESPONSIBILITY</th>
+                <th style="width:25%;">RESOURCE NAME</th>
+                <th style="width:25%;">ROLE</th>
+                <th style="width:15%; text-align:center;">ALLOCATION (MAN-DAYS)</th>
+                <th style="width:35%;">MAIN RESPONSIBILITY</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="resource-name"><i class="fa-solid fa-user"></i> Sarah Ahmed</span></td>
+                <td><span class="resource-name"><i class="fa-solid fa-user"></i> [Project Manager]</span></td>
                 <td>Project Manager</td>
-                <td><span class="man-days-badge">20</span></td>
-                <td>Planning, coordination, risks, reporting, client liaison</td>
+                <td style="text-align:center; font-weight:800;">20</td>
+                <td>Planning, coordination, risks, client liaison</td>
               </tr>
               <tr>
-                <td><span class="resource-name"><i class="fa-solid fa-user"></i> Nimal Perera</span></td>
-                <td>Solution Developer</td>
-                <td><span class="man-days-badge">30</span></td>
-                <td>Solution configuration &amp; development</td>
+                <td><span class="resource-name"><i class="fa-solid fa-user"></i> [Lead Developer]</span></td>
+                <td>Technical Lead</td>
+                <td style="text-align:center; font-weight:800;">50</td>
+                <td>Architecture, core modules development</td>
               </tr>
               <tr>
-                <td><span class="resource-name"><i class="fa-solid fa-user"></i> Tharsha Fernando</span></td>
+                <td><span class="resource-name"><i class="fa-solid fa-user"></i> [QA Lead]</span></td>
                 <td>QA Engineer</td>
-                <td><span class="man-days-badge">35</span></td>
-                <td>Testing, quality assurance, defect management</td>
-              </tr>
-              <tr>
-                <td><span class="resource-name"><i class="fa-solid fa-user"></i> John Wijesinghe</span></td>
-                <td>Technical Lead / Developer</td>
-                <td><span class="man-days-badge">65</span></td>
-                <td>Technical design, development, integration, mentoring</td>
+                <td style="text-align:center; font-weight:800;">30</td>
+                <td>Testing, defect management, quality assurance</td>
               </tr>
             </tbody>
           </table>
 
           <div class="total-alloc-card">
-            <span class="lbl">TOTAL ALLOCATION (THIS RELEASE)</span>
-            <span class="num">150</span>
+            <span class="lbl">TOTAL ALLOCATION</span>
+            <span class="num">100</span>
             <span class="unit">MAN-DAYS</span>
-            <span class="date-badge">Released on: 01 JUL 2026</span>
+            <span class="date-badge">Released on: [DATE]</span>
           </div>
         </div>
       </section>
 
-      <!-- 4. MAIN CONTENT 3-COLUMN x 2-ROW GRID -->
+      <!-- MAIN BODY -->
       <main class="main-body">
-
-        <!-- PANEL 1: SCOPE & RELEASE JOURNEY -->
         <article class="panel">
           <div class="panel-hdr">1. SCOPE &amp; RELEASE JOURNEY</div>
           <div class="panel-body">
-            <div class="journey-grid">
-              
-              <!-- Delivered Release 1 -->
-              <div class="journey-col">
-                <div class="j-title delivered">
-                  <i class="fa-solid fa-circle-check"></i> DELIVERED RELEASE 1
-                </div>
-                <ul class="j-bullets">
-                  <li>Core Booking</li>
-                  <li>Customer Management</li>
-                  <li>Payments</li>
-                  <li>Basic Reporting</li>
-                </ul>
-                <div class="j-footer-badge badge-delivered">
-                  Release 1 Completed<br>Go-Live: 15 May 2026
-                </div>
-              </div>
-
-              <!-- Current Release 2 -->
-              <div class="journey-col current">
-                <div class="j-title current-release">
-                  <i class="fa-solid fa-circle-play"></i> CURRENT RELEASE 2
-                </div>
-                <div class="j-subhead">CORE MODULES</div>
-                <ul class="j-bullets">
-                  <li>Membership Management</li>
-                  <li>Advanced Reporting</li>
-                </ul>
-                <div class="j-subhead">INTEGRATIONS</div>
-                <ul class="j-bullets">
-                  <li>Payment Gateway (Stripe)</li>
-                  <li>CRM Integration (Salesforce)</li>
-                </ul>
-                <div class="j-subhead">SPECIFIC OBJECTIVES</div>
-                <ul class="j-bullets">
-                  <li>Data Migration Tool</li>
-                  <li>Mobile Responsive Portal</li>
-                </ul>
-              </div>
-
-              <!-- Future Release 3 -->
-              <div class="journey-col">
-                <div class="j-title future">
-                  <i class="fa-solid fa-gem"></i> FUTURE RELEASE 3
-                </div>
-                <ul class="j-bullets">
-                  <li>Mobile Application (iOS/Android)</li>
-                  <li>Advanced Analytics</li>
-                  <li>Content Management System</li>
-                  <li>AI Recommendations</li>
-                </ul>
-                <div class="j-footer-badge badge-future">
-                  Planned Start<br>Nov 2026 (Tentative)
-                </div>
-              </div>
-
-            </div>
+            <p style="font-size:11px; color:#64748b; padding:10px;">Define Delivered, Current, and Future release milestones here.</p>
           </div>
         </article>
 
-        <!-- PANEL 2: CURRENT RELEASE PLAN -->
         <article class="panel">
-          <div class="panel-hdr">2. CURRENT RELEASE PLAN (RELEASE 2 ONLY)</div>
+          <div class="panel-hdr">2. CURRENT RELEASE PLAN</div>
           <div class="panel-body">
-            
-            <div class="timeline-wrap">
-              <div class="tl-row">
-                <span class="tl-label">ORIGINAL PLAN</span>
-                <span class="tl-date-start">01 JUL 2026</span>
-                <div class="tl-bar-container">
-                  <div class="tl-bar-green"></div>
-                </div>
-                <span class="tl-date-end">30 SEP 2026</span>
-              </div>
-              <div class="tl-row">
-                <span class="tl-label" style="color:#dc2626;">CURRENT FORECAST</span>
-                <span class="tl-date-start">01 JUL 2026</span>
-                <div class="tl-bar-container">
-                  <div class="tl-bar-red"></div>
-                </div>
-                <span class="tl-date-end" style="color:#dc2626;">21 OCT 2026</span>
-              </div>
-            </div>
-
-            <div class="delay-callout">
-              <span class="delay-text"><i class="fa-solid fa-clock"></i> DELAY: +21 DAYS</span>
-              <span class="tag-off-track">OFF TRACK</span>
-            </div>
-
-            <table class="milestone-table">
-              <thead>
-                <tr>
-                  <th style="width:34%;">MILESTONE</th>
-                  <th style="width:24%;">ORIGINAL PLAN</th>
-                  <th style="width:26%;">CURRENT FORECAST</th>
-                  <th style="width:16%; text-align:center;">VARIANCE</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Requirements Complete</td>
-                  <td>15 Jul 2026</td>
-                  <td>15 Jul 2026</td>
-                  <td style="text-align:center;">0 days <span class="dot dot-green"></span></td>
-                </tr>
-                <tr>
-                  <td>Development Complete</td>
-                  <td>31 Aug 2026</td>
-                  <td>14 Sep 2026</td>
-                  <td style="text-align:center; color:#dc2626;">+14 days <span class="dot dot-red"></span></td>
-                </tr>
-                <tr>
-                  <td>System Test Complete</td>
-                  <td>15 Sep 2026</td>
-                  <td>30 Sep 2026</td>
-                  <td style="text-align:center; color:#dc2626;">+15 days <span class="dot dot-red"></span></td>
-                </tr>
-                <tr>
-                  <td>UAT Complete</td>
-                  <td>22 Sep 2026</td>
-                  <td>12 Oct 2026</td>
-                  <td style="text-align:center; color:#dc2626;">+20 days <span class="dot dot-red"></span></td>
-                </tr>
-                <tr>
-                  <td><strong>Go-Live</strong></td>
-                  <td>30 Sep 2026</td>
-                  <td style="color:#dc2626; font-weight:800;">21 Oct 2026</td>
-                  <td style="text-align:center; color:#dc2626; font-weight:900;">+21 days <span class="dot dot-red"></span></td>
-                </tr>
-              </tbody>
-            </table>
-
+            <p style="font-size:11px; color:#64748b; padding:10px;">Track Original Plan vs Current Forecast schedule and milestone variance.</p>
           </div>
         </article>
 
-        <!-- PANEL 3: RESOURCE EFFORT SUMMARY -->
         <article class="panel">
-          <div class="panel-hdr">3. RESOURCE EFFORT SUMMARY (RELEASE 2 ONLY)</div>
+          <div class="panel-hdr">3. RESOURCE EFFORT SUMMARY</div>
           <div class="panel-body">
-            
-            <div class="effort-kpi-grid">
-              <div class="effort-kpi">
-                <div class="k-lbl">ORIGINAL ALLOCATION</div>
-                <div class="k-val">150</div>
-                <div class="k-unit">MAN-DAYS</div>
-              </div>
-              <div class="effort-kpi">
-                <div class="k-lbl">CONSUMED TO DATE</div>
-                <div class="k-val" style="color:#0284c7;">110</div>
-                <div class="k-unit">MAN-DAYS</div>
-              </div>
-              <div class="effort-kpi">
-                <div class="k-lbl">FORECAST REMAINING</div>
-                <div class="k-val" style="color:#d97706;">70</div>
-                <div class="k-unit">MAN-DAYS</div>
-              </div>
-              <div class="effort-kpi">
-                <div class="k-lbl">FORECAST TOTAL</div>
-                <div class="k-val" style="color:#7c3aed;">180</div>
-                <div class="k-unit">MAN-DAYS</div>
-              </div>
-            </div>
-
-            <div class="overrun-banner">
-              <span class="overrun-text">
-                <i class="fa-solid fa-gauge-high"></i> FORECAST OVERRUN: +30 MAN-DAYS / +20%
-              </span>
-              <span class="tag-over-budget">OVER BUDGET</span>
-            </div>
-
-            <div class="progress-bar-wrap">
-              <div class="pb-label">
-                <span>EFFORT CONSUMED vs ORIGINAL ALLOCATION</span>
-                <span style="font-weight:900; color:#0284c7;">73%</span>
-              </div>
-              <div class="pb-track">
-                <div class="pb-fill"></div>
-              </div>
-              <div class="pb-markers">
-                <span>0%</span>
-                <span>50%</span>
-                <span>100%</span>
-              </div>
-              <div style="font-size:8.5px; font-weight:700; color:#64748b; text-align:center; margin-top:2px;">
-                110 of 150 man-days consumed
-              </div>
-            </div>
-
+            <p style="font-size:11px; color:#64748b; padding:10px;">Overview of allocated, consumed, and remaining man-days.</p>
           </div>
         </article>
 
-        <!-- PANEL 4: WHAT CHANGED THIS WEEK? -->
         <article class="panel">
           <div class="panel-hdr">4. WHAT CHANGED THIS WEEK?</div>
           <div class="panel-body">
-            
-            <div class="change-item">
-              <span class="change-icon" style="color:#dc2626;"><i class="fa-solid fa-calendar-xmark"></i></span>
-              <div class="change-content">
-                <span class="change-tag tag-red">+21 days</span>
-                <div class="change-title" style="color:#dc2626;">SCHEDULE CHANGE</div>
-                Go-Live forecast moved from 30 Sep &rarr; 21 Oct 2026
-              </div>
-            </div>
-
-            <div class="change-item">
-              <span class="change-icon" style="color:#d97706;"><i class="fa-solid fa-gear"></i></span>
-              <div class="change-content">
-                <span class="change-tag tag-amber">CR-015 (Approved)</span>
-                <div class="change-title" style="color:#d97706;">SCOPE CHANGE</div>
-                CRM Integration (Salesforce) added to Release 2 through approved Change Request
-              </div>
-            </div>
-
-            <div class="change-item">
-              <span class="change-icon" style="color:#7c3aed;"><i class="fa-solid fa-users-gear"></i></span>
-              <div class="change-content">
-                <span class="change-tag tag-purple">+30 days / +20%</span>
-                <div class="change-title" style="color:#7c3aed;">EFFORT CHANGE</div>
-                Forecast effort increased from 150 &rarr; 180 man-days
-              </div>
-            </div>
-
-            <div style="font-size:9px; color:#64748b; font-weight:700; padding:2px 6px; display:flex; align-items:center; gap:5px;">
-              <i class="fa-solid fa-circle-info"></i> No other material changes this week.
-            </div>
-
+            <p style="font-size:11px; color:#64748b; padding:10px;">List key schedule changes, approved change requests, and effort revisions.</p>
           </div>
         </article>
 
-        <!-- PANEL 5: RISKS / ISSUES & CEO ATTENTION -->
         <article class="panel">
           <div class="panel-hdr">5. RISKS / ISSUES &amp; CEO ATTENTION</div>
           <div class="panel-body">
-            
-            <div style="font-size:9.5px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:2px;">
-              TOP RISKS / ISSUES
-            </div>
-            <table class="risk-table">
-              <tbody>
-                <tr>
-                  <td><span class="dot dot-red" style="margin-right:4px;"></span> Client API availability delayed.</td>
-                  <td style="text-align:right;"><span class="badge-pill pill-high">HIGH</span></td>
-                </tr>
-                <tr>
-                  <td><span class="dot dot-amber" style="margin-right:4px;"></span> Data migration source quality issues.</td>
-                  <td style="text-align:right;"><span class="badge-pill pill-med">MEDIUM</span></td>
-                </tr>
-                <tr>
-                  <td><span class="dot dot-amber" style="margin-right:4px;"></span> UAT environment performance instability.</td>
-                  <td style="text-align:right;"><span class="badge-pill pill-med">MEDIUM</span></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div style="font-size:9.5px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:2px;">
-              DECISIONS / APPROVALS REQUIRED
-            </div>
-            <div class="decision-box">
-              <i class="fa-solid fa-scale-balanced" style="margin-right:4px;"></i> Approve Change Request CR-016 (Additional Reporting)
-              <span style="float:right; color:#b91c1c;">Due: 6 Sep 2026</span>
-            </div>
-
-            <div style="font-size:9.5px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:2px;">
-              ESCALATION
-            </div>
-            <div class="escalation-box">
-              <i class="fa-solid fa-circle-check"></i> No escalations beyond normal reporting.
-            </div>
-
+            <p style="font-size:11px; color:#64748b; padding:10px;">Highlight top blockers, approvals needed, and escalations.</p>
           </div>
         </article>
 
-        <!-- PANEL 6: AT A GLANCE -->
         <article class="panel">
-          <div class="panel-hdr">6. AT A GLANCE (RELEASE 2 ONLY)</div>
+          <div class="panel-hdr">6. AT A GLANCE</div>
           <div class="panel-body">
-            
-            <div class="donuts-grid">
-              
-              <!-- Scope Complete -->
-              <div class="donut-card">
-                <div class="donut-svg-wrap">
-                  <svg width="68" height="68" viewBox="0 0 36 36">
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#2563eb" stroke-width="4" stroke-dasharray="58, 100" stroke-linecap="round"/>
-                  </svg>
-                  <span class="donut-pct-text">58%</span>
-                </div>
-                <span class="donut-label">OVERALL PROGRESS</span>
-                <span class="donut-sub">(Release 2)</span>
-                <span class="donut-sub" style="font-weight:800; color:#2563eb;">% Scope Complete</span>
-              </div>
-
-              <!-- Time Elapsed -->
-              <div class="donut-card">
-                <div class="donut-svg-wrap">
-                  <svg width="68" height="68" viewBox="0 0 36 36">
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ea580c" stroke-width="4" stroke-dasharray="72, 100" stroke-linecap="round"/>
-                  </svg>
-                  <span class="donut-pct-text">72%</span>
-                </div>
-                <span class="donut-label">TIME ELAPSED</span>
-                <span class="donut-sub">&nbsp;</span>
-                <span class="donut-sub" style="font-weight:800; color:#ea580c;">vs Plan</span>
-              </div>
-
-              <!-- Effort Consumed -->
-              <div class="donut-card">
-                <div class="donut-svg-wrap">
-                  <svg width="68" height="68" viewBox="0 0 36 36">
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="73, 100" stroke-linecap="round"/>
-                  </svg>
-                  <span class="donut-pct-text">73%</span>
-                </div>
-                <span class="donut-label">EFFORT CONSUMED</span>
-                <span class="donut-sub">&nbsp;</span>
-                <span class="donut-sub" style="font-weight:800; color:#16a34a;">vs Original Alloc.</span>
-              </div>
-
-            </div>
-
-            <div class="insight-callout">
-              <i class="fa-solid fa-star" style="color:#eab308;"></i>
-              <span>Time consumed (72%) is higher than scope complete (58%). <strong>Monitor closely.</strong></span>
-            </div>
-
+            <p style="font-size:11px; color:#64748b; padding:10px;">Circular progress gauges for scope complete, time elapsed, and effort consumed.</p>
           </div>
         </article>
-
       </main>
 
-      <!-- 5. FOOTER -->
+      <!-- FOOTER -->
       <footer class="footer-bar">
-        <div class="rules-list">
-          <span><i class="fa-solid fa-circle-dot" style="font-size:7px; color:#f59e0b;"></i> <strong>REPORTING RULES:</strong></span>
-          <span>• This card is a snapshot of the project status as at the end of Friday.</span>
-          <span>• One card per active release.</span>
-          <span>• Previous releases are shown under "Delivered".</span>
-        </div>
-        <div>
-          <span>• Data to be prepared by PM and validated by Company Head.</span>
-        </div>
+        <div>• REPORTING RULES: One card per active release. Data validated by PM and Company Head.</div>
+        <div>Clean Visibility Template &bull; Executive Project Tracker</div>
       </footer>
 
     </div>

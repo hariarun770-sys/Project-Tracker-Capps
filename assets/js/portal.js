@@ -3,32 +3,8 @@
  * Executive Project Tracker - Complete Portfolio Visibility Hub
  */
 
-// Active projects list with NBC Digital Platform from executive card
-const DEFAULT_PROJECTS = [
-  {
-    id: 'nbc-digital-platform',
-    name: 'NBC Digital Platform',
-    icon: '📡',
-    release: 'Release 2',
-    leads: 'Sarah Ahmed (PM) • John Wijesinghe (Tech Lead)',
-    description: 'National Broadcasting Corp. digital platform — membership management, advanced reporting, Stripe payments, Salesforce CRM integration, and responsive portal.',
-    highlights: 'Salesforce CRM added via CR-015 (+30 man-days). Go-Live forecasted for 21 Oct 2026 (+21d delay, Off Track). 110 of 150 man-days consumed (73%).',
-    selectedWeekIndex: 0,
-    weeks: [
-      {
-        weekNumber: 1,
-        weekLabel: 'Week 1 (4 Sep 2026)',
-        weekEnding: '4 Sep 2026',
-        status: 'AT RISK',
-        statusClass: 'amber',
-        manDays: '150 Man-Days (180 Forecast)',
-        consumed: '73% Consumed (110d)',
-        weeklyUrl: 'Incubator Weekly update/NBC_Digital_Platform_Weekly_Visibility_Card_04.09.2026.html',
-        scopeUrl: 'scope document/NBC_Digital_Platform_Scope_USP.html'
-      }
-    ]
-  }
-];
+// Active projects list (starts fresh for workspace)
+const DEFAULT_PROJECTS = [];
 
 // Purge old cache keys to guarantee fresh display
 try {
@@ -46,15 +22,16 @@ try {
     'portal_projects_v11_nsw_scope_update',
     'portal_projects_v12_marketing_team',
     'portal_projects_v13_sep18_updates',
-    'portal_projects_clean_v1'
+    'portal_projects_clean_v1',
+    'portal_projects_clean_v2'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_clean_v2';
+const STORAGE_KEY = 'portal_projects_clean_v3';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
-if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
-  PROJECTS = DEFAULT_PROJECTS;
+if (!Array.isArray(PROJECTS)) {
+  PROJECTS = [];
   localStorage.setItem(STORAGE_KEY, JSON.stringify(PROJECTS));
 }
 
