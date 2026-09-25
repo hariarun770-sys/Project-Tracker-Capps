@@ -3,8 +3,33 @@
  * Executive Project Tracker - Complete Portfolio Visibility Hub
  */
 
-// Active projects list (starts fresh for workspace)
-const DEFAULT_PROJECTS = [];
+// Active projects list with OneNex project from executive briefing
+const DEFAULT_PROJECTS = [
+  {
+    id: 'onenex',
+    name: 'OneNex',
+    icon: '🍽️',
+    release: 'Release 1.1 (Phase 1)',
+    leads: 'Core Cross-Functional Team (6 Developers)',
+    description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
+    highlights: 'Release 1.0 Delivered (10 Sep). Release 1.1 In Progress (Target: 17 Sep, 27/93 features complete). Release 1.2 Pilot & Hardening scheduled (21 Sep – 02 Nov 2026).',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 37,
+        weekLabel: 'Week 37 (11 Sep 2026)',
+        weekEnding: '11 Sep 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '6 Team Members',
+        consumed: '29% Completed (27/93)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_11.09.2026.html',
+        scopeUrl: 'scope document/OneNex_Scope_USP_Document.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+      }
+    ]
+  }
+];
 
 // Purge old cache keys to guarantee fresh display
 try {
@@ -23,15 +48,16 @@ try {
     'portal_projects_v12_marketing_team',
     'portal_projects_v13_sep18_updates',
     'portal_projects_clean_v1',
-    'portal_projects_clean_v2'
+    'portal_projects_clean_v2',
+    'portal_projects_clean_v3'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_clean_v3';
+const STORAGE_KEY = 'portal_projects_onenex_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
-if (!Array.isArray(PROJECTS)) {
-  PROJECTS = [];
+if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
+  PROJECTS = DEFAULT_PROJECTS;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(PROJECTS));
 }
 
@@ -184,18 +210,24 @@ function renderProjects(filterText = '', filterStatus = 'all') {
         </div>
       </div>
       <div class="project-card-actions" style="padding:16px 18px;">
-        <button class="btn btn-primary" style="padding:9px 16px; font-size:12.5px; background:linear-gradient(135deg, #2563eb, #1d4ed8);" onclick="openProjectDetail('${p.id}')" title="Open dedicated project view with Back button">
+        <button class="btn btn-primary" style="padding:9px 16px; font-size:12.5px; background:linear-gradient(135deg, #ff5722, #ea580c);" onclick="openProjectDetail('${p.id}')" title="Open dedicated project view with Back button">
           <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> 📂 Open Project View
         </button>
         <button class="btn btn-secondary" style="padding:9px 13px; font-size:12.5px;" onclick="openViewer('${p.id}', 'weekly')">
           <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Weekly Report (Week ${curWeek.weekNumber || 1})
         </button>
+        <button class="btn btn-secondary" style="padding:9px 13px; font-size:12.5px;" onclick="openViewer('${p.id}', 'timeline')">
+          <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Release 1 Timeline
+        </button>
         <button class="btn btn-secondary" style="padding:9px 13px; font-size:12.5px;" onclick="openViewer('${p.id}', 'scope')">
           <svg style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Scope &amp; USP Document
         </button>
-        <div class="quick-export-row" style="margin-top:8px;">
+        <div class="quick-export-row" style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
           <button class="btn btn-export-quick" onclick="quickExportJpg('${p.id}', 'weekly')" title="Export Week ${curWeek.weekNumber || 1} Report as high-resolution JPG">
             📸 Export Week ${curWeek.weekNumber || 1} Report JPG
+          </button>
+          <button class="btn btn-export-quick" onclick="quickExportJpg('${p.id}', 'timeline')" title="Export Release 1 Timeline as high-resolution JPG">
+            📸 Export Timeline JPG
           </button>
           <button class="btn btn-export-quick" onclick="quickExportJpg('${p.id}', 'scope')" title="Export Scope & USP Document as high-resolution JPG">
             📸 Export Scope &amp; USP JPG
@@ -261,14 +293,11 @@ function switchTab(tab) {
 
 function updateModalTabs() {
   const weeklyTab = document.getElementById('tabWeekly');
+  const timelineTab = document.getElementById('tabTimeline');
   const scopeTab = document.getElementById('tabScope');
-  if (currentTab === 'weekly') {
-    weeklyTab.classList.add('active');
-    scopeTab.classList.remove('active');
-  } else {
-    scopeTab.classList.add('active');
-    weeklyTab.classList.remove('active');
-  }
+  if (weeklyTab) weeklyTab.classList.toggle('active', currentTab === 'weekly');
+  if (timelineTab) timelineTab.classList.toggle('active', currentTab === 'timeline');
+  if (scopeTab) scopeTab.classList.toggle('active', currentTab === 'scope');
 }
 
 function ensureExporterInFrame(frame) {
@@ -282,7 +311,12 @@ function ensureExporterInFrame(frame) {
 function loadIframe() {
   const frame = document.getElementById('viewerFrame');
   const curWeek = activeProject.weeks[activeProject.selectedWeekIndex || 0] || activeProject.weeks[0];
-  const targetUrl = (currentTab === 'weekly') ? curWeek.weeklyUrl : curWeek.scopeUrl;
+  let targetUrl = curWeek.weeklyUrl;
+  if (currentTab === 'scope') {
+    targetUrl = curWeek.scopeUrl;
+  } else if (currentTab === 'timeline') {
+    targetUrl = curWeek.timelineUrl || 'Incubator Weekly update/OneNex_Release_Timeline.html';
+  }
   frame.src = targetUrl;
   frame.onload = () => ensureExporterInFrame(frame);
 }
@@ -580,21 +614,23 @@ function switchDetailTab(tab) {
 
 function updateDetailTabs() {
   const weeklyTab = document.getElementById('detailTabWeekly');
+  const timelineTab = document.getElementById('detailTabTimeline');
   const scopeTab = document.getElementById('detailTabScope');
-  if (currentTab === 'weekly') {
-    if (weeklyTab) weeklyTab.classList.add('active');
-    if (scopeTab) scopeTab.classList.remove('active');
-  } else {
-    if (scopeTab) scopeTab.classList.add('active');
-    if (weeklyTab) weeklyTab.classList.remove('active');
-  }
+  if (weeklyTab) weeklyTab.classList.toggle('active', currentTab === 'weekly');
+  if (timelineTab) timelineTab.classList.toggle('active', currentTab === 'timeline');
+  if (scopeTab) scopeTab.classList.toggle('active', currentTab === 'scope');
 }
 
 function loadDetailFrame() {
   const frame = document.getElementById('detailFrame');
   if (!frame || !activeProject) return;
   const curWeek = activeProject.weeks[activeProject.selectedWeekIndex || 0] || activeProject.weeks[0];
-  const targetUrl = (currentTab === 'weekly') ? curWeek.weeklyUrl : curWeek.scopeUrl;
+  let targetUrl = curWeek.weeklyUrl;
+  if (currentTab === 'scope') {
+    targetUrl = curWeek.scopeUrl;
+  } else if (currentTab === 'timeline') {
+    targetUrl = curWeek.timelineUrl || 'Incubator Weekly update/OneNex_Release_Timeline.html';
+  }
   frame.src = targetUrl;
   frame.onload = () => ensureExporterInFrame(frame);
 }
@@ -605,7 +641,10 @@ async function triggerDetailExport() {
 
   const curWeek = activeProject.weeks[activeProject.selectedWeekIndex || 0] || activeProject.weeks[0];
   const cleanName = activeProject.name.replace(/[^a-zA-Z0-9]/g, '_');
-  const filename = `${cleanName}_Week_${curWeek.weekNumber || 1}_${currentTab === 'weekly' ? 'Report' : 'Scope'}.jpg`;
+  let typeLabel = 'Report';
+  if (currentTab === 'scope') typeLabel = 'Scope';
+  else if (currentTab === 'timeline') typeLabel = 'Timeline';
+  const filename = `${cleanName}_Week_${curWeek.weekNumber || 1}_${typeLabel}.jpg`;
 
   showPortalToast(`Generating high-res JPG for ${activeProject.name}...`, 'loading');
 
@@ -625,7 +664,12 @@ async function triggerDetailExport() {
 function openDetailInNewTab() {
   if (!activeProject) return;
   const curWeek = activeProject.weeks[activeProject.selectedWeekIndex || 0] || activeProject.weeks[0];
-  const targetUrl = (currentTab === 'weekly') ? curWeek.weeklyUrl : curWeek.scopeUrl;
+  let targetUrl = curWeek.weeklyUrl;
+  if (currentTab === 'scope') {
+    targetUrl = curWeek.scopeUrl;
+  } else if (currentTab === 'timeline') {
+    targetUrl = curWeek.timelineUrl || 'Incubator Weekly update/OneNex_Release_Timeline.html';
+  }
   window.open(targetUrl, '_blank');
 }
 
@@ -635,9 +679,17 @@ async function quickExportJpg(projectId, type) {
   if (!project) return;
 
   const curWeek = project.weeks[project.selectedWeekIndex || 0] || project.weeks[0];
-  const url = (type === 'weekly') ? curWeek.weeklyUrl : curWeek.scopeUrl;
+  let url = curWeek.weeklyUrl;
+  let typeLabel = 'Report';
+  if (type === 'scope') {
+    url = curWeek.scopeUrl;
+    typeLabel = 'Scope';
+  } else if (type === 'timeline') {
+    url = curWeek.timelineUrl || 'Incubator Weekly update/OneNex_Release_Timeline.html';
+    typeLabel = 'Timeline';
+  }
   const cleanName = project.name.replace(/[^a-zA-Z0-9]/g, '_');
-  const filename = `${cleanName}_Week_${curWeek.weekNumber || 1}_${type === 'weekly' ? 'Report' : 'Scope'}.jpg`;
+  const filename = `${cleanName}_Week_${curWeek.weekNumber || 1}_${typeLabel}.jpg`;
 
   showPortalToast(`Generating high-res JPG for ${project.name}...`, 'loading');
 

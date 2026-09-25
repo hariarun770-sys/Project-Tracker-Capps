@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex — Weekly Project Visibility Card (Week 37 / 11 September 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+    }
+
+    /* 1. TOP HEADER */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 10px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .brand-logo span.nex {
+      color: #ff5722;
+      position: relative;
+    }
+    .brand-logo sup {
+      font-size: 11px;
+      margin-left: 2px;
+      color: #ff5722;
+    }
+
+    .divider-vert {
+      width: 1.5px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #f59e0b;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .header-center {
+      text-align: right;
+      margin-right: 12px;
+    }
+    .header-center .sys-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .header-center .sys-tagline {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-amber-badge {
+      background: #f59e0b;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+
+    .status-amber-badge .indicator-circle {
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+    }
+    .status-amber-badge .sub-text {
+      font-size: 10px;
+      font-weight: 700;
+      opacity: 0.95;
+      display: block;
+      line-height: 1;
+    }
+
+    .status-guide {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      padding: 4px 10px;
+    }
+
+    .status-guide .guide-title {
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .guide-items {
+      display: flex;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .guide-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-green { background: #22c55e; }
+    .dot-amber { background: #f59e0b; }
+    .dot-red { background: #ef4444; }
+
+    /* 2. METADATA ROW */
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr 1.1fr 1.3fr 1.5fr 0.7fr 1.2fr;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .meta-col {
+      padding: 6px 12px;
+      border-right: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .meta-col:last-child {
+      border-right: none;
+    }
+
+    .meta-label {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #475569;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .meta-label i {
+      color: #1e3a8a;
+      font-size: 10.5px;
+    }
+
+    .meta-value {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+    .meta-sub {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* 3. MAIN DASHBOARD GRID */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #eef2f6;
+      flex: 1;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .panel-hdr {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 4px 10px;
+      font-size: 10.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      padding: 6px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* SECTION 1: RELEASE JOURNEY */
+    .journey-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1.15fr auto 1fr;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 0;
+    }
+
+    .journey-step {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 8px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      min-height: 120px;
+      justify-content: space-between;
+    }
+
+    .journey-step.done {
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+    .journey-step.testing {
+      border-color: #fed7aa;
+      background: #fff7ed;
+    }
+    .journey-step.progress {
+      border-color: #93c5fd;
+      background: #f0f7ff;
+    }
+    .journey-step.next {
+      border-color: #e9d5ff;
+      background: #faf5ff;
+    }
+
+    .step-hdr {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .step-hdr-icon {
+      font-size: 14px;
+      margin-top: 1px;
+    }
+    .step-title {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+    .step-sub {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .step-bullets {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+    .step-bullets li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 2px;
+    }
+    .step-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #64748b;
+      font-weight: 900;
+    }
+
+    .step-badge {
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 2.5px 6px;
+      border-radius: 4px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .badge-done { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .badge-testing { background: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
+    .badge-progress { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+    .arrow-icon {
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    /* SECTION 2: RELEASE 1.1 PROGRESS (FEATURES) */
+    .features-panel-body {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .feature-donut-wrap {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+    }
+    .feature-donut-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .feature-donut-text .pct {
+      font-size: 19px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .feature-donut-text .count {
+      font-size: 9px;
+      font-weight: 800;
+      color: #475569;
+      margin-top: 2px;
+    }
+    .feature-donut-text .lbl {
+      font-size: 7.5px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .feature-stat-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .f-stat-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      background: #f8fafc;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .f-stat-icon {
+      font-size: 13px;
+      width: 16px;
+      text-align: center;
+    }
+    .f-stat-num {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      min-width: 24px;
+    }
+    .f-stat-info {
+      line-height: 1.15;
+    }
+    .f-stat-info .title {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #1e293b;
+    }
+    .f-stat-info .sub {
+      font-size: 8px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* SECTION 3: R1.0 TESTING STATUS */
+    .testing-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .testing-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      background: #f8fafc;
+      padding: 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .testing-card .icon {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .testing-card .val {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .testing-card .lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #475569;
+      margin-top: 2px;
+    }
+
+    /* SECTION 4: CURRENT RELEASE PLAN R1.1 */
+    .r11-plan-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 4px;
+    }
+    .r11-plan-top .target-box {
+      font-size: 10px;
+      font-weight: 800;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .r11-plan-top .days-box {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #dc2626;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .plan-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+    }
+    .plan-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 8.5px;
+      padding: 3px 6px;
+      border-bottom: 1px solid #cbd5e1;
+      text-align: left;
+    }
+    .plan-table td {
+      padding: 3px 6px;
+      border-bottom: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* SECTION 5: RESOURCE ALLOCATION */
+    .resource-body-grid {
+      display: grid;
+      grid-template-columns: 85px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .team-badge-big {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #f8fafc;
+      text-align: center;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-badge-big .num {
+      font-size: 26px;
+      font-weight: 900;
+      color: #091e3a;
+      line-height: 1;
+    }
+    .team-badge-big .lbl {
+      font-size: 8px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .res-breakdown-table {
+      width: 100%;
+      font-size: 9.5px;
+      border-collapse: collapse;
+    }
+    .res-breakdown-table td {
+      padding: 3px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      font-weight: 700;
+    }
+
+    /* SECTION 6: WHAT CHANGED THIS WEEK? */
+    .change-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .change-row {
+      display: grid;
+      grid-template-columns: 18px 120px 1fr;
+      align-items: center;
+      font-size: 9.5px;
+      padding: 2px 4px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .change-row .icon {
+      font-size: 11px;
+      color: #2563eb;
+    }
+    .change-row .tag {
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .change-row .detail {
+      font-weight: 600;
+      color: #334155;
+    }
+
+    /* SECTION 7: RISKS & MANAGEMENT ATTENTION */
+    .risk-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+    }
+    .risk-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 9.5px;
+      line-height: 1.25;
+      padding: 2.5px 4px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .risk-row .icon-amber { color: #f59e0b; font-size: 11px; margin-top: 1px; }
+    .risk-row .icon-green { color: #22c55e; font-size: 11px; margin-top: 1px; }
+    .risk-row .r-title {
+      font-weight: 800;
+      color: #0f172a;
+      min-width: 140px;
+    }
+    .risk-row .r-desc {
+      font-weight: 600;
+      color: #334155;
+      flex: 1;
+    }
+
+    /* SECTION 8: AT A GLANCE */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .glance-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      background: #f8fafc;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .glance-circle {
+      position: relative;
+      width: 48px;
+      height: 48px;
+    }
+    .glance-circle svg {
+      transform: rotate(-90deg);
+    }
+    .glance-pct {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .glance-title {
+      font-size: 8px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-top: 3px;
+      line-height: 1.1;
+    }
+    .glance-sub {
+      font-size: 7.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* SECTION 9: WEEKLY SUMMARY */
+    .summary-box {
+      background: #f8fafc;
+      border-left: 3.5px solid #ff5722;
+      padding: 6px 10px;
+      font-size: 9.5px;
+      line-height: 1.45;
+      font-weight: 600;
+      color: #1e293b;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .summary-box .sum-icon {
+      color: #ff5722;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    /* FOOTER */
+    .footer-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      border-top: 1px solid #061528;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo {
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .footer-logo span { color: #ff5722; }
+    .footer-badges {
+      display: flex;
+      gap: 14px;
+      font-size: 9px;
+      color: #cbd5e1;
+    }
+    .footer-badges span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .footer-badges span i {
+      color: #ff5722;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card">
+      
+      <!-- 1. TOP HEADER -->
+      <header class="header-bar">
+        <div class="brand-group">
+          <div class="brand-logo">One<span class="nex">Nex</span><sup>TM</sup></div>
+          <div class="divider-vert"></div>
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">WEEK ENDING FRIDAY, 11 SEPTEMBER 2026 &nbsp;|&nbsp; WEEK 37</div>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <div class="sys-title">Restaurant Management System</div>
+          <div class="sys-tagline">One Platform. Every Journey.</div>
+        </div>
+
+        <div class="header-right">
+          <div class="status-amber-badge">
+            <span class="indicator-circle"></span>
+            <div>
+              <div>AMBER</div>
+              <span class="sub-text">On Track with Attention</span>
+            </div>
+          </div>
+
+          <div class="status-guide">
+            <div class="guide-title">STATUS GUIDE</div>
+            <div class="guide-items">
+              <span class="guide-item"><span class="dot dot-green"></span> On Track</span>
+              <span class="guide-item"><span class="dot dot-amber"></span> At Risk</span>
+              <span class="guide-item"><span class="dot dot-red"></span> Off Track</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. METADATA ROW -->
+      <section class="meta-row">
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-building"></i> PROJECT</span>
+          <span class="meta-value">OneNex</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-bullseye"></i> PHASE</span>
+          <span class="meta-value">Phase 1</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-gear"></i> CURRENT RELEASE</span>
+          <span class="meta-value">Release 1.1</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-layer-group"></i> PROJECT TYPE</span>
+          <span class="meta-value">Restaurant Platform</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-users"></i> TEAM SIZE</span>
+          <span class="meta-value">6</span>
+          <span class="meta-sub">(All members cross-functional)</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-calendar-week"></i> WEEK NO.</span>
+          <span class="meta-value">37</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-label"><i class="fa-solid fa-calendar-day"></i> WEEK ENDING (FRIDAY)</span>
+          <span class="meta-value">11 SEPTEMBER 2026</span>
+        </div>
+      </section>
+
+      <!-- 3. DASHBOARD MAIN GRID -->
+      <main class="dashboard-grid">
+
+        <!-- PANEL 1: RELEASE JOURNEY & STATUS -->
+        <article class="panel">
+          <div class="panel-hdr">1. RELEASE JOURNEY &amp; STATUS</div>
+          <div class="panel-body">
+            <div class="journey-flow">
+              
+              <!-- Step 1: Release 1.0 Delivered -->
+              <div class="journey-step done">
+                <div>
+                  <div class="step-hdr">
+                    <i class="fa-solid fa-circle-check step-hdr-icon" style="color:#16a34a;"></i>
+                    <div>
+                      <div class="step-title" style="color:#16a34a;">Release 1.0</div>
+                      <div class="step-sub" style="font-weight:800; color:#15803d;">DELIVERED &bull; 10 Sep 2026</div>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>Business App stabilised</li>
+                    <li>Orders &amp; payments</li>
+                    <li>Core business operations</li>
+                    <li>Ready for production</li>
+                  </ul>
+                </div>
+                <div class="step-badge badge-done">
+                  <i class="fa-solid fa-check"></i> Completed
+                </div>
+              </div>
+
+              <div class="arrow-icon">&rarr;</div>
+
+              <!-- Step 2: Post-Release Testing -->
+              <div class="journey-step testing">
+                <div>
+                  <div class="step-hdr">
+                    <i class="fa-solid fa-magnifying-glass step-hdr-icon" style="color:#ea580c;"></i>
+                    <div>
+                      <div class="step-title" style="color:#c2410c;">Post-Release Testing</div>
+                      <div class="step-sub" style="font-weight:800; color:#ea580c;">IN PROGRESS</div>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>11 bugs resolved</li>
+                    <li>5 verified / tested</li>
+                    <li>6 awaiting verification</li>
+                    <li>Business App production on progress</li>
+                  </ul>
+                </div>
+                <div class="step-badge badge-testing">
+                  <i class="fa-solid fa-rotate"></i> Testing in Progress
+                </div>
+              </div>
+
+              <div class="arrow-icon">&rarr;</div>
+
+              <!-- Step 3: Release 1.1 In Progress -->
+              <div class="journey-step progress">
+                <div>
+                  <div class="step-hdr">
+                    <i class="fa-solid fa-gear step-hdr-icon" style="color:#2563eb;"></i>
+                    <div>
+                      <div class="step-title" style="color:#1d4ed8;">Release 1.1</div>
+                      <div class="step-sub" style="font-weight:800; color:#2563eb;">IN PROGRESS &bull; Target: 17 Sep</div>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>Full journey across app &amp; web</li>
+                    <li>Customer Web</li>
+                    <li>Business Web</li>
+                    <li>Additional features &amp; stabilization</li>
+                  </ul>
+                </div>
+                <div class="step-badge badge-progress">
+                  <i class="fa-solid fa-chart-simple"></i> On Schedule
+                </div>
+              </div>
+
+              <div class="arrow-icon">&rarr;</div>
+
+              <!-- Step 4: Pilot & Live -->
+              <div class="journey-step next">
+                <div>
+                  <div class="step-hdr">
+                    <i class="fa-solid fa-rocket step-hdr-icon" style="color:#7c3aed;"></i>
+                    <div>
+                      <div class="step-title" style="color:#6d28d9;">Pilot &amp; Live</div>
+                      <div class="step-sub" style="font-weight:800; color:#7c3aed;">NEXT</div>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>Pilot businesses</li>
+                    <li>Live demonstration</li>
+                    <li>Market rollout</li>
+                  </ul>
+                </div>
+                <div style="font-size:8.5px; font-weight:700; color:#7c3aed; text-align:center; padding:2px;">
+                  Upcoming Milestone
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: RELEASE 1.1 PROGRESS (FEATURES) -->
+        <article class="panel">
+          <div class="panel-hdr">2. RELEASE 1.1 PROGRESS (FEATURES)</div>
+          <div class="panel-body">
+            <div class="features-panel-body">
+              
+              <div class="feature-donut-wrap">
+                <svg width="100" height="100" viewBox="0 0 36 36">
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4.2"/>
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ff5722" stroke-width="4.2" stroke-dasharray="29, 100" stroke-linecap="round"/>
+                </svg>
+                <div class="feature-donut-text">
+                  <div class="pct">29%</div>
+                  <div class="count">27 / 93</div>
+                  <div class="lbl">Features Completed</div>
+                </div>
+              </div>
+
+              <div class="feature-stat-cards">
+                <div class="f-stat-card">
+                  <span class="f-stat-icon" style="color:#16a34a;"><i class="fa-solid fa-circle-check"></i></span>
+                  <span class="f-stat-num" style="color:#16a34a;">27</span>
+                  <div class="f-stat-info">
+                    <div class="title">Done</div>
+                  </div>
+                </div>
+
+                <div class="f-stat-card">
+                  <span class="f-stat-icon" style="color:#0284c7;"><i class="fa-solid fa-arrows-rotate"></i></span>
+                  <span class="f-stat-num" style="color:#0284c7;">3</span>
+                  <div class="f-stat-info">
+                    <div class="title">In Progress</div>
+                    <div class="sub">Ordering, Menu, Business Web (Overall)</div>
+                  </div>
+                </div>
+
+                <div class="f-stat-card">
+                  <span class="f-stat-icon" style="color:#64748b;"><i class="fa-regular fa-clock"></i></span>
+                  <span class="f-stat-num" style="color:#64748b;">63</span>
+                  <div class="f-stat-info">
+                    <div class="title">Not Started</div>
+                    <div class="sub">Business Web Payment</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 3: RELEASE 1.0 TESTING STATUS -->
+        <article class="panel">
+          <div class="panel-hdr">3. RELEASE 1.0 TESTING STATUS</div>
+          <div class="panel-body">
+            <div style="font-size:9.5px; color:#334155; font-weight:700; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-clipboard-check" style="color:#16a34a; font-size:13px;"></i>
+              <div>
+                <strong>Post-Release Testing:</strong> Release 1.0 delivered on 10 September 2026. Testing and validation is currently in progress.
+              </div>
+            </div>
+
+            <div class="testing-panel-grid">
+              <div class="testing-card">
+                <i class="fa-solid fa-bug icon" style="color:#2563eb;"></i>
+                <div class="val" style="color:#2563eb;">11</div>
+                <div class="lbl">Bugs Resolved</div>
+              </div>
+
+              <div class="testing-card">
+                <i class="fa-solid fa-check icon" style="color:#16a34a;"></i>
+                <div class="val" style="color:#16a34a;">5</div>
+                <div class="lbl">Verified / Tested</div>
+              </div>
+
+              <div class="testing-card">
+                <i class="fa-regular fa-clock icon" style="color:#ea580c;"></i>
+                <div class="val" style="color:#ea580c;">6</div>
+                <div class="lbl">Awaiting Verification</div>
+              </div>
+
+              <div class="testing-card" style="background:#fff7ed; border-color:#fed7aa;">
+                <i class="fa-solid fa-heart-pulse icon" style="color:#c2410c;"></i>
+                <div class="val" style="font-size:12px; color:#c2410c; margin-top:2px;">Still testing</div>
+                <div class="lbl" style="color:#9a3412;">No major unresolved issues.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 4: CURRENT RELEASE PLAN — R1.1 -->
+        <article class="panel">
+          <div class="panel-hdr">4. CURRENT RELEASE PLAN &mdash; R1.1</div>
+          <div class="panel-body">
+            <div class="r11-plan-top">
+              <span class="target-box">
+                <i class="fa-solid fa-calendar-days"></i> Target Release Date: <strong>17 September 2026</strong>
+              </span>
+              <span class="days-box">
+                <i class="fa-regular fa-clock"></i> Days Remaining: <strong>6 Days</strong>
+              </span>
+            </div>
+
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th style="width:30%;">Feature Area</th>
+                  <th style="width:28%;">Status</th>
+                  <th style="width:42%;">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ordering</strong></td>
+                  <td style="color:#0284c7; font-weight:800;"><i class="fa-solid fa-arrows-rotate"></i> In Progress</td>
+                  <td>Development in progress</td>
+                </tr>
+                <tr>
+                  <td><strong>Menu</strong></td>
+                  <td style="color:#0284c7; font-weight:800;"><i class="fa-solid fa-arrows-rotate"></i> In Progress</td>
+                  <td>Development in progress</td>
+                </tr>
+                <tr>
+                  <td><strong>Business Web (Overall)</strong></td>
+                  <td style="color:#0284c7; font-weight:800;"><i class="fa-solid fa-arrows-rotate"></i> In Progress</td>
+                  <td>Multiple features in progress</td>
+                </tr>
+                <tr>
+                  <td><strong>Business Web Payment</strong></td>
+                  <td style="color:#64748b; font-weight:700;"><i class="fa-regular fa-clock"></i> Not Started</td>
+                  <td>Planned</td>
+                </tr>
+                <tr>
+                  <td><strong>Other Features</strong></td>
+                  <td style="color:#16a34a; font-weight:800;"><i class="fa-solid fa-circle-check"></i> Partially Done</td>
+                  <td>27 of 93 completed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- PANEL 5: RESOURCE ALLOCATION -->
+        <article class="panel">
+          <div class="panel-hdr">5. RESOURCE ALLOCATION</div>
+          <div class="panel-body">
+            <div class="resource-body-grid">
+              
+              <div class="team-badge-big">
+                <i class="fa-solid fa-users" style="color:#0284c7; font-size:18px; margin-bottom:2px;"></i>
+                <div class="num">6</div>
+                <div class="lbl">Total Team Members</div>
+                <div style="font-size:7.5px; color:#64748b; margin-top:2px;">(Cross-functional)</div>
+              </div>
+
+              <table class="res-breakdown-table">
+                <tbody>
+                  <tr>
+                    <td><i class="fa-solid fa-user-gear" style="color:#2563eb; width:14px;"></i> Developers</td>
+                    <td style="text-align:right; font-weight:900; color:#0f172a;">6</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-vial-circle-check" style="color:#059669; width:14px;"></i> QA</td>
+                    <td style="text-align:right; color:#64748b;">None (Shared by team)</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-pen-nib" style="color:#7c3aed; width:14px;"></i> UI / UX</td>
+                    <td style="text-align:right; color:#1e293b;">All members</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-user-tie" style="color:#ea580c; width:14px;"></i> Lead / PM</td>
+                    <td style="text-align:right; color:#1e293b;">All members</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 6: WHAT CHANGED THIS WEEK? -->
+        <article class="panel">
+          <div class="panel-hdr">6. WHAT CHANGED THIS WEEK?</div>
+          <div class="panel-body">
+            <div class="change-list">
+              <div class="change-row">
+                <i class="fa-solid fa-flag change-icon"></i>
+                <span class="tag">Release Milestone</span>
+                <span class="detail">Release 1.0 completed on 10 September 2026.</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-flask change-icon"></i>
+                <span class="tag">Testing Started</span>
+                <span class="detail">Post-release testing and validation in progress.</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-bug change-icon"></i>
+                <span class="tag">Bugs Fixed</span>
+                <span class="detail">11 bugs resolved (5 verified so far).</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-rocket change-icon"></i>
+                <span class="tag">Release 1.1</span>
+                <span class="detail">Development continued for Release 1.1.</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-shield-halved change-icon"></i>
+                <span class="tag">Stabilisation</span>
+                <span class="detail">Business App stabilised.</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-cloud-arrow-up change-icon"></i>
+                <span class="tag">Production</span>
+                <span class="detail">Business App production preparation on progress.</span>
+              </div>
+              <div class="change-row">
+                <i class="fa-solid fa-list-check change-icon"></i>
+                <span class="tag">Overall</span>
+                <span class="detail">Team continues to work across all areas.</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 7: RISKS / ISSUES & MANAGEMENT ATTENTION -->
+        <article class="panel">
+          <div class="panel-hdr">7. RISKS / ISSUES &amp; MANAGEMENT ATTENTION</div>
+          <div class="panel-body">
+            <div class="risk-list">
+              
+              <div class="risk-row">
+                <i class="fa-solid fa-circle-exclamation icon-amber"></i>
+                <span class="r-title">Release 1.1 Schedule</span>
+                <span class="r-desc">Only 27 of 93 features completed. Target date 17 September is approaching. Need to maintain focus.</span>
+              </div>
+
+              <div class="risk-row">
+                <i class="fa-solid fa-circle-exclamation icon-amber"></i>
+                <span class="r-title">R1.0 Validation</span>
+                <span class="r-desc">6 of 11 resolved bugs still require verification. Testing ongoing.</span>
+              </div>
+
+              <div class="risk-row">
+                <i class="fa-solid fa-circle-exclamation icon-amber"></i>
+                <span class="r-title">App Store Registration</span>
+                <span class="r-desc">Registration is in progress and required for release readiness.</span>
+              </div>
+
+              <div class="risk-row">
+                <i class="fa-solid fa-circle-check icon-green"></i>
+                <span class="r-title" style="color:#166534;">Technical Dependencies</span>
+                <span class="r-desc">No current API, synchronization, payment, infrastructure or other technical blockers.</span>
+              </div>
+
+              <div class="risk-row">
+                <i class="fa-solid fa-circle-check icon-green"></i>
+                <span class="r-title" style="color:#166534;">Management Decision</span>
+                <span class="r-desc">No approval or decision required at this time.</span>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 8: AT A GLANCE -->
+        <article class="panel">
+          <div class="panel-hdr">8. AT A GLANCE</div>
+          <div class="panel-body">
+            <div class="glance-grid">
+              
+              <!-- R1.0 Delivery -->
+              <div class="glance-card">
+                <div class="glance-circle">
+                  <svg width="48" height="48" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#16a34a" stroke-width="4" stroke-dasharray="100, 100"/>
+                  </svg>
+                  <span class="glance-pct" style="color:#16a34a;">100%</span>
+                </div>
+                <div class="glance-title">R1.0 Delivery</div>
+                <div class="glance-sub">Completed</div>
+              </div>
+
+              <!-- R1.0 Bug Verification -->
+              <div class="glance-card">
+                <div class="glance-circle">
+                  <svg width="48" height="48" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ea580c" stroke-width="4" stroke-dasharray="45, 100"/>
+                  </svg>
+                  <span class="glance-pct" style="color:#ea580c;">45%</span>
+                </div>
+                <div class="glance-title">R1.0 Bug Verification</div>
+                <div class="glance-sub">5 of 11</div>
+              </div>
+
+              <!-- R1.1 Progress -->
+              <div class="glance-card">
+                <div class="glance-circle">
+                  <svg width="48" height="48" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="4"/>
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ea580c" stroke-width="4" stroke-dasharray="29, 100"/>
+                  </svg>
+                  <span class="glance-pct" style="color:#ea580c;">29%</span>
+                </div>
+                <div class="glance-title">R1.1 Progress</div>
+                <div class="glance-sub">27 of 93</div>
+              </div>
+
+              <!-- Team Members -->
+              <div class="glance-card">
+                <div class="glance-circle" style="display:flex; align-items:center; justify-content:center; background:#eff6ff; border-radius:50%;">
+                  <i class="fa-solid fa-users" style="color:#2563eb; font-size:18px;"></i>
+                  <span class="glance-pct" style="color:#2563eb; font-size:14px; top:65%;">6</span>
+                </div>
+                <div class="glance-title">Team Members</div>
+                <div class="glance-sub">Cross-functional</div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 9: WEEKLY SUMMARY -->
+        <article class="panel">
+          <div class="panel-hdr">9. WEEKLY SUMMARY</div>
+          <div class="panel-body">
+            <div class="summary-box">
+              <i class="fa-solid fa-file-lines sum-icon"></i>
+              <div>
+                Release 1.0 has been delivered and the Business App is now undergoing post-release validation. 11 identified bugs have been resolved, with 5 verified so far. In parallel, Release 1.1 development is progressing toward the 17 September target, with 27 of 93 features completed. Business App production readiness and app-store registration are also in progress. No major technical blockers or management decisions are currently reported.
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </main>
+
+      <!-- 4. FOOTER -->
+      <footer class="footer-bar">
+        <div class="footer-left">
+          <div class="footer-logo">One<span>Nex</span></div>
+          <span>&bull;</span>
+          <span>More control for businesses. A smoother journey for guests.</span>
+        </div>
+        <div class="footer-badges">
+          <span><i class="fa-solid fa-utensils"></i> Food</span>
+          <span><i class="fa-solid fa-user-group"></i> People</span>
+          <span><i class="fa-solid fa-chart-line"></i> Technology</span>
+          <span><i class="fa-solid fa-heart"></i> Better Together</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

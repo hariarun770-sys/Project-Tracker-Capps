@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex — Scope & USP Specification Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 20px 28px 14px 28px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 32px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+    .brand-logo span.nex { color: #ff5722; }
+    .brand-logo sup { font-size: 11px; color: #ff5722; }
+
+    .brand-tagline {
+      font-size: 16px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+    .hdr-sys {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .hdr-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* TOP 2 RELEASES GRID */
+    .releases-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .release-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .rel-badge-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ff5722;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      width: fit-content;
+    }
+    .rel-badge-date.blue {
+      background: #0284c7;
+    }
+
+    .rel-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .rel-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .rel-inner-grid {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .outcomes-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #ea580c;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .outcomes-title.blue { color: #0284c7; }
+
+    .outcomes-list {
+      list-style: none;
+      font-size: 10px;
+      line-height: 1.35;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .outcomes-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+    .outcomes-list li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #ea580c;
+      font-size: 9px;
+      font-weight: 900;
+    }
+    .outcomes-list.blue li::before {
+      color: #0284c7;
+    }
+
+    .rel-device-box {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .rel-device-box .dev-icon {
+      font-size: 26px;
+      color: #ff5722;
+    }
+    .rel-device-box .dev-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .rel-device-box .dev-sub {
+      font-size: 8px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .success-stmt {
+      margin-top: 10px;
+      background: #fff7ed;
+      border-left: 3px solid #ff5722;
+      padding: 6px 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #9a3412;
+      line-height: 1.3;
+    }
+    .success-stmt.blue {
+      background: #f0f7ff;
+      border-left-color: #0284c7;
+      color: #075985;
+    }
+
+    /* BOTTOM 3 COLUMNS */
+    .bottom-three-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .section-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sec-header {
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+    .sec-header i { color: #ff5722; }
+
+    /* TABLE: USPS */
+    .usp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      flex: 1;
+    }
+    .usp-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 8px;
+      padding: 3px 4px;
+      border-bottom: 1px solid #cbd5e1;
+      text-align: left;
+    }
+    .usp-table td {
+      padding: 3px 4px;
+      border-bottom: 1px solid #f1f5f9;
+      line-height: 1.25;
+      vertical-align: middle;
+    }
+    .usp-claim {
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .usp-avail {
+      font-size: 7.5px;
+      font-weight: 900;
+      padding: 1px 4px;
+      border-radius: 3px;
+      text-align: center;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .tag-r10 { background: #ffedd5; color: #c2410c; }
+    .tag-r11 { background: #dbeafe; color: #1d4ed8; }
+    .tag-r1011 { background: #fef3c7; color: #b45309; }
+
+    /* BUSINESS TYPES */
+    .biz-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .biz-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 6px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+    }
+    .biz-icon {
+      font-size: 16px;
+      color: #ff5722;
+      width: 22px;
+      text-align: center;
+    }
+    .biz-info .name {
+      font-size: 10px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .biz-info .desc {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.2;
+    }
+
+    /* MODULES TABLE */
+    .modules-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      flex: 1;
+    }
+    .modules-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 8px;
+      padding: 3px 6px;
+      border-bottom: 1px solid #cbd5e1;
+      text-align: left;
+    }
+    .modules-table td {
+      padding: 2.5px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      font-weight: 600;
+    }
+    .m-pill {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 2px;
+    }
+    .pill-app { background: #ffedd5; color: #c2410c; }
+    .pill-web { background: #dbeafe; color: #1d4ed8; }
+    .pill-admin { background: #dcfce7; color: #15803d; }
+    .pill-kds { background: #ede9fe; color: #6d28d9; }
+
+    /* FOOTER */
+    .scope-footer {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .scope-footer .left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .scope-footer .left span.logo {
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .scope-footer .left span.logo span { color: #ff5722; }
+    .scope-footer .badges {
+      display: flex;
+      gap: 12px;
+      color: #cbd5e1;
+      font-size: 9px;
+    }
+    .scope-footer .badges span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .scope-footer .badges span i { color: #ff5722; }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+      
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">One<span class="nex">Nex</span><sup>TM</sup></div>
+          <div style="font-size: 20px; color: #94a3b8; font-weight: 300;">|</div>
+          <div class="brand-tagline">One Platform. Every Journey.</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">Restaurant Management System</div>
+          <div class="hdr-sub">Built for Today. Ready for Tomorrow.</div>
+        </div>
+      </header>
+
+      <!-- TOP 2 RELEASES GRID -->
+      <section class="releases-top-grid">
+        
+        <!-- RELEASE 1.0 -->
+        <article class="release-card">
+          <div>
+            <div class="rel-badge-date">
+              <i class="fa-regular fa-calendar-days"></i> Release 1.0 &bull; 10 September
+            </div>
+            <div class="rel-title">Business App Stabilised</div>
+            <div class="rel-sub">
+              A business can run its core in-store operation reliably without depending on fragmented tools or fallback processes.
+            </div>
+
+            <div class="rel-inner-grid">
+              <div>
+                <div class="outcomes-title">
+                  <i class="fa-solid fa-bullseye"></i> Key outcomes
+                </div>
+                <ul class="outcomes-list">
+                  <li>Orders and payments work reliably end-to-end on the Business App.</li>
+                  <li>A guest's orders stay on one bill, regardless of the channel.</li>
+                  <li>Staff can complete the core service flow in-app: seating &rarr; ordering &rarr; service requests &rarr; payment.</li>
+                  <li>Card payments can be completed directly through the business flow without falling back to a till.</li>
+                  <li>Admin can register and activate a business, then configure its own setup.</li>
+                </ul>
+              </div>
+
+              <div class="rel-device-box">
+                <i class="fa-solid fa-mobile-screen-button dev-icon"></i>
+                <div class="dev-lbl">Staff on mobile</div>
+                <div class="dev-sub">No new hardware.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="success-stmt">
+            <strong>Release 1.0 success statement:</strong><br>
+            A business can onboard, configure itself, serve guests, manage orders and collect payments through OneNex.
+          </div>
+        </article>
+
+        <!-- RELEASE 1.1 -->
+        <article class="release-card">
+          <div>
+            <div class="rel-badge-date blue">
+              <i class="fa-regular fa-calendar-days"></i> Release 1.1 &bull; 17 September
+            </div>
+            <div class="rel-title">Full Customer Journey Across App &amp; Web</div>
+            <div class="rel-sub">
+              Customers and staff can complete the full journey across OneNex, with a shared real-time order and payment experience.
+            </div>
+
+            <div class="rel-inner-grid">
+              <div>
+                <div class="outcomes-title blue">
+                  <i class="fa-solid fa-bullseye"></i> Key outcomes
+                </div>
+                <ul class="outcomes-list blue">
+                  <li>The complete customer journey works across Business App and Web: reserve &rarr; arrive &rarr; dine/order &rarr; pay &rarr; close.</li>
+                  <li>Dine-in, immediate takeaway and click &amp; collect are supported through both customer-initiated and staff-initiated flows.</li>
+                  <li>Staff and customers see the same order state in real time.</li>
+                  <li>A failed payment can be retried and completed without losing the transaction.</li>
+                  <li>The platform is ready for pilot businesses and live demonstrations.</li>
+                </ul>
+              </div>
+
+              <div class="rel-device-box" style="border-color:#bfdbfe; background:#eff6ff;">
+                <i class="fa-solid fa-laptop-code dev-icon" style="color:#0284c7;"></i>
+                <div class="dev-lbl">Customer Web</div>
+                <div class="dev-sub">Business App &bull; Web</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="success-stmt blue">
+            <strong>Release 1.1 success statement:</strong><br>
+            A customer can start their journey on the web and seamlessly complete their experience with the business through OneNex.
+          </div>
+        </article>
+
+      </section>
+
+      <!-- BOTTOM 3 COLUMNS -->
+      <section class="bottom-three-grid">
+        
+        <!-- SECTION 1: ONENEX USPS -->
+        <article class="section-card">
+          <div class="sec-header">
+            <i class="fa-solid fa-star"></i> OneNex USPs
+          </div>
+
+          <table class="usp-table">
+            <thead>
+              <tr>
+                <th style="width:34%;">Claim</th>
+                <th style="width:52%;">What it means</th>
+                <th style="width:14%; text-align:center;">From</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-mobile-screen"></i> No new hardware</td>
+                <td>Staff work from their own mobile. No POS terminal to buy, no tablet fleet to provision.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r10">R1.0</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-globe"></i> Nothing to download</td>
+                <td>A guest scans, orders and pays directly through the web without installing an app.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r11">R1.1</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-receipt"></i> One guest, one bill</td>
+                <td>Orders from different channels resolve into a single guest/session bill.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r1011">R1.0&rarr;1.1</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-shield-halved"></i> Kitchen unpaid</td>
+                <td>An unpaid order can't be served, and a paid order can't be cancelled.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r10">R1.0</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-clipboard"></i> Never paper</td>
+                <td>Seating, ordering, service requests &amp; payments managed digitally.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r10">R1.0</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-sliders"></i> Configured by you</td>
+                <td>Business manages profile, availability, operational settings &amp; users.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r10">R1.0</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-arrows-rotate"></i> Same order live</td>
+                <td>Shared order state across app and web reduces communication gaps.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r11">R1.1</span></td>
+              </tr>
+              <tr>
+                <td class="usp-claim"><i class="fa-solid fa-credit-card"></i> Declined retry</td>
+                <td>Payment failures preserve the transaction so customer can retry.</td>
+                <td style="text-align:center;"><span class="usp-avail tag-r11">R1.1</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- SECTION 2: SUPPORTED BUSINESS TYPES -->
+        <article class="section-card">
+          <div class="sec-header">
+            <i class="fa-solid fa-store"></i> Supported Business Types
+          </div>
+
+          <div class="biz-list">
+            
+            <div class="biz-item">
+              <i class="fa-solid fa-utensils biz-icon"></i>
+              <div class="biz-info">
+                <div class="name">Full-Service Restaurant</div>
+                <div class="desc">Reservations, table management, dine-in ordering, service requests and billing.</div>
+              </div>
+            </div>
+
+            <div class="biz-item">
+              <i class="fa-solid fa-mug-hot biz-icon"></i>
+              <div class="biz-info">
+                <div class="name">Café &amp; Counter Service</div>
+                <div class="desc">Walk-in seating, staff ordering, QR self-ordering and immediate takeaway.</div>
+              </div>
+            </div>
+
+            <div class="biz-item">
+              <i class="fa-solid fa-bag-shopping biz-icon"></i>
+              <div class="biz-info">
+                <div class="name">Takeaway-Led Operators</div>
+                <div class="desc">Immediate takeaway and scheduled collection, initiated by customers or staff.</div>
+              </div>
+            </div>
+
+            <div class="biz-item">
+              <i class="fa-solid fa-box-open biz-icon"></i>
+              <div class="biz-info">
+                <div class="name">Order-Ahead / Click &amp; Collect</div>
+                <div class="desc">Scheduled ordering and collection within supported operating &amp; booking windows.</div>
+              </div>
+            </div>
+
+            <div class="biz-item" style="opacity:0.85;">
+              <i class="fa-solid fa-bread-slice biz-icon" style="color:#64748b;"></i>
+              <div class="biz-info">
+                <div class="name">Bakery &amp; Food Production <span style="font-size:8px; font-weight:700; color:#64748b;">(Post-Phase 1)</span></div>
+                <div class="desc">Customer orders, staff orders, walk-ins, production workflows. Scheduled separately.</div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- SECTION 3: PHASE 1 MODULES -->
+        <article class="section-card">
+          <div class="sec-header">
+            <i class="fa-solid fa-cubes"></i> Phase 1 Modules
+          </div>
+
+          <table class="modules-table">
+            <thead>
+              <tr>
+                <th style="width:52%;">Module</th>
+                <th style="width:48%;">Where it runs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><i class="fa-solid fa-chair" style="color:#2563eb; width:12px;"></i> Table Management</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-web">Customer Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-hand-holding-hand" style="color:#ea580c; width:12px;"></i> Dine-in — Staff</td>
+                <td><span class="m-pill pill-app">Business App</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-qrcode" style="color:#0284c7; width:12px;"></i> Dine-in — QR</td>
+                <td><span class="m-pill pill-web">Customer Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-burger" style="color:#16a34a; width:12px;"></i> Immediate Takeaway</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-web">Customer Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-clock" style="color:#d97706; width:12px;"></i> Click &amp; Collect</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-web">Customer Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-bell-concierge" style="color:#7c3aed; width:12px;"></i> Service Requests</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-web">Business Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-fire-burner" style="color:#dc2626; width:12px;"></i> Kitchen &amp; Fulfilment</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-kds">KDS</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-credit-card" style="color:#0284c7; width:12px;"></i> Payments &amp; Billing</td>
+                <td><span class="m-pill pill-app">Business App</span> <span class="m-pill pill-web">Customer Web</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-bell" style="color:#eab308; width:12px;"></i> Notifications</td>
+                <td><span class="m-pill pill-app">Business App</span></td>
+              </tr>
+              <tr>
+                <td><i class="fa-solid fa-user-gear" style="color:#059669; width:12px;"></i> Business Onboarding</td>
+                <td><span class="m-pill pill-app">Business Web</span> <span class="m-pill pill-admin">Admin Web</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div class="left">
+          <span class="logo">One<span>Nex</span></span>
+          <span>&bull;</span>
+          <span>More control for businesses. A smoother journey for guests.</span>
+        </div>
+        <div class="badges">
+          <span><i class="fa-solid fa-utensils"></i> Food</span>
+          <span><i class="fa-solid fa-user-group"></i> People</span>
+          <span><i class="fa-solid fa-chart-line"></i> Technology</span>
+          <span><i class="fa-solid fa-heart"></i> Better Together</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

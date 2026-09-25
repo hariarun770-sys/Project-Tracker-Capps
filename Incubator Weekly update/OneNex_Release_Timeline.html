@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex — Release Overview & Timeline (Release 1.1 Pilot & Release 1.2)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 36px 48px;
+      justify-content: space-between;
+    }
+
+    /* HEADER */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .title-group h1 {
+      font-size: 38px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-group h1 span.logo-one { color: #0f172a; }
+    .title-group h1 span.logo-nex { color: #ff5722; }
+
+    .title-group h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 4px;
+    }
+
+    .title-group p {
+      font-size: 18px;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .header-device-mockup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .pos-screen {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pos-screen span.nex { color: #ff5722; }
+
+    /* SECTION 1: TOP RELEASE COMPARISON CARDS */
+    .releases-compare-row {
+      display: grid;
+      grid-template-columns: 1fr 140px 1fr;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .release-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .r-hdr {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .r-icon-badge {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #ff5722;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 6px 16px rgba(255, 87, 34, 0.35);
+    }
+    .r-icon-badge.gear {
+      background: #ea580c;
+    }
+
+    .r-titles {
+      line-height: 1.2;
+    }
+    .r-tag {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+    }
+    .r-main-date {
+      font-size: 24px;
+      font-weight: 900;
+      color: #dc2626;
+    }
+    .r-main-date.orange {
+      color: #ea580c;
+    }
+
+    .r-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .r-items-list {
+      list-style: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .r-items-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .r-items-list li i {
+      color: #475569;
+      font-size: 14px;
+      width: 16px;
+      text-align: center;
+    }
+
+    /* Severity badges grid */
+    .severity-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .severity-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #475569;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .severity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .sev-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 8px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .sev-crit { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+    .sev-high { background: #ffedd5; color: #ea580c; border: 1px solid #fed7aa; }
+    .sev-med { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+    .sev-low { background: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0; }
+
+    .live-pilot-badge {
+      margin-top: 14px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      color: #166534;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Connector arrow */
+    .connector-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .big-arrow {
+      width: 100%;
+      height: 60px;
+      background: #ff5722;
+      clip-path: polygon(0% 20%, 65% 20%, 65% 0%, 100% 50%, 65% 100%, 65% 80%, 0% 80%);
+      margin-bottom: 8px;
+    }
+    .connector-text {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #c2410c;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      line-height: 1.2;
+    }
+
+    /* SECTION 2: SIX WORKSTREAMS */
+    .section-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: #e2e8f0;
+      margin-left: 10px;
+    }
+
+    .workstreams-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .workstream-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .ws-number {
+      font-size: 14px;
+      font-weight: 900;
+      color: #ff5722;
+      margin-bottom: 8px;
+    }
+
+    .ws-icon {
+      font-size: 26px;
+      color: #ff5722;
+      margin-bottom: 10px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    .ws-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .ws-desc {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    /* SECTION 3: TIMELINE CHEVRON PIPELINE */
+    .timeline-pipeline {
+      display: grid;
+      grid-template-columns: 1.1fr 1.35fr 1.35fr 1fr;
+      gap: 8px;
+    }
+
+    .timeline-phase {
+      background: #ff5722;
+      color: #ffffff;
+      padding: 16px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 4px 12px rgba(255, 87, 34, 0.25);
+    }
+    .timeline-phase.red {
+      background: #dc2626;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    }
+
+    .phase-badge-date {
+      background: #ffffff;
+      color: #ff5722;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .timeline-phase.red .phase-badge-date {
+      color: #dc2626;
+    }
+
+    .phase-info {
+      line-height: 1.25;
+    }
+    .phase-dates {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      opacity: 0.95;
+    }
+    .phase-name {
+      font-size: 15px;
+      font-weight: 900;
+      margin: 2px 0;
+    }
+    .phase-detail {
+      font-size: 11.5px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card">
+      
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="title-group">
+          <h1>
+            <span class="logo-one">One</span><span class="logo-nex">Nex</span> &mdash; Release Overview
+          </h1>
+          <h2>Release 1.1 (Pilot) and Release 1.2</h2>
+          <p>September &ndash; November 2026</p>
+        </div>
+
+        <div class="header-device-mockup">
+          <i class="fa-solid fa-desktop" style="color:#0284c7; font-size:22px;"></i>
+          <div class="pos-screen">
+            One<span class="nex">Nex</span> POS
+          </div>
+        </div>
+      </header>
+
+      <!-- SECTION 1: TOP RELEASE COMPARISON CARDS -->
+      <section class="releases-compare-row">
+        
+        <!-- CARD 1: RELEASE 1.1 PILOT -->
+        <article class="release-box">
+          <div class="r-hdr">
+            <div class="r-icon-badge">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div class="r-titles">
+              <div class="r-tag">RELEASE 1.1 &mdash; PILOT</div>
+              <div class="r-main-date">18 SEPTEMBER 2026</div>
+            </div>
+          </div>
+
+          <div class="r-content-grid">
+            <ul class="r-items-list">
+              <li>
+                <i class="fa-solid fa-user-check"></i> Pilot release to selected users
+              </li>
+              <li>
+                <i class="fa-solid fa-wrench"></i> 93 functional issues fixed &amp; released
+              </li>
+              <li>
+                <i class="fa-solid fa-list-check"></i> ONX-001 to ONX-093
+              </li>
+            </ul>
+
+            <div class="severity-container">
+              <div class="severity-title">Severity summary:</div>
+              <div class="severity-grid">
+                <div class="sev-pill sev-crit">11 Critical</div>
+                <div class="sev-pill sev-high">22 High</div>
+                <div class="sev-pill sev-med">43 Medium</div>
+                <div class="sev-pill sev-low">17 Low</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="live-pilot-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Live in pilot throughout Release 1.2 development</span>
+          </div>
+        </article>
+
+        <!-- CONNECTOR ARROW -->
+        <div class="connector-col">
+          <div class="big-arrow"></div>
+          <div class="connector-text">FROM PILOT<br>TO HARDENING<br>TO PRODUCTION</div>
+        </div>
+
+        <!-- CARD 2: RELEASE 1.2 -->
+        <article class="release-box">
+          <div class="r-hdr">
+            <div class="r-icon-badge gear">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+            <div class="r-titles">
+              <div class="r-tag">RELEASE 1.2</div>
+              <div class="r-main-date orange">21 SEP &mdash; 02 NOV 2026</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 6px;">
+            <div style="font-size:14px; font-weight:900; color:#0f172a; margin-bottom:10px;">Focus:</div>
+            <ul class="r-items-list" style="font-size:14.5px;">
+              <li>
+                <i class="fa-solid fa-circle-check" style="color:#ff5722;"></i>
+                <strong>Non-functional hardening</strong>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="color:#ff5722;"></i>
+                <strong>UK market readiness</strong>
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-top: 24px; padding: 10px 14px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: #c2410c;">
+            <i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i> Full security, performance, &amp; Stripe payment validation
+          </div>
+        </article>
+
+      </section>
+
+      <!-- SECTION 2: SIX WORKSTREAMS -->
+      <section>
+        <div class="section-title">RELEASE 1.2 &mdash; SIX WORKSTREAMS</div>
+        <div class="workstreams-grid">
+          
+          <div class="workstream-card">
+            <span class="ws-number">01</span>
+            <div class="ws-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="ws-title">Security</div>
+            <div class="ws-desc">Data exposure &amp; token validation</div>
+          </div>
+
+          <div class="workstream-card">
+            <span class="ws-number">02</span>
+            <div class="ws-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <div class="ws-title">Performance</div>
+            <div class="ws-desc">Lazy loading &amp; middleware data mapping</div>
+          </div>
+
+          <div class="workstream-card">
+            <span class="ws-number">03</span>
+            <div class="ws-icon"><i class="fa-solid fa-gear"></i></div>
+            <div class="ws-title">Business Setup UX</div>
+            <div class="ws-desc">Improve the business setup flow</div>
+          </div>
+
+          <div class="workstream-card">
+            <span class="ws-number">04</span>
+            <div class="ws-icon"><i class="fa-solid fa-globe"></i></div>
+            <div class="ws-title">Localization</div>
+            <div class="ws-desc">UK currency &amp; time zone support</div>
+          </div>
+
+          <div class="workstream-card">
+            <span class="ws-number">05</span>
+            <div class="ws-icon"><i class="fa-solid fa-credit-card"></i></div>
+            <div class="ws-title">Payments</div>
+            <div class="ws-desc">Stripe payment gateway integration</div>
+          </div>
+
+          <div class="workstream-card">
+            <span class="ws-number">06</span>
+            <div class="ws-icon"><i class="fa-solid fa-window-maximize"></i></div>
+            <div class="ws-title">Business Web UX</div>
+            <div class="ws-desc">Improve the overall business web portal</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 3: TIMELINE -->
+      <section>
+        <div class="section-title">RELEASE 1.2 &mdash; TIMELINE</div>
+        <div class="timeline-pipeline">
+          
+          <!-- Phase 1 -->
+          <div class="timeline-phase">
+            <div class="phase-badge-date">
+              <i class="fa-regular fa-calendar-days"></i>
+            </div>
+            <div class="phase-info">
+              <div class="phase-dates">21&ndash;25 SEP</div>
+              <div class="phase-name">Testing &amp; Assessment</div>
+              <div class="phase-detail">Findings report &mdash; 25 Sep</div>
+            </div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="timeline-phase">
+            <div class="phase-badge-date">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div class="phase-info">
+              <div class="phase-dates">28 SEP&ndash;23 OCT</div>
+              <div class="phase-name">Development &amp; Issue Fixing</div>
+              <div class="phase-detail">Release candidate &amp; code freeze &mdash; 23 Oct</div>
+            </div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="timeline-phase">
+            <div class="phase-badge-date">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="phase-info">
+              <div class="phase-dates">26&ndash;30 OCT</div>
+              <div class="phase-name">QA Validation &amp; Production Deployment</div>
+              <div class="phase-detail">Go/no-go sign-off &amp; production deploy &mdash; 30 Oct</div>
+            </div>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="timeline-phase red">
+            <div class="phase-badge-date">
+              <i class="fa-solid fa-flag"></i>
+            </div>
+            <div class="phase-info">
+              <div class="phase-dates">02 NOV</div>
+              <div class="phase-name">Product Release</div>
+              <div class="phase-detail">Release 1.2 live</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>
