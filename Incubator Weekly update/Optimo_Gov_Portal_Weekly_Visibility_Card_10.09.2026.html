@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Portal — Weekly Project Visibility Card (Week 37 / 10 September 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER BAR */
+    .header-bar {
+      background: #0b2240;
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .header-titles h1 {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #f59e0b;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .portal-badge-btn {
+      background: #0284c7;
+      color: #ffffff;
+      padding: 7px 22px;
+      border-radius: 6px;
+      font-size: 16.5px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.4);
+    }
+
+    .portal-badge-btn i {
+      font-size: 18px;
+    }
+
+    .status-guide {
+      background: #061528;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 5px 12px;
+      text-align: right;
+    }
+
+    .status-guide .guide-title {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      text-align: center;
+    }
+
+    .status-guide .guide-items {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .status-guide .guide-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .status-dot {
+      width: 7.5px;
+      height: 7.5px;
+      border-radius: 50%;
+    }
+    .status-dot.green { background: #22c55e; }
+    .status-dot.amber { background: #f59e0b; }
+    .status-dot.red { background: #ef4444; }
+
+    /* 2. PROJECT METADATA ROW (6 Columns) */
+    .project-meta-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr 1.9fr 1.9fr 0.9fr 1.6fr;
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+      padding: 6px 18px;
+      gap: 12px;
+    }
+
+    .meta-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-lbl {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .meta-lbl i {
+      font-size: 10.5px;
+      color: #2563eb;
+    }
+
+    .meta-val {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
+    }
+
+    .phase-badge-green { color: #15803d; font-weight: 900; }
+    .phase-badge-blue { color: #1d4ed8; font-weight: 900; }
+
+    /* 3. RESOURCE ALLOCATION BLOCK */
+    .resource-block {
+      margin: 5px 14px 4px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .resource-hdr-banner {
+      background: #0b2d5c;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      text-align: center;
+      padding: 3.5px 10px;
+    }
+
+    .resource-content {
+      display: grid;
+      grid-template-columns: 3.1fr 1.1fr;
+    }
+
+    .resource-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+
+    .resource-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      letter-spacing: 0.3px;
+      padding: 3.5px 8px;
+      text-align: left;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .resource-table th:last-child {
+      border-right: none;
+    }
+
+    .resource-table td {
+      padding: 3px 8px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+
+    .resource-table td:last-child {
+      border-right: none;
+    }
+
+    .resource-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .team-cell {
+      font-weight: 800;
+      color: #0f172a;
+      width: 28%;
+      white-space: nowrap;
+    }
+
+    .team-cell-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .team-cell-wrap i {
+      color: #2563eb;
+      font-size: 11px;
+    }
+
+    .work-item-cell {
+      font-size: 10px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.25;
+      width: 72%;
+    }
+
+    .resource-summary-box {
+      border-left: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      padding: 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .summary-box-title {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 1px;
+    }
+
+    .summary-box-big-num {
+      font-size: 42px;
+      font-weight: 900;
+      color: #0b2d5c;
+      line-height: 1;
+      margin: 1px 0;
+    }
+
+    .summary-box-unit {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0b2d5c;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .summary-box-sub {
+      font-size: 9px;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.3;
+    }
+
+    /* 4. MAIN 6-PANEL GRID */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      padding: 4px 14px;
+      flex: 1;
+    }
+
+    .panel {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      padding: 8px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 10px;
+    }
+
+    /* PANEL 1: SCOPE & PROJECT JOURNEY */
+    .journey-stepper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .journey-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+    }
+
+    .step-header i {
+      font-size: 14px;
+    }
+
+    .step-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-title {
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .step-title.green { color: #15803d; }
+    .step-title.blue { color: #1d4ed8; }
+    .step-title.purple { color: #7c3aed; }
+
+    .step-sub-status {
+      font-size: 8px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .step-sub-status.green { color: #166534; }
+    .step-sub-status.blue { color: #1e40af; }
+    .step-sub-status.purple { color: #6b21a8; }
+
+    .step-bullets {
+      list-style: none;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: #334155;
+    }
+
+    .step-bullets li {
+      position: relative;
+      padding-left: 8px;
+      margin-bottom: 2px;
+    }
+
+    .step-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #64748b;
+      font-size: 10px;
+    }
+
+    .journey-arrow {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .scope-phase1-badge {
+      margin-top: 6px;
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      color: #166534;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .scope-phase3-box {
+      margin-top: 6px;
+      background: #faf5ff;
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    /* PANEL 2: CURRENT PHASE PLAN (PHASE 2 ONLY) */
+    .phase-plan-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+    }
+
+    .phase-plan-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-size: 8.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .phase-plan-table th:last-child {
+      text-align: right;
+    }
+
+    .phase-plan-table td {
+      padding: 2.5px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .phase-plan-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-cell-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
+      font-size: 8.5px;
+      font-weight: 800;
+    }
+    .status-cell-wrap.completed { color: #16a34a; }
+    .status-cell-wrap.in-progress { color: #2563eb; }
+
+    .status-dot-sm {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .status-dot-sm.green { background: #22c55e; }
+    .status-dot-sm.blue { background: #2563eb; }
+
+    /* PANEL 3: RESOURCE EFFORT SUMMARY */
+    .kpi-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .kpi-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 4px 3px;
+      text-align: center;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .kpi-icon {
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+    .kpi-icon.green { color: #16a34a; }
+    .kpi-icon.blue { color: #2563eb; }
+    .kpi-icon.orange { color: #ea580c; }
+    .kpi-icon.purple { color: #7c3aed; }
+
+    .kpi-lbl {
+      font-size: 7.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 2px;
+    }
+
+    .kpi-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1;
+    }
+
+    .kpi-unit {
+      font-size: 7.5px;
+      font-weight: 800;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .gauge-budget-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 3px 0 5px 0;
+      padding: 3px 6px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+    }
+
+    .gauge-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gauge-left i {
+      color: #16a34a;
+      font-size: 14px;
+    }
+
+    .gauge-txt {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gauge-title {
+      font-size: 9px;
+      font-weight: 900;
+      color: #15803d;
+      text-transform: uppercase;
+    }
+
+    .gauge-sub {
+      font-size: 8px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .budget-badge {
+      background: #14532d;
+      color: #ffffff;
+      font-size: 8.5px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .effort-bar-block {
+      margin-top: 3px;
+    }
+
+    .effort-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .effort-progress-track {
+      height: 13px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .effort-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #0284c7;
+      width: 80%;
+    }
+
+    .effort-pct-inside {
+      position: relative;
+      z-index: 2;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .effort-sub-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5px;
+      color: #64748b;
+      margin-top: 1.5px;
+      font-weight: 700;
+    }
+
+    .effort-consumed-caption {
+      text-align: center;
+      font-size: 8.5px;
+      color: #475569;
+      font-weight: 700;
+      margin-top: 1.5px;
+    }
+
+    /* PANEL 4: WHAT CHANGED THIS WEEK? */
+    .changes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .change-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .change-item:last-child {
+      border-bottom: none;
+    }
+
+    .change-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .change-icon-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .change-icon-circle.red { background: #fee2e2; color: #dc2626; }
+    .change-icon-circle.orange { background: #ffedd5; color: #ea580c; }
+    .change-icon-circle.purple { background: #f3e8ff; color: #7c3aed; }
+
+    .change-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .change-lbl {
+      font-size: 8.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .change-lbl.red { color: #dc2626; }
+    .change-lbl.orange { color: #ea580c; }
+    .change-lbl.purple { color: #7c3aed; }
+
+    .change-desc {
+      font-size: 9px;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .change-variance {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #64748b;
+      margin-left: 10px;
+      text-align: right;
+      min-width: 35px;
+    }
+
+    .material-changes-note {
+      margin-top: 4px;
+      background: #f8fafc;
+      border-left: 3px solid #0284c7;
+      padding: 3px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    /* PANEL 5: RISKS / ISSUES & CEO ATTENTION */
+    .risks-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      margin-bottom: 5px;
+    }
+
+    .risks-table th {
+      background: #f8fafc;
+      color: #0b2d5c;
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2.5px 6px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .risks-table td {
+      padding: 3px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .risk-desc-cell {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .risk-dot-amber {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background: #f59e0b;
+      flex-shrink: 0;
+    }
+
+    .risk-badge-medium {
+      font-size: 8px;
+      font-weight: 800;
+      color: #ea580c;
+      text-align: right;
+    }
+
+    .decisions-section {
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 4px;
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .decisions-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .decisions-title {
+      font-size: 8px;
+      font-weight: 900;
+      color: #92400e;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .decisions-desc {
+      font-size: 8.5px;
+      color: #78350f;
+      font-weight: 600;
+    }
+
+    .decisions-target-badge {
+      font-size: 8px;
+      font-weight: 900;
+      color: #dc2626;
+      white-space: nowrap;
+    }
+
+    .escalation-box-custom {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 4px;
+      padding: 4px 6px;
+    }
+
+    .escalation-title-custom {
+      font-size: 8px;
+      font-weight: 900;
+      color: #15803d;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 1px;
+    }
+
+    .escalation-text-custom {
+      font-size: 8.5px;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    /* PANEL 6: AT A GLANCE (PHASE 2 ONLY) */
+    .donuts-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+
+    .donut-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .donut-hdr-lbl {
+      font-size: 8px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      max-width: 90px;
+      line-height: 1.15;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donut-circle-svg {
+      width: 58px;
+      height: 58px;
+      transform: rotate(-90deg);
+    }
+
+    .donut-circle-bg {
+      fill: none;
+      stroke: #e2e8f0;
+      stroke-width: 5;
+    }
+
+    .donut-circle-val {
+      fill: none;
+      stroke-width: 5;
+      stroke-linecap: round;
+    }
+    .donut-circle-val.blue { stroke: #0284c7; }
+    .donut-circle-val.red { stroke: #ef4444; }
+    .donut-circle-val.green { stroke: #16a34a; }
+
+    .donut-container {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donut-center-pct {
+      position: absolute;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .donut-sub-lbl {
+      font-size: 8px;
+      font-weight: 700;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .glance-callout {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 8.5px;
+      color: #1e40af;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    .glance-callout i {
+      color: #0284c7;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* 5. FOOTER REPORTING RULES */
+    .reporting-rules-bar {
+      background: #0b2240;
+      color: #ffffff;
+      padding: 6px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 9.5px;
+      border-top: 1.5px solid #061528;
+    }
+
+    .rules-left-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .reporting-rules-title {
+      color: #f59e0b;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .reporting-rules-title i {
+      font-size: 10.5px;
+    }
+
+    .reporting-rules-items {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    .reporting-rules-items span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .reporting-rules-items span::before {
+      content: "•";
+      color: #f59e0b;
+      font-weight: 900;
+      font-size: 11px;
+    }
+
+    .rules-right-brand {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER BAR -->
+      <header class="header-bar">
+        <div class="header-titles">
+          <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+          <div class="sub-title">WEEK ENDING FRIDAY, 10 SEPTEMBER 2026 &nbsp;|&nbsp; WEEK 37</div>
+        </div>
+
+        <div class="header-right">
+          <!-- Optimo Gov Portal Badge -->
+          <div class="portal-badge-btn">
+            <i class="fa-solid fa-desktop"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+
+          <!-- Status Guide Legend -->
+          <div class="status-guide">
+            <div class="guide-title">STATUS GUIDE</div>
+            <div class="guide-items">
+              <div class="guide-item"><span class="status-dot green"></span> On Track</div>
+              <div class="guide-item"><span class="status-dot amber"></span> At Risk</div>
+              <div class="guide-item"><span class="status-dot red"></span> Off Track</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. PROJECT METADATA ROW (6 Columns) -->
+      <section class="project-meta-row">
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-building"></i> COMPANY</div>
+          <div class="meta-val">C Apps</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-user-check"></i> CLIENT</div>
+          <div class="meta-val">Internal</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-folder-open"></i> PROJECT NAME</div>
+          <div class="meta-val" title="Optimo Gov portal">Optimo Gov portal</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-rocket"></i> CURRENT PHASE</div>
+          <div class="meta-val">
+            <span class="phase-badge-green">Phase 1 &mdash; Completed</span><br>
+            <span class="phase-badge-blue">Phase 2 &mdash; In Progress</span>
+          </div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-calendar-days"></i> WEEK NO.</div>
+          <div class="meta-val">37</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl"><i class="fa-solid fa-calendar-check"></i> WEEK ENDING (FRIDAY)</div>
+          <div class="meta-val">10 SEPTEMBER 2026</div>
+        </div>
+      </section>
+
+      <!-- 3. RESOURCE ALLOCATION BLOCK -->
+      <section class="resource-block">
+        <div class="resource-hdr-banner">
+          RESOURCE ALLOCATION FOR THIS PROJECT (TOTAL ALLOCATION: 16)
+        </div>
+        <div class="resource-content">
+          <!-- Resource Table -->
+          <table class="resource-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">TEAM</th>
+                <th style="width: 72%;">WORK ITEMS / FOCUS AREA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="team-cell">
+                  <div class="team-cell-wrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Team Saruja (Dedicated)</span>
+                  </div>
+                </td>
+                <td class="work-item-cell">Customer tab, Overview, Dashboard - OptimoGov portal phase 2, Customer section implementation</td>
+              </tr>
+              <tr>
+                <td class="team-cell">
+                  <div class="team-cell-wrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Team Sajilan (Dedicated)</span>
+                  </div>
+                </td>
+                <td class="work-item-cell">Events and Programs, Optimo Govportal Public Booking</td>
+              </tr>
+              <tr>
+                <td class="team-cell">
+                  <div class="team-cell-wrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Team Gopi (Shared)</span>
+                  </div>
+                </td>
+                <td class="work-item-cell">AI implementation - OptimoGov portal phase 2, AskOptimo - Clientside AI booking assistant</td>
+              </tr>
+              <tr>
+                <td class="team-cell">
+                  <div class="team-cell-wrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Team Denojan (Shared)</span>
+                  </div>
+                </td>
+                <td class="work-item-cell">Supporting Ticket - OptimoGov portal phase 2</td>
+              </tr>
+              <tr>
+                <td class="team-cell">
+                  <div class="team-cell-wrap">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Other Teams (Shared)</span>
+                  </div>
+                </td>
+                <td class="work-item-cell">Additional support and cross-functional resources as needed</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Right Summary Card -->
+          <div class="resource-summary-box">
+            <div class="summary-box-title">TOTAL ALLOCATION (THIS PROJECT)</div>
+            <div class="summary-box-big-num">16</div>
+            <div class="summary-box-unit">RESOURCES</div>
+            <div class="summary-box-sub">
+              <strong>2 teams are dedicated to this project</strong><br>
+              (Team Saruja &amp; Team Sajilan) and required resources are used from other 3 teams (Team Gopi, Team Denojan &amp; Others).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. MAIN 6-PANEL GRID -->
+      <main class="grid-container">
+
+        <!-- PANEL 1: SCOPE & PROJECT JOURNEY -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>1. SCOPE &amp; PROJECT JOURNEY</span>
+          </div>
+          <div class="panel-body">
+            <div class="journey-stepper">
+              
+              <!-- Phase 1 -->
+              <div class="journey-step">
+                <div>
+                  <div class="step-header">
+                    <i class="fa-solid fa-circle-check" style="color:#16a34a;"></i>
+                    <div class="step-title-group">
+                      <span class="step-title green">PHASE 1</span>
+                      <span class="step-sub-status green">Completed</span>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>OptimoGov portal foundation</li>
+                    <li>Initial setup &amp; configuration</li>
+                    <li>Base modules</li>
+                  </ul>
+                </div>
+                <div class="scope-phase1-badge">
+                  Phase 1 Completed
+                </div>
+              </div>
+
+              <div class="journey-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+              <!-- Phase 2 -->
+              <div class="journey-step">
+                <div>
+                  <div class="step-header">
+                    <i class="fa-solid fa-circle-play" style="color:#2563eb;"></i>
+                    <div class="step-title-group">
+                      <span class="step-title blue">PHASE 2</span>
+                      <span class="step-sub-status blue">In Progress</span>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>AI implementation</li>
+                    <li>Supporting tickets</li>
+                    <li>Customer tab, Overview, Dashboard</li>
+                    <li>Events and Programs</li>
+                    <li>Public Booking</li>
+                    <li>Customer section implementation</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="journey-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+              <!-- Phase 3 -->
+              <div class="journey-step">
+                <div>
+                  <div class="step-header">
+                    <i class="fa-solid fa-diamond" style="color:#7c3aed;"></i>
+                    <div class="step-title-group">
+                      <span class="step-title purple">PHASE 3</span>
+                      <span class="step-sub-status purple">To Be Planned</span>
+                    </div>
+                  </div>
+                  <ul class="step-bullets">
+                    <li>Phase 3 scope has to be finalized after meeting with Jon.</li>
+                  </ul>
+                </div>
+                <div class="scope-phase3-box">
+                  Phase 3<br>Scope to be finalized
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: CURRENT PHASE PLAN (PHASE 2 ONLY) -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>2. CURRENT PHASE PLAN (PHASE 2 ONLY)</span>
+          </div>
+          <div class="panel-body">
+            
+            <table class="phase-plan-table">
+              <thead>
+                <tr>
+                  <th style="width: 76%;">WORK ITEM / INITIATIVE</th>
+                  <th style="width: 24%; text-align: right;">STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AI implementation - OptimoGov portal phase 2</td>
+                  <td>
+                    <div class="status-cell-wrap completed">
+                      <span class="status-dot-sm green"></span>
+                      <span>Completed</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>AskOptimo - Clientside AI booking assistant</td>
+                  <td>
+                    <div class="status-cell-wrap in-progress">
+                      <span class="status-dot-sm blue"></span>
+                      <span>In Progress</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Supporting Ticket - OptimoGov portal phase 2</td>
+                  <td>
+                    <div class="status-cell-wrap completed">
+                      <span class="status-dot-sm green"></span>
+                      <span>Completed</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Customer tab, Overview, Dashboard - OptimoGov portal phase 2</td>
+                  <td>
+                    <div class="status-cell-wrap in-progress">
+                      <span class="status-dot-sm blue"></span>
+                      <span>In Progress</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Events and Programs</td>
+                  <td>
+                    <div class="status-cell-wrap in-progress">
+                      <span class="status-dot-sm blue"></span>
+                      <span>In Progress</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Optimo Govportal Public Booking</td>
+                  <td>
+                    <div class="status-cell-wrap in-progress">
+                      <span class="status-dot-sm blue"></span>
+                      <span>In Progress</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Gov portal phase 2 Customer section implementation</td>
+                  <td>
+                    <div class="status-cell-wrap in-progress">
+                      <span class="status-dot-sm blue"></span>
+                      <span>In Progress</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </article>
+
+        <!-- PANEL 3: RESOURCE EFFORT SUMMARY (PHASE 2 ONLY) -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>3. RESOURCE EFFORT SUMMARY (PHASE 2 ONLY)</span>
+          </div>
+          <div class="panel-body">
+            
+            <div class="kpi-row-4">
+              <!-- KPI 1 -->
+              <div class="kpi-card">
+                <i class="fa-solid fa-calendar-plus kpi-icon green"></i>
+                <div class="kpi-lbl">ORIGINAL ALLOCATION</div>
+                <div class="kpi-val">150</div>
+                <div class="kpi-unit">MAN-DAYS</div>
+              </div>
+              <!-- KPI 2 -->
+              <div class="kpi-card">
+                <i class="fa-solid fa-chart-pie kpi-icon blue"></i>
+                <div class="kpi-lbl">CONSUMED TO DATE</div>
+                <div class="kpi-val">120</div>
+                <div class="kpi-unit">MAN-DAYS</div>
+              </div>
+              <!-- KPI 3 -->
+              <div class="kpi-card">
+                <i class="fa-solid fa-hourglass-half kpi-icon orange"></i>
+                <div class="kpi-lbl">FORECAST REMAINING</div>
+                <div class="kpi-val">30</div>
+                <div class="kpi-unit">MAN-DAYS</div>
+              </div>
+              <!-- KPI 4 -->
+              <div class="kpi-card">
+                <i class="fa-solid fa-chart-line kpi-icon purple"></i>
+                <div class="kpi-lbl">FORECAST TOTAL</div>
+                <div class="kpi-val">150</div>
+                <div class="kpi-unit">MAN-DAYS</div>
+              </div>
+            </div>
+
+            <!-- Gauge & Budget Badge -->
+            <div class="gauge-budget-row">
+              <div class="gauge-left">
+                <i class="fa-solid fa-gauge-high"></i>
+                <div class="gauge-txt">
+                  <span class="gauge-title">ON TRACK</span>
+                  <span class="gauge-sub">Delivery as per current plan</span>
+                </div>
+              </div>
+              <span class="budget-badge">WITHIN BUDGET</span>
+            </div>
+
+            <!-- Effort Progress Bar -->
+            <div class="effort-bar-block">
+              <div class="effort-bar-labels">
+                <span>EFFORT CONSUMED vs ORIGINAL ALLOCATION</span>
+              </div>
+              <div class="effort-progress-track">
+                <div class="effort-progress-fill"></div>
+                <span class="effort-pct-inside">80%</span>
+              </div>
+              <div class="effort-sub-ticks">
+                <span>0%</span>
+                <span style="padding-left:14px;">50%</span>
+                <span>100%</span>
+              </div>
+              <div class="effort-consumed-caption">
+                120 of 150 man-days consumed
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PANEL 4: WHAT CHANGED THIS WEEK? -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>4. WHAT CHANGED THIS WEEK?</span>
+          </div>
+          <div class="panel-body">
+            
+            <div class="changes-list">
+              <!-- Item 1: Schedule Change -->
+              <div class="change-item">
+                <div class="change-left">
+                  <div class="change-icon-circle red">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                  </div>
+                  <div class="change-text-group">
+                    <span class="change-lbl red">SCHEDULE CHANGE</span>
+                    <span class="change-desc">No schedule changes this week.</span>
+                  </div>
+                </div>
+                <div class="change-variance">&mdash;</div>
+              </div>
+
+              <!-- Item 2: Scope Change -->
+              <div class="change-item">
+                <div class="change-left">
+                  <div class="change-icon-circle orange">
+                    <i class="fa-solid fa-gear"></i>
+                  </div>
+                  <div class="change-text-group">
+                    <span class="change-lbl orange">SCOPE CHANGE</span>
+                    <span class="change-desc">No scope changes this week.</span>
+                  </div>
+                </div>
+                <div class="change-variance">&mdash;</div>
+              </div>
+
+              <!-- Item 3: Effort Change -->
+              <div class="change-item">
+                <div class="change-left">
+                  <div class="change-icon-circle purple">
+                    <i class="fa-solid fa-users"></i>
+                  </div>
+                  <div class="change-text-group">
+                    <span class="change-lbl purple">EFFORT CHANGE</span>
+                    <span class="change-desc">Project activities progressing as planned.</span>
+                  </div>
+                </div>
+                <div class="change-variance">&mdash;</div>
+              </div>
+            </div>
+
+            <div class="material-changes-note">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>No other material changes this week.</span>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PANEL 5: RISKS / ISSUES & CEO ATTENTION -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>5. RISKS / ISSUES &amp; CEO ATTENTION</span>
+          </div>
+          <div class="panel-body">
+            
+            <table class="risks-table">
+              <thead>
+                <tr>
+                  <th style="width: 78%;">TOP RISKS / ISSUES</th>
+                  <th style="width: 22%; text-align: right;">RISK LEVEL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="risk-desc-cell">
+                      <span class="risk-dot-amber"></span>
+                      <span>AskOptimo scope and timeline to be confirmed.</span>
+                    </div>
+                  </td>
+                  <td class="risk-badge-medium">MEDIUM</td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="risk-desc-cell">
+                      <span class="risk-dot-amber"></span>
+                      <span>Dependencies for phase 3 need to be discussed after meeting with Jon.</span>
+                    </div>
+                  </td>
+                  <td class="risk-badge-medium">MEDIUM</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Decisions & Approvals Required -->
+            <div class="decisions-section">
+              <div class="decisions-left">
+                <i class="fa-solid fa-gavel" style="color:#b45309; font-size:10px;"></i>
+                <div>
+                  <div class="decisions-title">DECISIONS / APPROVALS REQUIRED</div>
+                  <div class="decisions-desc">&bull; Finalize scope for Phase 3.</div>
+                </div>
+              </div>
+              <div class="decisions-target-badge">Due: TBD</div>
+            </div>
+
+            <!-- Escalation -->
+            <div class="escalation-box-custom">
+              <div class="escalation-title-custom">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>ESCALATION</span>
+              </div>
+              <div class="escalation-text-custom">
+                No escalations beyond normal reporting.
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PANEL 6: AT A GLANCE (PHASE 2 ONLY) -->
+        <article class="panel">
+          <div class="panel-hdr">
+            <span>6. AT A GLANCE (PHASE 2 ONLY)</span>
+          </div>
+          <div class="panel-body">
+            
+            <div class="donuts-row">
+              <!-- Donut 1: Overall Progress -->
+              <div class="donut-item">
+                <div class="donut-hdr-lbl">OVERALL PROGRESS (Phase 2)</div>
+                <div class="donut-container">
+                  <svg class="donut-circle-svg" viewBox="0 0 36 36">
+                    <path class="donut-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <!-- 70% filled blue -->
+                    <path class="donut-circle-val blue" stroke-dasharray="70, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <div class="donut-center-pct">70%</div>
+                </div>
+                <div class="donut-sub-lbl">% Phase Complete</div>
+              </div>
+
+              <!-- Donut 2: Time Elapsed -->
+              <div class="donut-item">
+                <div class="donut-hdr-lbl">TIME ELAPSED</div>
+                <div class="donut-container">
+                  <svg class="donut-circle-svg" viewBox="0 0 36 36">
+                    <path class="donut-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <!-- 55% filled red -->
+                    <path class="donut-circle-val red" stroke-dasharray="55, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <div class="donut-center-pct">55%</div>
+                </div>
+                <div class="donut-sub-lbl">vs Plan</div>
+              </div>
+
+              <!-- Donut 3: Effort Consumed -->
+              <div class="donut-item">
+                <div class="donut-hdr-lbl">EFFORT CONSUMED</div>
+                <div class="donut-container">
+                  <svg class="donut-circle-svg" viewBox="0 0 36 36">
+                    <path class="donut-circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <!-- 80% filled green -->
+                    <path class="donut-circle-val green" stroke-dasharray="80, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  </svg>
+                  <div class="donut-center-pct">80%</div>
+                </div>
+                <div class="donut-sub-lbl">vs Original Allocation</div>
+              </div>
+            </div>
+
+            <!-- Bottom summary callout -->
+            <div class="glance-callout">
+              <i class="fa-solid fa-star"></i>
+              <div>
+                Project is on track with current plan.<br>
+                Focus on completing remaining phase 2 items.
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </main>
+
+      <!-- 5. BOTTOM FOOTER REPORTING RULES -->
+      <footer class="reporting-rules-bar">
+        <div class="rules-left-group">
+          <div class="reporting-rules-title">
+            <i class="fa-solid fa-book-bookmark"></i>
+            <span>REPORTING RULES:</span>
+          </div>
+          <div class="reporting-rules-items">
+            <span>This card is a snapshot of the project status as at the end of Friday.</span>
+            <span>One card per active project.</span>
+            <span>Previous weeks are shown under 'Delivered'.</span>
+            <span>Data to be prepared by PM and validated by Company Head.</span>
+          </div>
+        </div>
+        <div class="rules-right-brand">
+          C Apps
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>
