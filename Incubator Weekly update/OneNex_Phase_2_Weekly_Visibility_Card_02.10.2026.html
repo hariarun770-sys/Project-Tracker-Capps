@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex Phase 2 — Weekly Project Visibility Card (Sprint 28 Sep – 02 Oct 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER BAR */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 8px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #ff5722;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    .brand-logo-wrap span.nex {
+      color: #ffffff;
+    }
+
+    .divider-vert {
+      width: 1.5px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ff7043;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-center-team {
+      font-size: 26px;
+      font-weight: 900;
+      color: #ff6b35;
+      letter-spacing: -0.3px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-badge-attention {
+      background: #f59e0b;
+      color: #0b1f3a;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13.5px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.35);
+      white-space: nowrap;
+    }
+
+    .status-badge-attention .white-dot {
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-note-box {
+      background: #061528;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      max-width: 170px;
+      line-height: 1.25;
+    }
+
+    /* 2. TOP METADATA & KPI STRIP */
+    .meta-kpi-container {
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+      padding: 6px 18px;
+    }
+
+    .meta-top-row {
+      display: grid;
+      grid-template-columns: 1.3fr 2fr 1.3fr;
+      gap: 16px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .meta-col {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-icon {
+      font-size: 20px;
+      color: #ea580c;
+    }
+
+    .meta-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .meta-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.2px;
+    }
+
+    .meta-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 5px;
+      font-size: 11px;
+    }
+
+    .assumption-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .assumption-icon {
+      font-size: 16px;
+      color: #ea580c;
+    }
+
+    .assumption-txt {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+    }
+
+    .assumption-txt span {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .kpi-metrics-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .kpi-mini-col {
+      text-align: center;
+    }
+
+    .kpi-mini-num {
+      font-size: 17px;
+      font-weight: 900;
+      color: #0b2d5c;
+      line-height: 1;
+    }
+
+    .kpi-mini-lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-top: 1.5px;
+    }
+
+    .kpi-vert-sep {
+      width: 1px;
+      height: 24px;
+      background: #cbd5e1;
+    }
+
+    .capacity-note-callout {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+      max-width: 250px;
+      line-height: 1.25;
+    }
+
+    .capacity-note-callout i {
+      color: #ea580c;
+      font-size: 14px;
+    }
+
+    /* 3. MAIN BODY - 3 COLUMN LAYOUT */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr 1.35fr;
+      gap: 10px;
+      padding: 6px 14px;
+      flex: 1;
+    }
+
+    .col-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .panel {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 4.5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      padding: 7px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 10px;
+    }
+
+    /* PANEL 1: SPRINT PLAN */
+    .sprint-plan-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 4px 2px;
+    }
+
+    .plan-item-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .plan-item-icon {
+      font-size: 18px;
+      margin-top: 1px;
+    }
+    .plan-item-icon.green { color: #16a34a; }
+    .plan-item-icon.blue { color: #0284c7; }
+    .plan-item-icon.purple { color: #7c3aed; }
+
+    .plan-item-txt {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .plan-item-name {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0b2d5c;
+    }
+
+    .plan-item-sub {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* PANEL 4: NEXT SPRINT PLAN */
+    .next-sprint-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .next-sub-hdr {
+      font-size: 10px;
+      font-weight: 900;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .next-bullets {
+      list-style: none;
+      font-size: 9.5px;
+      line-height: 1.4;
+      color: #334155;
+    }
+
+    .next-bullets li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 2.5px;
+      font-weight: 600;
+    }
+
+    .next-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-weight: 900;
+    }
+
+    /* PANEL 2: SPRINT PROGRESS */
+    .progress-section-completed {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .banner-status-hdr {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3.5px 8px;
+      border-radius: 4px;
+    }
+    .banner-status-hdr.completed {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+    }
+    .banner-status-hdr.in-progress {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #ea580c;
+    }
+
+    .modules-2x2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .module-sub-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 6px 8px;
+      background: #fafafa;
+    }
+
+    .module-sub-title {
+      font-size: 10px;
+      font-weight: 900;
+      color: #0b2d5c;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2px;
+    }
+
+    .check-list-items {
+      list-style: none;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: #1e293b;
+    }
+
+    .check-list-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      margin-bottom: 2.5px;
+      font-weight: 600;
+    }
+
+    .check-list-items li i {
+      color: #16a34a;
+      font-size: 9px;
+      margin-top: 1.5px;
+      flex-shrink: 0;
+    }
+
+    .check-list-items li.pending i {
+      color: #f59e0b;
+    }
+
+    .in-progress-body {
+      padding: 6px 8px;
+      font-size: 9px;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .in-progress-title {
+      font-weight: 900;
+      color: #0b2d5c;
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    .in-progress-bullets {
+      list-style: none;
+      padding-left: 2px;
+    }
+
+    .in-progress-bullets li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .in-progress-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #ea580c;
+      font-weight: 900;
+    }
+
+    /* PANEL 3: PROJECT TIMELINE & CAPACITY */
+    .capacity-banner-sub {
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      border-radius: 4px;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #581c87;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .capacity-banner-sub i {
+      font-size: 12px;
+      color: #7c3aed;
+    }
+
+    .timeline-metrics-tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-metrics-tbl th {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 3px 6px;
+      font-size: 8.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .timeline-metrics-tbl th:last-child {
+      text-align: right;
+    }
+
+    .timeline-metrics-tbl td {
+      padding: 2px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .timeline-metrics-tbl td:last-child {
+      text-align: right;
+      font-weight: 800;
+      color: #0b2d5c;
+    }
+
+    .two-phases-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .phase-track-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      overflow: hidden;
+      font-size: 8.5px;
+      background: #ffffff;
+    }
+
+    .phase-track-hdr {
+      color: #ffffff;
+      padding: 3px 6px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .phase-track-hdr.phase0 { background: #0284c7; }
+    .phase-track-hdr.phase1 { background: #7c3aed; }
+
+    .phase-track-body {
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .phase-line-item {
+      display: flex;
+      justify-content: space-between;
+      color: #475569;
+    }
+
+    .phase-line-item strong {
+      color: #0f172a;
+    }
+
+    .phase-status-pill {
+      margin-top: 3px;
+      font-weight: 800;
+      font-size: 8px;
+      padding: 1.5px 5px;
+      border-radius: 3px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .phase-status-pill.complete {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+    .phase-status-pill.in-progress {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1px solid #fed7aa;
+    }
+
+    /* PANEL 5: SPRINT STATUS AT A GLANCE */
+    .glance-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .glance-table th {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 3px 6px;
+      font-size: 8px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .glance-table th:last-child {
+      text-align: right;
+    }
+
+    .glance-table td {
+      padding: 2.5px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    .glance-area-cell {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .glance-area-cell i {
+      color: #0284c7;
+      font-size: 9px;
+      width: 12px;
+      text-align: center;
+    }
+
+    .glance-status-cell {
+      text-align: right;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .glance-status-cell.green { color: #16a34a; }
+    .glance-status-cell.amber { color: #d97706; }
+    .glance-status-cell.blue { color: #0284c7; }
+
+    /* 4. BOTTOM FOOTER BAR */
+    .footer-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-top: 1.5px solid #061528;
+    }
+
+    .footer-bar i {
+      color: #ff5722;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER BAR -->
+      <header class="header-bar">
+        <div class="brand-group">
+          <!-- OneNex Brand Logo -->
+          <div class="brand-logo-wrap">
+            <div class="brand-logo-icon">1</div>
+            <span>ne<span class="nex">Nex</span></span>
+          </div>
+
+          <div class="divider-vert"></div>
+
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">SPRINT UPDATE &nbsp;|&nbsp; 28 SEP 2026 &ndash; 02 OCT 2026</div>
+          </div>
+        </div>
+
+        <div class="header-center-team">
+          Team B
+        </div>
+
+        <div class="header-right">
+          <!-- Planning/Development Attention Badge -->
+          <div class="status-badge-attention">
+            <span class="white-dot"></span>
+            <span>PLANNING / DEVELOPMENT ATTENTION</span>
+          </div>
+
+          <!-- Status note box -->
+          <div class="status-note-box">
+            Planning &amp; development in progress &mdash; needs continued attention
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. TOP METADATA & KPI STRIP -->
+      <section class="meta-kpi-container">
+        <!-- Top Row -->
+        <div class="meta-top-row">
+          <div class="meta-col">
+            <i class="fa-regular fa-calendar-days meta-icon"></i>
+            <div class="meta-text-group">
+              <span class="meta-lbl">WEEK ENDING:</span>
+              <span class="meta-val">02 OCT 2026</span>
+            </div>
+          </div>
+
+          <div class="meta-col">
+            <i class="fa-solid fa-gear meta-icon"></i>
+            <div class="meta-text-group">
+              <span class="meta-lbl">CURRENT PHASE:</span>
+              <span class="meta-val">PHASE 1 &mdash; FOUNDATION MODULES</span>
+            </div>
+          </div>
+
+          <div class="meta-col">
+            <i class="fa-solid fa-users meta-icon"></i>
+            <div class="meta-text-group">
+              <span class="meta-lbl">TEAM B:</span>
+              <span class="meta-val">4 DEVELOPERS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="meta-bottom-row">
+          <div class="assumption-left">
+            <i class="fa-solid fa-database assumption-icon"></i>
+            <div class="assumption-txt">
+              PLANNING ASSUMPTION: <span>4 developers &times; 6 hrs/day &times; 5 days/week</span>
+            </div>
+          </div>
+
+          <div class="kpi-metrics-group">
+            <div class="kpi-mini-col">
+              <div class="kpi-mini-num">26</div>
+              <div class="kpi-mini-lbl">WEEKS</div>
+            </div>
+
+            <div class="kpi-vert-sep"></div>
+
+            <div class="kpi-mini-col">
+              <div class="kpi-mini-num">130</div>
+              <div class="kpi-mini-lbl">WORK DAYS</div>
+            </div>
+
+            <div class="kpi-vert-sep"></div>
+
+            <div class="kpi-mini-col">
+              <div class="kpi-mini-num">3,120</div>
+              <div class="kpi-mini-lbl">TEAM CAPACITY (HRS)</div>
+            </div>
+          </div>
+
+          <div class="capacity-note-callout">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Capacity is planned availability; actual effort has not been reported.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. MAIN 3-COLUMN BODY -->
+      <main class="main-grid">
+
+        <!-- COLUMN 1: SPRINT PLAN & NEXT SPRINT PLAN -->
+        <div class="col-stack">
+          
+          <!-- PANEL 1: SPRINT PLAN -->
+          <article class="panel" style="flex: 1;">
+            <div class="panel-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. SPRINT PLAN</span>
+            </div>
+            <div class="panel-body">
+              <div class="sprint-plan-items">
+                <!-- Item 1 -->
+                <div class="plan-item-block">
+                  <i class="fa-solid fa-bullseye plan-item-icon green"></i>
+                  <div class="plan-item-txt">
+                    <span class="plan-item-name">Identity Module</span>
+                    <span class="plan-item-sub">Continue API development</span>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="plan-item-block">
+                  <i class="fa-solid fa-bullseye plan-item-icon blue"></i>
+                  <div class="plan-item-txt">
+                    <span class="plan-item-name">Business Module</span>
+                    <span class="plan-item-sub">Start API work</span>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="plan-item-block">
+                  <i class="fa-solid fa-bullseye plan-item-icon purple"></i>
+                  <div class="plan-item-txt">
+                    <span class="plan-item-name">Notification Module</span>
+                    <span class="plan-item-sub">SMS channel complete + Start FCM implementation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 4: NEXT SPRINT PLAN -->
+          <article class="panel" style="flex: 1.45;">
+            <div class="panel-hdr">
+              <i class="fa-regular fa-calendar-plus"></i>
+              <span>4. NEXT SPRINT PLAN</span>
+            </div>
+            <div class="panel-body">
+              <div class="next-sprint-section">
+                <!-- Section 1 -->
+                <div>
+                  <div class="next-sub-hdr">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>DEVELOPMENT</span>
+                  </div>
+                  <ul class="next-bullets">
+                    <li>Complete Admin Side Business Creation &amp; Flow APIs</li>
+                    <li>Basic Business Detail Management APIs</li>
+                    <li>Raise pending PRs (Identity, Business Tax Rate, Notification FCM)</li>
+                    <li>Storage Module &mdash; end-to-end testing</li>
+                  </ul>
+                </div>
+
+                <!-- Section 2 -->
+                <div>
+                  <div class="next-sub-hdr">
+                    <i class="fa-solid fa-table-list"></i>
+                    <span>PLANNING</span>
+                  </div>
+                  <ul class="next-bullets">
+                    <li>User Management Module planning</li>
+                    <li>Folio &amp; Billing Module &mdash; design finalization (separated from Payment)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- COLUMN 2: SPRINT PROGRESS -->
+        <article class="panel" style="flex: 1;">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>2. SPRINT PROGRESS</span>
+          </div>
+          <div class="panel-body" style="gap: 8px;">
+            
+            <!-- Completed Section -->
+            <div class="progress-section-completed">
+              <div class="banner-status-hdr completed">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>COMPLETED</span>
+              </div>
+
+              <div class="modules-2x2-grid">
+                <!-- Identity Module -->
+                <div class="module-sub-card">
+                  <div class="module-sub-title">Identity Module</div>
+                  <ul class="check-list-items">
+                    <li><i class="fa-solid fa-circle-check"></i> Login with OTP API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Login with Password API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> User Initiate API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> User Initiate Verify API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Email Confirm API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> User Search API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Find Existing Client API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Set Password / Forget Password APIs complete</li>
+                    <li class="pending"><i class="fa-solid fa-clock"></i> PR pending review</li>
+                  </ul>
+                </div>
+
+                <!-- Business Module -->
+                <div class="module-sub-card">
+                  <div class="module-sub-title">Business Module</div>
+                  <ul class="check-list-items">
+                    <li><i class="fa-solid fa-circle-check"></i> Business Create API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Slug Availability Check API complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Business Tax Profile Management APIs complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Business Tax Rate Management APIs complete (PR pending)</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Opening Hours APIs complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Admin Business List &amp; Get APIs complete</li>
+                  </ul>
+                </div>
+
+                <!-- Notification Module -->
+                <div class="module-sub-card">
+                  <div class="module-sub-title">Notification Module</div>
+                  <ul class="check-list-items">
+                    <li><i class="fa-solid fa-circle-check"></i> Email providers complete &mdash; SendGrid + SMTP</li>
+                    <li><i class="fa-solid fa-circle-check"></i> SMS provider complete &mdash; Text.lk</li>
+                    <li><i class="fa-solid fa-circle-check"></i> FCM (Push Notification) code implemented</li>
+                    <li class="pending"><i class="fa-solid fa-clock"></i> PR not raised yet</li>
+                  </ul>
+                </div>
+
+                <!-- Storage Module (New) -->
+                <div class="module-sub-card">
+                  <div class="module-sub-title">Storage Module (New)</div>
+                  <ul class="check-list-items">
+                    <li><i class="fa-solid fa-circle-check"></i> Module planning and development complete</li>
+                    <li><i class="fa-solid fa-circle-check"></i> File handling APIs complete</li>
+                    <li class="pending"><i class="fa-solid fa-clock"></i> End-to-end testing pending</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- In Progress Section -->
+            <div>
+              <div class="banner-status-hdr in-progress">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <span>IN PROGRESS</span>
+              </div>
+              <div class="in-progress-body">
+                <div class="in-progress-title">Payment / Folio &amp; Billing</div>
+                <ul class="in-progress-bullets">
+                  <li>Team discussion completed this week</li>
+                  <li><strong>Decision:</strong> Extract Folio &amp; Billing as a separate module from Payment</li>
+                  <li>Full design finalization pending &mdash; carry to next week</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- COLUMN 3: TIMELINE & CAPACITY + SPRINT STATUS AT A GLANCE -->
+        <div class="col-stack">
+
+          <!-- PANEL 3: PROJECT TIMELINE & CAPACITY -->
+          <article class="panel" style="flex: 1.1;">
+            <div class="panel-hdr">
+              <i class="fa-solid fa-clock"></i>
+              <span>3. PROJECT TIMELINE &amp; CAPACITY</span>
+            </div>
+            <div class="panel-body">
+              
+              <div class="capacity-banner-sub">
+                <i class="fa-solid fa-users"></i>
+                <span>MANAGEMENT PLANNING ASSUMPTION: 4 Developers &times; 6 hrs/day &times; 5 days/week</span>
+              </div>
+
+              <!-- Metric Table -->
+              <table class="timeline-metrics-tbl">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Total Project Duration</td>
+                    <td>26 weeks</td>
+                  </tr>
+                  <tr>
+                    <td>Total Work Days</td>
+                    <td>130 days</td>
+                  </tr>
+                  <tr>
+                    <td>Total Team Capacity</td>
+                    <td>3,120 hrs</td>
+                  </tr>
+                  <tr>
+                    <td>Used</td>
+                    <td>13 days</td>
+                  </tr>
+                  <tr>
+                    <td>Remaining</td>
+                    <td>117 days</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Two Phases Comparison Grid -->
+              <div class="two-phases-row">
+                <!-- Phase 0 -->
+                <div class="phase-track-card">
+                  <div class="phase-track-hdr phase0">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                    <span>PHASE 0 &mdash; ARCHITECTURE</span>
+                  </div>
+                  <div class="phase-track-body">
+                    <div class="phase-line-item"><span>Phase Duration</span><strong>10 work days</strong></div>
+                    <div class="phase-line-item"><span>Used</span><strong>10 days</strong></div>
+                    <div class="phase-line-item"><span>Remaining</span><strong>0 days</strong></div>
+                    <div class="phase-line-item"><span>Phase End</span><strong>30 Sep 2026</strong></div>
+                    <div class="phase-status-pill complete">
+                      <i class="fa-solid fa-check"></i> Complete
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Phase 1 -->
+                <div class="phase-track-card">
+                  <div class="phase-track-hdr phase1">
+                    <i class="fa-solid fa-cubes"></i>
+                    <span>PHASE 1 &mdash; FOUNDATION</span>
+                  </div>
+                  <div class="phase-track-body">
+                    <div class="phase-line-item"><span>Phase Duration</span><strong>30 work days</strong></div>
+                    <div class="phase-line-item"><span>Used</span><strong>3 days</strong></div>
+                    <div class="phase-line-item"><span>Remaining</span><strong>27 days</strong></div>
+                    <div class="phase-line-item"><span>Phase End</span><strong>12 Nov 2026</strong></div>
+                    <div class="phase-status-pill in-progress">
+                      <i class="fa-solid fa-spinner fa-spin"></i> In Progress
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PANEL 5: SPRINT STATUS AT A GLANCE -->
+          <article class="panel" style="flex: 1.15;">
+            <div class="panel-hdr">
+              <i class="fa-solid fa-chart-column"></i>
+              <span>5. SPRINT STATUS AT A GLANCE</span>
+            </div>
+            <div class="panel-body">
+              
+              <table class="glance-table">
+                <thead>
+                  <tr>
+                    <th>Area</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-id-badge"></i>
+                        <span>Identity APIs</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> Complete (PR pending)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Business Admin APIs</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> Complete (Tax Rate PR pending)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Notification &mdash; Email (SendGrid + SMTP)</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> Complete
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span>Notification &mdash; SMS (Text.lk)</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> Complete
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Notification &mdash; FCM</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> Code Done (PR not raised)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-hard-drive"></i>
+                        <span>Storage Module</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell green">
+                      <i class="fa-solid fa-circle-check"></i> APIs Done (E2E testing pending)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Folio &amp; Billing Design</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell amber">
+                      <i class="fa-solid fa-circle-exclamation"></i> Decision made, design pending
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="glance-area-cell">
+                        <i class="fa-solid fa-users-gear"></i>
+                        <span>User Management Module</span>
+                      </div>
+                    </td>
+                    <td class="glance-status-cell blue">
+                      <i class="fa-regular fa-clock"></i> Next Sprint
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </article>
+
+        </div>
+
+      </main>
+
+      <!-- 4. BOTTOM FOOTER BAR -->
+      <footer class="footer-bar">
+        <i class="fa-solid fa-bullseye"></i>
+        <span>Building a scalable and robust platform &mdash; one sprint at a time.</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

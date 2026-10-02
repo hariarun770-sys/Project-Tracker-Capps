@@ -45,15 +45,27 @@ const DEFAULT_PROJECTS = [
     id: 'onenex-phase-2',
     name: 'OneNex Phase 2',
     icon: '🏗️',
-    release: 'Phase 0 — Architecture',
-    leads: 'Team B (4 Developers)',
-    description: 'Architecture & System Foundations — Identity, Notification, Business Entity, and Payment engine design for Phase 2.',
-    highlights: 'Sprint 21–25 Sep: User Register, Login, Token APIs complete. Email channel complete. Payment findings review session planned. Phase 0 wraps 30 Sep.',
+    release: 'Phase 1 — Foundation Modules',
+    leads: 'Team B (4 Developers — 3,120h)',
+    description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, and Modular Folio & Billing.',
+    highlights: 'Sprint 28 Sep – 02 Oct: Phase 0 Architecture completed (10/10d). Phase 1 underway (3/30d). 8 Identity APIs, 6 Business APIs, Email/SMS/FCM Notification done, Storage Module created, Folio & Billing extracted from Payment.',
     selectedWeekIndex: 0,
     weeks: [
       {
+        weekNumber: 40,
+        weekLabel: 'Sprint 28 Sep – 02 Oct 2026 (Phase 1)',
+        weekEnding: '02 Oct 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '4 Developers (3,120h Capacity)',
+        consumed: '13 Days Used (Phase 1: 3/30d)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_02.10.2026.html',
+        scopeUrl: 'scope document/OneNex_Phase_2_Scope_Architecture.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_02.10.2026.html'
+      },
+      {
         weekNumber: 39,
-        weekLabel: 'Sprint 21–25 Sep 2026',
+        weekLabel: 'Sprint 21–25 Sep 2026 (Phase 0)',
         weekEnding: '25 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
@@ -162,11 +174,12 @@ try {
     'portal_projects_onenex_v2',
     'portal_projects_integration_v1',
     'portal_projects_onenex_r12_v1',
-    'portal_projects_deploy_auto_v1'
+    'portal_projects_deploy_auto_v1',
+    'portal_projects_optimo_gov_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_optimo_gov_v1';
+const STORAGE_KEY = 'portal_projects_phase2_oct2_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {

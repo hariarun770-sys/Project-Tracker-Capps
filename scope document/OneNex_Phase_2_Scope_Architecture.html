@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneNex Phase 2 — Architecture & Technical Scope Document</title>
+  <title>OneNex Phase 2 — Architecture & Foundation Modules Scope Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -41,7 +41,7 @@
       position: relative;
       overflow: hidden;
       color: #0f172a;
-      padding: 24px 32px 14px 32px;
+      padding: 18px 26px 12px 26px;
       justify-content: space-between;
     }
 
@@ -50,9 +50,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: 2px solid #e2e8f0;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .brand-wrap {
@@ -62,7 +62,7 @@
     }
 
     .brand-logo {
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 900;
       color: #0f172a;
       letter-spacing: -0.5px;
@@ -70,7 +70,7 @@
     .brand-logo span.nex { color: #ff5722; }
 
     .brand-tagline {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
       color: #475569;
     }
@@ -78,9 +78,9 @@
     .phase-badge {
       background: #ff5722;
       color: #ffffff;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 20px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -89,41 +89,43 @@
     /* METADATA STRIP */
     .meta-strip {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 10px 16px;
-      gap: 12px;
-      margin-bottom: 14px;
+      padding: 8px 14px;
+      gap: 10px;
+      margin-bottom: 10px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     .meta-box .lbl {
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 800;
       color: #64748b;
       text-transform: uppercase;
     }
     .meta-box .val {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       color: #0f172a;
       margin-top: 1px;
     }
+    .meta-box .val.green { color: #15803d; }
+    .meta-box .val.orange { color: #ea580c; }
 
-    /* ARCHITECTURE GRID */
+    /* ARCHITECTURE GRID (5 Modules) */
     .arch-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     .arch-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 14px;
+      border-radius: 8px;
+      padding: 10px 12px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
@@ -133,17 +135,17 @@
     .arch-card-hdr {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
       border-bottom: 1.5px solid #f1f5f9;
-      padding-bottom: 6px;
+      padding-bottom: 5px;
     }
     .arch-icon {
-      font-size: 20px;
+      font-size: 16px;
       color: #ff5722;
     }
     .arch-title {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 900;
       color: #0f172a;
       text-transform: uppercase;
@@ -151,15 +153,15 @@
 
     .arch-list {
       list-style: none;
-      font-size: 10.5px;
-      line-height: 1.45;
+      font-size: 9.5px;
+      line-height: 1.4;
       font-weight: 600;
       color: #334155;
     }
     .arch-list li {
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       position: relative;
-      padding-left: 14px;
+      padding-left: 13px;
     }
     .arch-list li::before {
       content: "✔";
@@ -171,22 +173,22 @@
     }
     .arch-list li.pending::before {
       content: "⏳";
-      font-size: 9px;
+      font-size: 8.5px;
     }
 
     /* BOTTOM DETAILS ROW */
     .bottom-split {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
-      gap: 14px;
+      gap: 12px;
       flex: 1;
     }
 
     .info-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 12px 16px;
+      border-radius: 8px;
+      padding: 10px 14px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
@@ -194,16 +196,16 @@
     }
 
     .sec-title {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
       color: #0f172a;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 6px;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
       border-bottom: 1.5px solid #e2e8f0;
     }
     .sec-title i { color: #ff5722; }
@@ -212,14 +214,14 @@
     .scope-footer {
       background: #091e3a;
       color: #ffffff;
-      padding: 8px 20px;
+      padding: 6px 18px;
       border-radius: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
-      margin-top: 8px;
+      margin-top: 6px;
     }
     .scope-footer span.nex { color: #ff5722; font-weight: 900; }
   </style>
@@ -233,154 +235,193 @@
       <header class="scope-hdr">
         <div class="brand-wrap">
           <div class="brand-logo">One<span class="nex">Nex</span> Phase 2</div>
-          <div style="font-size: 20px; color: #94a3b8; font-weight: 300;">|</div>
-          <div class="brand-tagline">Phase 0 &mdash; Architecture &amp; System Foundations</div>
+          <div style="font-size: 18px; color: #94a3b8; font-weight: 300;">|</div>
+          <div class="brand-tagline">Phase 1 &mdash; Foundation Modules &amp; Microservices Architecture</div>
         </div>
 
-        <span class="phase-badge">Team B &bull; 4 Developers</span>
+        <span class="phase-badge">Team B &bull; 4 Developers (3,120h)</span>
       </header>
 
       <!-- METADATA STRIP -->
       <section class="meta-strip">
         <div class="meta-box">
-          <div class="lbl">Phase Scope</div>
-          <div class="val">Phase 0: Architecture</div>
+          <div class="lbl">Sprint Period</div>
+          <div class="val">28 Sep &ndash; 02 Oct 2026</div>
         </div>
         <div class="meta-box">
-          <div class="lbl">Total Capacity</div>
-          <div class="val">3,120 Hours (26 Weeks)</div>
+          <div class="lbl">Phase 0 (Arch)</div>
+          <div class="val green">Completed (30 Sep)</div>
         </div>
         <div class="meta-box">
-          <div class="lbl">Phase 0 Days</div>
-          <div class="val">10 Days (8 Used, 2 Left)</div>
+          <div class="lbl">Phase 1 (Foundation)</div>
+          <div class="val orange">In Progress (3/30d)</div>
         </div>
         <div class="meta-box">
-          <div class="lbl">Phase End Date</div>
-          <div class="val">30 September 2026</div>
+          <div class="lbl">Team &amp; Headcount</div>
+          <div class="val">Team B &bull; 4 Developers</div>
         </div>
         <div class="meta-box">
-          <div class="lbl">Current Status</div>
-          <div class="val" style="color:#d97706;">Planning Attention</div>
+          <div class="lbl">Work Days / Capacity</div>
+          <div class="val">13/130 Days (3,120h)</div>
+        </div>
+        <div class="meta-box">
+          <div class="lbl">Sprint Status</div>
+          <div class="val orange">Dev Attention (Active)</div>
         </div>
       </section>
 
-      <!-- 4 ARCHITECTURE MODULE CARDS -->
+      <!-- 5-MODULE ARCHITECTURE GRID -->
       <section class="arch-grid">
         
-        <article class="arch-card">
+        <!-- Module 1: Identity -->
+        <div class="arch-card">
           <div>
             <div class="arch-card-hdr">
-              <i class="fa-solid fa-user-shield arch-icon"></i>
+              <i class="fa-solid fa-id-card-clip arch-icon"></i>
               <div class="arch-title">Identity &amp; Auth</div>
             </div>
             <ul class="arch-list">
-              <li>User Register API completed</li>
-              <li>Login &amp; Auth Tokens completed</li>
-              <li>Client Token generation validated</li>
-              <li class="pending">Role &amp; permission scopes ongoing</li>
-              <li class="pending">OAuth2 / Session token refresh</li>
+              <li>Login with OTP API complete</li>
+              <li>Login with Password API complete</li>
+              <li>User Initiate &amp; Verify APIs</li>
+              <li>Email Confirm &amp; Search APIs</li>
+              <li>Find Existing Client API</li>
+              <li>Set &amp; Forget Password APIs</li>
+              <li class="pending">PR review pending</li>
             </ul>
           </div>
-          <div style="font-size:9px; font-weight:800; color:#16a34a; background:#dcfce7; padding:4px 8px; border-radius:4px; text-align:center; margin-top:8px;">
-            Core Auth Engine Ready
-          </div>
-        </article>
+          <div style="font-size: 9px; font-weight: 800; color: #16a34a; margin-top: 6px;">8 APIs Implemented</div>
+        </div>
 
-        <article class="arch-card">
+        <!-- Module 2: Business -->
+        <div class="arch-card">
+          <div>
+            <div class="arch-card-hdr">
+              <i class="fa-solid fa-briefcase arch-icon"></i>
+              <div class="arch-title">Business Core</div>
+            </div>
+            <ul class="arch-list">
+              <li>Business Create API complete</li>
+              <li>Slug Availability Check API</li>
+              <li>Business Tax Profile APIs</li>
+              <li>Business Tax Rate APIs (PR pend)</li>
+              <li>Opening Hours APIs complete</li>
+              <li>Admin Business List &amp; Get APIs</li>
+            </ul>
+          </div>
+          <div style="font-size: 9px; font-weight: 800; color: #16a34a; margin-top: 6px;">Admin &amp; Config Ready</div>
+        </div>
+
+        <!-- Module 3: Notification -->
+        <div class="arch-card">
           <div>
             <div class="arch-card-hdr">
               <i class="fa-solid fa-bell arch-icon"></i>
               <div class="arch-title">Notification</div>
             </div>
             <ul class="arch-list">
-              <li>Unified interface pattern working end-to-end</li>
-              <li>Email channel delivery complete</li>
-              <li class="pending">SMS provider adapter (Next Sprint)</li>
-              <li class="pending">Firebase Cloud Messaging (FCM)</li>
-              <li class="pending">Transactional templates &amp; logging</li>
+              <li>SendGrid &amp; SMTP Email providers</li>
+              <li>Text.lk SMS provider complete</li>
+              <li>FCM Push Notification code</li>
+              <li class="pending">FCM PR to be raised</li>
             </ul>
           </div>
-          <div style="font-size:9px; font-weight:800; color:#0284c7; background:#dbeafe; padding:4px 8px; border-radius:4px; text-align:center; margin-top:8px;">
-            Pattern &amp; Email Operational
-          </div>
-        </article>
+          <div style="font-size: 9px; font-weight: 800; color: #0284c7; margin-top: 6px;">Multi-Channel Engine</div>
+        </div>
 
-        <article class="arch-card">
+        <!-- Module 4: Storage (New) -->
+        <div class="arch-card">
           <div>
             <div class="arch-card-hdr">
-              <i class="fa-solid fa-store arch-icon"></i>
-              <div class="arch-title">Business Core</div>
+              <i class="fa-solid fa-hard-drive arch-icon"></i>
+              <div class="arch-title">Storage (New)</div>
             </div>
             <ul class="arch-list">
-              <li>Multi-tenant entity model finalized</li>
-              <li>Entity configuration schemas complete</li>
-              <li>Data validation contracts approved</li>
-              <li class="pending">API development begins next sprint</li>
-              <li class="pending">Location &amp; operating hours mapping</li>
+              <li>Module planning complete</li>
+              <li>Development finalized</li>
+              <li>File handling APIs complete</li>
+              <li class="pending">End-to-end testing pending</li>
             </ul>
           </div>
-          <div style="font-size:9px; font-weight:800; color:#16a34a; background:#dcfce7; padding:4px 8px; border-radius:4px; text-align:center; margin-top:8px;">
-            Schemas Ready for APIs
-          </div>
-        </article>
+          <div style="font-size: 9px; font-weight: 800; color: #16a34a; margin-top: 6px;">Asset Storage Service</div>
+        </div>
 
-        <article class="arch-card">
+        <!-- Module 5: Payment & Folio -->
+        <div class="arch-card">
           <div>
             <div class="arch-card-hdr">
-              <i class="fa-solid fa-credit-card arch-icon"></i>
-              <div class="arch-title">Payment Engine</div>
+              <i class="fa-solid fa-receipt arch-icon"></i>
+              <div class="arch-title">Payment &amp; Folio</div>
             </div>
             <ul class="arch-list">
-              <li>Payment integration research almost complete</li>
-              <li class="pending">Open architecture concerns remain</li>
-              <li class="pending">Resolution session scheduled next week</li>
-              <li class="pending">Idempotency &amp; webhook telemetry</li>
-              <li class="pending">Escrow &amp; split payouts specification</li>
+              <li>Team discussion completed</li>
+              <li><strong>Decision:</strong> Extract Folio &amp; Billing from Payment</li>
+              <li class="pending">Full design finalization pending</li>
+              <li class="pending">Carry forward to next sprint</li>
             </ul>
           </div>
-          <div style="font-size:9px; font-weight:800; color:#d97706; background:#fef3c7; padding:4px 8px; border-radius:4px; text-align:center; margin-top:8px;">
-            Findings Session Next Week
-          </div>
-        </article>
+          <div style="font-size: 9px; font-weight: 800; color: #ea580c; margin-top: 6px;">Modular Separation</div>
+        </div>
 
       </section>
 
       <!-- BOTTOM SPLIT DETAILS -->
       <section class="bottom-split">
         
-        <article class="info-card">
-          <div class="sec-title">
-            <i class="fa-solid fa-calendar-days"></i> Phase 0 Timeline &amp; Delivery Milestones
+        <!-- Sprint Deliverables & Milestones -->
+        <div class="info-card">
+          <div>
+            <div class="sec-title"><i class="fa-solid fa-chart-line"></i> Phase 0 &amp; Phase 1 Milestones</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 9.5px;">
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px;">
+                <div style="font-weight: 900; color: #0284c7; margin-bottom: 2px;">PHASE 0 &mdash; ARCHITECTURE</div>
+                <div>&bull; Duration: 10 work days &bull; <strong>Used: 10 days</strong></div>
+                <div>&bull; Completed on: <strong>30 Sep 2026</strong></div>
+                <div style="color: #16a34a; font-weight: 800; margin-top: 2px;">✔ Complete &amp; Baseline Signed</div>
+              </div>
+              <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 6px; padding: 6px 10px;">
+                <div style="font-weight: 900; color: #7c3aed; margin-bottom: 2px;">PHASE 1 &mdash; FOUNDATION</div>
+                <div>&bull; Duration: 30 work days &bull; <strong>Used: 3 days (27 left)</strong></div>
+                <div>&bull; Target End: <strong>12 Nov 2026</strong></div>
+                <div style="color: #ea580c; font-weight: 800; margin-top: 2px;">⏳ Active Development In Progress</div>
+              </div>
+            </div>
           </div>
-          <div style="font-size:10px; line-height:1.45; color:#334155;">
-            <p><strong>Sprint 21&ndash;25 September 2026:</strong> Initial foundations established across all 4 workstreams. User authentication and registration contracts are closed. Email channel pattern established.</p>
-            <p style="margin-top:6px;"><strong>Target Completion:</strong> 30 September 2026 (Phase 0 Architecture wrap-up).</p>
-            <p style="margin-top:6px;"><strong>Team Structure:</strong> 4 dedicated full-stack developers operating under Team B with cross-functional module ownership.</p>
-          </div>
-        </article>
 
-        <article class="info-card">
-          <div class="sec-title">
-            <i class="fa-solid fa-triangle-exclamation"></i> Management Action Items
+          <div style="margin-top: 8px; font-size: 9px; color: #64748b; font-weight: 600;">
+            Next Sprint Focus: Admin Side Business Creation &amp; Flow APIs, Basic Business Detail Management, User Management Module planning, Folio &amp; Billing design finalization.
           </div>
-          <div style="font-size:10px; line-height:1.45; color:#334155;">
-            <div>&bull; <strong>Payment Resolution:</strong> Finalize provider architecture decisions during the upcoming findings review session.</div>
-            <div style="margin-top:6px;">&bull; <strong>Timeline Validation:</strong> Validate remaining Phase 0 tasks against the September 30 milestone deadline.</div>
+        </div>
+
+        <!-- Resource Planning Assumption -->
+        <div class="info-card">
+          <div>
+            <div class="sec-title"><i class="fa-solid fa-users"></i> Team B Capacity Allocation</div>
+            <div style="font-size: 9.5px; line-height: 1.45; color: #334155;">
+              <div>&bull; <strong>Assumption:</strong> 4 developers &times; 6 hrs/day &times; 5 days/week = 3,120h</div>
+              <div>&bull; <strong>Total Timeline:</strong> 26 weeks (130 work days)</div>
+              <div>&bull; <strong>Days Elapsed:</strong> 13 days used &bull; 117 days remaining</div>
+              <div>&bull; <strong>Governance:</strong> One sprint at a time with weekly visibility cards.</div>
+            </div>
           </div>
-        </article>
+
+          <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 4px; padding: 4px 8px; font-size: 8.5px; color: #9a3412; font-weight: 700;">
+            Status: Planning &amp; Development Attention &mdash; continued velocity focus.
+          </div>
+        </div>
 
       </section>
 
       <!-- FOOTER -->
       <footer class="scope-footer">
-        <div>One<span class="nex">Nex</span> Phase 2 &bull; Architecture &amp; System Foundations &bull; Confidential Executive Briefing</div>
-        <div>Week Ending 25 September 2026 &bull; Team B (4 Developers)</div>
+        <div>One<span class="nex">Nex</span> Phase 2 &bull; Architecture &amp; Foundation Modules Baseline &bull; Confidential</div>
+        <div>Generated for Executive Project Tracker &bull; 02 October 2026</div>
       </footer>
 
     </div>
   </div>
 
-  <!-- Exporter Scripts -->
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
   <script src="../assets/js/html2canvas.min.js"></script>
   <script src="../assets/js/exporter.js"></script>
 </body>
