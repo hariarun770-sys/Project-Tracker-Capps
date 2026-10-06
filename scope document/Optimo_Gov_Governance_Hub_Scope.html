@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Governance Hub — Scope Specification (Knowledge Base Module | Support)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 14px 22px 10px 22px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon-box {
+      width: 48px;
+      height: 48px;
+      background: #0284c7;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+
+    .header-titles h1 {
+      font-size: 25px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.4px;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0284c7;
+      margin-top: 2px;
+      letter-spacing: 0.2px;
+    }
+
+    .header-right-tagline {
+      text-align: right;
+    }
+
+    .tagline-sub {
+      font-size: 9px;
+      font-weight: 900;
+      color: #0ea5e9;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .tagline-main-1 {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0b2240;
+      line-height: 1.15;
+    }
+
+    .tagline-main-2 {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0ea5e9;
+      line-height: 1.15;
+    }
+
+    /* COMMON SECTION CARD STYLES */
+    .sec-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .sec-hdr {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .sec-hdr i {
+      font-size: 12px;
+      color: #0284c7;
+    }
+
+    .sec-body {
+      padding: 7px 10px;
+      flex: 1;
+      font-size: 9.5px;
+      color: #334155;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* ROW 1: 4 COLUMNS */
+    .grid-row-1 {
+      display: grid;
+      grid-template-columns: 1.25fr 1.35fr 1fr 1.4fr;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Overview Key-Value */
+    .overview-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+    }
+
+    .overview-table td {
+      padding: 2.5px 0;
+      vertical-align: top;
+    }
+
+    .overview-table td.lbl {
+      font-weight: 800;
+      color: #0f172a;
+      width: 38%;
+    }
+
+    .overview-table td.val {
+      font-weight: 600;
+      color: #334155;
+      width: 62%;
+    }
+
+    .code-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #0284c7;
+      background: #f0f9ff;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    /* Checkmark Lists */
+    .check-list {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.35;
+      color: #1e293b;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 3.5px;
+      font-weight: 600;
+    }
+
+    .check-list li i {
+      color: #16a34a;
+      font-size: 10px;
+      margin-top: 1.5px;
+      flex-shrink: 0;
+    }
+
+    /* Icon Text Lists */
+    .icon-text-list {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.35;
+      color: #1e293b;
+    }
+
+    .icon-text-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      margin-bottom: 3.5px;
+      font-weight: 600;
+    }
+
+    .icon-text-list li i {
+      font-size: 11px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    /* ROW 2: 3 COLUMNS */
+    .grid-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 2.1fr 1.35fr;
+      gap: 10px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    /* Actions List in Card 5 */
+    .actions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+    }
+
+    .action-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 9px;
+      font-weight: 700;
+      color: #1e293b;
+      padding: 2px 0;
+    }
+
+    .action-badge-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+    .action-badge-icon.blue { background: #0284c7; }
+    .action-badge-icon.teal { background: #0d9488; }
+    .action-badge-icon.coral { background: #f43f5e; }
+    .action-badge-icon.purple { background: #8b5cf6; }
+    .action-badge-icon.amber { background: #f59e0b; }
+
+    /* Card 6: Screen / Content Summary */
+    .screen-summary-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.75fr;
+      gap: 10px;
+      height: 100%;
+    }
+
+    .screen-bullets-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .screen-bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #1e293b;
+      line-height: 1.3;
+    }
+
+    .screen-bullet-item i {
+      color: #0284c7;
+      font-size: 11px;
+      margin-top: 1.5px;
+      flex-shrink: 0;
+    }
+
+    /* UI Mockup Window */
+    .ui-mockup-window {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .mockup-top-chrome {
+      background: #0b2240;
+      color: #ffffff;
+      padding: 3px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .mockup-body {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      background: #f8fafc;
+      flex: 1;
+    }
+
+    .mockup-sidebar {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 6px 4px;
+      font-size: 7.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mockup-sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 4px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .mockup-sidebar-item.active {
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .mockup-main {
+      padding: 6px 8px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mockup-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mockup-title {
+      font-size: 10px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .mockup-sub {
+      font-size: 7.5px;
+      color: #64748b;
+    }
+
+    .btn-new-article {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 7.5px;
+      font-weight: 800;
+    }
+
+    .mockup-search-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5px;
+    }
+
+    .mockup-search-input {
+      border: 1px solid #cbd5e1;
+      border-radius: 3px;
+      padding: 2px 5px;
+      font-size: 7px;
+      width: 110px;
+      color: #64748b;
+    }
+
+    .mockup-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.5px;
+    }
+
+    .mockup-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 7px;
+      padding: 2px 4px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .mockup-table td {
+      padding: 2.5px 4px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-size: 7.5px;
+    }
+
+    .tag-pill {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      color: #0369a1;
+      padding: 0.5px 3px;
+      border-radius: 2px;
+      font-size: 6.5px;
+      font-weight: 700;
+    }
+
+    .status-badge-kb {
+      padding: 0.5px 4px;
+      border-radius: 2px;
+      font-size: 6.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .status-badge-kb.published { background: #dcfce7; color: #15803d; }
+    .status-badge-kb.draft { background: #fef3c7; color: #b45309; }
+
+    /* Card 7: User Workflows (3 Steps) */
+    .workflow-steps-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      height: 100%;
+    }
+
+    .workflow-col {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      height: 100%;
+    }
+
+    .workflow-hdr {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 900;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .workflow-num-circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 8.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .workflow-icon-center {
+      text-align: center;
+      font-size: 16px;
+      color: #0284c7;
+      margin: 2px 0;
+    }
+
+    .workflow-bullets {
+      list-style: none;
+      font-size: 8.5px;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .workflow-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 1.5px;
+      font-weight: 600;
+    }
+
+    .workflow-bullets li i {
+      color: #0284c7;
+      font-size: 8px;
+    }
+
+    .workflow-arrow-sep {
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    /* ROW 3: 4 COLUMNS */
+    .grid-row-3 {
+      display: grid;
+      grid-template-columns: 1.35fr 1.3fr 1.15fr 1.1fr;
+      gap: 10px;
+    }
+
+    /* Out of scope 2x3 grid */
+    .out-scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+
+    .out-scope-item {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 4px;
+      padding: 3.5px 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #be123c;
+    }
+
+    .out-scope-item i {
+      font-size: 10px;
+      color: #e11d48;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 6px;
+      margin-top: 6px;
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2240;
+    }
+
+    .footer-accent-bar {
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION UTILITY BAR -->
+  <div class="top-nav-bar" data-html2canvas-ignore="true" style="width: 1536px; max-width: 100%; display: flex; justify-content: space-between; align-items: center; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 10px 18px; margin-bottom: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <a href="../index.html" style="display:inline-flex; align-items:center; gap:6px; color:#38bdf8; text-decoration:none; font-size:12px; font-weight:700; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); padding:6px 12px; border-radius:6px; transition:0.2s;">
+        <i class="fa-solid fa-arrow-left"></i> Project Tracker
+      </a>
+      <a href="Optimo_Phase2_Feature_Scope_Showcase.html" style="display:inline-flex; align-items:center; gap:6px; color:#c084fc; text-decoration:none; font-size:12px; font-weight:700; background:rgba(192,132,252,0.1); border:1px solid rgba(192,132,252,0.3); padding:6px 12px; border-radius:6px; transition:0.2s;">
+        <i class="fa-solid fa-layer-group"></i> All 10 Phase 2 Features Showcase
+      </a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span style="font-size:11.5px; color:#94a3b8; font-weight:600;">Governance Hub &bull; Knowledge Base Module Specification</span>
+      <button onclick="window.exportCurrentPageToJpg && window.exportCurrentPageToJpg('Optimo_Gov_Governance_Hub_Knowledge_Base_Scope')" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; background:#0284c7; color:#fff; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; box-shadow:0 2px 8px rgba(2,132,199,0.4);">
+        <i class="fa-solid fa-camera"></i> 📸 1-Click Retina JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="header-bar">
+        <div class="header-left">
+          <div class="brand-icon-box">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div class="header-titles">
+            <h1>Governance Hub &mdash; Scope Image</h1>
+            <div class="sub-title">Knowledge Base Module | Support</div>
+          </div>
+        </div>
+
+        <div class="header-right-tagline">
+          <div class="tagline-sub">CAPTURE &nbsp;&rsaquo;&nbsp; REUSE &nbsp;&rsaquo;&nbsp; EMPOWER</div>
+          <div class="tagline-main-1">KNOWLEDGE TODAY.</div>
+          <div class="tagline-main-2">BETTER SUPPORT TOMORROW.</div>
+        </div>
+      </header>
+
+      <!-- ROW 1: 4 COLUMNS -->
+      <div class="grid-row-1">
+
+        <!-- 1. Overview -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-list-check"></i>
+            <span>1. Overview</span>
+          </div>
+          <div class="sec-body">
+            <table class="overview-table">
+              <tr>
+                <td class="lbl">Module</td>
+                <td class="val" style="font-weight:800; color:#0b2240;">Knowledge Base</td>
+              </tr>
+              <tr>
+                <td class="lbl">Governance Hub route</td>
+                <td class="val"><span class="code-pill">/admin/support/kb</span></td>
+              </tr>
+              <tr>
+                <td class="lbl">Mirrored route outside</td>
+                <td class="val"><span class="code-pill">/support/kb</span></td>
+              </tr>
+              <tr>
+                <td class="lbl">Audience</td>
+                <td class="val">Product Owners, Business Analysts, Project Managers, QA Leads, Stakeholders</td>
+              </tr>
+              <tr>
+                <td class="lbl">Purpose</td>
+                <td class="val">Reusable article library for support answers, including AI-assisted reuse through Concierge</td>
+              </tr>
+            </table>
+          </div>
+        </article>
+
+        <!-- 2. Business Purpose -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>2. Business Purpose</span>
+          </div>
+          <div class="sec-body">
+            <ul class="check-list">
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Capture repeat support resolutions as reusable knowledge</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Allow staff to author help articles directly</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Let Concierge use published knowledge for answering common questions</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Support Draft vs Published content before exposure</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 3. Target Users -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-users"></i>
+            <span>3. Target Users</span>
+          </div>
+          <div class="sec-body">
+            <ul class="icon-text-list">
+              <li>
+                <i class="fa-solid fa-users" style="color:#2563eb;"></i>
+                <span>Admin / Governance users with access to the support area</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-user-tag" style="color:#64748b;"></i>
+                <span>No role split inside the module</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-lock" style="color:#0284c7;"></i>
+                <span>Any user with access can view, create, edit, publish/unpublish, and delete articles</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 4. Entry & Navigation -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-compass"></i>
+            <span>4. Entry &amp; Navigation</span>
+          </div>
+          <div class="sec-body">
+            <ul class="icon-text-list">
+              <li>
+                <i class="fa-solid fa-ticket" style="color:#0284c7;"></i>
+                <span>Accessed from Support Tickets screen via &ldquo;Knowledge Base&rdquo; button</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-ban" style="color:#ef4444;"></i>
+                <span>No dedicated left-sidebar link for Knowledge Base</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-link" style="color:#2563eb;"></i>
+                <span>Discoverable mainly through Support Tickets or direct URL</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-sitemap" style="color:#0891b2;"></i>
+                <span>Breadcrumb is limited and does not fully show Support &gt; Knowledge Base</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ROW 2: 3 COLUMNS -->
+      <div class="grid-row-2">
+
+        <!-- 5. Core Functional Scope -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-gears"></i>
+            <span>5. Core Functional Scope</span>
+          </div>
+          <div class="sec-body">
+            <div class="actions-grid">
+              <div class="action-row">
+                <span class="action-badge-icon blue"><i class="fa-solid fa-eye"></i></span>
+                <span>View all articles</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon teal"><i class="fa-solid fa-magnifying-glass"></i></span>
+                <span>Live keyword search</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon coral"><i class="fa-solid fa-plus"></i></span>
+                <span>Create new article</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon purple"><i class="fa-solid fa-pen"></i></span>
+                <span>Click-to-edit existing article</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon coral"><i class="fa-solid fa-trash-can"></i></span>
+                <span>Delete article with confirmation</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon amber"><i class="fa-solid fa-star"></i></span>
+                <span>Publish / unpublish article</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon amber"><i class="fa-solid fa-certificate"></i></span>
+                <span>Promote resolved ticket to KB</span>
+              </div>
+              <div class="action-row">
+                <span class="action-badge-icon blue"><i class="fa-solid fa-file-code"></i></span>
+                <span>Markdown body with live preview</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Screen / Content Summary -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-desktop"></i>
+            <span>6. Screen / Content Summary</span>
+          </div>
+          <div class="sec-body" style="padding: 6px 8px;">
+            <div class="screen-summary-layout">
+              <!-- Left Bullet Points -->
+              <div class="screen-bullets-left">
+                <div class="screen-bullet-item">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <span>Article list with live count</span>
+                </div>
+                <div class="screen-bullet-item">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <span>Search box</span>
+                </div>
+                <div class="screen-bullet-item">
+                  <i class="fa-solid fa-table-list"></i>
+                  <span>Rows show title, tags, excerpt, updated date, delete action</span>
+                </div>
+                <div class="screen-bullet-item">
+                  <i class="fa-solid fa-flag"></i>
+                  <span>Draft articles visibly flagged</span>
+                </div>
+                <div class="screen-bullet-item">
+                  <i class="fa-solid fa-tag"></i>
+                  <span>Promoted articles include ticket description + public resolution</span>
+                </div>
+              </div>
+
+              <!-- Right UI Mockup Window -->
+              <div class="ui-mockup-window">
+                <div class="mockup-top-chrome">
+                  <span>Governance Hub &bull; Optimo Support</span>
+                  <div style="display:flex; gap:3px;">
+                    <span style="width:6px; height:6px; background:#ef4444; border-radius:50%;"></span>
+                    <span style="width:6px; height:6px; background:#f59e0b; border-radius:50%;"></span>
+                    <span style="width:6px; height:6px; background:#22c55e; border-radius:50%;"></span>
+                  </div>
+                </div>
+                <div class="mockup-body">
+                  <!-- Sidebar -->
+                  <div class="mockup-sidebar">
+                    <div class="mockup-sidebar-item"><i class="fa-solid fa-house"></i> Home</div>
+                    <div class="mockup-sidebar-item"><i class="fa-solid fa-users"></i> Users</div>
+                    <div class="mockup-sidebar-item"><i class="fa-solid fa-chart-line"></i> Projects</div>
+                    <div class="mockup-sidebar-item"><i class="fa-solid fa-ticket"></i> Support Tickets</div>
+                    <div class="mockup-sidebar-item active" style="margin-left: 4px;"><i class="fa-solid fa-book-bookmark"></i> Knowledge Base</div>
+                  </div>
+
+                  <!-- Content Area -->
+                  <div class="mockup-main">
+                    <div class="mockup-header-row">
+                      <div>
+                        <div class="mockup-title">Knowledge Base</div>
+                        <div class="mockup-sub">Reusable articles for support answers</div>
+                      </div>
+                      <button class="btn-new-article">+ New Article</button>
+                    </div>
+
+                    <div class="mockup-search-row">
+                      <input type="text" class="mockup-search-input" value="Search articles..." readonly>
+                      <span style="color:#64748b; font-weight:700;">12 articles</span>
+                    </div>
+
+                    <table class="mockup-table">
+                      <thead>
+                        <tr>
+                          <th>Title</th>
+                          <th>Tags</th>
+                          <th>Excerpt</th>
+                          <th>Updated</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>How to reset your password</strong></td>
+                          <td><span class="tag-pill">account</span> <span class="tag-pill">login</span></td>
+                          <td>Step-by-step guide to reset...</td>
+                          <td>2026-07-01</td>
+                          <td><span class="status-badge-kb published">Published</span></td>
+                          <td><i class="fa-solid fa-trash-can" style="color:#94a3b8; font-size:7px;"></i></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Invite a new team member</strong></td>
+                          <td><span class="tag-pill">users</span> <span class="tag-pill">access</span></td>
+                          <td>Learn how to invite and manage...</td>
+                          <td>2026-06-28</td>
+                          <td><span class="status-badge-kb draft">Draft</span></td>
+                          <td><i class="fa-solid fa-trash-can" style="color:#94a3b8; font-size:7px;"></i></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Resolve billing issues</strong></td>
+                          <td><span class="tag-pill">billing</span> <span class="tag-pill">payments</span></td>
+                          <td>Common billing issues and how to...</td>
+                          <td>2026-06-25</td>
+                          <td><span class="status-badge-kb published">Published</span></td>
+                          <td><i class="fa-solid fa-trash-can" style="color:#94a3b8; font-size:7px;"></i></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. User Workflows -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>7. User Workflows</span>
+          </div>
+          <div class="sec-body" style="padding: 6px 8px;">
+            <div class="workflow-steps-flex">
+              <!-- Step 1 -->
+              <div class="workflow-col">
+                <div class="workflow-hdr">
+                  <span class="workflow-num-circle">1</span>
+                  <span>Author directly</span>
+                </div>
+                <div class="workflow-icon-center"><i class="fa-solid fa-file-circle-plus"></i></div>
+                <ul class="workflow-bullets">
+                  <li><i class="fa-solid fa-check"></i> New article</li>
+                  <li><i class="fa-solid fa-check"></i> Enter title, body, tags</li>
+                  <li><i class="fa-solid fa-check"></i> Preview</li>
+                  <li><i class="fa-solid fa-check"></i> Save</li>
+                </ul>
+              </div>
+
+              <div class="workflow-arrow-sep"><i class="fa-solid fa-chevron-right"></i></div>
+
+              <!-- Step 2 -->
+              <div class="workflow-col">
+                <div class="workflow-hdr">
+                  <span class="workflow-num-circle">2</span>
+                  <span>Promote ticket</span>
+                </div>
+                <div class="workflow-icon-center"><i class="fa-solid fa-ticket"></i></div>
+                <ul class="workflow-bullets">
+                  <li><i class="fa-solid fa-check"></i> Resolved ticket</li>
+                  <li><i class="fa-solid fa-check"></i> Promote to KB</li>
+                  <li><i class="fa-solid fa-check"></i> Generated article</li>
+                  <li><i class="fa-solid fa-check"></i> Publish / use</li>
+                </ul>
+              </div>
+
+              <div class="workflow-arrow-sep"><i class="fa-solid fa-chevron-right"></i></div>
+
+              <!-- Step 3 -->
+              <div class="workflow-col">
+                <div class="workflow-hdr">
+                  <span class="workflow-num-circle">3</span>
+                  <span>Maintain article</span>
+                </div>
+                <div class="workflow-icon-center"><i class="fa-solid fa-gear"></i></div>
+                <ul class="workflow-bullets">
+                  <li><i class="fa-solid fa-check"></i> Open article</li>
+                  <li><i class="fa-solid fa-check"></i> Edit / unpublish</li>
+                  <li><i class="fa-solid fa-check"></i> Delete</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ROW 3: 4 COLUMNS -->
+      <div class="grid-row-3">
+
+        <!-- 8. Business Rules -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>8. Business Rules</span>
+          </div>
+          <div class="sec-body">
+            <ul class="check-list" style="font-size:8px; line-height:1.3;">
+              <li><i class="fa-solid fa-circle-check"></i> Title and body are mandatory</li>
+              <li><i class="fa-solid fa-circle-check"></i> Tags are optional free-text, comma-separated</li>
+              <li><i class="fa-solid fa-circle-check"></i> Manual new articles default to Published</li>
+              <li><i class="fa-solid fa-circle-check"></i> Promoted articles are created as Published</li>
+              <li><i class="fa-solid fa-circle-check"></i> Promote to KB only available for Resolved tickets</li>
+              <li><i class="fa-solid fa-circle-check"></i> Promote to KB can be used only once per ticket</li>
+              <li><i class="fa-solid fa-circle-check"></i> Internal ticket comments excluded from promoted content</li>
+              <li><i class="fa-solid fa-circle-check"></i> Delete requires explicit confirmation and cannot be undone</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 9. Out of Scope / Not Included -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-ban" style="color:#ef4444;"></i>
+            <span>9. Out of Scope / Not Included</span>
+          </div>
+          <div class="sec-body">
+            <div class="out-scope-grid">
+              <div class="out-scope-item"><i class="fa-solid fa-arrow-up-from-bracket"></i> No export</div>
+              <div class="out-scope-item"><i class="fa-solid fa-list-check"></i> No bulk actions</div>
+              <div class="out-scope-item"><i class="fa-solid fa-network-wired"></i> No categorization tree</div>
+              <div class="out-scope-item"><i class="fa-solid fa-user-check"></i> No approval workflow</div>
+              <div class="out-scope-item"><i class="fa-solid fa-clock-rotate-left"></i> No version history</div>
+              <div class="out-scope-item"><i class="fa-solid fa-paperclip"></i> No file attachments</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10. Business Impact -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>10. Business Impact</span>
+          </div>
+          <div class="sec-body">
+            <ul class="check-list" style="font-size:8.5px; line-height:1.35;">
+              <li><i class="fa-solid fa-circle-check"></i> Reduces repeated support effort</li>
+              <li><i class="fa-solid fa-circle-check"></i> Enables self-service knowledge reuse</li>
+              <li><i class="fa-solid fa-circle-check"></i> Supports Concierge strategy</li>
+              <li><i class="fa-solid fa-circle-check"></i> Low overhead through one-click promotion</li>
+              <li><i class="fa-solid fa-circle-check"></i> Basic content control via Draft / Published</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 11. Permissions & Access -->
+        <article class="sec-card">
+          <div class="sec-hdr">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>11. Permissions &amp; Access</span>
+          </div>
+          <div class="sec-body">
+            <ul class="icon-text-list" style="font-size:8.5px; line-height:1.35;">
+              <li>
+                <i class="fa-solid fa-key" style="color:#8b5cf6;"></i>
+                <span>Requires sign-in and administrative / governance access</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-users" style="color:#0284c7;"></i>
+                <span>Beyond the main access gate, there is no fine-grained permission model within this module</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>Scope based on business stakeholder documentation &nbsp;|&nbsp; <strong>Last reviewed: 2026-07-02</strong></div>
+        <div class="footer-accent-bar"></div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

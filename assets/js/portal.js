@@ -143,8 +143,8 @@ const DEFAULT_PROJECTS = [
     icon: '🏛️',
     release: 'Phase 2 (In Progress)',
     leads: 'Team Saruja & Team Sajilan (Dedicated), Gopi, Denojan (16 Resources)',
-    description: 'Enterprise Municipal & Citizen Self-Service Architecture — customer self-service portals, overview dashboards, public event & program booking, support ticketing, and AskOptimo AI conversational assistant.',
-    highlights: 'Phase 1 Foundation Completed. Phase 2 active: 120/150 man-days consumed (80%), AI implementation & ticketing complete. Overall progress 70%. Within budget & on track.',
+    description: 'Enterprise Municipal & Citizen Self-Service Architecture — customer self-service portals, overview dashboards, public event & program booking, support ticketing, Governance Hub Knowledge Base module, and AskOptimo AI conversational assistant.',
+    highlights: 'Phase 1 Foundation Completed. Phase 2 active: 120/150 man-days consumed (80%), AI implementation, Governance Hub Knowledge Base & ticketing complete. Overall progress 70%. Within budget & on track.',
     selectedWeekIndex: 0,
     weeks: [
       {
@@ -156,7 +156,7 @@ const DEFAULT_PROJECTS = [
         manDays: '16 Resources (150 Man-Days Phase 2)',
         consumed: '80% Consumed (120/150 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html',
-        scopeUrl: 'scope document/Optimo_Phase2_Feature_Scope_Showcase.html',
+        scopeUrl: 'scope document/Optimo_Gov_Governance_Hub_Scope.html',
         timelineUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html'
       }
     ]
@@ -188,11 +188,12 @@ try {
     'portal_projects_onenex_r12_v1',
     'portal_projects_deploy_auto_v1',
     'portal_projects_phase2_oct2_v1',
-    'portal_projects_phase2_oct6_features_v1'
+    'portal_projects_phase2_oct6_features_v1',
+    'portal_projects_all_oct2_v3'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_all_oct2_v3';
+const STORAGE_KEY = 'portal_projects_gov_hub_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
