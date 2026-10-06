@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Master Feature Scope &amp; Visual Showcase</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 20px;
+    }
+
+    /* TOP MASTER BAR */
+    .master-header {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .master-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .master-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .master-tag {
+      font-size: 11px;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .tenant-link {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tenant-link:hover { text-decoration: underline; }
+
+    /* FEATURE TAB SWITCHER */
+    .feature-nav-strip {
+      width: 1536px;
+      max-width: 100%;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .nav-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 8px 6px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn i {
+      font-size: 14px;
+    }
+
+    .nav-btn:hover {
+      background: #334155;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .nav-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    }
+
+    /* IFRAME VIEWER CONTAINER */
+    .stage-wrapper {
+      width: 1536px;
+      height: 1024px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      border: 1px solid #334155;
+      background: #fbfbfd;
+      position: relative;
+    }
+
+    #stageFrame {
+      width: 1536px;
+      height: 1024px;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MASTER TOP HEADER -->
+  <header class="master-header">
+    <div class="master-title">
+      <div class="master-logo">
+        <i class="fa-solid fa-layer-group" style="color:#0284c7;"></i>
+        <span>OPTIMO GOV PORTAL</span>
+      </div>
+      <span class="master-tag">Phase 2 Scope &bull; 9 Features Showcase</span>
+      <span style="font-size:11px;color:#94a3b8;">16 Resources &bull; 150 Man-Days &bull; 80% Consumed</span>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank" class="tenant-link">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <span>Live Tenant: Marina Bay Autodrome (CivicSpaces)</span>
+      </a>
+      <a href="../index.html" class="tenant-link" style="color:#a78bfa;">
+        <i class="fa-solid fa-table-columns"></i>
+        <span>Project Tracker</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- FEATURE NAVIGATION STRIP (9 BUTTONS) -->
+  <nav class="feature-nav-strip">
+    <button class="nav-btn active" onclick="loadFeature(0, 'Optimo_Scope_01_AI_Implementation.html')">
+      <i class="fa-solid fa-brain" style="color:#38bdf8;"></i>
+      <span>1. AI Engine</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(1, 'Optimo_Scope_02_Ask_Optimo.html')">
+      <i class="fa-solid fa-comments" style="color:#c084fc;"></i>
+      <span>2. Ask Optimo</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(2, 'Optimo_Scope_03_Support_Ticket.html')">
+      <i class="fa-solid fa-ticket" style="color:#fb923c;"></i>
+      <span>3. Support Tickets</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(3, 'Optimo_Scope_04_Customer_Tab.html')">
+      <i class="fa-solid fa-address-book" style="color:#38bdf8;"></i>
+      <span>4. Customer Tab</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(4, 'Optimo_Scope_05_Overview.html')">
+      <i class="fa-solid fa-chart-line" style="color:#4ade80;"></i>
+      <span>5. Overview</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(5, 'Optimo_Scope_06_Dashboard.html')">
+      <i class="fa-solid fa-table-columns" style="color:#60a5fa;"></i>
+      <span>6. Dashboard</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(6, 'Optimo_Scope_07_Events_and_Programs.html')">
+      <i class="fa-solid fa-calendar-star" style="color:#fb923c;"></i>
+      <span>7. Events &amp; Programs</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(7, 'Optimo_Scope_08_Public_Booking.html')">
+      <i class="fa-solid fa-calendar-check" style="color:#4ade80;"></i>
+      <span>8. Public Booking</span>
+    </button>
+    <button class="nav-btn" onclick="loadFeature(8, 'Optimo_Scope_09_Customer_Section.html')">
+      <i class="fa-solid fa-user-gear" style="color:#a78bfa;"></i>
+      <span>9. Customer Section</span>
+    </button>
+  </nav>
+
+  <!-- STAGE DISPLAY -->
+  <main class="stage-wrapper">
+    <iframe id="stageFrame" src="Optimo_Scope_01_AI_Implementation.html"></iframe>
+  </main>
+
+  <script>
+    function loadFeature(index, url) {
+      document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+        if (i === index) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      document.getElementById('stageFrame').src = url;
+    }
+  </script>
+
+</body>
+</html>

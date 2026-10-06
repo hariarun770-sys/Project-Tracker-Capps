@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 09: Customer Section Implementation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #0284c7;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #0284c7;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      padding: 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* MOCKUP UI ELEMENTS */
+    .customer-header-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cust-avatar-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cust-lg-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cust-name-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+
+    .cust-tag-pill {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: #dcfce7;
+      color: #15803d;
+      text-transform: uppercase;
+    }
+
+    .cust-tabs-bar {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 2px;
+    }
+    .cust-tab {
+      font-size: 8px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 4px 4px 0 0;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .cust-tab.active {
+      background: #0b2d5c;
+      color: #ffffff;
+    }
+
+    .cust-data-grid {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 6px;
+    }
+
+    .data-row-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8px;
+    }
+
+    /* SPECS PANE */
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 09: Customer Section 360° — Profile Implementation Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: CUSTOMER SECTION &bull; ROUTE: /admin/customers/:id</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Detail Route</span>
+          <span class="meta-item-val blue">/admin/customers/:id</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Saruja (Dedicated)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-id-badge"></i> View Model</span>
+          <span class="meta-item-val green">360-Degree Unified Profile</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-file-invoice"></i> Linked Folios</span>
+          <span class="meta-item-val">Full Transaction Ledger</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-clock-rotate-left"></i> Audit History</span>
+          <span class="meta-item-val blue">Immutable Event Log</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-spinner"></i> Delivery Status</span>
+          <span class="meta-item-val blue">IN PROGRESS (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE MOCKUP -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Customer 360 Account Console</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          
+          <div class="mockup-container">
+            <!-- Header Card -->
+            <div class="customer-header-card">
+              <div class="cust-avatar-box">
+                <div class="cust-lg-avatar">SJ</div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span class="cust-name-title">Sarah Jenkins</span>
+                    <span class="cust-tag-pill">Verified Resident</span>
+                  </div>
+                  <div style="font-size:8px;color:#64748b;margin-top:2px;">
+                    ID: <code>CUST-08912</code> &bull; Rates No: <code>VIC-3000-84291</code> &bull; 120 Collins St, Melbourne
+                  </div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:12px;font-weight:900;color:#0b2240;">$3,420.00</div>
+                <div style="font-size:7px;color:#64748b;text-transform:uppercase;">Lifetime Municipal Spend</div>
+              </div>
+            </div>
+
+            <!-- Tabs Bar -->
+            <div class="cust-tabs-bar">
+              <span class="cust-tab active"><i class="fa-solid fa-calendar-check"></i> Bookings &amp; Folios (4)</span>
+              <span class="cust-tab"><i class="fa-solid fa-id-card"></i> Permits &amp; Concessions (1)</span>
+              <span class="cust-tab"><i class="fa-solid fa-ticket"></i> Support History (2)</span>
+              <span class="cust-tab"><i class="fa-solid fa-file-shield"></i> ID Verification &amp; Audit</span>
+            </div>
+
+            <!-- Tab Content Grid -->
+            <div class="cust-data-grid">
+              <div class="data-row-card">
+                <div>
+                  <strong style="color:#0b2240;">Marina Bay Autodrome &mdash; Circuit Track Session &amp; VIP Lounge</strong>
+                  <div style="color:#64748b;font-size:7.5px;">Booking #BK-7891 &bull; Oct 26, 2026 &bull; Aston Martin Vantage &bull; Pit Garage #12</div>
+                </div>
+                <div style="text-align:right;">
+                  <strong style="color:#15803d;">$931.50 (Paid)</strong>
+                  <div style="font-size:7px;color:#0284c7;cursor:pointer;">View Receipt &rarr;</div>
+                </div>
+              </div>
+
+              <div class="data-row-card">
+                <div>
+                  <strong style="color:#0b2240;">Melbourne Town Hall &mdash; Meeting Room 3</strong>
+                  <div style="color:#64748b;font-size:7.5px;">Booking #BK-7450 &bull; Sep 14, 2026 &bull; Half-Day Civic Space Hire</div>
+                </div>
+                <div style="text-align:right;">
+                  <strong style="color:#15803d;">$450.00 (Paid)</strong>
+                  <div style="font-size:7px;color:#0284c7;cursor:pointer;">View Receipt &rarr;</div>
+                </div>
+              </div>
+
+              <div class="data-row-card">
+                <div>
+                  <strong style="color:#0b2240;">Junior Karting Academy Session Pass</strong>
+                  <div style="color:#64748b;font-size:7.5px;">Booking #BK-6210 &bull; Aug 01, 2026 &bull; Community Youth Program</div>
+                </div>
+                <div style="text-align:right;">
+                  <strong style="color:#15803d;">$120.00 (Paid)</strong>
+                  <div style="font-size:7px;color:#0284c7;cursor:pointer;">View Receipt &rarr;</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admin Drawer Action Bar -->
+            <div style="display:flex;gap:6px;margin-top:2px;">
+              <button style="flex:1;background:#0b2d5c;color:#ffffff;border:none;border-radius:4px;padding:5px;font-size:7.5px;font-weight:800;">
+                <i class="fa-solid fa-plus"></i> Create Booking for Customer
+              </button>
+              <button style="flex:1;background:#ffffff;border:1px solid #cbd5e1;color:#0b2240;border-radius:4px;padding:5px;font-size:7.5px;font-weight:800;">
+                <i class="fa-solid fa-envelope"></i> Send Direct Notice
+              </button>
+              <button style="flex:1;background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;border-radius:4px;padding:5px;font-size:7.5px;font-weight:800;">
+                <i class="fa-solid fa-ban"></i> Suspend Concession
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Customer 360</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Complete Customer 360 Console:</strong> Single pane aggregating profile attributes, residency documents, payment ledger, and ticket history.</li>
+                <li><strong>Cross-Module Navigation:</strong> Directly opens linked bookings, downloads tax receipts, or inspects past Support Tickets filed by this citizen.</li>
+                <li><strong>Concession &amp; Rate Governance:</strong> Manual override controls allowing council officers to verify resident discounts or issue municipal credits.</li>
+                <li><strong>Full Audit Logging:</strong> Tamper-evident logging tracking every officer who viewed, modified, or updated customer record details.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>2. Council Officer Support User Journey</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Journey Step</th>
+                    <th>Officer Action</th>
+                    <th>System Delivery</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Lookup</strong></td>
+                    <td>Opens /admin/customers/:id</td>
+                    <td>Renders 360 profile header &amp; tabs</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Audit</strong></td>
+                    <td>Checks Bookings &amp; Folios tab</td>
+                    <td>Displays chronological invoice history</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Dispute</strong></td>
+                    <td>Reviews associated Support Ticket</td>
+                    <td>Opens threaded notes from Concierge</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Resolution</strong></td>
+                    <td>Applies credit or updates permit</td>
+                    <td>Updates folio &amp; dispatches citizen notification</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-shield"></i> Privacy &amp; Data Security:
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  Compliant with Australian Privacy Principles (APP). Citizen payment card numbers are tokenized via payment gateway; only masked last 4 digits are visible to officers.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 09 SCOPE</strong> &bull; Team Saruja &bull; Subsystem: Customer 360 Section
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

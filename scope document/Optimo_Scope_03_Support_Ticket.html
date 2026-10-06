@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 03: Support Ticket Subsystem</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #ea580c;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #ea580c;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+    .meta-item-val.orange { color: #ea580c; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #0f172a;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .visual-image-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #090d16;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #ea580c;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .pill-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1.5px 5px;
+      border-radius: 8px;
+      text-transform: uppercase;
+    }
+    .pill-badge.red { background: #fee2e2; color: #b91c1c; }
+    .pill-badge.amber { background: #fef3c7; color: #b45309; }
+    .pill-badge.green { background: #dcfce7; color: #15803d; }
+    .pill-badge.blue { background: #e0f2fe; color: #0369a1; }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-ticket"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 03: Support Ticket Subsystem — Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: SUPPORT TICKET &bull; ROUTE: /admin/support/tickets</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Triage Route</span>
+          <span class="meta-item-val blue">/admin/support/tickets</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Denojan (Shared)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-chart-pie"></i> Summary KPI Tiles</span>
+          <span class="meta-item-val">Total, Open, Blockers, Resolved</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-bell"></i> Blocker SLA Target</span>
+          <span class="meta-item-val orange">2h Response / 24h Resolve</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-wand-magic-sparkles"></i> KB Integration</span>
+          <span class="meta-item-val green">1-Click "Promote to KB"</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-circle-check"></i> Delivery Status</span>
+          <span class="meta-item-val green">COMPLETED (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE IMAGE -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Support Ticket Triage Queue</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          <div class="visual-image-container">
+            <img src="../assets/images/support_ticket.jpg" alt="Support Ticket Triage Screen Mockup">
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Triage Engine</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Unified Triage Queue:</strong> Filterable table showing ticket ref (TKT-000x), title, category, colored severity pills, status badges, reporter, and SLA timestamps.</li>
+                <li><strong>KPI Metric Counter Cards:</strong> Top summary counters for Total (142), Open (28 amber), Blockers (3 red), and Resolved (111 green).</li>
+                <li><strong>Auto-Context Attachment:</strong> Captures active hub, URL, DOM breadcrumbs, console errors, and non-sensitive network failures automatically.</li>
+                <li><strong>Threaded Internal &amp; Public Comments:</strong> Staff can reply directly to reporters or toggle 'Internal' notes hidden from reporters.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-stopwatch"></i>
+              <span>2. SLA Matrix &amp; Status Transitions</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Respond Within</th>
+                    <th>Resolve Within</th>
+                    <th>State Flow</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="pill-badge red">Blocker</span></td>
+                    <td><strong>2 Hours</strong></td>
+                    <td><strong>24 Hours</strong></td>
+                    <td>New &rarr; Triaged</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill-badge amber">High</span></td>
+                    <td>4 Hours</td>
+                    <td>72 Hours</td>
+                    <td>In Progress</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill-badge blue">Normal</span></td>
+                    <td>24 Hours</td>
+                    <td>168 Hours</td>
+                    <td>Waiting on Reporter</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill-badge green">Resolved</span></td>
+                    <td>Auto Timestamp</td>
+                    <td>Ticket Closed</td>
+                    <td>Promote to KB</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#fff7ed; border:1px solid #ffedd5; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#c2410c; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-triangle-exclamation"></i> Attachment &amp; Input Boundaries:
+                </div>
+                <div style="font-size:8px; color:#9a3412; line-height:1.35;">
+                  Max 3 screenshots, max 5 attachments (5 MB/file, 15 MB combined). Title capped at 140 chars; description capped at 4,000 chars.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 03 SCOPE</strong> &bull; Team Denojan &bull; Subsystem: Supporting Tickets
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

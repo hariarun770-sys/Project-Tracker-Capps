@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 08: Public Booking Console</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #16a34a;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #16a34a;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      padding: 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* MOCKUP UI ELEMENTS */
+    .booking-split {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .booking-slots-panel {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .venue-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 6px;
+    }
+
+    .slot-row {
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+    .slot-row.selected {
+      border-color: #16a34a;
+      background: #f0fdf4;
+    }
+
+    .slot-time {
+      font-size: 9px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+    .slot-sub {
+      font-size: 7.5px;
+      color: #64748b;
+    }
+
+    .asset-checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .asset-item {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 4px 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8px;
+    }
+
+    .folio-checkout-panel {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .folio-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      padding: 3.5px 0;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    .folio-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0b2240;
+      padding-top: 6px;
+      border-top: 1.5px solid #0b2240;
+      margin-top: 6px;
+    }
+
+    .checkout-btn {
+      background: #16a34a;
+      color: #ffffff;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 7px;
+      border-radius: 4px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* SPECS PANE */
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 08: Public Booking Console — Facility Scheduling Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: PUBLIC BOOKING &bull; ROUTE: /venues/:id &amp; /book</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Booking Route</span>
+          <span class="meta-item-val blue">/venues/:id/book</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Sajilan (Dedicated)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-clock"></i> Scheduling Engine</span>
+          <span class="meta-item-val green">Hourly &amp; Session Grid</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-car"></i> Fleet &amp; Garages</span>
+          <span class="meta-item-val">Multi-Asset Bundling</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-credit-card"></i> Payment Ledger</span>
+          <span class="meta-item-val blue">Instant Municipal Folio</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-spinner"></i> Delivery Status</span>
+          <span class="meta-item-val blue">IN PROGRESS (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE MOCKUP -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Public Facility Booking Console</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          
+          <div class="mockup-container">
+            <div class="booking-split">
+              
+              <!-- Session & Space Selector -->
+              <div class="booking-slots-panel">
+                <div class="venue-title-bar">
+                  <div>
+                    <strong style="font-size:10px;color:#0b2240;">Marina Bay Autodrome</strong>
+                    <div style="font-size:7.5px;color:#64748b;">Circuit Sessions &bull; Tue, 26 Oct 2026</div>
+                  </div>
+                  <span style="background:#dcfce7;color:#15803d;font-size:7.5px;font-weight:800;padding:2px 6px;border-radius:6px;">Open Diary</span>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div class="slot-row">
+                    <div>
+                      <div class="slot-time">Morning Session (09:00 &ndash; 13:00)</div>
+                      <div class="slot-sub">Track Session A &bull; 14 of 20 spots taken</div>
+                    </div>
+                    <span style="font-weight:800;font-size:8.5px;color:#0b2240;">$200.00</span>
+                  </div>
+
+                  <div class="slot-row selected">
+                    <div>
+                      <div class="slot-time"><i class="fa-solid fa-check" style="color:#16a34a;margin-right:3px;"></i> Afternoon Session (14:00 &ndash; 18:30)</div>
+                      <div class="slot-sub">Track Session B + Paddock Club Access</div>
+                    </div>
+                    <span style="font-weight:900;font-size:8.5px;color:#16a34a;">$450.00</span>
+                  </div>
+                </div>
+
+                <!-- Add-on Equipment Fleet -->
+                <div style="margin-top:4px;">
+                  <div style="font-size:8px;font-weight:800;color:#0b2240;text-transform:uppercase;margin-bottom:3px;">
+                    Bundled Equipment &amp; Facility Add-ons
+                  </div>
+                  <div class="asset-checkbox-group">
+                    <div class="asset-item">
+                      <span><i class="fa-solid fa-check-square" style="color:#16a34a;margin-right:4px;"></i> Aston Martin Vantage (510 hp)</span>
+                      <strong>+$380.00</strong>
+                    </div>
+                    <div class="asset-item">
+                      <span><i class="fa-solid fa-check-square" style="color:#16a34a;margin-right:4px;"></i> Pit Lane Garage #12</span>
+                      <strong>+$180.00</strong>
+                    </div>
+                    <div class="asset-item">
+                      <span><i class="fa-solid fa-check-square" style="color:#16a34a;margin-right:4px;"></i> Car Park North Bay 14</span>
+                      <strong>+$25.00</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Itemized Folio Checkout -->
+              <div class="folio-checkout-panel">
+                <div>
+                  <div style="font-size:9px;font-weight:800;color:#0b2240;text-transform:uppercase;border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-bottom:6px;">
+                    Reservation Folio Summary
+                  </div>
+                  <div class="folio-line">
+                    <span>Afternoon Track Session</span>
+                    <span>$450.00</span>
+                  </div>
+                  <div class="folio-line">
+                    <span>Aston Martin Vantage Hire</span>
+                    <span>$380.00</span>
+                  </div>
+                  <div class="folio-line">
+                    <span>Pit Lane Garage #12</span>
+                    <span>$180.00</span>
+                  </div>
+                  <div class="folio-line">
+                    <span>North Car Park Bay</span>
+                    <span>$25.00</span>
+                  </div>
+                  <div class="folio-line" style="color:#15803d;font-weight:700;">
+                    <span>Verified Resident Subsidy (10%)</span>
+                    <span>-$103.50</span>
+                  </div>
+                  
+                  <div class="folio-total">
+                    <span>Total Deposit Due</span>
+                    <span>$931.50</span>
+                  </div>
+                </div>
+
+                <div style="margin-top:10px;">
+                  <button class="checkout-btn">
+                    <i class="fa-solid fa-lock"></i> Confirm &amp; Pay Reservation
+                  </button>
+                  <div style="font-size:7px;color:#64748b;text-align:center;margin-top:3px;">
+                    Secure Municipal Payment &bull; Instant QR Pass Issued
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Diary Constraints</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Dynamic Asset Bundling:</strong> Seamlessly bundles primary venue spaces (track / rooms) with auxiliary assets (vehicles, garages, parking) in one reservation.</li>
+                <li><strong>Concurrency Lock Engine:</strong> Holds chosen time slot in diary for 10 minutes during checkout to avoid double-booking conflicts.</li>
+                <li><strong>Automated Subsidy Application:</strong> Automatically detects logged-in citizen resident verification and calculates municipal discounts live.</li>
+                <li><strong>Live Capacity Gauges:</strong> Visual progress bars preventing over-subscription of restricted parking zones and shared hospitality areas.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-receipt"></i>
+              <span>2. Citizen Booking Checkout User Journey</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Journey Step</th>
+                    <th>User Action</th>
+                    <th>System Delivery</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Time Slot</strong></td>
+                    <td>Selects session on timetable</td>
+                    <td>Locks asset &amp; displays available fleet</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Equipment</strong></td>
+                    <td>Checks vehicle &amp; garage items</td>
+                    <td>Dynamically recalibrates folio cart</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Payment</strong></td>
+                    <td>Submits credit card / account folio</td>
+                    <td>Clears transaction &amp; saves booking</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Confirmation</strong></td>
+                    <td>Views confirmation screen</td>
+                    <td>Dispatches email receipt &amp; QR turnstile code</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-flag-checkered"></i> Venue Isolation:
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  Specific assets (such as the Aston Martin Vantage fleet or Pit Lane Garages) are strictly restricted to Marina Bay Autodrome sessions and cannot be hired at other civic spaces.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 08 SCOPE</strong> &bull; Team Sajilan &bull; Subsystem: Public Booking
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Portal — Support Tickets Feature & User Journey Scope Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #ea580c;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .hdr-sub a:hover {
+      text-decoration: underline;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #ea580c;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+    .meta-item-val.orange { color: #ea580c; }
+
+    /* 3-COLUMN MAIN LAYOUT */
+    .scope-main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr 0.9fr;
+      gap: 12px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .scope-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .box-hdr span.title-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-hdr .badge-pill {
+      font-size: 8px;
+      background: rgba(255,255,255,0.2);
+      padding: 1.5px 6px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .box-body {
+      padding: 9px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    /* USER JOURNEY CARDS */
+    .journey-card {
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #0284c7;
+      border-radius: 5px;
+      padding: 5.5px 8px;
+      background: #f8fafc;
+    }
+    .journey-card.orange { border-left-color: #ea580c; }
+    .journey-card.green { border-left-color: #16a34a; }
+    .journey-card.purple { border-left-color: #7c3aed; }
+
+    .journey-card-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3px;
+    }
+
+    .journey-title {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #0b2d5c;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .journey-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1.5px 5px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+    .journey-badge.reporter { background: #e0f2fe; color: #0369a1; }
+    .journey-badge.triage { background: #ffedd5; color: #c2410c; }
+    .journey-badge.collab { background: #f3e8ff; color: #7c3aed; }
+    .journey-badge.resolve { background: #dcfce7; color: #15803d; }
+
+    .journey-steps {
+      list-style: none;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .journey-steps li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 1.5px;
+    }
+
+    .journey-steps li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #ea580c;
+      font-weight: 900;
+    }
+
+    /* DATA & SLA TABLES */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .spec-table tr.highlight td {
+      background: #fef2f2;
+      font-weight: 700;
+    }
+
+    .pill-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 8px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+    .pill-badge.red { background: #fee2e2; color: #b91c1c; }
+    .pill-badge.amber { background: #fef3c7; color: #b45309; }
+    .pill-badge.blue { background: #e0f2fe; color: #0369a1; }
+    .pill-badge.gray { background: #f1f5f9; color: #475569; }
+    .pill-badge.green { background: #dcfce7; color: #15803d; }
+
+    /* CONTEXT BOX */
+    .telemetry-chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .telemetry-chip {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 3.5px 6px;
+      font-size: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .telemetry-chip i {
+      color: #0284c7;
+      font-size: 9px;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-headset"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Support Tickets Subsystem — Feature Scope &amp; User Journeys</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">MODULE: SUPPORT TICKETS &bull; ROUTE: /admin/support/tickets</div>
+          <div class="hdr-sub">
+            Audience: Product Owners, BAs, QA &bull; Live Tenant: 
+            <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Primary Routes</span>
+          <span class="meta-item-val blue">/admin/support/tickets</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-clone"></i> Mirrored Route</span>
+          <span class="meta-item-val">/support/tickets</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users-gear"></i> Delivery Team</span>
+          <span class="meta-item-val">Team Denojan (Shared)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-robot"></i> Ingestion Engine</span>
+          <span class="meta-item-val orange">Concierge AI Assistant</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-stopwatch"></i> Top SLA Target</span>
+          <span class="meta-item-val orange">2h Response / 24h Resolve</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-circle-check"></i> Module Status</span>
+          <span class="meta-item-val green">COMPLETED (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN 3-COLUMN BODY -->
+      <main class="scope-main-grid">
+
+        <!-- COLUMN 1: USER JOURNEYS (END-TO-END) -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+                <span>1. Core User Journeys</span>
+              </span>
+              <span class="badge-pill">4 Defined Paths</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Journey A -->
+              <div class="journey-card orange">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-paper-plane" style="color:#ea580c;"></i>
+                    <span>Journey 1: Staff Member Issue Reporting (via Concierge)</span>
+                  </div>
+                  <span class="journey-badge reporter">Staff Reporter</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Trigger:</strong> Staff member encounters a bug or question on any portal page (e.g., Marina Bay venue booking).</li>
+                  <li><strong>Entry Point:</strong> Opens Concierge (⌘I / Avatar Menu) &rarr; clicks <em>"Report an issue"</em> or <em>"Escalate to Support"</em> under an AI reply.</li>
+                  <li><strong>Auto-Attached Telemetry:</strong> System auto-snapshots active hub, path, active record, console logs, failed network calls, and chat history.</li>
+                  <li><strong>Data Entry:</strong> Reporter enters Title (&le;140 chars) &amp; What happened? (&le;4000 chars), attaches up to 3 screenshots and 5 files (&le;5MB each).</li>
+                  <li><strong>Submission:</strong> Validated submission generates sequential reference <code>TKT-000x</code>, sets status <code>New</code>, starts SLA clock, and shows toast.</li>
+                </ul>
+              </div>
+
+              <!-- Journey B -->
+              <div class="journey-card">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-filter" style="color:#0284c7;"></i>
+                    <span>Journey 2: Support Staff Triage &amp; Assignment Queue</span>
+                  </div>
+                  <span class="journey-badge triage">Support Staff</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Entry Point:</strong> Support opens <code>/admin/support/tickets</code> from Governance Hub sidebar or header user menu.</li>
+                  <li><strong>Overview Inspection:</strong> Triage sees 4 summary KPI tiles: Total (neutral), Open (amber), Blockers (red), Resolved (green).</li>
+                  <li><strong>Search &amp; Filter:</strong> Free-text filters across title, ref (e.g. <code>TKT-0001</code>), and description; dropdowns for Status &amp; Severity.</li>
+                  <li><strong>Ticket Claim:</strong> Support opens ticket detail (<code>/admin/support/tickets/:id</code>), inspects telemetry, sets status <code>Triaged</code>, assigns owner.</li>
+                </ul>
+              </div>
+
+              <!-- Journey C -->
+              <div class="journey-card purple">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-comments" style="color:#7c3aed;"></i>
+                    <span>Journey 3: Collaborative Investigation &amp; Internal Notes</span>
+                  </div>
+                  <span class="journey-badge collab">Triage &amp; Assignee</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Threaded Updates:</strong> Staff posts public comments to reporter, or toggles <em>"Internal Note"</em> (hidden from reporter, flagged visually).</li>
+                  <li><strong>First Response Clock:</strong> Automatically stops when first non-internal comment by non-reporter is posted.</li>
+                  <li><strong>Status Flow:</strong> Transitions through <code>In progress</code> &rarr; <code>Waiting on reporter</code> (if clarification needed) &rarr; resumes on reply.</li>
+                </ul>
+              </div>
+
+              <!-- Journey D -->
+              <div class="journey-card green">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-award" style="color:#16a34a;"></i>
+                    <span>Journey 4: Resolution &amp; Knowledge Base Promotion</span>
+                  </div>
+                  <span class="journey-badge resolve">Resolved &amp; KB</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Resolution:</strong> Status set to <code>Resolved</code>; system stamps immutable <code>resolvedAt</code> date.</li>
+                  <li><strong>Knowledge Capture:</strong> Support clicks <em>"Promote to KB"</em> &rarr; copies title, description, and non-internal comments to KB.</li>
+                  <li><strong>Lifecycle Exit:</strong> Ticket permanently links to created article; button hides to prevent duplicate promotion.</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 2: BUSINESS RULES, SLAS & AUTO-TELEMETRY -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>2. Business Rules &amp; SLA Matrix</span>
+              </span>
+              <span class="badge-pill">Strict Enforcement</span>
+            </div>
+            <div class="box-body">
+
+              <!-- SLA Target Table -->
+              <div>
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  SLA Response &amp; Resolution Targets by Severity
+                </div>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>Severity</th>
+                      <th>Respond Within</th>
+                      <th>Resolve Within</th>
+                      <th>Stat Tile Impact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="highlight">
+                      <td><span class="pill-badge red">Blocker</span></td>
+                      <td><strong>2 Hours</strong></td>
+                      <td><strong>24 Hours</strong></td>
+                      <td>Increments "Blockers" KPI Tile</td>
+                    </tr>
+                    <tr>
+                      <td><span class="pill-badge amber">High</span></td>
+                      <td>4 Hours</td>
+                      <td>72 Hours (3 days)</td>
+                      <td>Open Ticket Queue</td>
+                    </tr>
+                    <tr>
+                      <td><span class="pill-badge blue">Normal</span></td>
+                      <td>24 Hours (1 day)</td>
+                      <td>168 Hours (7 days)</td>
+                      <td>Default Selection on Creation</td>
+                    </tr>
+                    <tr>
+                      <td><span class="pill-badge gray">Low</span></td>
+                      <td>72 Hours (3 days)</td>
+                      <td>720 Hours (30 days)</td>
+                      <td>Backlog Queue</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Auto-Attached Telemetry Scope -->
+              <div style="margin-top:2px;">
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:2px;">
+                  Auto-Attached Telemetry Context (Zero Manual Reporter Overhead)
+                </div>
+                <div style="font-size:8px; color:#475569; margin-bottom:4px;">
+                  Captured automatically upon clicking "Report an issue" inside Concierge:
+                </div>
+                <div class="telemetry-chip-grid">
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-compass"></i>
+                    <span><strong>Active Hub &amp; URL:</strong> /admin/... route &amp; params</span>
+                  </div>
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-database"></i>
+                    <span><strong>Active Record:</strong> Venue/Booking ID being viewed</span>
+                  </div>
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span><strong>Console Errors:</strong> Recent window.console errors</span>
+                  </div>
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <span><strong>Network Logs:</strong> Failed HTTP status (no payloads)</span>
+                  </div>
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                    <span><strong>Breadcrumbs:</strong> Last 10 interaction steps</span>
+                  </div>
+                  <div class="telemetry-chip">
+                    <i class="fa-solid fa-comments"></i>
+                    <span><strong>Concierge Thread:</strong> Prior chat prompt &amp; reply</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status Workflow State Machine -->
+              <div style="margin-top:2px; background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 7px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:3px;">
+                  <i class="fa-solid fa-code-fork"></i> Workflow State Machine
+                </div>
+                <div style="font-size:8.5px; color:#1e3a8a; line-height:1.4;">
+                  <code>New</code> &rarr; <code>Triaged</code> &rarr; <code>In progress</code> &rarr; <code>Waiting on reporter</code> &rarr; <code>Resolved</code> | <code>Won't fix</code><br>
+                  &bull; <strong>Open:</strong> Any status other than Resolved or Won't fix.<br>
+                  &bull; <strong>First Response:</strong> Auto-logged on 1st public reply by non-reporter.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 3: SCREEN ARCHITECTURE, VALIDATIONS & SECURITY -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-desktop"></i>
+                <span>3. Screens, Validations &amp; Security</span>
+              </span>
+              <span class="badge-pill">Governance Hub</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Screen Inventory -->
+              <div>
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  Screen Inventory &amp; Layout Components
+                </div>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>Screen</th>
+                      <th>Route</th>
+                      <th>Key Components</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Ticket List</strong></td>
+                      <td><code>/admin/support/tickets</code></td>
+                      <td>4 KPI counters, filter bar, search box, ticket table, KB link button.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Ticket Detail</strong></td>
+                      <td><code>/admin/support/tickets/:id</code></td>
+                      <td>Inline field editor, telemetry drawer, screenshot viewer, threaded chat, Promote to KB.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Report Dialog</strong></td>
+                      <td>Modal via Concierge</td>
+                      <td>Title, description, attachment dropzone, screen annotator, telemetry preview.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Validation Rules Matrix -->
+              <div>
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  Validation Constraints &amp; Toast Feedback
+                </div>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>Constraint</th>
+                      <th>Rule / Boundary</th>
+                      <th>Client Feedback Behavior</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Title &amp; Desc</td>
+                      <td>Mandatory, non-blank</td>
+                      <td>Blocked: "Add a short title and description first"</td>
+                    </tr>
+                    <tr>
+                      <td>Title Length</td>
+                      <td>Max 140 chars</td>
+                      <td>Hard input cap at 140 characters</td>
+                    </tr>
+                    <tr>
+                      <td>Desc Length</td>
+                      <td>Max 4,000 chars</td>
+                      <td>Hard input cap at 4,000 characters</td>
+                    </tr>
+                    <tr>
+                      <td>Screenshots</td>
+                      <td>Max 3 files</td>
+                      <td>"Max 3 screenshots" toast; button disabled</td>
+                    </tr>
+                    <tr>
+                      <td>Attachments</td>
+                      <td>Max 5 files (5MB/file, 15MB total)</td>
+                      <td>"Exceeds 5MB" or "Total exceed 15MB" toast</td>
+                    </tr>
+                    <tr>
+                      <td>Delete Ticket</td>
+                      <td>Explicit confirmation required</td>
+                      <td>Browser modal: "Delete ticket TKT-000x?"</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Permissions & Access Notice -->
+              <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:5px; padding:5px 7px; margin-top:1px;">
+                <div style="font-size:8px; font-weight:900; color:#0f172a; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-lock"></i> Access &amp; Permissions Baseline
+                </div>
+                <div style="font-size:8px; color:#475569; line-height:1.35;">
+                  &bull; <strong>Governance Hub:</strong> Requires admin/staff authentication gate.<br>
+                  &bull; <strong>Mirrored Route:</strong> Reachable by any signed-in staff member at <code>/support/tickets</code>.<br>
+                  &bull; <strong>Directory:</strong> Fixed council staff assignee directory; all staff can comment &amp; triage.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; SUPPORT TICKETS FEATURE SCOPE</strong> &bull; Team Denojan &bull; 16 Resources Shared Pool
+        </div>
+        <div>
+          Deployed: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank" style="color:#0284c7;text-decoration:none;">ts4.optimo.training/V5.0.0/CApps/UI/</a> &bull; Project Visibility Hub
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 06: Citizen Self-Service Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #0284c7;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #0284c7;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      padding: 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* MOCKUP UI ELEMENTS */
+    .mockup-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .mock-kpi-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mock-kpi-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+    .mock-kpi-lbl {
+      font-size: 8px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .res-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .res-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .res-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 2px 6px;
+      border-radius: 8px;
+      display: inline-block;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .res-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+
+    .res-meta {
+      font-size: 8.5px;
+      color: #64748b;
+      display: flex;
+      gap: 12px;
+    }
+
+    .qr-box {
+      width: 52px;
+      height: 52px;
+      background: #0f172a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 20px;
+    }
+
+    /* SPECS PANE */
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-table-columns"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 06: Citizen Self-Service Dashboard — Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: DASHBOARD &bull; ROUTE: /dashboard</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Portal Route</span>
+          <span class="meta-item-val blue">/dashboard</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Saruja (Dedicated)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-qrcode"></i> Digital Passes</span>
+          <span class="meta-item-val green">Real-Time Dynamic QR</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-receipt"></i> Folio &amp; Invoices</span>
+          <span class="meta-item-val">Tax Receipts &amp; Balances</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-rotate-left"></i> 1-Click Actions</span>
+          <span class="meta-item-val blue">Re-Book &amp; Modify</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-spinner"></i> Delivery Status</span>
+          <span class="meta-item-val blue">IN PROGRESS (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE MOCKUP -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Citizen Self-Service Dashboard</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          
+          <div class="mockup-container">
+            <!-- Summary KPI Strip -->
+            <div class="mockup-kpis">
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#0284c7;">2 Active</span>
+                <span class="mock-kpi-lbl">Upcoming Reservations</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#15803d;">1 Valid</span>
+                <span class="mock-kpi-lbl">Approved Municipal Permits</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val">$0.00</span>
+                <span class="mock-kpi-lbl">Outstanding Balance</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#7c3aed;">4 Ready</span>
+                <span class="mock-kpi-lbl">Tax Invoices &amp; Receipts</span>
+              </div>
+            </div>
+
+            <!-- Reservation 1: Marina Bay Track Session -->
+            <div class="res-card">
+              <div class="res-info">
+                <span class="res-badge">Confirmed &bull; Gate Pass Issued</span>
+                <span class="res-title">Marina Bay Autodrome &mdash; Circuit Track Session &amp; VIP Lounge</span>
+                <div class="res-meta">
+                  <span><i class="fa-solid fa-calendar-days" style="color:#0284c7;"></i> Tue, 26 Oct 2026</span>
+                  <span><i class="fa-solid fa-clock" style="color:#0284c7;"></i> 14:00 &ndash; 18:30</span>
+                  <span><i class="fa-solid fa-car" style="color:#0284c7;"></i> Aston Martin Vantage</span>
+                  <span><i class="fa-solid fa-square-parking" style="color:#0284c7;"></i> North Bay 12</span>
+                </div>
+              </div>
+              <div class="qr-box" title="Scan at Gate A Access Turnstile">
+                <i class="fa-solid fa-qrcode"></i>
+              </div>
+            </div>
+
+            <!-- Reservation 2: Town Hall Meeting -->
+            <div class="res-card">
+              <div class="res-info">
+                <span class="res-badge" style="background:#e0f2fe;color:#0369a1;">Confirmed &bull; Civic Spaces</span>
+                <span class="res-title">Melbourne Town Hall &mdash; Executive Conference Room 3</span>
+                <div class="res-meta">
+                  <span><i class="fa-solid fa-calendar-days" style="color:#0284c7;"></i> Fri, 04 Nov 2026</span>
+                  <span><i class="fa-solid fa-clock" style="color:#0284c7;"></i> 10:00 &ndash; 12:00</span>
+                  <span><i class="fa-solid fa-users" style="color:#0284c7;"></i> 14 Attendees</span>
+                </div>
+              </div>
+              <div class="qr-box" style="background:#1e293b;" title="Digital Pass">
+                <i class="fa-solid fa-qrcode"></i>
+              </div>
+            </div>
+
+            <!-- Quick Action Bar -->
+            <div style="display:flex;gap:8px;margin-top:2px;">
+              <button style="flex:1;background:#0284c7;color:#ffffff;border:none;border-radius:4px;padding:6px;font-size:8px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px;">
+                <i class="fa-solid fa-rotate-right"></i> Quick Re-Book Favorite Space
+              </button>
+              <button style="flex:1;background:#ffffff;border:1px solid #cbd5e1;color:#0b2240;border-radius:4px;padding:6px;font-size:8px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px;">
+                <i class="fa-solid fa-download"></i> Download Folio Statements (PDF)
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Self-Service Engine</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Unified Reservation Timeline:</strong> Chronological overview of citizen's current and past bookings across sports facilities, civic halls, and parking.</li>
+                <li><strong>Dynamic QR Turnstile Pass:</strong> Cryptographically generated pass refreshable every 60s for contactless entry at venue gates.</li>
+                <li><strong>Tax Folio &amp; Invoice Portal:</strong> Instant download of GST/VAT tax invoices and payment receipts with zero council admin intervention.</li>
+                <li><strong>Automated Cancellation &amp; Reschedule:</strong> Self-service rescheduling engine enforcing tiered refund policies based on lead time.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-mobile-screen"></i>
+              <span>2. Citizen Self-Service User Journey</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Journey Step</th>
+                    <th>Citizen Interaction</th>
+                    <th>System Behavior</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Sign In</strong></td>
+                    <td>Accesses /dashboard</td>
+                    <td>Loads upcoming passes &amp; payment balance</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Venue Entry</strong></td>
+                    <td>Presents QR code on phone</td>
+                    <td>Turnstile hardware validates &amp; admits</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Modification</strong></td>
+                    <td>Clicks "Change Time Slot"</td>
+                    <td>Re-opens availability grid for easy swap</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Invoicing</strong></td>
+                    <td>Clicks "Download Receipt"</td>
+                    <td>Generates compliant council tax invoice</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-mobile-button"></i> Mobile-Responsive Architecture:
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  Fully optimized for mobile viewports, allowing citizens arriving at venues like Marina Bay Autodrome to present entry passes directly from smartphone browsers.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 06 SCOPE</strong> &bull; Team Saruja &bull; Subsystem: Customer Dashboard
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

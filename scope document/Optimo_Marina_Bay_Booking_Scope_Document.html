@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Portal — Marina Bay Autodrome Public Booking & Citizen Experience Scope Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #16a34a;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .hdr-sub a:hover {
+      text-decoration: underline;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #16a34a;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+    .meta-item-val.purple { color: #7c3aed; }
+
+    /* 3-COLUMN MAIN LAYOUT */
+    .scope-main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr 0.9fr;
+      gap: 12px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .scope-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .box-hdr span.title-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-hdr .badge-pill {
+      font-size: 8px;
+      background: rgba(255,255,255,0.2);
+      padding: 1.5px 6px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .box-body {
+      padding: 9px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    /* USER JOURNEY CARDS */
+    .journey-card {
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #16a34a;
+      border-radius: 5px;
+      padding: 5.5px 8px;
+      background: #f8fafc;
+    }
+    .journey-card.green { border-left-color: #16a34a; }
+    .journey-card.blue { border-left-color: #0284c7; }
+    .journey-card.purple { border-left-color: #7c3aed; }
+    .journey-card.orange { border-left-color: #ea580c; }
+
+    .journey-card-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3px;
+    }
+
+    .journey-title {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #0b2d5c;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .journey-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1.5px 5px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+    .journey-badge.citizen { background: #dcfce7; color: #15803d; }
+    .journey-badge.track { background: #fee2e2; color: #b91c1c; }
+    .journey-badge.vip { background: #f3e8ff; color: #7c3aed; }
+    .journey-badge.folio { background: #e0f2fe; color: #0369a1; }
+
+    .journey-steps {
+      list-style: none;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .journey-steps li {
+      position: relative;
+      padding-left: 9px;
+      margin-bottom: 1.5px;
+    }
+
+    .journey-steps li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    /* DATA & COMPARISON TABLES */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .pill-badge {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 8px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+    .pill-badge.green { background: #dcfce7; color: #15803d; }
+    .pill-badge.blue { background: #e0f2fe; color: #0369a1; }
+    .pill-badge.purple { background: #f3e8ff; color: #7c3aed; }
+
+    /* ASSET HIGHLIGHT CHIPS */
+    .fleet-chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .fleet-chip {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 3.5px 6px;
+      font-size: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .fleet-chip i {
+      color: #0284c7;
+      font-size: 9px;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-flag-checkered"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Marina Bay Autodrome — Public Booking &amp; Asset Experience</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: PUBLIC BOOKING &bull; TENANT: MARINA BAY AUTODROME</div>
+          <div class="hdr-sub">
+            Venue ID: <code>marina-bay-autodrome</code> &bull; Live UI: 
+            <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">ts4.optimo.training/V5.0.0/CApps/UI/</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-map-location-dot"></i> Flagship Venue</span>
+          <span class="meta-item-val blue">Marina Bay Autodrome</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Delivery Teams</span>
+          <span class="meta-item-val">Team Sajilan &amp; Team Saruja</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-car"></i> Performance Fleet</span>
+          <span class="meta-item-val green">Porsche, Aston Martin, BMW</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-champagne-glasses"></i> VIP Hospitality</span>
+          <span class="meta-item-val purple">Paddock Club &amp; Lounges</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-square-parking"></i> Parking Assets</span>
+          <span class="meta-item-val">North &amp; South (40 Bays)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-circle-play"></i> Delivery State</span>
+          <span class="meta-item-val green">LIVE &amp; TESTED</span>
+        </div>
+      </section>
+
+      <!-- MAIN 3-COLUMN BODY -->
+      <main class="scope-main-grid">
+
+        <!-- COLUMN 1: USER JOURNEYS (END-TO-END) -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <span>1. Citizen &amp; Booking Journeys</span>
+              </span>
+              <span class="badge-pill">4 Core Paths</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Journey 1 -->
+              <div class="journey-card green">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-compass" style="color:#16a34a;"></i>
+                    <span>Journey 1: Venue Discovery &amp; Space Selection</span>
+                  </div>
+                  <span class="journey-badge citizen">Public Citizen</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Discovery:</strong> Citizen navigates CivicSpaces home UI &rarr; searches venues or clicks featured Marina Bay Autodrome banner.</li>
+                  <li><strong>Space Catalog:</strong> Browses spaces: Paddock Club Lounge (cap 200), Pit Lane Garages (cap 24), Members Lounge (cap 60).</li>
+                  <li><strong>Real-Time Schedule:</strong> Inspects live interactive timetable for available session slots and track configurations.</li>
+                  <li><strong>Basket Assembly:</strong> Selects required time slots and adds base space reservation to active booking basket.</li>
+                </ul>
+              </div>
+
+              <!-- Journey 2 -->
+              <div class="journey-card orange">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-gauge-high" style="color:#ea580c;"></i>
+                    <span>Journey 2: Vehicle Fleet Hire &amp; Pit Garage Allocation</span>
+                  </div>
+                  <span class="journey-badge track">Track Hire</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Equipment Selection:</strong> Citizen/Club chooses track vehicle: Porsche 911 GT3 (502 hp), Aston Martin Vantage (510 hp), BMW M2 Competition (460 hp).</li>
+                  <li><strong>Pit Lane Add-On:</strong> Designates Pit Lane Garage unit (1 to 24) with secure direct circuit access and tool storage.</li>
+                  <li><strong>Logistics Coordination:</strong> Selects North or South Car Park pass (20 allocated bays each) with vehicle registration plate validation.</li>
+                </ul>
+              </div>
+
+              <!-- Journey 3 -->
+              <div class="journey-card purple">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-martini-glass-citrus" style="color:#7c3aed;"></i>
+                    <span>Journey 3: Hospitality Catering &amp; VIP Dining Packages</span>
+                  </div>
+                  <span class="journey-badge vip">Hospitality</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Package Selection:</strong> Chooses Platinum Restaurant Package ($56.50/head, 40 seats) or Members Lounge ($35/head, 60 seats).</li>
+                  <li><strong>Inclusions Check:</strong> Inclusions verify climate-controlled panoramic straight view, TAB screen access, and private VIP bar.</li>
+                </ul>
+              </div>
+
+              <!-- Journey 4 -->
+              <div class="journey-card blue">
+                <div class="journey-card-hdr">
+                  <div class="journey-title">
+                    <i class="fa-solid fa-receipt" style="color:#0284c7;"></i>
+                    <span>Journey 4: Instant Folio, Confirmation &amp; AI Self-Service</span>
+                  </div>
+                  <span class="journey-badge folio">Customer Account</span>
+                </div>
+                <ul class="journey-steps">
+                  <li><strong>Checkout:</strong> Review line-itemized folio; automated deposit computation and instant digital confirmation receipt.</li>
+                  <li><strong>Self-Service Management:</strong> Booking displays in Customer Dashboard; AskOptimo conversational AI assists with amendments.</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 2: ASSET INVENTORY & VENUE TOPOLOGY -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-warehouse"></i>
+                <span>2. Venue Assets &amp; Capacity Matrix</span>
+              </span>
+              <span class="badge-pill">Marina Bay Tenant</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Asset Specs Table -->
+              <div>
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  Core Facilities &amp; Asset Capacity
+                </div>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>Asset ID</th>
+                      <th>Facility Name</th>
+                      <th>Capacity</th>
+                      <th>Business Area</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>autodrome-paddock-club</code></td>
+                      <td>Paddock Club Lounge</td>
+                      <td>200 Pax</td>
+                      <td><span class="pill-badge purple">VIP Suites</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>autodrome-pit-lane</code></td>
+                      <td>Pit Lane Garages</td>
+                      <td>24 Garages</td>
+                      <td><span class="pill-badge blue">Circuit / Storage</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>gh-members-lounge</code></td>
+                      <td>Members Lounge</td>
+                      <td>60 Seats</td>
+                      <td><span class="pill-badge green">Hospitality</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>gh-bistro-floor</code></td>
+                      <td>Platinum Restaurant</td>
+                      <td>40 Seats</td>
+                      <td><span class="pill-badge green">Dining</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>autodrome-car-park-north</code></td>
+                      <td>Car Park — North</td>
+                      <td>20 Bays</td>
+                      <td><span class="pill-badge blue">Parking</span></td>
+                    </tr>
+                    <tr>
+                      <td><code>autodrome-car-park-south</code></td>
+                      <td>Car Park — South</td>
+                      <td>20 Bays</td>
+                      <td><span class="pill-badge blue">Parking</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- High-Performance Fleet Inventory -->
+              <div style="margin-top:2px;">
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:2px;">
+                  High-Performance Vehicle Fleet (Equipment Assets)
+                </div>
+                <div class="fleet-chip-grid">
+                  <div class="fleet-chip">
+                    <i class="fa-solid fa-car-side" style="color:#dc2626;"></i>
+                    <span><strong>Porsche 911 GT3:</strong> 502 hp 4.0L flat-six (0-100: 3.4s)</span>
+                  </div>
+                  <div class="fleet-chip">
+                    <i class="fa-solid fa-car-side" style="color:#16a34a;"></i>
+                    <span><strong>Aston Martin Vantage:</strong> 510 hp V8 (0-100: 3.6s)</span>
+                  </div>
+                  <div class="fleet-chip">
+                    <i class="fa-solid fa-car-side" style="color:#2563eb;"></i>
+                    <span><strong>BMW M2 Comp:</strong> 460 hp twin-turbo (0-100: 4.1s)</span>
+                  </div>
+                  <div class="fleet-chip">
+                    <i class="fa-solid fa-car-side" style="color:#7c3aed;"></i>
+                    <span><strong>BMW M240i:</strong> 374 hp turbocharged xDrive</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Architecture Pipeline Notice -->
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 7px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-microchip"></i> Architectural Subsystems
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  &bull; <strong>Booking UI:</strong> Built by Team Sajilan (Dedicated, Events &amp; Public Programs).<br>
+                  &bull; <strong>Account Hub:</strong> Built by Team Saruja (Dedicated, Customer Overview &amp; UX).<br>
+                  &bull; <strong>AI Assistant:</strong> Built by Team Gopi (AskOptimo Real-Time Availability Bot).
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- COLUMN 3: BOOKING RULES, SECURITY & GOVERNANCE -->
+        <section class="scope-col">
+          <div class="content-box">
+            <div class="box-hdr">
+              <span class="title-group">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>3. Rules, Policies &amp; Integration</span>
+              </span>
+              <span class="badge-pill">Governance &amp; SLA</span>
+            </div>
+            <div class="box-body">
+
+              <!-- Policies Matrix -->
+              <div>
+                <div style="font-size:8.5px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  Booking Governance &amp; Asset Restrictions
+                </div>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>Policy Area</th>
+                      <th>Rule Specification</th>
+                      <th>Enforcement</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Venue Restriction</strong></td>
+                      <td>Fleet and garages restricted to Marina Bay track sessions only</td>
+                      <td><span class="pill-badge green">Hard Constraint</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Simultaneous Booking</strong></td>
+                      <td>Vehicle hire requires active concurrent track or garage reservation</td>
+                      <td><span class="pill-badge green">Validated</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Deposit &amp; Cancellation</strong></td>
+                      <td>Automatic deposit calculation with tiered municipal cancellation rules</td>
+                      <td><span class="pill-badge blue">Policy Engine</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Incident Support</strong></td>
+                      <td>Issues during booking escalate directly to Support Tickets (Concierge)</td>
+                      <td><span class="pill-badge purple">Team Denojan</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Integration with Support & KB Modules -->
+              <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:5px; padding:6px 8px;">
+                <div style="font-size:8px; font-weight:900; color:#0b2d5c; text-transform:uppercase; margin-bottom:3px;">
+                  <i class="fa-solid fa-link"></i> Integration with Support &amp; KB Modules
+                </div>
+                <div style="font-size:8px; color:#475569; line-height:1.4;">
+                  &bull; <strong>Context Snapping:</strong> Reporting a problem from the Marina Bay venue page auto-attaches active record <code>marina-bay-autodrome</code> to the generated ticket.<br>
+                  &bull; <strong>Knowledge Base Articles:</strong> FAQ articles published on <code>/admin/support/kb</code> (e.g., track helmet requirements, pit rules) are proactively suggested by AskOptimo.<br>
+                  &bull; <strong>Direct Route:</strong> Accessible via CivicSpaces venue detail and public booking router.
+                </div>
+              </div>
+
+              <!-- Security & Access Summary -->
+              <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:5px; padding:5px 7px; margin-top:1px;">
+                <div style="font-size:8px; font-weight:900; color:#991b1b; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-lock"></i> Staff Administration &amp; Diary Control
+                </div>
+                <div style="font-size:8px; color:#7f1d1d; line-height:1.35;">
+                  Authorized council officers manage bookings, blackouts, and maintenance through the Governance Hub (<code>/admin</code>), while public citizens interact via the responsive booking console.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; MARINA BAY AUTODROME SCOPE</strong> &bull; Team Sajilan, Saruja, Gopi &amp; Denojan
+        </div>
+        <div>
+          Live Deployment: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank" style="color:#0284c7;text-decoration:none;">ts4.optimo.training/V5.0.0/CApps/UI/</a> &bull; Project Visibility Hub
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

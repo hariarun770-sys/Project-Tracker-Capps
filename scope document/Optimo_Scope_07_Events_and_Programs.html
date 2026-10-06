@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 07: Events and Programs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #ea580c;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #ea580c;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      padding: 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* MOCKUP UI ELEMENTS */
+    .mock-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
+
+    .mock-pills {
+      display: flex;
+      gap: 4px;
+    }
+    .mock-pill {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .mock-pill.active {
+      background: #ea580c;
+      color: #ffffff;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      flex: 1;
+    }
+
+    .event-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 9px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+    }
+
+    .event-tag {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1.5px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+    .event-tag.orange { background: #ffedd5; color: #c2410c; }
+    .event-tag.green { background: #dcfce7; color: #15803d; }
+    .event-tag.blue { background: #e0f2fe; color: #0369a1; }
+
+    .event-name {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0b2240;
+      line-height: 1.3;
+    }
+
+    .event-meta-line {
+      font-size: 8px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .event-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 5px;
+      margin-top: 2px;
+    }
+
+    .price-tag {
+      font-size: 9px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+
+    .book-btn {
+      font-size: 7.5px;
+      font-weight: 800;
+      background: #0b2d5c;
+      color: #ffffff;
+      border: none;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* SPECS PANE */
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #ea580c;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-calendar-star"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 07: Events and Programs — Municipal Scheduling Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: EVENTS AND PROGRAMS &bull; ROUTE: /events</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Public Route</span>
+          <span class="meta-item-val blue">/events</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Sajilan (Dedicated)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-ticket-simple"></i> Tier Allocation</span>
+          <span class="meta-item-val orange">GA, VIP, Resident Passes</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-layer-group"></i> Active Programs</span>
+          <span class="meta-item-val green">24 Live Programs</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users-viewfinder"></i> Audience Capacity</span>
+          <span class="meta-item-val">Dynamic Roster Limits</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-spinner"></i> Delivery Status</span>
+          <span class="meta-item-val blue">IN PROGRESS (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE MOCKUP -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Public Events &amp; Program Console</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          
+          <div class="mockup-container">
+            <!-- Toolbar & Filter Pills -->
+            <div class="mock-toolbar">
+              <div class="mock-pills">
+                <span class="mock-pill active">All Programs (24)</span>
+                <span class="mock-pill">Motorsports &amp; Track</span>
+                <span class="mock-pill">Community Workshops</span>
+                <span class="mock-pill">Youth Academy</span>
+                <span class="mock-pill">Civic Forums</span>
+              </div>
+              <span style="font-size:8px;font-weight:800;color:#0b2240;">Melbourne &bull; 2026 Calendar</span>
+            </div>
+
+            <!-- Events Grid (4 Rich Cards) -->
+            <div class="events-grid">
+              
+              <div class="event-card">
+                <div>
+                  <span class="event-tag orange">Motorsports Premier</span>
+                  <div class="event-name" style="margin-top:4px;">Marina Bay Twilight Track Championship</div>
+                  <div class="event-meta-line" style="margin-top:3px;">
+                    <i class="fa-solid fa-calendar-day" style="color:#ea580c;"></i>
+                    <span>Nov 12&ndash;14, 2026 &bull; 17:00 &ndash; 22:00</span>
+                  </div>
+                  <div class="event-meta-line">
+                    <i class="fa-solid fa-location-dot" style="color:#ea580c;"></i>
+                    <span>Marina Bay Autodrome (Full 5.06km Circuit)</span>
+                  </div>
+                </div>
+                <div class="event-footer">
+                  <span class="price-tag">From $45.00 <span style="font-size:7px;color:#64748b;font-weight:500;">/ Grandstand</span></span>
+                  <button class="book-btn" style="background:#ea580c;">Register Passes</button>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div>
+                  <span class="event-tag green">Civic Assembly</span>
+                  <div class="event-name" style="margin-top:4px;">City of Melbourne Sustainability Forum 2026</div>
+                  <div class="event-meta-line" style="margin-top:3px;">
+                    <i class="fa-solid fa-calendar-day" style="color:#16a34a;"></i>
+                    <span>Oct 28, 2026 &bull; 09:30 &ndash; 15:30</span>
+                  </div>
+                  <div class="event-meta-line">
+                    <i class="fa-solid fa-location-dot" style="color:#16a34a;"></i>
+                    <span>Melbourne Town Hall Main Auditorium</span>
+                  </div>
+                </div>
+                <div class="event-footer">
+                  <span class="price-tag" style="color:#16a34a;">Free Admission <span style="font-size:7px;color:#64748b;font-weight:500;">(Resident ID)</span></span>
+                  <button class="book-btn" style="background:#16a34a;">Claim Pass</button>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div>
+                  <span class="event-tag blue">Youth Development</span>
+                  <div class="event-name" style="margin-top:4px;">Junior Performance Driving Academy</div>
+                  <div class="event-meta-line" style="margin-top:3px;">
+                    <i class="fa-solid fa-calendar-day" style="color:#0284c7;"></i>
+                    <span>Weekly Saturdays &bull; 09:00 &ndash; 12:00</span>
+                  </div>
+                  <div class="event-meta-line">
+                    <i class="fa-solid fa-location-dot" style="color:#0284c7;"></i>
+                    <span>Marina Bay South Training Circuit</span>
+                  </div>
+                </div>
+                <div class="event-footer">
+                  <span class="price-tag">$120.00 <span style="font-size:7px;color:#64748b;font-weight:500;">/ 4-Week Block</span></span>
+                  <button class="book-btn" style="background:#0284c7;">Enroll Student</button>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div>
+                  <span class="event-tag" style="background:#f3e8ff;color:#7c3aed;">Cultural Gathering</span>
+                  <div class="event-name" style="margin-top:4px;">Melbourne Public Arts &amp; Sculpture Gala</div>
+                  <div class="event-meta-line" style="margin-top:3px;">
+                    <i class="fa-solid fa-calendar-day" style="color:#7c3aed;"></i>
+                    <span>Dec 02, 2026 &bull; 18:00 &ndash; 21:00</span>
+                  </div>
+                  <div class="event-meta-line">
+                    <i class="fa-solid fa-location-dot" style="color:#7c3aed;"></i>
+                    <span>Riverfront Promenade &amp; Plaza</span>
+                  </div>
+                </div>
+                <div class="event-footer">
+                  <span class="price-tag">$15.00 <span style="font-size:7px;color:#64748b;font-weight:500;">/ Entry</span></span>
+                  <button class="book-btn" style="background:#7c3aed;">Book Ticket</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Program Engine</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Public Program Discovery:</strong> Visual catalog allowing citizens to browse, filter by community category, and reserve seats across council venues.</li>
+                <li><strong>Tiered Ticketing &amp; Resident Passes:</strong> Flexible ticket structures supporting General Admission, VIP hospitality, and verified free resident allocations.</li>
+                <li><strong>Dynamic Capacity Management:</strong> Automated waitlists, capacity caps, and instant roster locking once venue limits are reached.</li>
+                <li><strong>Integrated Payment &amp; QR Badging:</strong> Automated ticketing payment with immediate generation of mobile-ready digital admission barcodes.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-ticket"></i>
+              <span>2. Citizen Registration User Journey</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Journey Step</th>
+                    <th>User Action</th>
+                    <th>System Delivery</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Discovery</strong></td>
+                    <td>Navigates /events &amp; filters category</td>
+                    <td>Displays live program cards with pricing</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Tier Choice</strong></td>
+                    <td>Selects Grandstand / VIP tier</td>
+                    <td>Validates live seat quotas in diary</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Checkout</strong></td>
+                    <td>Enters attendee details &amp; pays</td>
+                    <td>Records folio &amp; generates admission QR</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Gate Entry</strong></td>
+                    <td>Presents digital pass at turnstile</td>
+                    <td>Scans pass &amp; checks in attendee</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-bullhorn"></i> Council Publishing Controls:
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  Officers manage event scheduling, blackout dates, and ticket allotments inside Governance Hub, with real-time propagation to the public CivicSpaces portal.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 07 SCOPE</strong> &bull; Team Sajilan &bull; Subsystem: Events &amp; Programs
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>

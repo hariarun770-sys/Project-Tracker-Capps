@@ -9,15 +9,27 @@ const DEFAULT_PROJECTS = [
     id: 'onenex',
     name: 'OneNex',
     icon: '🍽️',
-    release: 'Release 1.2 (Testing & Assessment)',
+    release: 'Release 1.2 (Development & Fixes)',
     leads: 'Imthath & Team (4 Developers — 120 Man-Days)',
     description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
-    highlights: 'Release 1.2 Testing & Assessment active (21–25 Sep). 8 API reports complete (Reservation, Auth, Billing, Service, Business, Menu, Payment, Notification). Planned live release: 02 Nov 2026.',
+    highlights: 'Release 1.2 Development & Issue Fixing active (28 Sep – 23 Oct). 8 API areas under remediation. Code freeze target: 23 Oct. Production release: 02 Nov 2026.',
     selectedWeekIndex: 0,
     weeks: [
       {
+        weekNumber: 6,
+        weekLabel: 'W06 · 02 Oct 2026 (Release 1.2 Dev & Fix)',
+        weekEnding: '02 Oct 2026',
+        status: 'ON TRACK',
+        statusClass: 'green',
+        manDays: '4 Members (120 Man-Days)',
+        consumed: '33% Elapsed (40/120 Man-Days)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_02.10.2026.html',
+        scopeUrl: 'scope document/OneNex_Scope_USP_Document.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+      },
+      {
         weekNumber: 5,
-        weekLabel: 'W05 · 25 Sep 2026 (Release 1.2)',
+        weekLabel: 'W05 · 25 Sep 2026 (Release 1.2 Assessment)',
         weekEnding: '25 Sep 2026',
         status: 'ON TRACK',
         statusClass: 'green',
@@ -144,7 +156,7 @@ const DEFAULT_PROJECTS = [
         manDays: '16 Resources (150 Man-Days Phase 2)',
         consumed: '80% Consumed (120/150 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html',
-        scopeUrl: 'scope document/Optimo_Gov_Portal_Scope_Document.html',
+        scopeUrl: 'scope document/Optimo_Phase2_Feature_Scope_Showcase.html',
         timelineUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html'
       }
     ]
@@ -175,11 +187,12 @@ try {
     'portal_projects_integration_v1',
     'portal_projects_onenex_r12_v1',
     'portal_projects_deploy_auto_v1',
-    'portal_projects_optimo_gov_v1'
+    'portal_projects_phase2_oct2_v1',
+    'portal_projects_phase2_oct6_features_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_phase2_oct2_v1';
+const STORAGE_KEY = 'portal_projects_all_oct2_v3';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {

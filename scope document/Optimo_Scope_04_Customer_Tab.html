@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimo Gov Phase 2 — Feature Scope 04: Customer Tab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card, .scope-card {
+      width: 1536px;
+      height: 1024px;
+      background: #fbfbfd;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 10px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo i {
+      color: #0284c7;
+      font-size: 22px;
+    }
+
+    .brand-tagline {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    .hdr-right {
+      text-align: right;
+    }
+
+    .hdr-sys {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .hdr-sub {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .hdr-sub a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* TOP SUMMARY META STRIP */
+    .meta-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-item-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-item-lbl i {
+      font-size: 10px;
+      color: #0284c7;
+    }
+
+    .meta-item-val {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .meta-item-val.green { color: #15803d; }
+    .meta-item-val.blue { color: #0284c7; }
+
+    /* 2-COLUMN MAIN CONTENT (VISUAL + SPECS) */
+    .scope-split-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    .visual-pane {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .pane-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      padding: 12px;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    /* MOCKUP UI ELEMENTS */
+    .mockup-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .mock-kpi-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mock-kpi-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+    .mock-kpi-lbl {
+      font-size: 8px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .mockup-table-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .mockup-toolbar {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+    }
+
+    .mock-search {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 8.5px;
+      color: #64748b;
+      width: 200px;
+    }
+
+    .mock-pills {
+      display: flex;
+      gap: 4px;
+    }
+    .mock-pill {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .mock-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    .mock-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .mock-table th {
+      background: #f8fafc;
+      color: #0b2240;
+      font-weight: 800;
+      padding: 5px 8px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 8px;
+      text-transform: uppercase;
+    }
+
+    .mock-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      font-size: 8.5px;
+    }
+
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 8px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-resident { background: #dcfce7; color: #15803d; font-weight: 800; font-size: 7.5px; padding: 2px 6px; border-radius: 8px; }
+    .badge-business { background: #f3e8ff; color: #7c3aed; font-weight: 800; font-size: 7.5px; padding: 2px 6px; border-radius: 8px; }
+
+    /* SPECS PANE */
+    .specs-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .box-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 5px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-body {
+      padding: 9px 11px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 9.5px;
+      color: #334155;
+    }
+
+    .feature-points {
+      list-style: none;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #334155;
+      padding-left: 2px;
+    }
+
+    .feature-points li {
+      position: relative;
+      padding-left: 11px;
+      margin-bottom: 3px;
+    }
+
+    .feature-points li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-weight: 900;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5px;
+    }
+
+    .spec-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3.5px 5px;
+      text-align: left;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .spec-table td {
+      padding: 3.5px 5px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* FOOTER */
+    .scope-footer {
+      border-top: 1.5px solid #cbd5e1;
+      padding-top: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .scope-footer strong {
+      color: #0b2d5c;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+    <div id="card" class="scope-card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-logo">
+            <i class="fa-solid fa-address-book"></i>
+            <span>OPTIMO GOV PORTAL</span>
+          </div>
+          <div class="brand-tagline">| Feature 04: Customer Tab — Municipal Directory Scope Specification</div>
+        </div>
+
+        <div class="hdr-right">
+          <div class="hdr-sys">FEATURE: CUSTOMER TAB &bull; ROUTE: /admin/customers</div>
+          <div class="hdr-sub">
+            Phase 2 Scope &bull; Tenant: <a href="https://ts4.optimo.training/V5.0.0/CApps/UI/" target="_blank">Marina Bay Autodrome (CivicSpaces)</a>
+          </div>
+        </div>
+      </header>
+
+      <!-- TOP METADATA STRIP -->
+      <section class="meta-summary-strip">
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-route"></i> Admin Route</span>
+          <span class="meta-item-val blue">/admin/customers</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Responsible Team</span>
+          <span class="meta-item-val">Team Saruja (Dedicated)</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-id-card"></i> Account Entities</span>
+          <span class="meta-item-val">Residents &amp; Corporate</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-filter"></i> Search &amp; Filtering</span>
+          <span class="meta-item-val green">Instant Client Index</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-link"></i> Linked Modules</span>
+          <span class="meta-item-val">Bookings, Folios, Support</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-item-lbl"><i class="fa-solid fa-spinner"></i> Delivery Status</span>
+          <span class="meta-item-val blue">IN PROGRESS (Phase 2)</span>
+        </div>
+      </section>
+
+      <!-- MAIN SPLIT BODY -->
+      <main class="scope-split-grid">
+
+        <!-- LEFT: VISUAL SCOPE MOCKUP -->
+        <section class="visual-pane">
+          <div class="pane-hdr">
+            <span><i class="fa-solid fa-image"></i> Feature Scope UI Design: Customer Directory Grid</span>
+            <span style="font-size:8px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px;">16:9 Retina Master</span>
+          </div>
+          
+          <div class="mockup-container">
+            <!-- Summary KPI Strip -->
+            <div class="mockup-kpis">
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val">18,420</span>
+                <span class="mock-kpi-lbl">Total Registered Citizens</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#15803d;">94.2%</span>
+                <span class="mock-kpi-lbl">Verified Residents</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#7c3aed;">340</span>
+                <span class="mock-kpi-lbl">Corporate Accounts</span>
+              </div>
+              <div class="mock-kpi-card">
+                <span class="mock-kpi-val" style="color:#ea580c;">12</span>
+                <span class="mock-kpi-lbl">Pending Approvals</span>
+              </div>
+            </div>
+
+            <!-- Customer Table Box -->
+            <div class="mockup-table-box">
+              <div class="mockup-toolbar">
+                <div class="mock-search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <span>Search citizens by name, email, ID...</span>
+                </div>
+                <div class="mock-pills">
+                  <span class="mock-pill active">All Citizens (18.4k)</span>
+                  <span class="mock-pill">Residents</span>
+                  <span class="mock-pill">Corporate</span>
+                  <span class="mock-pill">Non-Profit</span>
+                </div>
+              </div>
+
+              <table class="mock-table">
+                <thead>
+                  <tr>
+                    <th>Citizen / Entity</th>
+                    <th>Account ID</th>
+                    <th>Status</th>
+                    <th>Contact Email</th>
+                    <th>Active Bookings</th>
+                    <th>Total Spend</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar">SJ</div>
+                        <div>
+                          <strong>Sarah Jenkins</strong>
+                          <div style="font-size:7.5px;color:#64748b;">Melbourne VIC 3000</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><code>CUST-08912</code></td>
+                    <td><span class="badge-resident">Verified Resident</span></td>
+                    <td>sarah.j@melb.org</td>
+                    <td><strong>4 Bookings</strong></td>
+                    <td>$3,420.00</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical" style="color:#64748b;cursor:pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" style="background:#7c3aed;">MM</div>
+                        <div>
+                          <strong>Melbourne Motorsport Club</strong>
+                          <div style="font-size:7.5px;color:#64748b;">Marina Bay Autodrome Partner</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><code>CORP-00412</code></td>
+                    <td><span class="badge-business">Corporate Tier 1</span></td>
+                    <td>admin@melbmotorsport.au</td>
+                    <td><strong>12 Bookings</strong></td>
+                    <td>$18,950.00</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical" style="color:#64748b;cursor:pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" style="background:#059669;">MV</div>
+                        <div>
+                          <strong>Marcus Vance</strong>
+                          <div style="font-size:7.5px;color:#64748b;">Southbank VIC 3006</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><code>CUST-09144</code></td>
+                    <td><span class="badge-resident">Verified Resident</span></td>
+                    <td>m.vance@gmail.com</td>
+                    <td><strong>1 Booking</strong></td>
+                    <td>$850.00</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical" style="color:#64748b;cursor:pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="user-cell">
+                        <div class="user-avatar" style="background:#ea580c;">ER</div>
+                        <div>
+                          <strong>Elena Rostova</strong>
+                          <div style="font-size:7.5px;color:#64748b;">Docklands VIC 3008</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><code>CUST-09255</code></td>
+                    <td><span style="background:#ffedd5;color:#c2410c;font-weight:800;font-size:7.5px;padding:2px 6px;border-radius:8px;">Pending ID</span></td>
+                    <td>elena.rostova@outlook.com</td>
+                    <td><strong>0 Active</strong></td>
+                    <td>$0.00</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical" style="color:#64748b;cursor:pointer;"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: SPECS & USER JOURNEYS -->
+        <section class="specs-pane">
+          
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-list-check"></i>
+              <span>1. Functional Scope &amp; Account Entities</span>
+            </div>
+            <div class="box-body">
+              <ul class="feature-points">
+                <li><strong>Citizen &amp; Corporate Directory:</strong> Master registry aggregating private residents, community groups, and corporate partners across municipal hubs.</li>
+                <li><strong>Resident Status Verification:</strong> Automated address validation against Melbourne council rates database to qualify for municipal subsidies.</li>
+                <li><strong>Folio Aggregation:</strong> Real-time tally of historical bookings, active venue hire agreements, and outstanding invoice balances.</li>
+                <li><strong>Direct Impersonation &amp; Support:</strong> Admin ability to open a customer's view to assist with booking alterations or troubleshoot issues.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="box-hdr">
+              <i class="fa-solid fa-user-check"></i>
+              <span>2. Council Administrator User Journey</span>
+            </div>
+            <div class="box-body">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Journey Step</th>
+                    <th>Admin Interaction</th>
+                    <th>System Behavior</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Lookup</strong></td>
+                    <td>Enters name / email in search box</td>
+                    <td>Instant fuzzy filtering across 18k+ records</td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Inspect</strong></td>
+                    <td>Clicks citizen row</td>
+                    <td>Opens slide-over Customer 360 drawer</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Verify</strong></td>
+                    <td>Reviews uploaded proof of residency</td>
+                    <td>Toggles verified badge; applies discount</td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Manage</strong></td>
+                    <td>Clicks "New Booking on Behalf"</td>
+                    <td>Launches booking console with customer pre-filled</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:5px 8px; margin-top:2px;">
+                <div style="font-size:8px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:2px;">
+                  <i class="fa-solid fa-lock"></i> Governance Access Gate:
+                </div>
+                <div style="font-size:8px; color:#1e3a8a; line-height:1.35;">
+                  Access restricted to council staff with Governance Admin permissions. Full audit logging tracks all customer record views and updates.
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="scope-footer">
+        <div>
+          <strong>OPTIMO GOV PORTAL &bull; FEATURE 04 SCOPE</strong> &bull; Team Saruja &bull; Subsystem: Customer Directory
+        </div>
+        <div>
+          Executive Project Tracker &bull; Retina 1-Click JPG Export
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>
