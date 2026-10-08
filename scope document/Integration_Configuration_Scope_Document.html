@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Integration Configuration — Scope & Technical Architecture Document</title>
+  <title>Integration Configuration — Business Scope (Business View / Phase 1)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -16,11 +16,96 @@
     body {
       background-color: #0f172a;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       min-height: 100vh;
       padding: 16px;
       overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+    }
+
+    .top-nav-link.active-tab {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+
+    .top-nav-link.tech-link {
+      color: #c084fc;
+      background: rgba(192, 132, 252, 0.1);
+      border-color: rgba(192, 132, 252, 0.3);
+    }
+
+    .top-nav-link.tech-link:hover {
+      background: rgba(192, 132, 252, 0.2);
+      border-color: #c084fc;
+    }
+
+    .top-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .export-btn-top {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s;
+    }
+
+    .export-btn-top:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
     }
 
     #viewport {
@@ -31,643 +116,808 @@
       background: transparent;
     }
 
+    /* 1536 x 1024 EXECUTIVE SLIDE CARD */
     #card, .scope-card {
       width: 1536px;
       height: 1024px;
-      background: #fbfbfd;
+      background: #ffffff;
       display: flex;
       flex-direction: column;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       position: relative;
       overflow: hidden;
       color: #0f172a;
-      padding: 18px 24px 14px 24px;
+      padding: 24px 32px 18px 32px;
       justify-content: space-between;
     }
 
-    /* TOP HEADER */
-    .scope-hdr {
+    /* TOP ACCENT STRIPES (Exact match to presentation branding) */
+    .top-accent-stripes {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 85px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .top-accent-stripes .stripe {
+      position: absolute;
+      top: -30px;
+      height: 150px;
+      width: 22px;
+      transform: skewX(-32deg);
+      border-radius: 2px;
+    }
+
+    .stripe.s1 { right: 130px; background: rgba(251, 191, 36, 0.45); }
+    .stripe.s2 { right: 94px; background: rgba(56, 189, 248, 0.35); }
+    .stripe.s3 { right: 58px; background: rgba(37, 99, 235, 0.35); }
+    .stripe.s4 { right: 22px; background: rgba(30, 58, 138, 0.45); }
+
+    /* 1. HEADER SECTION */
+    .header-bar {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #e2e8f0;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
     }
 
-    .brand-wrap {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      font-size: 26px;
+    .title-group h1 {
+      font-size: 34px;
       font-weight: 900;
       color: #0b2240;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.6px;
+      line-height: 1.1;
+    }
+
+    .title-group .subtitle {
+      font-size: 17px;
+      font-weight: 700;
+      color: #64748b;
+      margin-top: 4px;
+      letter-spacing: -0.2px;
+    }
+
+    /* 2. TOP BANNER: WHAT IS THIS PROJECT? + BUSINESS OBJECTIVES */
+    .intro-banner {
+      background: #fef9ed;
+      border: 1px solid #fef3c7;
+      border-radius: 12px;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .project-what-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon-badge-warm {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: #fef3c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d97706;
+      font-size: 24px;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
+    }
+
+    .what-content h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0b2240;
+      margin-bottom: 3px;
+    }
+
+    .what-content p {
+      font-size: 14.5px;
+      color: #334155;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .objective-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    .icon-badge-blue {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: #eff6ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d4ed8;
+      font-size: 24px;
+      box-shadow: 0 2px 6px rgba(29, 78, 216, 0.15);
+    }
+
+    .obj-content-wrap {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .obj-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0b2240;
+      white-space: nowrap;
+    }
+
+    .obj-vdivider {
+      width: 1.5px;
+      height: 44px;
+      background: #cbd5e1;
+    }
+
+    .obj-bullets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 36px;
+      flex: 1;
+    }
+
+    .obj-bullet-item {
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .brand-logo i {
-      color: #2563eb;
-      font-size: 22px;
-    }
-
-    .brand-tagline {
-      font-size: 14px;
-      font-weight: 800;
-      color: #475569;
-    }
-
-    .hdr-right {
-      text-align: right;
-    }
-
-    .hdr-sys {
-      font-size: 12px;
-      font-weight: 800;
-      color: #0b2240;
-    }
-
-    .hdr-sub {
-      font-size: 10.5px;
+      font-size: 13.5px;
+      color: #334155;
       font-weight: 600;
-      color: #64748b;
     }
 
-    /* TOP SUMMARY META STRIP */
-    .meta-summary-strip {
+    .obj-bullet-dot {
+      width: 6px;
+      height: 6px;
+      min-width: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+
+    /* 3. MIDDLE SECTION: IN SCOPE - BUSINESS CAPABILITIES */
+    .capabilities-section {
+      margin-bottom: 16px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 17px;
+      font-weight: 900;
+      color: #0b2240;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .section-title-wrap i {
+      color: #0284c7;
+      font-size: 18px;
+    }
+
+    .capabilities-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .cap-card {
+      background: #f0f9ff;
+      border: 1px solid #e0f2fe;
+      border-radius: 10px;
+      padding: 14px 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.04);
+      min-height: 195px;
+    }
+
+    .cap-header {
+      display: flex;
+      align-items: center;
       gap: 10px;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 8px 14px;
       margin-bottom: 12px;
     }
 
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .meta-item-lbl {
-      font-size: 9.5px;
-      font-weight: 800;
-      color: #1e3a8a;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .meta-item-lbl i {
-      font-size: 10px;
-      color: #2563eb;
-    }
-
-    .meta-item-val {
-      font-size: 13px;
-      font-weight: 900;
-      color: #0f172a;
-    }
-
-    /* 3-COLUMN MAIN LAYOUT */
-    .scope-main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      flex: 1;
-      margin-bottom: 8px;
-    }
-
-    .scope-col {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .content-box {
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .box-hdr {
-      background: #0b2d5c;
-      color: #ffffff;
-      padding: 5px 10px;
-      font-size: 10.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .box-hdr i {
-      font-size: 11px;
-    }
-
-    .box-body {
-      padding: 10px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 10px;
-      color: #334155;
-    }
-
-    /* MODULE CARDS */
-    .module-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 5px;
-      padding: 7px 9px;
-      background: #f8fafc;
-    }
-
-    .module-card-hdr {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .module-title {
-      font-size: 10.5px;
-      font-weight: 900;
-      color: #0b2d5c;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .module-badge {
-      font-size: 8.5px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 10px;
-      text-transform: uppercase;
-    }
-    .module-badge.setup { background: #dcfce7; color: #15803d; }
-    .module-badge.monitor { background: #dbeafe; color: #1d4ed8; }
-    .module-badge.future { background: #f3e8ff; color: #7c3aed; }
-
-    .module-bullets {
-      list-style: none;
-      font-size: 9.5px;
-      line-height: 1.35;
-      color: #334155;
-      padding-left: 2px;
-    }
-
-    .module-bullets li {
-      position: relative;
-      padding-left: 10px;
-      margin-bottom: 2.5px;
-    }
-
-    .module-bullets li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #2563eb;
-      font-weight: 900;
-    }
-
-    /* EFFORT & RESOURCE TABLE */
-    .effort-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 9.5px;
-    }
-
-    .effort-table th {
-      background: #f1f5f9;
-      color: #0b2d5c;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 4px 6px;
-      text-align: left;
-      border-bottom: 1px solid #cbd5e1;
-    }
-
-    .effort-table td {
-      padding: 4px 6px;
-      border-bottom: 1px solid #f1f5f9;
-      color: #1e293b;
-    }
-
-    .effort-table tr.total-row td {
-      font-weight: 900;
-      color: #0b2d5c;
-      background: #f8fafc;
-      border-top: 1px solid #cbd5e1;
-    }
-
-    /* ARCHITECTURE PIPELINE */
-    .arch-flow-diagram {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .arch-node {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-left: 3px solid #2563eb;
-      border-radius: 4px;
-      padding: 5px 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .arch-node-title {
-      font-weight: 800;
-      font-size: 9.5px;
-      color: #0f172a;
-    }
-
-    .arch-node-desc {
-      font-size: 8.5px;
-      color: #64748b;
-    }
-
-    .arch-connector {
-      text-align: center;
-      color: #94a3b8;
-      font-size: 10px;
-      line-height: 1;
-    }
-
-    /* RISK MATRIX */
-    .risk-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 4px 0;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 9px;
-    }
-
-    .risk-item-row:last-child {
-      border-bottom: none;
-    }
-
-    .risk-pill {
-      font-size: 8px;
-      font-weight: 800;
-      padding: 1.5px 5px;
+    .cap-icon-box {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: #0284c7;
       border-radius: 8px;
-      text-transform: uppercase;
-    }
-    .risk-pill.medium { background: #ffedd5; color: #ea580c; }
-    .risk-pill.low { background: #dcfce7; color: #166534; }
-
-    /* FOOTER */
-    .scope-footer {
-      border-top: 1.5px solid #cbd5e1;
-      padding-top: 8px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-size: 10px;
-      color: #64748b;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 16px;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+    }
+
+    .cap-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0b2240;
+      line-height: 1.25;
+    }
+
+    .cap-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      flex: 1;
+    }
+
+    .cap-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: #334155;
+      line-height: 1.35;
       font-weight: 600;
     }
 
-    .scope-footer strong {
+    .cap-bullet-dot {
+      color: #0284c7;
+      font-size: 14px;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    /* 4. BOTTOM 4 CARDS ROW */
+    .bottom-row-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1.38fr 1.05fr 1.12fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .bottom-card {
+      border-radius: 10px;
+      padding: 14px 14px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+      min-height: 205px;
+    }
+
+    .card-outputs {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+
+    .card-benefits {
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+    }
+
+    .card-out-scope {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+    }
+
+    .card-success {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .bottom-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .bottom-card-header h4 {
+      font-size: 15px;
+      font-weight: 800;
       color: #0b2240;
+    }
+
+    .bottom-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .bottom-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 11.8px;
+      color: #334155;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .dot-green { color: #16a34a; font-size: 14px; line-height: 1; margin-top: 1px; }
+    .dot-red { color: #e11d48; font-size: 14px; line-height: 1; margin-top: 1px; }
+    .dot-blue { color: #2563eb; font-size: 14px; line-height: 1; margin-top: 1px; }
+
+    /* BENEFITS 2x3 MINI GRID */
+    .benefits-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .benefit-item {
+      background: #ffffff;
+      border: 1px solid #fde68a;
+      border-radius: 6px;
+      padding: 6px 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.25;
+      box-shadow: 0 1px 2px rgba(245, 158, 11, 0.05);
+    }
+
+    .benefit-item i {
+      font-size: 13px;
+      min-width: 14px;
+      text-align: center;
+    }
+
+    /* 5. MANAGEMENT VIEW BOTTOM BANNER */
+    .mgmt-banner {
+      background: #0b2240;
+      border-radius: 8px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(11, 34, 64, 0.25);
+    }
+
+    .mgmt-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mgmt-icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #38bdf8;
+      font-size: 18px;
+    }
+
+    .mgmt-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .mgmt-divider {
+      color: #475569;
+      font-size: 18px;
+      font-weight: 300;
+      margin: 0 6px;
+    }
+
+    .mgmt-text {
+      color: #f1f5f9;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+    }
+
+    .mgmt-accent-decor {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 140px;
+      display: flex;
+      pointer-events: none;
+    }
+
+    .mgmt-accent-decor .accent-poly-1 {
+      position: absolute;
+      right: 40px;
+      top: 0;
+      bottom: 0;
+      width: 45px;
+      background: #f59e0b;
+      transform: skewX(-32deg);
+      opacity: 0.9;
+    }
+
+    .mgmt-accent-decor .accent-poly-2 {
+      position: absolute;
+      right: -20px;
+      top: 0;
+      bottom: 0;
+      width: 70px;
+      background: #1e3a8a;
+      transform: skewX(-32deg);
     }
   </style>
 </head>
 <body>
 
+  <!-- TOP NAVIGATION UTILITY BAR (Ignored during JPG export) -->
+  <div class="top-nav-bar" data-html2canvas-ignore="true">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Project Tracker
+      </a>
+      <a href="Integration_Configuration_Scope_Document.html" class="top-nav-link active-tab">
+        <i class="fa-solid fa-chart-pie"></i> Business Scope (Phase 1 Business View)
+      </a>
+      <a href="Integration_Configuration_Technical_Architecture.html" class="top-nav-link tech-link">
+        <i class="fa-solid fa-cubes"></i> Technical Architecture &amp; Data Flow
+      </a>
+    </div>
+    <div class="top-nav-right">
+      <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">Integration Configuration &bull; Business Scope</span>
+      <button class="export-btn-top" onclick="window.exportCurrentPageToJpg && window.exportCurrentPageToJpg('Integration_Configuration_Business_Scope_Phase1')">
+        <i class="fa-solid fa-camera"></i> 📸 1-Click Retina JPG
+      </button>
+    </div>
+  </div>
+
   <div id="viewport">
     <div id="card" class="scope-card">
 
-      <!-- TOP HEADER -->
-      <header class="scope-hdr">
-        <div class="brand-wrap">
-          <div class="brand-logo">
-            <i class="fa-solid fa-network-wired"></i>
-            <span>INTEGRATION CONFIGURATION</span>
-          </div>
-          <div class="brand-tagline">| Enterprise External Services &amp; API Orchestration Platform</div>
-        </div>
+      <!-- TOP ACCENT STRIPES -->
+      <div class="top-accent-stripes">
+        <div class="stripe s1"></div>
+        <div class="stripe s2"></div>
+        <div class="stripe s3"></div>
+        <div class="stripe s4"></div>
+      </div>
 
-        <div class="hdr-right">
-          <div class="hdr-sys">EXECUTIVE SCOPE &amp; SYSTEM SPECIFICATION</div>
-          <div class="hdr-sub">Company: C APPS &bull; Client: INTERNAL &bull; Project ID: 239378</div>
+      <!-- 1. HEADER SECTION -->
+      <header class="header-bar">
+        <div class="title-group">
+          <h1>Integration Configuration – Business Scope</h1>
+          <div class="subtitle">Business View / Phase 1</div>
         </div>
       </header>
 
-      <!-- TOP METADATA STRIP -->
-      <section class="meta-summary-strip">
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-code-branch"></i> Current Release</span>
-          <span class="meta-item-val">Release 01</span>
+      <!-- 2. INTRO & BUSINESS OBJECTIVE SECTION -->
+      <section class="intro-banner">
+        <!-- Row 1: What is this project? -->
+        <div class="project-what-row">
+          <div class="icon-badge-warm">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div class="what-content">
+            <h3>What is this project?</h3>
+            <p>A new Integration Configuration module in Optimo that moves integration setup from manual / developer-led configuration to a guided, user-managed process.</p>
+          </div>
         </div>
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-users"></i> Assigned Team</span>
-          <span class="meta-item-val">Team Althaf</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-user-clock"></i> Allocation</span>
-          <span class="meta-item-val">50 Man-Days</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-chart-pie"></i> Consumed to Date</span>
-          <span class="meta-item-val">20 Man-Days (40%)</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-calendar-check"></i> Dev Completion</span>
-          <span class="meta-item-val">12 Sep 2026</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-item-lbl"><i class="fa-solid fa-shield-halved"></i> Health Status</span>
-          <span class="meta-item-val" style="color:#d97706;">AMBER (Attention)</span>
+
+        <!-- Row 2: Business Objective -->
+        <div class="objective-row">
+          <div class="icon-badge-blue">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <div class="obj-content-wrap">
+            <div class="obj-title">Business Objective</div>
+            <div class="obj-vdivider"></div>
+            <div class="obj-bullets-grid">
+              <div class="obj-bullet-item">
+                <span class="obj-bullet-dot"></span>
+                <span>Standardize how integrations are created and managed</span>
+              </div>
+              <div class="obj-bullet-item">
+                <span class="obj-bullet-dot"></span>
+                <span>Reduce dependency on developers for routine setup</span>
+              </div>
+              <div class="obj-bullet-item">
+                <span class="obj-bullet-dot"></span>
+                <span>Improve visibility, control, and governance of integrations</span>
+              </div>
+              <div class="obj-bullet-item">
+                <span class="obj-bullet-dot"></span>
+                <span>Enable faster onboarding of external systems</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- MAIN 3-COLUMN BODY -->
-      <main class="scope-main-grid">
-
-        <!-- COLUMN 1: SCOPE JOURNEY & MODULE BREAKDOWN -->
-        <section class="scope-col">
-          <div class="content-box">
-            <div class="box-hdr">
-              <i class="fa-solid fa-diagram-project"></i>
-              <span>1. Functional Scope &amp; Journey</span>
-            </div>
-            <div class="box-body">
-              
-              <!-- Module 1 -->
-              <div class="module-card">
-                <div class="module-card-hdr">
-                  <div class="module-title">
-                    <i class="fa-solid fa-circle-check" style="color:#16a34a;"></i>
-                    <span>Integration Setup</span>
-                  </div>
-                  <span class="module-badge setup">Active / In Dev</span>
-                </div>
-                <ul class="module-bullets">
-                  <li>Integrate with external third-party systems and ERPs.</li>
-                  <li>Use existing backend APIs (majority already available).</li>
-                  <li>Develop user-friendly frontend for web services action.</li>
-                  <li>Configuration management, endpoint mappings, and secret vaulting.</li>
-                </ul>
-              </div>
-
-              <!-- Module 2 -->
-              <div class="module-card">
-                <div class="module-card-hdr">
-                  <div class="module-title">
-                    <i class="fa-solid fa-clock" style="color:#2563eb;"></i>
-                    <span>Integration Monitor</span>
-                  </div>
-                  <span class="module-badge monitor">Sprint Active</span>
-                </div>
-                <ul class="module-bullets">
-                  <li>Real-time telemetry and health-check monitoring for all integrations.</li>
-                  <li>API development for status querying and error interception.</li>
-                  <li>Frontend monitor UI dashboard with execution histories.</li>
-                  <li>Logging, request/response tracking, and automated alert triggers.</li>
-                </ul>
-              </div>
-
-              <!-- Module 3 -->
-              <div class="module-card">
-                <div class="module-card-hdr">
-                  <div class="module-title">
-                    <i class="fa-solid fa-diamond" style="color:#7c3aed;"></i>
-                    <span>Future Enhancements</span>
-                  </div>
-                  <span class="module-badge future">Roadmap</span>
-                </div>
-                <ul class="module-bullets">
-                  <li>Additional external integrations (TBD based on client priorities).</li>
-                  <li>Advanced monitoring heuristics, analytics, and latency profiling.</li>
-                  <li>Performance optimizations and rate-limiting safeguards.</li>
-                </ul>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        <!-- COLUMN 2: TECHNICAL ARCHITECTURE & WORKFLOW -->
-        <section class="scope-col">
-          <div class="content-box">
-            <div class="box-hdr">
-              <i class="fa-solid fa-cubes"></i>
-              <span>2. System Architecture &amp; Data Flow</span>
-            </div>
-            <div class="box-body">
-              
-              <div class="arch-flow-diagram">
-                <!-- Layer 1 -->
-                <div class="arch-node">
-                  <div>
-                    <div class="arch-node-title"><i class="fa-solid fa-desktop" style="color:#2563eb;"></i> Frontend Action &amp; Monitor UI</div>
-                    <div class="arch-node-desc">40 Man-Days &bull; Web services triggers, status grids, config forms</div>
-                  </div>
-                  <span class="module-badge setup">UI Layer</span>
-                </div>
-
-                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <!-- Layer 2 -->
-                <div class="arch-node">
-                  <div>
-                    <div class="arch-node-title"><i class="fa-solid fa-server" style="color:#059669;"></i> API Gateway &amp; Integration Hub</div>
-                    <div class="arch-node-desc">10 Man-Days &bull; Setup &amp; Monitor APIs, request validation, authentication</div>
-                  </div>
-                  <span class="module-badge monitor">API Layer</span>
-                </div>
-
-                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <!-- Layer 3 -->
-                <div class="arch-node">
-                  <div>
-                    <div class="arch-node-title"><i class="fa-solid fa-bolt" style="color:#d97706;"></i> Web Services Execution Engine</div>
-                    <div class="arch-node-desc">Payload transformation, retry policies, asynchronous processing</div>
-                  </div>
-                  <span class="module-badge setup">Core Engine</span>
-                </div>
-
-                <div class="arch-connector"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <!-- Layer 4 -->
-                <div class="arch-node">
-                  <div>
-                    <div class="arch-node-title"><i class="fa-solid fa-cloud-arrow-up" style="color:#7c3aed;"></i> External Systems &amp; Third-Party APIs</div>
-                    <div class="arch-node-desc">REST / SOAP endpoints, webhook delivery, client enterprise systems</div>
-                  </div>
-                  <span class="module-badge future">External Target</span>
-                </div>
-              </div>
-
-              <!-- Resource Breakdown Table -->
-              <div style="margin-top:6px;">
-                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
-                  Resource Allocation Breakdown (50 Man-Days Total)
-                </div>
-                <table class="effort-table">
-                  <thead>
-                    <tr>
-                      <th>Resource / Team</th>
-                      <th>Role</th>
-                      <th style="text-align:center;">Days</th>
-                      <th>Deliverable Focus</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td rowspan="2" style="font-weight:800; color:#1d4ed8;">Team Althaf</td>
-                      <td>API Development</td>
-                      <td style="text-align:center; font-weight:800;">10</td>
-                      <td>Integration Setup &amp; Monitor APIs</td>
-                    </tr>
-                    <tr>
-                      <td>Frontend Development</td>
-                      <td style="text-align:center; font-weight:800;">40</td>
-                      <td>Web services UI, Monitor UI, Configs</td>
-                    </tr>
-                    <tr class="total-row">
-                      <td colspan="2">Total Allocation</td>
-                      <td style="text-align:center;">50</td>
-                      <td>50 DEV Man-Days</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        <!-- COLUMN 3: MILESTONES, RISKS & GOVERNANCE -->
-        <section class="scope-col">
-          <div class="content-box">
-            <div class="box-hdr">
-              <i class="fa-solid fa-clipboard-check"></i>
-              <span>3. Milestones &amp; CEO Attention</span>
-            </div>
-            <div class="box-body">
-
-              <!-- Milestones -->
-              <div>
-                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
-                  Release 01 Execution Schedule
-                </div>
-                <table class="effort-table">
-                  <thead>
-                    <tr>
-                      <th>Milestone</th>
-                      <th>Target Date</th>
-                      <th>Status / Variance</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Project Restart</td>
-                      <td>27 Aug 2026</td>
-                      <td style="color:#16a34a; font-weight:700;">Completed</td>
-                    </tr>
-                    <tr>
-                      <td>Development Complete</td>
-                      <td>12 Sep 2026</td>
-                      <td style="color:#16a34a; font-weight:700;">On Track (0 days)</td>
-                    </tr>
-                    <tr>
-                      <td>Client UAT</td>
-                      <td>TBD</td>
-                      <td style="color:#ea580c; font-weight:700;">Pending Confirmation</td>
-                    </tr>
-                    <tr>
-                      <td>Production Go-Live</td>
-                      <td>TBD</td>
-                      <td style="color:#64748b; font-weight:700;">Scheduled post-UAT</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Top Risks -->
-              <div>
-                <div style="font-size:9px; font-weight:800; color:#0b2d5c; text-transform:uppercase; margin-bottom:4px;">
-                  Top Project Risks &amp; CEO Attention
-                </div>
-                <div class="risk-item-row">
-                  <div>
-                    <span style="font-weight:700; color:#0f172a;">External API Dependencies:</span>
-                    <span style="color:#64748b;">Third-party API rate limits and response SLAs.</span>
-                  </div>
-                  <span class="risk-pill medium">Medium</span>
-                </div>
-                <div class="risk-item-row">
-                  <div>
-                    <span style="font-weight:700; color:#0f172a;">Monitoring Module Scope:</span>
-                    <span style="color:#64748b;">Detailed logging depth and notification rules pending.</span>
-                  </div>
-                  <span class="risk-pill medium">Medium</span>
-                </div>
-                <div class="risk-item-row">
-                  <div>
-                    <span style="font-weight:700; color:#0f172a;">Client Confirmation:</span>
-                    <span style="color:#64748b;">Prioritization of additional integrations needed.</span>
-                  </div>
-                  <span class="risk-pill medium">Medium</span>
-                </div>
-              </div>
-
-              <!-- Actionable Approvals -->
-              <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:5px; padding:6px 8px; margin-top:2px;">
-                <div style="font-size:8.5px; font-weight:900; color:#1e40af; text-transform:uppercase; margin-bottom:3px;">
-                  <i class="fa-solid fa-gavel"></i> Decisions &amp; Approvals Required:
-                </div>
-                <div style="font-size:8.5px; color:#1e3a8a; line-height:1.35;">
-                  &bull; Confirm any additional integrations for Release 01.<br>
-                  &bull; Validate monitoring module scope.<br>
-                  &bull; Ensure client availability for UAT (dates to be confirmed).
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <!-- FOOTER -->
-      <footer class="scope-footer">
-        <div>
-          <strong>INTEGRATION CONFIGURATION &amp; SETUP</strong> &bull; Release 01 Architecture Baseline &bull; Team Althaf (50 Man-Days)
+      <!-- 3. MIDDLE SECTION: IN SCOPE - BUSINESS CAPABILITIES (5 CARDS) -->
+      <section class="capabilities-section">
+        <div class="section-title-wrap">
+          <i class="fa-solid fa-gear"></i>
+          <span>In Scope – Business Capabilities</span>
         </div>
-        <div>
-          Executive Project Tracker &bull; Confidential Internal Use Only
+
+        <div class="capabilities-grid">
+          <!-- Card 1: Integration Management Hub -->
+          <article class="cap-card">
+            <div class="cap-header">
+              <div class="cap-icon-box">
+                <i class="fa-solid fa-list-check"></i>
+              </div>
+              <div class="cap-title">Integration Management Hub</div>
+            </div>
+            <ul class="cap-bullets">
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Central list of configured integrations</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Search, filters, and status visibility</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Edit, delete, activate, deactivate</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Card 2: Guided Integration Creation -->
+          <article class="cap-card">
+            <div class="cap-header">
+              <div class="cap-icon-box">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <div class="cap-title">Guided Integration Creation</div>
+            </div>
+            <ul class="cap-bullets">
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Step-by-step setup wizard</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Supports Push, Pull, File, and Document types</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Required-field validation before progressing</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Card 3: Destination Setup -->
+          <article class="cap-card">
+            <div class="cap-header">
+              <div class="cap-icon-box">
+                <i class="fa-solid fa-database"></i>
+              </div>
+              <div class="cap-title">Destination Setup</div>
+            </div>
+            <ul class="cap-bullets">
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Configure external endpoints</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Supports HTTP / external HTTP / FTP style destinations</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Dynamic forms based on integration type</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Card 4: Field Mapping -->
+          <article class="cap-card">
+            <div class="cap-header">
+              <div class="cap-icon-box">
+                <i class="fa-solid fa-right-left"></i>
+              </div>
+              <div class="cap-title">Field Mapping</div>
+            </div>
+            <ul class="cap-bullets">
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Map source data to target payloads</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Auto-map matching fields</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Manual mapping when needed</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Card 5: Chained Integrations -->
+          <article class="cap-card">
+            <div class="cap-header">
+              <div class="cap-icon-box">
+                <i class="fa-solid fa-link"></i>
+              </div>
+              <div class="cap-title">Chained Integrations</div>
+            </div>
+            <ul class="cap-bullets">
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Create multiple related integrations in one session</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Review all configured steps before submission</span>
+              </li>
+              <li class="cap-bullet">
+                <span class="cap-bullet-dot">&bull;</span>
+                <span>Submit the chain and return to the list</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. BOTTOM ROW: 4 SUMMARY CARDS -->
+      <section class="bottom-row-grid">
+        <!-- Card A: Key Business Outputs -->
+        <article class="bottom-card card-outputs">
+          <div class="bottom-card-header">
+            <i class="fa-solid fa-file-lines" style="color: #16a34a; font-size: 16px;"></i>
+            <h4>Key Business Outputs</h4>
+          </div>
+          <ul class="bottom-bullets">
+            <li class="bottom-bullet">
+              <span class="dot-green">&bull;</span>
+              <span>New Integration Configuration area in the platform</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-green">&bull;</span>
+              <span>Business-friendly workflow for creating and managing integrations</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-green">&bull;</span>
+              <span>Centralized administration of integration records</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-green">&bull;</span>
+              <span>Improved ownership using name, description, and point of contact</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card B: Business Benefits (2x3 mini grid) -->
+        <article class="bottom-card card-benefits">
+          <div class="bottom-card-header">
+            <i class="fa-solid fa-chart-column" style="color: #0284c7; font-size: 16px;"></i>
+            <h4>Business Benefits</h4>
+          </div>
+          <div class="benefits-mini-grid">
+            <div class="benefit-item">
+              <i class="fa-solid fa-gear" style="color: #ea580c;"></i>
+              <span>Reduced manual database setup</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #d97706;"></i>
+              <span>Lower configuration errors</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fa-solid fa-bolt" style="color: #f59e0b;"></i>
+              <span>Faster integration onboarding</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fa-solid fa-shield-halved" style="color: #b45309;"></i>
+              <span>Better governance and auditability</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fa-solid fa-arrow-trend-up" style="color: #ea580c;"></i>
+              <span>More scalable integration model</span>
+            </div>
+            <div class="benefit-item">
+              <i class="fa-solid fa-users" style="color: #1e40af;"></i>
+              <span>Better user experience for configuration teams</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card C: Out of Scope – Phase 1 -->
+        <article class="bottom-card card-out-scope">
+          <div class="bottom-card-header">
+            <i class="fa-solid fa-ban" style="color: #e11d48; font-size: 16px;"></i>
+            <h4>Out of Scope – Phase 1</h4>
+          </div>
+          <ul class="bottom-bullets">
+            <li class="bottom-bullet">
+              <span class="dot-red">&bull;</span>
+              <span>Drag-and-drop integration designer</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-red">&bull;</span>
+              <span>Automated API testing</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-red">&bull;</span>
+              <span>Mobile app support</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-red">&bull;</span>
+              <span>Advanced nested / hierarchical payload mapping</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Card D: Success Measures -->
+        <article class="bottom-card card-success">
+          <div class="bottom-card-header">
+            <i class="fa-solid fa-trophy" style="color: #2563eb; font-size: 16px;"></i>
+            <h4>Success Measures</h4>
+          </div>
+          <ul class="bottom-bullets">
+            <li class="bottom-bullet">
+              <span class="dot-blue">&bull;</span>
+              <span>Integrations can be created successfully through the front-end</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-blue">&bull;</span>
+              <span>Fewer developer-led manual setup activities</span>
+            </li>
+            <li class="bottom-bullet">
+              <span class="dot-blue">&bull;</span>
+              <span>Higher adoption of the guided configuration process</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- 5. MANAGEMENT VIEW BANNER -->
+      <footer class="mgmt-banner">
+        <div class="mgmt-left">
+          <div class="mgmt-icon-wrap">
+            <i class="fa-solid fa-chart-simple"></i>
+          </div>
+          <div class="mgmt-title">Management View</div>
+          <div class="mgmt-divider">|</div>
+          <div class="mgmt-text">
+            This project productizes integration setup by turning a technical configuration activity into a governed business capability.
+          </div>
+        </div>
+
+        <div class="mgmt-accent-decor">
+          <div class="accent-poly-1"></div>
+          <div class="accent-poly-2"></div>
         </div>
       </footer>
 
     </div>
   </div>
 
-  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <!-- Exporter Scripts for 1-Click Retina High-Resolution JPG -->
   <script src="../assets/js/html2canvas.min.js"></script>
   <script src="../assets/js/exporter.js"></script>
 </body>

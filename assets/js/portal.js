@@ -95,8 +95,8 @@ const DEFAULT_PROJECTS = [
     icon: '🔌',
     release: 'Release 01 (Integration Setup & Monitor)',
     leads: 'Team Althaf (50 Man-Days)',
-    description: 'Enterprise External Services & API Orchestration — automated integration setup with external systems, web services action UI, and real-time execution monitoring.',
-    highlights: 'Release 01 on track for 12 Sep 2026. 20 of 50 man-days consumed (40%). Setup & Monitor APIs in place; Web services action & monitoring UI in active development.',
+    description: 'Enterprise Optimo Integration Configuration Module — transitions integration setup from manual / developer-led configuration to a guided, user-managed capability with Integration Hub, Destination Setup, Field Mapping, and Chained Integrations.',
+    highlights: 'Phase 1 Business Scope baseline: Integration Management Hub, Guided Creation Wizard (Push/Pull/File/Doc), Endpoint Destination Setup, Field Mapping, and Chained Integrations. In active dev (20/50 man-days, 40% consumed).',
     selectedWeekIndex: 0,
     weeks: [
       {
@@ -189,11 +189,12 @@ try {
     'portal_projects_deploy_auto_v1',
     'portal_projects_phase2_oct2_v1',
     'portal_projects_phase2_oct6_features_v1',
-    'portal_projects_all_oct2_v3'
+    'portal_projects_all_oct2_v3',
+    'portal_projects_gov_hub_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_gov_hub_v1';
+const STORAGE_KEY = 'portal_projects_integ_scope_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
