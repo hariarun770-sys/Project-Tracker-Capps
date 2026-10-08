@@ -96,9 +96,21 @@ const DEFAULT_PROJECTS = [
     release: 'Release 01 (Integration Setup & Monitor)',
     leads: 'Team Althaf (50 Man-Days)',
     description: 'Enterprise Optimo Integration Configuration Module — transitions integration setup from manual / developer-led configuration to a guided, user-managed capability with Integration Hub, Destination Setup, Field Mapping, and Chained Integrations.',
-    highlights: 'Phase 1 Business Scope baseline: Integration Management Hub, Guided Creation Wizard (Push/Pull/File/Doc), Endpoint Destination Setup, Field Mapping, and Chained Integrations. In active dev (20/50 man-days, 40% consumed).',
+    highlights: 'Week 38 (09 Oct 2026): 48% overall progress, 30/50 man-days consumed (60%). Hub, Type Selection & General Details 100% completed; Configuration (70%), Destination Setup (60%), and Field Mapping (55%) in active development. Target Go-Live: 16 Oct 2026.',
     selectedWeekIndex: 0,
     weeks: [
+      {
+        weekNumber: 38,
+        weekLabel: 'Week 38 (09 Oct 2026 · Release 01)',
+        weekEnding: '09 Oct 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '50 Man-Days (Team Althaf)',
+        consumed: '60% Consumed (30/50 Man-Days)',
+        weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_09.10.2026.html',
+        scopeUrl: 'scope document/Integration_Configuration_Scope_Document.html',
+        timelineUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_09.10.2026.html'
+      },
       {
         weekNumber: 37,
         weekLabel: 'Week 37 (11 Sep 2026)',
@@ -190,11 +202,12 @@ try {
     'portal_projects_phase2_oct2_v1',
     'portal_projects_phase2_oct6_features_v1',
     'portal_projects_all_oct2_v3',
-    'portal_projects_gov_hub_v1'
+    'portal_projects_gov_hub_v1',
+    'portal_projects_integ_scope_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_integ_scope_v1';
+const STORAGE_KEY = 'portal_projects_integ_card_oct9_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
