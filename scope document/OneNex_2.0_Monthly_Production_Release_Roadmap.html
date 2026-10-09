@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex 2.0 — Monthly Production Release Roadmap</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .scope-pill-btn {
+      padding: 6px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #94a3b8;
+      background: #0f172a;
+      border: 1px solid #334155;
+      transition: all 0.2s ease;
+    }
+    .scope-pill-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER */
+    .header-bar {
+      background: linear-gradient(135deg, #071e3d 0%, #0d3663 60%, #174d82 100%);
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+      position: relative;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-logo-main {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .brand-logo-icon {
+      width: 34px;
+      height: 34px;
+      background: #ff5722;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 19px;
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    .brand-logo-main span.v2 {
+      color: #ff5722;
+      font-size: 28px;
+      margin-left: 2px;
+    }
+
+    .brand-tagline-sub {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+    }
+
+    .divider-vert {
+      width: 1.5px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    .header-titles .sub-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-top: 2px;
+    }
+
+    .header-titles .qa-release-note {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #fde047;
+      margin-top: 2px;
+    }
+
+    .header-right-tagline {
+      text-align: right;
+      font-style: italic;
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: 0.2px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* 2. TIME AXIS RIBBON (Top months) */
+    .time-axis-ribbon {
+      display: grid;
+      grid-template-columns: 180px repeat(10, 1fr);
+      background: #e2e8f0;
+      border-bottom: 1.5px solid #cbd5e1;
+      font-size: 10px;
+      font-weight: 900;
+      color: #0b2240;
+      text-align: center;
+      line-height: 22px;
+    }
+
+    .time-axis-label {
+      background: #cbd5e1;
+      color: #0b2240;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding-left: 12px;
+      text-align: left;
+    }
+
+    .time-month-col {
+      border-left: 1px solid #cbd5e1;
+      background: #f1f5f9;
+    }
+
+    /* 3. THREE TEAMS MATRIX */
+    .teams-matrix-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 6px 14px 4px;
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+    }
+
+    .team-stream-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 8px;
+      align-items: stretch;
+      min-height: 108px;
+    }
+
+    /* Team label badge */
+    .team-label-card {
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .team-label-card.team-b { background: #0284c7; }
+    .team-label-card.team-c { background: #16a34a; }
+    .team-label-card.team-a { background: #ea580c; }
+
+    .team-card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+    .team-card-sub {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .team-card-desc {
+      font-size: 8.5px;
+      font-weight: 600;
+      line-height: 1.25;
+      opacity: 0.92;
+      margin-top: 2px;
+    }
+
+    /* Phase blocks strip */
+    .stream-phases-grid {
+      display: grid;
+      gap: 6px;
+      height: 100%;
+    }
+    .stream-phases-grid.team-b-grid {
+      grid-template-columns: 2fr 2fr 2fr 4fr;
+    }
+    .stream-phases-grid.team-c-grid {
+      grid-template-columns: 2fr 3fr 5fr 4fr; /* Adjusted for Stays & Wellness */
+    }
+    .stream-phases-grid.team-a-grid {
+      grid-template-columns: 2fr 1fr 2fr 5fr;
+    }
+
+    .phase-block {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .phase-block.team-b-border { border-top: 3px solid #0284c7; }
+    .phase-block.team-c-border { border-top: 3px solid #16a34a; }
+    .phase-block.team-a-border { border-top: 3px solid #ea580c; }
+
+    .phase-block-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 2px;
+    }
+    .phase-dates {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .phase-block-title {
+      font-size: 10px;
+      font-weight: 900;
+      color: #0b2240;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+    .phase-block-title i {
+      font-size: 11px;
+    }
+    .phase-block.team-b-border .phase-block-title i { color: #0284c7; }
+    .phase-block.team-c-border .phase-block-title i { color: #16a34a; }
+    .phase-block.team-a-border .phase-block-title i { color: #ea580c; }
+
+    .phase-bullets {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+    }
+    .phase-bullets li {
+      font-size: 8px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.2;
+      position: relative;
+      padding-left: 9px;
+    }
+    .phase-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+      font-size: 9px;
+    }
+    .phase-block.team-b-border .phase-bullets li::before { color: #0284c7; }
+    .phase-block.team-c-border .phase-bullets li::before { color: #16a34a; }
+    .phase-block.team-a-border .phase-bullets li::before { color: #ea580c; }
+
+    /* 4. MONTHLY RELEASE TRAIN */
+    .release-train-section {
+      padding: 6px 14px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .release-train-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #091e3a;
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 5px;
+    }
+
+    .train-title {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .train-legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 9.5px;
+      font-weight: 800;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .legend-dot.b { background: #0284c7; }
+    .legend-dot.c { background: #16a34a; }
+    .legend-dot.a { background: #ea580c; }
+
+    .train-columns-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      flex: 1;
+    }
+
+    .train-col-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .train-col-top {
+      padding: 5px 8px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .train-col-top.qa-theme { background: #0284c7; }
+    .train-col-top.r1-theme { background: #0369a1; }
+    .train-col-top.r2-theme { background: #0f766e; }
+    .train-col-top.r3-theme { background: #ea580c; }
+    .train-col-top.r4-theme { background: #be185d; }
+    .train-col-top.r5-theme { background: #6b21a8; }
+
+    .train-date-tag {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+    }
+
+    .train-release-name {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .train-badge-pill {
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 7.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 1px 5px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 1px;
+      align-self: flex-start;
+    }
+
+    .train-col-body {
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      justify-content: space-around;
+      background: #f8fafc;
+    }
+
+    .train-workstream-block {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 6px;
+    }
+
+    .train-work-title {
+      font-size: 8px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+    .train-work-title.stays { color: #0284c7; }
+    .train-work-title.restaurant { color: #ea580c; }
+
+    .train-work-desc {
+      font-size: 8px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    /* 5. BOTTOM MILESTONES BAR */
+    .milestones-strip {
+      background: #ffffff;
+      border-top: 1.5px solid #cbd5e1;
+      padding: 6px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .milestone-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #0b2240;
+      white-space: nowrap;
+    }
+    .milestone-left i {
+      color: #0284c7;
+      font-size: 14px;
+    }
+
+    .milestone-track-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .milestone-track-line::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 12px;
+      height: 2px;
+      background: #cbd5e1;
+      z-index: 1;
+    }
+
+    .milestone-point {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .m-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #0284c7;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #0284c7;
+      margin: 7px 0 2px;
+    }
+    .m-dot.green { background: #16a34a; box-shadow: 0 0 0 1px #16a34a; }
+    .m-dot.orange { background: #ea580c; box-shadow: 0 0 0 1px #ea580c; }
+    .m-dot.purple { background: #7c3aed; box-shadow: 0 0 0 1px #7c3aed; }
+
+    .m-date {
+      font-size: 7.5px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+    .m-label {
+      font-size: 7.5px;
+      color: #475569;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .milestone-right-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .m-brand-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+    .m-brand-name span { color: #ff5722; }
+    .m-brand-tag {
+      font-size: 8px;
+      font-style: italic;
+      color: #64748b;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <a href="OneNex_2.0_Monthly_Production_Release_Roadmap.html" class="scope-pill-btn active">
+        <i class="fa-solid fa-map"></i> OneNex 2.0 Release Roadmap
+      </a>
+      <a href="OneNex_Phase_2_Scope_Architecture.html" class="scope-pill-btn">
+        <i class="fa-solid fa-cubes"></i> Microservices Architecture Spec
+      </a>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Roadmap JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER -->
+      <header class="header-bar">
+        <div class="brand-group">
+          <div class="brand-logo-wrap">
+            <div class="brand-logo-main">
+              <div class="brand-logo-icon">1</div>
+              <span>neNex<span class="v2">2.0</span></span>
+            </div>
+            <span class="brand-tagline-sub">The AI Platform for Experience Businesses</span>
+          </div>
+
+          <div class="divider-vert"></div>
+
+          <div class="header-titles">
+            <h1>OneNex 2.0 &ndash; Monthly Production Release Roadmap</h1>
+            <div class="sub-title">Stay (Hotel) and Dine/Eats (Restaurant) &mdash; Three Teams &bull; Shared Platform &bull; Monthly Release Train</div>
+            <div class="qa-release-note">&bull; Core in January for functional QA only &nbsp;&bull;&nbsp; First production release in February 2027</div>
+          </div>
+        </div>
+
+        <div class="header-right-tagline">
+          More Industries.<br>More Value.<br>Together.
+        </div>
+      </header>
+
+      <!-- 2. TIME AXIS RIBBON (Top months) -->
+      <section class="time-axis-ribbon">
+        <div class="time-axis-label">Timeline 2026&ndash;2027</div>
+        <div class="time-month-col">Sep 2026</div>
+        <div class="time-month-col">Oct 2026</div>
+        <div class="time-month-col">Nov 2026</div>
+        <div class="time-month-col">Dec 2026</div>
+        <div class="time-month-col">Jan 2027</div>
+        <div class="time-month-col">Feb 2027</div>
+        <div class="time-month-col">Mar 2027</div>
+        <div class="time-month-col">Apr 2027</div>
+        <div class="time-month-col">May 2027</div>
+        <div class="time-month-col">Jun 2027</div>
+      </section>
+
+      <!-- 3. THREE TEAMS MATRIX -->
+      <section class="teams-matrix-container">
+
+        <!-- ROW 1: TEAM B (PLATFORM FOUNDATION) -->
+        <div class="team-stream-row">
+          <div class="team-label-card team-b">
+            <div class="team-card-title-row">
+              <i class="fa-solid fa-gear"></i>
+              <span>Team B</span>
+            </div>
+            <div class="team-card-sub">Platform Foundation</div>
+            <div class="team-card-desc">Shared platform, backend services and reusable engines</div>
+          </div>
+
+          <div class="stream-phases-grid team-b-grid">
+            <!-- Phase 1: Sep - Oct 2026 -->
+            <div class="phase-block team-b-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Sep &ndash; Oct 2026</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-database"></i> Foundation &amp; Core Services
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>Owner / Business / Operation model</li>
+                <li>Identity &amp; RBAC</li>
+                <li>Reservation / resource / payment foundations</li>
+                <li>API framework &amp; integration</li>
+              </ul>
+            </div>
+
+            <!-- Phase 2: Nov - Dec 2026 -->
+            <div class="phase-block team-b-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Nov &ndash; Dec 2026</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-server"></i> Stay Backend Foundation
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>ST-C1 &ndash; ST-C9 backend</li>
+                <li>Room, rate &amp; availability APIs</li>
+                <li>Guest, folio &amp; front desk services</li>
+              </ul>
+            </div>
+
+            <!-- Phase 3: Jan - Feb 2027 -->
+            <div class="phase-block team-b-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Jan &ndash; Feb 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-utensils"></i> Dine/Eats Backend Foundation
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>DE-C1 &ndash; DE-C9 backend</li>
+                <li>Menu, ordering, kitchen, KDS</li>
+                <li>Dining session, billing &amp; POS services</li>
+              </ul>
+            </div>
+
+            <!-- Phase 4: Mar - Jun 2027 -->
+            <div class="phase-block team-b-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Mar &ndash; Jun 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-cogs"></i> Next Engine + Release Support
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>ENG-EV01 &ndash; ENG-EV10 Events, Experiences &amp; Ticketing engine</li>
+                <li>Monthly add-on API support for Stay and Dine/Eats</li>
+                <li>Analytics, security, DevOps</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 2: TEAM C (STAYS - HOTEL) -->
+        <div class="team-stream-row">
+          <div class="team-label-card team-c">
+            <div class="team-card-title-row">
+              <i class="fa-solid fa-bed"></i>
+              <span>Team C</span>
+            </div>
+            <div class="team-card-sub">Stays (Hotel)</div>
+            <div class="team-card-desc">Complete Stays product experience, UI/UX and frontend</div>
+          </div>
+
+          <div class="stream-phases-grid team-c-grid">
+            <!-- Phase 1: Sep - Oct 2026 -->
+            <div class="phase-block team-c-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Sep &ndash; Oct 2026</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-pen-nib"></i> User Journey &amp; UI/UX Design
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>User journeys</li>
+                <li>Information architecture</li>
+                <li>UI/UX system</li>
+                <li>API contract mapping</li>
+              </ul>
+            </div>
+
+            <!-- Phase 2: Nov 2026 - Jan 2027 -->
+            <div class="phase-block team-c-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Nov &ndash; Jan 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-hotel"></i> Stays Core Implementation
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>ST-C1 &ndash; ST-C9 core</li>
+                <li>Reservations, front desk</li>
+                <li>Housekeeping, folio</li>
+                <li>Dashboards</li>
+              </ul>
+            </div>
+
+            <!-- Phase 3: Feb - Jun 2027 -->
+            <div class="phase-block team-c-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Feb &ndash; Jun 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-chart-line"></i> Monthly Stays Add-ons
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>Feature integration</li>
+                <li>End-to-end testing</li>
+                <li>Pilot validation</li>
+                <li>Production rollout</li>
+              </ul>
+            </div>
+
+            <!-- Phase 4: Mar - Jun 2027 Next Industry -->
+            <div class="phase-block team-c-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Mar &ndash; Jun 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-spa"></i> Next Industry &mdash; Wellness / Spa
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>WL-C1 &ndash; WL-C9 discovery</li>
+                <li>Journeys &amp; UX in March</li>
+                <li>Core implementation from April</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 3: TEAM A (DINE/EATS - RESTAURANT) -->
+        <div class="team-stream-row">
+          <div class="team-label-card team-a">
+            <div class="team-card-title-row">
+              <i class="fa-solid fa-utensils"></i>
+              <span>Team A</span>
+            </div>
+            <div class="team-card-sub">Dine/Eats (Restaurant)</div>
+            <div class="team-card-desc">Complete Restaurant product, UI/UX and full-stack delivery</div>
+          </div>
+
+          <div class="stream-phases-grid team-a-grid">
+            <!-- Phase 1: Sep - Oct 2026 -->
+            <div class="phase-block team-a-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Sep &ndash; Oct 2026</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-wrench"></i> Release 1 Production Delivery Works
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>Support existing release</li>
+                <li>Issue fixes and stability</li>
+                <li>Operational improvements</li>
+                <li>Learnings for platform transition</li>
+              </ul>
+            </div>
+
+            <!-- Phase 2: Nov 2026 -->
+            <div class="phase-block team-a-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Nov 2026</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-file-contract"></i> Dine/Eats Alignment
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>Product journeys</li>
+                <li>Team B contract review</li>
+                <li>Integration plan &amp; wireframes</li>
+              </ul>
+            </div>
+
+            <!-- Phase 3: Dec 2026 - Jan 2027 -->
+            <div class="phase-block team-a-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Dec 2026 &ndash; Jan 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-kitchen-set"></i> Restaurant Core Implementation
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>DE-C1 &ndash; DE-C9 core</li>
+                <li>Menu, POS, ordering, KDS</li>
+                <li>Reservations, billing, dashboards</li>
+              </ul>
+            </div>
+
+            <!-- Phase 4: Feb - Jun 2027 -->
+            <div class="phase-block team-a-border">
+              <div>
+                <div class="phase-block-hdr">
+                  <span class="phase-dates">Feb &ndash; Jun 2027</span>
+                </div>
+                <div class="phase-block-title">
+                  <i class="fa-solid fa-chart-column"></i> Monthly Restaurant Add-ons
+                </div>
+              </div>
+              <ul class="phase-bullets">
+                <li>Feature integration &amp; UAT</li>
+                <li>Pilot rollout</li>
+                <li>Production launches</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 4. MONTHLY RELEASE TRAIN (Jan – Jun 2027) -->
+      <section class="release-train-section">
+        <div class="release-train-hdr">
+          <span class="train-title">Monthly Release Train (Jan &ndash; Jun 2027)</span>
+          <div class="train-legend">
+            <div class="legend-item"><span class="legend-dot b"></span> Team B &mdash; Platform Foundation</div>
+            <div class="legend-item"><span class="legend-dot c"></span> Team C &mdash; Stays (Hotel)</div>
+            <div class="legend-item"><span class="legend-dot a"></span> Team A &mdash; Dine/Eats (Restaurant)</div>
+          </div>
+        </div>
+
+        <div class="train-columns-grid">
+
+          <!-- Pillar 1: 29 Jan 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top qa-theme">
+              <span class="train-date-tag">29 Jan 2027</span>
+              <span class="train-release-name">Core Functional QA</span>
+              <span style="font-size: 7.5px; opacity: 0.9;">Internal / Functional QA only &mdash; not production</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-C1 &ndash; ST-C9 core available for functional QA</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-C1 &ndash; DE-C9 core / essential POS available for functional QA</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: 26 Feb 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top r1-theme">
+              <span class="train-date-tag">26 Feb 2027</span>
+              <span class="train-release-name">R1 &ndash; Digital Customer Experience</span>
+              <span class="train-badge-pill">First Production Release</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-A1 Direct Online Booking + ST-A5 Guest Experience Portal</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-A1 Direct Online Ordering &amp; Click &amp; Collect + DE-A2 QR / NFC Self-Ordering</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: 26 Mar 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top r2-theme">
+              <span class="train-date-tag">26 Mar 2027</span>
+              <span class="train-release-name">R2 &ndash; Operational Excellence</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-A4 Advanced Housekeeping + ST-A6 Maintenance &amp; Engineering</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-A5 Advanced Reservations &amp; Table Optimisation + DE-A6 Advanced Kitchen &amp; Production Management</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: 30 Apr 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top r3-theme">
+              <span class="train-date-tag">30 Apr 2027</span>
+              <span class="train-release-name">R3 &ndash; Business &amp; Financial Control</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-A3 Group &amp; Corporate + ST-A8 Advanced Folio &amp; Financial Operations</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-A7 Inventory, Recipes &amp; Cost Control + DE-A8 Purchasing &amp; Supplier Management</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 5: 28 May 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top r4-theme">
+              <span class="train-date-tag">28 May 2027</span>
+              <span class="train-release-name">R4 &ndash; Revenue &amp; Channel Growth</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-A2 Revenue Management + ST-A7 Meetings, Events &amp; Banquets</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-A3 Own Delivery &amp; Dispatch + DE-A4 Marketplace Order Integration</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 6: 25 Jun 2027 -->
+          <div class="train-col-card">
+            <div class="train-col-top r5-theme">
+              <span class="train-date-tag">25 Jun 2027</span>
+              <span class="train-release-name">R5 &ndash; Scale &amp; Intelligence</span>
+            </div>
+            <div class="train-col-body">
+              <div class="train-workstream-block">
+                <div class="train-work-title stays"><i class="fa-solid fa-bed"></i> Stays</div>
+                <div class="train-work-desc">ST-A9 Advanced Analytics &amp; Forecasting</div>
+              </div>
+              <div class="train-workstream-block">
+                <div class="train-work-title restaurant"><i class="fa-solid fa-utensils"></i> Restaurant</div>
+                <div class="train-work-desc">DE-A9 Multi-branch &amp; Central Restaurant Management + DE-A10 Advanced Analytics &amp; Forecasting</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. BOTTOM KEY MILESTONES -->
+      <footer class="milestones-strip">
+        <div class="milestone-left">
+          <i class="fa-solid fa-flag"></i>
+          <span>Key Milestones</span>
+        </div>
+
+        <div class="milestone-track-line">
+          <div class="milestone-point">
+            <span class="m-date">Sep 2026</span>
+            <span class="m-dot"></span>
+            <span class="m-label">Kick-off</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">Oct 2026</span>
+            <span class="m-dot green"></span>
+            <span class="m-label">Team C design complete</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">Dec 2026</span>
+            <span class="m-dot"></span>
+            <span class="m-label">Team B core APIs ready</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">29 Jan 2027</span>
+            <span class="m-dot"></span>
+            <span class="m-label">Core QA</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">26 Feb 2027</span>
+            <span class="m-dot orange"></span>
+            <span class="m-label">R1 live</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">26 Mar 2027</span>
+            <span class="m-dot green"></span>
+            <span class="m-label">R2 live</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">30 Apr 2027</span>
+            <span class="m-dot orange"></span>
+            <span class="m-label">R3 live</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">28 May 2027</span>
+            <span class="m-dot purple"></span>
+            <span class="m-label">R4 live</span>
+          </div>
+
+          <div class="milestone-point">
+            <span class="m-date">25 Jun 2027</span>
+            <span class="m-dot purple"></span>
+            <span class="m-label">R5 live</span>
+          </div>
+        </div>
+
+        <div class="milestone-right-brand">
+          <div class="m-brand-name">OneNex<span>2.0</span></div>
+          <div class="m-brand-tag">More Industries. More Value. Together.</div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('OneNex_2.0_Monthly_Production_Release_Roadmap.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'OneNex_2.0_Monthly_Production_Release_Roadmap.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
