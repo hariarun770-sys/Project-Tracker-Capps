@@ -10,7 +10,7 @@ const DEFAULT_PROJECTS = [
     name: 'OneNex',
     icon: '🍽️',
     release: 'Release 1.2 (Development & Fixes)',
-    leads: 'Imthath & Team (4 Developers — 120 Man-Days)',
+    leads: 'Imthath (Lead), Sureka, Nithusan (3 Developers — 91h Capacity)',
     description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
     highlights: 'W07 (09 Oct 2026): Security & performance reached 75%. Localization & Web UI/UX dev complete. Stripe initiated, UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Code freeze target: 23 Oct; Target release: 02 Nov 2026.',
     selectedWeekIndex: 0,
@@ -228,11 +228,12 @@ try {
     'portal_projects_all_oct2_v3',
     'portal_projects_gov_hub_v1',
     'portal_projects_integ_scope_v1',
-    'portal_projects_integ_card_oct9_v1'
+    'portal_projects_integ_card_oct9_v1',
+    'portal_projects_onenex_w07_oct9_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex_w07_oct9_v1';
+const STORAGE_KEY = 'portal_projects_onenex_w07_updated_v2';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
