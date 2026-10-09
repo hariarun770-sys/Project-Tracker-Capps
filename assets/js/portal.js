@@ -74,29 +74,42 @@ const DEFAULT_PROJECTS = [
     id: 'onenex-phase-2',
     name: 'OneNex Phase 2',
     icon: '🏗️',
-    release: 'Phase 1 — Foundation Modules',
+    release: 'Foundation & Hotel PMS (Part 1 & 2)',
     eta: '2nd Nov 2026',
-    leads: 'Team B (4 Developers — 3,120h)',
-    description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, and Modular Folio & Billing.',
-    highlights: 'Sprint 05–09 Oct (W07): Localization & Web UI/UX dev complete; Security & perf at 75%. UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Targets retained for 02 Nov release.',
+    leads: 'Team B (4 Devs · Foundation Modules) & Team C (Joel, Sopraj, Rashmin, Althaf · Hotel PMS)',
+    description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, Modular Folio & Billing, plus Hotel PMS R&D and Prototype Development.',
+    highlights: 'W07 (09 Oct 2026): Dual-workstream active. Team B (4 Devs): Admin Business Creation & Identity APIs complete; Business Access Module planned. Team C (Joel, Sopraj, Rashmin, Althaf): Hotel PMS R&D 541/560h consumed (96.6%); Self-onboarding prototype complete. Targets retained for 02 Nov release.',
     selectedWeekIndex: 0,
     weeks: [
       {
-        weekNumber: 41,
-        weekLabel: 'Sprint 05–09 Oct 2026 (W07 Release 1.2)',
+        weekNumber: 7,
+        weekLabel: 'W07 · 09 Oct 2026 (Team B · Foundation Modules)',
         weekEnding: '09 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
         eta: '2nd Nov 2026',
-        manDays: '3 Developers (71.5/91h Recorded)',
-        consumed: '78.6% Recorded Effort (71.5/91h)',
-        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html',
+        manDays: '4 Developers (3,120h Planned Capacity)',
+        consumed: 'Phase 1: 8/30d Used (22d Remaining)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Weekly_Visibility_Card_09.10.2026.html',
+        scopeUrl: 'scope document/OneNex_Phase_2_Scope_Architecture.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html'
+      },
+      {
+        weekNumber: 7,
+        weekLabel: 'W07 · 09 Oct 2026 (Team C · Hotel PMS R&D)',
+        weekEnding: '09 Oct 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        eta: '2nd Nov 2026',
+        manDays: 'Joel, Sopraj, Rashmin, Althaf (560h Allocation)',
+        consumed: '96.6% Consumed (541/560h · 121h W7)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_C_Weekly_Visibility_Card_09.10.2026.html',
         scopeUrl: 'scope document/OneNex_Phase_2_Scope_Architecture.html',
         timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html'
       },
       {
         weekNumber: 40,
-        weekLabel: 'Sprint 28 Sep – 02 Oct 2026 (Phase 1)',
+        weekLabel: 'Sprint 28 Sep – 02 Oct 2026 (Team B Phase 1)',
         weekEnding: '02 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
@@ -109,7 +122,7 @@ const DEFAULT_PROJECTS = [
       },
       {
         weekNumber: 39,
-        weekLabel: 'Sprint 21–25 Sep 2026 (Phase 0)',
+        weekLabel: 'Sprint 21–25 Sep 2026 (Team B Phase 0)',
         weekEnding: '25 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
@@ -208,8 +221,34 @@ const DEFAULT_PROJECTS = [
         manDays: '16 Resources (150 Man-Days Phase 2)',
         consumed: '80% Consumed (120/150 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html',
-        scopeUrl: 'scope document/Optimo_Gov_Governance_Hub_Scope.html',
+        scopeUrl: 'scope document/Optimo_Gov_Scope_Hub.html',
         timelineUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html'
+      }
+    ]
+  },
+  {
+    id: 'red-sea-import-tool',
+    name: 'Red Sea Import Tool',
+    icon: '🚢',
+    release: 'Release 1.0 (Pipeline Modernization)',
+    eta: '16th Oct 2026',
+    leads: 'RSG Unified Suite Core Engineering',
+    description: 'Enterprise Red Sea Global Import Tool — modernizes and consolidates 4 legacy desktop tools into a single connected, cloud-ready .NET Core pipeline featuring Timeslot Import, Template Generation, Excel Validator, and Bookable Tester.',
+    highlights: 'Week 38 (09 Oct 2026): End-to-end pipeline user journey finalized. Timeslot import parser & validation rules in active development with downloadable error reporting. Porting desktop validator logic into .NET Core. Target Delivery ETA: 16th Oct 2026.',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 38,
+        weekLabel: 'Week 38 (09 Oct 2026 · Release 1.0)',
+        weekEnding: '09 Oct 2026',
+        status: 'IN PROGRESS',
+        statusClass: 'blue',
+        eta: '16th Oct 2026',
+        manDays: 'Unified Suite Core Team',
+        consumed: 'Timeslot Import Active',
+        weeklyUrl: 'Incubator Weekly update/Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.html',
+        scopeUrl: 'scope document/Red_Sea_Import_Tool_Scope_Document.html',
+        timelineUrl: 'Incubator Weekly update/Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.html'
       }
     ]
   }
@@ -246,11 +285,12 @@ try {
     'portal_projects_integ_scope_v1',
     'portal_projects_integ_card_oct9_v1',
     'portal_projects_onenex_w07_oct9_v1',
-    'portal_projects_onenex_w07_updated_v2'
+    'portal_projects_onenex_w07_updated_v2',
+    'portal_projects_eta_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_eta_v1';
+const STORAGE_KEY = 'portal_projects_rsg_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
@@ -298,12 +338,15 @@ function renderProjects(filterText = '', filterStatus = 'all') {
   const completedBtn = document.querySelector('.filter-btn[data-status="completed"]');
   const allBtn = document.querySelector('.filter-btn[data-status="all"]');
 
-  const ontrackCount = PROJECTS.filter(p => (p.weeks[p.selectedWeekIndex || 0] || p.weeks[0]).status === 'ON TRACK').length;
+  const ontrackCount = PROJECTS.filter(p => {
+    const s = (p.weeks[p.selectedWeekIndex || 0] || p.weeks[0]).status;
+    return s === 'ON TRACK' || s === 'IN PROGRESS';
+  }).length;
   const atriskCount = PROJECTS.filter(p => (p.weeks[p.selectedWeekIndex || 0] || p.weeks[0]).status === 'AT RISK').length;
   const completedCount = PROJECTS.filter(p => (p.weeks[p.selectedWeekIndex || 0] || p.weeks[0]).status === 'COMPLETED').length;
 
   if (allBtn) allBtn.innerText = `All Projects (${PROJECTS.length})`;
-  if (ontrackBtn) ontrackBtn.innerText = `On Track (${ontrackCount})`;
+  if (ontrackBtn) ontrackBtn.innerText = `On Track / Active (${ontrackCount})`;
   if (atriskBtn) atriskBtn.innerText = `At Risk (${atriskCount})`;
   if (completedBtn) completedBtn.innerText = `Completed (${completedCount})`;
 
@@ -320,7 +363,7 @@ function renderProjects(filterText = '', filterStatus = 'all') {
                         p.description.toLowerCase().includes(filterText.toLowerCase()) ||
                         p.highlights.toLowerCase().includes(filterText.toLowerCase());
     const matchesStatus = (filterStatus === 'all') ||
-                          (filterStatus === 'ontrack' && curWeek.status === 'ON TRACK') ||
+                          (filterStatus === 'ontrack' && (curWeek.status === 'ON TRACK' || curWeek.status === 'IN PROGRESS')) ||
                           (filterStatus === 'atrisk' && curWeek.status === 'AT RISK') ||
                           (filterStatus === 'completed' && curWeek.status === 'COMPLETED');
     return matchesText && matchesStatus;

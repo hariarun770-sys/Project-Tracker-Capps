@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneNex Phase 2 — Weekly Visibility Cards (Team B & Team C · 09 Oct 2026)</title>
+  <title>Optimo Gov Portal — Phase 2 Scope & Architecture Hub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -66,7 +66,7 @@
       color: #ffffff;
     }
 
-    .team-toggle-group {
+    .scope-tabs-group {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -76,9 +76,9 @@
       border: 1px solid #334155;
     }
 
-    .team-tab-btn {
-      padding: 6px 14px;
-      font-size: 12px;
+    .scope-tab-btn {
+      padding: 6px 13px;
+      font-size: 11.5px;
       font-weight: 800;
       border-radius: 4px;
       border: none;
@@ -91,14 +91,14 @@
       transition: all 0.2s ease;
     }
 
-    .team-tab-btn:hover {
+    .scope-tab-btn:hover {
       color: #f1f5f9;
     }
 
-    .team-tab-btn.active {
-      background: #ea580c;
+    .scope-tab-btn.active {
+      background: #0284c7;
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.45);
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.45);
     }
 
     .top-nav-actions {
@@ -122,10 +122,6 @@
       box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
       transition: all 0.2s ease;
     }
-    .btn-export-retina:hover {
-      background: linear-gradient(135deg, #0369a1, #075985);
-      transform: translateY(-1px);
-    }
 
     .card-frame-container {
       width: 1536px;
@@ -134,12 +130,12 @@
       justify-content: center;
     }
 
-    .card-pane {
+    .scope-pane {
       display: none;
       width: 100%;
     }
 
-    .card-pane.active {
+    .scope-pane.active {
       display: block;
     }
 
@@ -161,67 +157,84 @@
       <a href="../index.html" class="top-nav-link">
         <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
       </a>
-      <div class="team-toggle-group">
-        <button class="team-tab-btn active" id="tabTeamB" onclick="switchTeam('b')">
-          <i class="fa-solid fa-code"></i> Team B &mdash; Foundation Modules (05&ndash;09 Oct)
+      <div class="scope-tabs-group">
+        <button class="scope-tab-btn active" id="tabSpec" onclick="switchScope('spec')">
+          <i class="fa-solid fa-diagram-project"></i> 1. Phase 2 Delivery Spec
         </button>
-        <button class="team-tab-btn" id="tabTeamC" onclick="switchTeam('c')">
-          <i class="fa-solid fa-hotel"></i> Team C &mdash; Hotel PMS R&amp;D (W07 / 09 Oct)
+        <button class="scope-tab-btn" id="tabVenues" onclick="switchScope('venues')">
+          <i class="fa-solid fa-building"></i> 2. Venues &amp; Assets (Catalog)
+        </button>
+        <button class="scope-tab-btn" id="tabTickets" onclick="switchScope('tickets')">
+          <i class="fa-solid fa-headset"></i> 3. Support Tickets (Support)
+        </button>
+        <button class="scope-tab-btn" id="tabKb" onclick="switchScope('kb')">
+          <i class="fa-solid fa-book-open"></i> 4. Knowledge Base (Support)
         </button>
       </div>
     </div>
     <div class="top-nav-actions">
-      <button class="btn-export-retina" onclick="exportActiveCard()">
-        <i class="fa-solid fa-camera"></i> <span id="exportBtnTxt">Export Team B Card JPG</span>
+      <button class="btn-export-retina" onclick="exportActiveScope()">
+        <i class="fa-solid fa-camera"></i> <span id="exportBtnTxt">Export Scope Spec JPG</span>
       </button>
     </div>
   </div>
 
   <div class="card-frame-container">
-    <!-- Pane 1: Team B -->
-    <div class="card-pane active" id="paneTeamB">
-      <iframe class="card-frame" id="frameTeamB" src="OneNex_Phase_2_Team_B_Weekly_Visibility_Card_09.10.2026.html"></iframe>
+    <!-- Pane 1: Phase 2 Delivery Spec -->
+    <div class="scope-pane active" id="paneSpec">
+      <iframe class="card-frame" id="frameSpec" src="Optimo_Gov_Portal_Scope_Document.html"></iframe>
     </div>
 
-    <!-- Pane 2: Team C -->
-    <div class="card-pane" id="paneTeamC">
-      <iframe class="card-frame" id="frameTeamC" src="OneNex_Phase_2_Team_C_Weekly_Visibility_Card_09.10.2026.html"></iframe>
+    <!-- Pane 2: Venues & Assets -->
+    <div class="scope-pane" id="paneVenues">
+      <iframe class="card-frame" id="frameVenues" src="Optimo_Venues_Assets_Scope_Document.html"></iframe>
+    </div>
+
+    <!-- Pane 3: Support Tickets -->
+    <div class="scope-pane" id="paneTickets">
+      <iframe class="card-frame" id="frameTickets" src="Optimo_Support_Tickets_Scope_Document.html"></iframe>
+    </div>
+
+    <!-- Pane 4: Knowledge Base -->
+    <div class="scope-pane" id="paneKb">
+      <iframe class="card-frame" id="frameKb" src="Optimo_Knowledge_Base_Scope_Document.html"></iframe>
     </div>
   </div>
 
   <script>
-    let currentActiveTeam = 'b';
+    let currentScope = 'spec';
 
-    function switchTeam(team) {
-      currentActiveTeam = team;
-      const tabB = document.getElementById('tabTeamB');
-      const tabC = document.getElementById('tabTeamC');
-      const paneB = document.getElementById('paneTeamB');
-      const paneC = document.getElementById('paneTeamC');
-      const exportTxt = document.getElementById('exportBtnTxt');
+    const tabMap = {
+      spec: { tabId: 'tabSpec', paneId: 'paneSpec', frameId: 'frameSpec', btnText: 'Export Scope Spec JPG' },
+      venues: { tabId: 'tabVenues', paneId: 'paneVenues', frameId: 'frameVenues', btnText: 'Export Venues & Assets Scope JPG' },
+      tickets: { tabId: 'tabTickets', paneId: 'paneTickets', frameId: 'frameTickets', btnText: 'Export Support Tickets Scope JPG' },
+      kb: { tabId: 'tabKb', paneId: 'paneKb', frameId: 'frameKb', btnText: 'Export Knowledge Base Scope JPG' }
+    };
 
-      if (team === 'b') {
-        tabB.classList.add('active');
-        tabC.classList.remove('active');
-        paneB.classList.add('active');
-        paneC.classList.remove('active');
-        exportTxt.innerText = 'Export Team B Card JPG';
-      } else {
-        tabC.classList.add('active');
-        tabB.classList.remove('active');
-        paneC.classList.add('active');
-        paneB.classList.remove('active');
-        exportTxt.innerText = 'Export Team C Card JPG';
-      }
+    function switchScope(scopeKey) {
+      currentScope = scopeKey;
+      Object.keys(tabMap).forEach(key => {
+        const item = tabMap[key];
+        const tabEl = document.getElementById(item.tabId);
+        const paneEl = document.getElementById(item.paneId);
+        if (key === scopeKey) {
+          tabEl.classList.add('active');
+          paneEl.classList.add('active');
+          document.getElementById('exportBtnTxt').innerText = item.btnText;
+        } else {
+          tabEl.classList.remove('active');
+          paneEl.classList.remove('active');
+        }
+      });
     }
 
-    function exportActiveCard() {
-      const activeFrameId = currentActiveTeam === 'b' ? 'frameTeamB' : 'frameTeamC';
+    function exportActiveScope() {
+      const activeFrameId = tabMap[currentScope].frameId;
       const iframe = document.getElementById(activeFrameId);
       if (iframe && iframe.contentWindow && typeof iframe.contentWindow.exportCardToJpg === 'function') {
         iframe.contentWindow.exportCardToJpg();
       } else {
-        alert('Exporting active visibility card...');
+        alert('Exporting active scope document...');
       }
     }
   </script>

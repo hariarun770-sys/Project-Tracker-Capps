@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venues & Assets — Scope Document | Governance Hub (Catalog Module)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .module-nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f172a;
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+    }
+
+    .module-nav-pill {
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+    }
+    .module-nav-pill:hover {
+      color: #f1f5f9;
+    }
+    .module-nav-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 14px 20px 10px;
+      justify-content: space-between;
+    }
+
+    /* TOP HEADER */
+    .scope-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon-box {
+      width: 42px;
+      height: 42px;
+      background: #0284c7;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 22px;
+    }
+
+    .brand-text h1 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .brand-text .sub-txt {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0284c7;
+      margin-top: 2px;
+    }
+
+    .hdr-right-meta {
+      text-align: right;
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .hdr-right-meta strong {
+      color: #0b2240;
+    }
+
+    /* 4-COLUMN TOP ROW */
+    .row-4col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .panel-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-title-bar {
+      background: #f8fafc;
+      border-bottom: 1px solid #cbd5e1;
+      padding: 4px 8px;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0b2240;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .panel-title-bar i {
+      color: #0284c7;
+      font-size: 11px;
+    }
+
+    .panel-card-body {
+      padding: 6px 8px;
+      font-size: 9.5px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Key-Value list */
+    .kv-row {
+      display: flex;
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .kv-lbl {
+      width: 75px;
+      font-weight: 800;
+      color: #0b2240;
+      flex-shrink: 0;
+    }
+    .kv-val {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* Bullet list */
+    .icon-bullet-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .icon-bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+    .icon-bullet-list li i {
+      color: #16a34a;
+      font-size: 10px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .icon-bullet-list li i.blue { color: #0284c7; }
+    .icon-bullet-list li i.amber { color: #f59e0b; }
+    .icon-bullet-list li i.red { color: #ef4444; }
+
+    /* MIDDLE MAIN ROW: SCOPE, SCREEN SUMMARY, WORKFLOWS */
+    .row-middle {
+      display: grid;
+      grid-template-columns: 1fr 1.55fr 1fr;
+      gap: 10px;
+      flex: 1;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    /* Middle Mockup Screen */
+    .mockup-container {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      height: 100%;
+    }
+
+    .mockup-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #091e3a;
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 800;
+    }
+
+    .mockup-body-grid {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.2fr;
+      gap: 6px;
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 6px;
+      overflow: hidden;
+    }
+
+    .mockup-nav {
+      background: #091e3a;
+      color: #cbd5e1;
+      border-radius: 4px;
+      padding: 4px;
+      font-size: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mockup-nav-item {
+      padding: 3px 4px;
+      border-radius: 3px;
+    }
+    .mockup-nav-item.active {
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .mockup-venues-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 8px;
+      border-right: 1px solid #e2e8f0;
+      padding-right: 4px;
+    }
+    .venue-item-mock {
+      padding: 3px;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .venue-item-mock.active {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      font-weight: 800;
+    }
+
+    .mockup-detail-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 8px;
+    }
+
+    .venue-detail-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 6px;
+    }
+
+    /* Workflow Cards */
+    .wf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      height: 100%;
+    }
+    .wf-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .wf-hdr {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #0b2240;
+    }
+    .wf-badge {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9.5px;
+      font-weight: 900;
+    }
+    .wf-bullets {
+      list-style: none;
+      padding: 0;
+      font-size: 8.5px;
+      color: #475569;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1.25;
+    }
+
+    /* BOTTOM ROW: RULES, STATES, IMPACT */
+    .row-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 0.9fr;
+      gap: 10px;
+    }
+
+    .footer-stamp {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 4px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <div class="module-nav-pills">
+        <a href="Optimo_Gov_Portal_Scope_Document.html" class="module-nav-pill">
+          <i class="fa-solid fa-diagram-project"></i> Phase 2 Spec
+        </a>
+        <a href="Optimo_Venues_Assets_Scope_Document.html" class="module-nav-pill active">
+          <i class="fa-solid fa-building"></i> Venues &amp; Assets
+        </a>
+        <a href="Optimo_Support_Tickets_Scope_Document.html" class="module-nav-pill">
+          <i class="fa-solid fa-headset"></i> Support Tickets
+        </a>
+        <a href="Optimo_Knowledge_Base_Scope_Document.html" class="module-nav-pill">
+          <i class="fa-solid fa-book-open"></i> Knowledge Base
+        </a>
+      </div>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Venues &amp; Assets Scope JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- TOP HEADER -->
+      <header class="scope-hdr">
+        <div class="brand-wrap">
+          <div class="brand-icon-box">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <div class="brand-text">
+            <h1>Venues &amp; Assets &mdash; Scope Image</h1>
+            <div class="sub-txt">Governance Hub | Catalog Module</div>
+          </div>
+        </div>
+
+        <div class="hdr-right-meta">
+          <div>Route: <strong>/admin/venues</strong></div>
+          <div>Last reviewed: <strong>2026-06-25</strong></div>
+        </div>
+      </header>
+
+      <!-- ROW 1: 4 COLUMNS -->
+      <section class="row-4col">
+        <!-- 1. Overview -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-clipboard-list"></i> 1. Overview</div>
+          <div class="panel-card-body">
+            <div class="kv-row">
+              <span class="kv-lbl">Module:</span>
+              <span class="kv-val">Venues &amp; Assets</span>
+            </div>
+            <div class="kv-row">
+              <span class="kv-lbl">Purpose:</span>
+              <span class="kv-val">Central management hub for physical locations and bookable assets in the OptimoGov Governance Hub.</span>
+            </div>
+            <div class="kv-row">
+              <span class="kv-lbl">Audience:</span>
+              <span class="kv-val">Product Owners, Business Analysts, Project Managers, QA Leads, Business Stakeholders</span>
+            </div>
+            <div class="kv-row">
+              <span class="kv-lbl">Core concept:</span>
+              <span class="kv-val">Manage venues such as buildings, parks, community centres, stadiums, and the assets within them.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Business Purpose -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-bullseye"></i> 2. Business Purpose</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list">
+              <li><i class="fa-solid fa-circle-check"></i> Centralized catalog management</li>
+              <li><i class="fa-solid fa-circle-check"></i> Pricing control for all bookable spaces and assets</li>
+              <li><i class="fa-solid fa-circle-check"></i> Booking readiness via completeness tracking</li>
+              <li><i class="fa-solid fa-circle-check"></i> Audit compliance for changes</li>
+              <li><i class="fa-solid fa-circle-check"></i> Access control configuration for automated entry venues</li>
+              <li><i class="fa-solid fa-circle-check"></i> Terms management with revision history</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 3. Target Users -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-users"></i> 3. Target Users</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list">
+              <li><i class="fa-solid fa-crown blue"></i> <strong>Governance Administrators:</strong> Manage the venue and asset catalog</li>
+              <li><i class="fa-solid fa-users-gear blue"></i> <strong>Venue Coordinators:</strong> Maintain venue details</li>
+              <li><i class="fa-solid fa-tag blue"></i> <strong>Pricing Officers:</strong> Handle pricing revisions across assets</li>
+              <li><i class="fa-solid fa-clipboard-check blue"></i> <strong>QA / Onboarding Staff:</strong> Review setup completeness before go-live</li>
+              <li><i class="fa-solid fa-server blue"></i> <strong>System Administrators:</strong> Configure access provider integrations</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 4. Entry & Navigation -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-compass"></i> 4. Entry &amp; Navigation</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list">
+              <li><i class="fa-solid fa-sitemap blue"></i> Governance Hub &gt; Catalog &gt; Venues &amp; Assets</li>
+              <li><i class="fa-solid fa-list-check blue"></i> Breadcrumb: Governance &gt; Catalog &gt; Venues &amp; Assets</li>
+              <li><i class="fa-solid fa-arrow-pointer blue"></i> Top-right actions: Bulk price revision, + New venue</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- ROW 2: SCOPE, MOCKUP SCREEN, WORKFLOWS -->
+      <section class="row-middle">
+        <!-- 5. Core Functional Scope -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-gears"></i> 5. Core Functional Scope</div>
+          <div class="panel-card-body" style="gap: 8px;">
+            <div>
+              <div style="font-weight: 900; color: #0b2240; font-size: 10px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-building" style="color: #0284c7;"></i> Venue Management
+              </div>
+              <ul class="icon-bullet-list">
+                <li><i class="fa-solid fa-circle-check"></i> View venues in an alphabetically sorted list with category icon and asset count badge</li>
+                <li><i class="fa-solid fa-circle-check"></i> Filter by name/suburb, category, suburb, and whether the venue has assets</li>
+                <li><i class="fa-solid fa-circle-check"></i> Create a new venue via manual form, URL extraction, bulk import, or AI-assisted prompt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Edit venue details across 10 sections: Basics, Media, Hours, Documents, Contact, Directions, Terms, Assets, Access Control, Audit</li>
+                <li><i class="fa-solid fa-circle-check"></i> Delete venue with confirmation</li>
+                <li><i class="fa-solid fa-circle-check"></i> Toggle Active / Inactive status</li>
+                <li><i class="fa-solid fa-circle-check"></i> View venue completeness progress</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-weight: 900; color: #0b2240; font-size: 10px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <i class="fa-solid fa-cubes" style="color: #0284c7;"></i> Asset Management
+              </div>
+              <ul class="icon-bullet-list">
+                <li><i class="fa-solid fa-circle-check"></i> View assets for the selected venue, grouped by type</li>
+                <li><i class="fa-solid fa-circle-check"></i> Filter by name, type, category, status, scope, pricing, sub-units, and completeness</li>
+                <li><i class="fa-solid fa-circle-check"></i> Add new assets</li>
+                <li><i class="fa-solid fa-circle-check"></i> Preview asset details including capacity, configurations, pricing, activities, hours, documents, and audit</li>
+                <li><i class="fa-solid fa-circle-check"></i> Open asset editor from preview</li>
+                <li><i class="fa-solid fa-circle-check"></i> Expand/collapse asset type groups with saved user preference</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Screen / Content Summary -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-desktop"></i> 6. Screen / Content Summary</div>
+          <div class="panel-card-body" style="padding: 4px;">
+            <div class="mockup-container">
+              <div class="mockup-top-bar">
+                <span>OptimoGov Governance Hub &mdash; Venues &amp; Assets Catalog</span>
+                <span style="background: #0284c7; padding: 2px 6px; border-radius: 3px;">+ New venue</span>
+              </div>
+              <div class="mockup-body-grid">
+                <!-- Nav -->
+                <div class="mockup-nav">
+                  <div class="mockup-nav-item"><i class="fa-solid fa-house"></i> Home</div>
+                  <div class="mockup-nav-item active"><i class="fa-solid fa-building"></i> Venues &amp; Assets</div>
+                  <div class="mockup-nav-item"><i class="fa-solid fa-calendar"></i> Bookings</div>
+                  <div class="mockup-nav-item"><i class="fa-solid fa-users"></i> Users</div>
+                  <div class="mockup-nav-item"><i class="fa-solid fa-chart-line"></i> Reports</div>
+                </div>
+
+                <!-- Venues Column -->
+                <div class="mockup-venues-list">
+                  <div style="font-weight: 800; color: #0b2240; margin-bottom: 2px;">All Venues (60)</div>
+                  <div class="venue-item-mock">
+                    <span>🌳 Albert Park</span>
+                    <span style="color: #16a34a; font-weight: 800;">92%</span>
+                  </div>
+                  <div class="venue-item-mock active">
+                    <span>🏛️ Central Comm.</span>
+                    <span style="color: #16a34a; font-weight: 800;">100%</span>
+                  </div>
+                  <div class="venue-item-mock">
+                    <span>🏟️ Riverside Stadium</span>
+                    <span style="color: #d97706; font-weight: 800;">76%</span>
+                  </div>
+                  <div class="venue-item-mock">
+                    <span>🏖️ Sunset Beach</span>
+                    <span style="color: #d97706; font-weight: 800;">64%</span>
+                  </div>
+                  <div class="venue-item-mock">
+                    <span>🏢 Town Hall</span>
+                    <span style="color: #0284c7; font-weight: 800;">85%</span>
+                  </div>
+                </div>
+
+                <!-- Detail / Asset Preview -->
+                <div class="mockup-detail-preview">
+                  <div class="venue-detail-card">
+                    <div style="font-weight: 900; color: #0b2240; font-size: 9px;">Central Community Centre</div>
+                    <div style="color: #16a34a; font-weight: 800; font-size: 8px;">● Active &bull; 100% complete</div>
+                    <div style="color: #64748b; font-size: 7.5px; margin-top: 2px;">123 Community Drive, Springfield VIC 3000</div>
+                  </div>
+                  <div style="font-weight: 800; color: #0b2240; font-size: 8.5px; margin-top: 2px;">Assets (28):</div>
+                  <div style="display: flex; flex-direction: column; gap: 2px; font-size: 7.5px;">
+                    <div style="background: #f1f5f9; padding: 2px 4px; border-radius: 2px;">• Main Hall (Cap 300)</div>
+                    <div style="background: #f1f5f9; padding: 2px 4px; border-radius: 2px;">• Meeting Room 1 (Cap 20)</div>
+                    <div style="background: #f1f5f9; padding: 2px 4px; border-radius: 2px;">• Outdoor Plaza (Cap 500)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick stats strip -->
+              <div style="display: flex; justify-content: space-around; background: #e2e8f0; border-radius: 4px; padding: 3px; font-size: 8px; font-weight: 800; color: #0b2240;">
+                <span>Venues: <strong>60</strong></span>
+                <span>Assets: <strong>252</strong></span>
+                <span>Spaces: <strong>197</strong></span>
+                <span>Equipment: <strong>7</strong></span>
+                <span>Car Parks: <strong>5</strong></span>
+                <span>Other: <strong>21</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. User Workflows -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-route"></i> 7. User Workflows</div>
+          <div class="panel-card-body" style="padding: 6px;">
+            <div class="wf-grid">
+              <!-- WF 1 -->
+              <div class="wf-card">
+                <div class="wf-hdr">
+                  <div class="wf-badge">1</div>
+                  <span>Browse &amp; Manage</span>
+                </div>
+                <ul class="wf-bullets">
+                  <li>Open module &rarr; Select venue</li>
+                  <li>Select asset &rarr; Preview</li>
+                  <li>Edit &rarr; Save</li>
+                </ul>
+              </div>
+
+              <!-- WF 2 -->
+              <div class="wf-card">
+                <div class="wf-hdr">
+                  <div class="wf-badge" style="background: #16a34a;">2</div>
+                  <span>Create New Venue</span>
+                </div>
+                <ul class="wf-bullets">
+                  <li>Click "+ New venue"</li>
+                  <li>Choose Manual / AI / Bulk</li>
+                  <li>Complete 10 tabs &rarr; Save</li>
+                  <li>Venue appears in list</li>
+                </ul>
+              </div>
+
+              <!-- WF 3 -->
+              <div class="wf-card">
+                <div class="wf-hdr">
+                  <div class="wf-badge" style="background: #7c3aed;">3</div>
+                  <span>Apply Bulk Pricing</span>
+                </div>
+                <ul class="wf-bullets">
+                  <li>Open bulk price revision</li>
+                  <li>Select assets &rarr; Enter price &amp; effective date</li>
+                  <li>Preview &rarr; Confirm</li>
+                </ul>
+              </div>
+
+              <!-- WF 4 -->
+              <div class="wf-card">
+                <div class="wf-hdr">
+                  <div class="wf-badge" style="background: #ea580c;">4</div>
+                  <span>Filter Venues</span>
+                </div>
+                <ul class="wf-bullets">
+                  <li>Open filter &rarr; Search / choose category or suburb</li>
+                  <li>Done &rarr; Filtered list</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ROW 3: RULES, STATES, IMPACT -->
+      <section class="row-bottom">
+        <!-- 8. Business Rules & Validation -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-scale-balanced"></i> 8. Business Rules &amp; Validation</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list" style="font-size: 8px;">
+              <li><i class="fa-solid fa-circle-check"></i> Venue name, suburb, address, description are required</li>
+              <li><i class="fa-solid fa-circle-check"></i> Slug is required, unique, and uses lowercase letters, numbers, hyphens</li>
+              <li><i class="fa-solid fa-circle-check"></i> Slug auto-generates from name until manually edited</li>
+              <li><i class="fa-solid fa-circle-check"></i> If entry mode is Keypad or Self-access, an access provider is required</li>
+              <li><i class="fa-solid fa-circle-check"></i> Inactive venues/assets remain in system but hidden from public portal</li>
+              <li><i class="fa-solid fa-circle-check"></i> Delete requires confirmation</li>
+              <li><i class="fa-solid fa-circle-check"></i> Terms revisions are versioned</li>
+              <li><i class="fa-solid fa-circle-check"></i> Every asset belongs to exactly one venue</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 9. States & Messages -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-bell"></i> 9. States &amp; Messages</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list" style="font-size: 8px;">
+              <li><i class="fa-solid fa-house blue"></i> Initial load shows "All venues" mode</li>
+              <li><i class="fa-solid fa-circle-info blue"></i> No venue selected: "Select a venue to get started"</li>
+              <li><i class="fa-solid fa-magnifying-glass blue"></i> Filter with no results shows empty list</li>
+              <li><i class="fa-solid fa-spinner fa-spin blue"></i> Save in progress shows "Saving..."</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Successful save shows a toast notification</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 10. Permissions & Not Confirmed -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-lock"></i> 10. Permissions &amp; Not Confirmed</div>
+          <div class="panel-card-body">
+            <div style="font-weight: 800; color: #0b2240; font-size: 8.5px; margin-bottom: 2px;">Permissions:</div>
+            <ul class="icon-bullet-list" style="font-size: 8px; margin-bottom: 4px;">
+              <li><i class="fa-solid fa-circle-check blue"></i> Accessible only to admin-level Governance Hub users</li>
+              <li><i class="fa-solid fa-circle-check blue"></i> No differentiated role behavior confirmed within module</li>
+            </ul>
+            <div style="font-weight: 800; color: #b91c1c; font-size: 8.5px; margin-bottom: 2px;">⚠️ Not Confirmed:</div>
+            <ul class="icon-bullet-list" style="font-size: 7.5px;">
+              <li><i class="fa-solid fa-triangle-exclamation red"></i> Full bulk import flow not fully traced</li>
+              <li><i class="fa-solid fa-triangle-exclamation red"></i> URL extraction backend not confirmed</li>
+              <li><i class="fa-solid fa-triangle-exclamation red"></i> AI prompt extraction backend not confirmed</li>
+              <li><i class="fa-solid fa-triangle-exclamation red"></i> Real-time multi-user sync not confirmed</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 11. Business Impact -->
+        <article class="panel-card">
+          <div class="panel-title-bar"><i class="fa-solid fa-chart-line"></i> 11. Business Impact</div>
+          <div class="panel-card-body">
+            <ul class="icon-bullet-list" style="font-size: 8.5px;">
+              <li><i class="fa-solid fa-circle-check green"></i> Better operational efficiency</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Improved booking portal readiness</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Higher pricing accuracy</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Stronger audit compliance</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Access control enablement</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Versioned terms support</li>
+              <li><i class="fa-solid fa-circle-check green"></i> Scalable management for 60+ venues &amp; 250+ assets</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- FOOTER STAMP -->
+      <footer class="footer-stamp">
+        <div>Scope based on business stakeholder documentation &nbsp;|&nbsp; <strong>Last reviewed: 2026-06-25</strong></div>
+        <div>OptimoGov Governance Hub &bull; Catalog Module Specification</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('Optimo_Venues_Assets_Scope_Document.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'Optimo_Venues_Assets_Scope_Document.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

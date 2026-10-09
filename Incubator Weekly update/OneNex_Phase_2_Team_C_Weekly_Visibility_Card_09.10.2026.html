@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex Phase 2 — Team C Weekly Visibility Card (W07 / 09 October 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .team-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f172a;
+      padding: 4px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+    }
+
+    .team-toggle-btn {
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+    }
+
+    .team-toggle-btn.active {
+      background: #ea580c;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(234, 88, 12, 0.4);
+    }
+
+    .top-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER BAR */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: #ff5722;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    .brand-logo-wrap span.nex {
+      color: #ffffff;
+    }
+
+    .divider-vert {
+      width: 1.5px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ff9800;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-titles .date-meta {
+      font-size: 11px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-left: 8px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-badge-w07 {
+      background: #f59e0b;
+      color: #ffffff;
+      padding: 7px 20px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.4);
+    }
+
+    .status-badge-w07 .white-dot {
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    /* 2. TOP METADATA ROW (5 Columns) */
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr 1.4fr 1fr 1fr;
+      gap: 12px;
+      padding: 8px 24px;
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .meta-card {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .meta-card-icon {
+      font-size: 18px;
+      color: #0b2d5c;
+    }
+
+    .meta-card-txt {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-card-lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-card-val {
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* 3. MAIN BODY SECTION */
+    .main-content {
+      padding: 8px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ROW 1: GOALS & INDIVIDUAL TASK ALLOCATION */
+    .row-1-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.35fr;
+      gap: 12px;
+      flex: 1.15;
+    }
+
+    .panel-box {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-hdr-navy {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Goal Table */
+    .goals-table {
+      width: 100%;
+      border-collapse: collapse;
+      height: 100%;
+    }
+
+    .goals-table th {
+      background: #f1f5f9;
+      padding: 5px 8px;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      border-bottom: 1px solid #cbd5e1;
+      text-align: left;
+    }
+
+    .goals-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+
+    .goal-num-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .goal-num-circle.amber { background: #fef3c7; color: #d97706; border: 1.5px solid #fde68a; }
+    .goal-num-circle.green { background: #dcfce7; color: #16a34a; border: 1.5px solid #bbf7d0; }
+
+    .goal-desc-wrap h4 {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .goal-desc-wrap p {
+      font-size: 10px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .goal-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    .goal-status-pill.in-progress {
+      background: #fffbeb;
+      color: #d97706;
+      border: 1px solid #fde68a;
+    }
+    .goal-status-pill.completed {
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1px solid #bbf7d0;
+    }
+
+    /* Individual Allocation Grid */
+    .team-alloc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 8px;
+      height: 100%;
+    }
+
+    .member-col {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .member-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 8px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .member-name {
+      font-size: 12px;
+      font-weight: 900;
+      color: #0b2d5c;
+    }
+
+    .member-hours {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0284c7;
+    }
+
+    .member-focus-banner {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 3px 6px;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .member-bullets {
+      list-style: none;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+      flex: 1;
+    }
+
+    .member-bullets li {
+      font-size: 8.5px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.25;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .member-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    /* ROW 2: EFFORT SUMMARY & WEEKLY EFFORT CHART */
+    .row-2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+    }
+
+    /* Effort Summary */
+    .kpi-summary-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .kpi-stat-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 6px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kpi-stat-val {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1;
+      color: #0b2d5c;
+      margin-bottom: 3px;
+    }
+    .kpi-stat-val.highlight-orange {
+      color: #ea580c;
+    }
+
+    .kpi-stat-lbl {
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.15;
+    }
+
+    /* Progress bar */
+    .consumed-bar-wrap {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 8px 10px;
+    }
+
+    .consumed-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      font-size: 10px;
+      font-weight: 900;
+      color: #0b2d5c;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .consumed-track {
+      height: 14px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .consumed-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #16a34a;
+      width: 96.6%;
+    }
+
+    .consumed-sub-note {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+
+    /* Weekly Effort Bar Chart */
+    .chart-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 110px;
+      padding: 10px 16px 4px 34px;
+      position: relative;
+    }
+
+    .chart-y-axis {
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-align: right;
+    }
+
+    .chart-y-label {
+      position: absolute;
+      left: 0;
+      top: 45px;
+      font-size: 8px;
+      font-weight: 800;
+      color: #475569;
+      transform: rotate(-90deg);
+      text-transform: uppercase;
+    }
+
+    .chart-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .chart-val {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .chart-val.highlight {
+      color: #ea580c;
+    }
+
+    .chart-bar {
+      width: 44px;
+      border-radius: 3px 3px 0 0;
+      transition: height 0.3s ease;
+    }
+    .chart-bar.blue { background: #2563eb; }
+    .chart-bar.orange { background: #f97316; }
+
+    .chart-x-lbl {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #0b2d5c;
+      margin-top: 3px;
+    }
+
+    /* ROW 3: OUTCOMES & NEXT FOCUS */
+    .outcomes-bar {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .outcomes-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .outcome-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .outcome-icon-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .outcome-icon-circle.green { background: #dcfce7; color: #16a34a; }
+    .outcome-icon-circle.orange { background: #ffedd5; color: #ea580c; }
+    .outcome-icon-circle.blue { background: #e0f2fe; color: #0284c7; }
+
+    .outcome-txt {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .outcome-title {
+      font-size: 10.5px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+    .outcome-title.green { color: #16a34a; }
+    .outcome-title.orange { color: #ea580c; }
+    .outcome-title.blue { color: #0284c7; }
+
+    .outcome-desc {
+      font-size: 9.5px;
+      color: #334155;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .outcomes-note-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #475569;
+      border-left: 1px solid #cbd5e1;
+      padding-left: 14px;
+      white-space: nowrap;
+    }
+    .outcomes-note-right i {
+      color: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <div class="team-toggle-group">
+        <a href="OneNex_Phase_2_Team_B_Weekly_Visibility_Card_09.10.2026.html" class="team-toggle-btn">
+          <i class="fa-solid fa-code"></i> Team B (Foundation Modules)
+        </a>
+        <a href="OneNex_Phase_2_Team_C_Weekly_Visibility_Card_09.10.2026.html" class="team-toggle-btn active">
+          <i class="fa-solid fa-hotel"></i> Team C (Hotel PMS R&amp;D)
+        </a>
+      </div>
+    </div>
+    <div class="top-nav-actions">
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Team C Card JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER BAR -->
+      <header class="header-bar">
+        <div class="brand-group">
+          <!-- OneNex Brand Logo -->
+          <div class="brand-logo-wrap">
+            <div class="brand-logo-icon">1</div>
+            <span>ne<span class="nex">Nex</span></span>
+          </div>
+
+          <div class="divider-vert"></div>
+
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">
+              <span>HOTEL PMS &bull; TEAM C &nbsp;|&nbsp; PROJECT WEEK 7</span>
+              <span class="date-meta">Week ending: 9 October 2026 &nbsp;|&nbsp; Effort through: 8 October 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- W07 Update Badge -->
+          <div class="status-badge-w07">
+            <span class="white-dot"></span>
+            <span>W07 UPDATE</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. TOP METADATA ROW (5 Columns) -->
+      <section class="meta-row">
+        <!-- Project -->
+        <div class="meta-card">
+          <i class="fa-solid fa-hotel meta-card-icon"></i>
+          <div class="meta-card-txt">
+            <span class="meta-card-lbl">PROJECT</span>
+            <span class="meta-card-val" title="OneNex Hotel PMS">OneNex Hotel PMS</span>
+          </div>
+        </div>
+
+        <!-- Workstream -->
+        <div class="meta-card">
+          <i class="fa-solid fa-gear meta-card-icon"></i>
+          <div class="meta-card-txt">
+            <span class="meta-card-lbl">WORKSTREAM</span>
+            <span class="meta-card-val" title="Part 2 — R&D & Prototype Development">Part 2 &mdash; R&amp;D &amp; Prototype Development</span>
+          </div>
+        </div>
+
+        <!-- Team -->
+        <div class="meta-card">
+          <i class="fa-solid fa-users meta-card-icon"></i>
+          <div class="meta-card-txt">
+            <span class="meta-card-lbl">TEAM</span>
+            <span class="meta-card-val" title="Joel • Sopraj • Rashmin • Althaf">Joel &bull; Sopraj &bull; Rashmin &bull; Althaf</span>
+          </div>
+        </div>
+
+        <!-- Focus -->
+        <div class="meta-card">
+          <i class="fa-solid fa-bullseye meta-card-icon"></i>
+          <div class="meta-card-txt">
+            <span class="meta-card-lbl">FOCUS</span>
+            <span class="meta-card-val" title="Industry Expansion">Industry Expansion</span>
+          </div>
+        </div>
+
+        <!-- Reporting Period -->
+        <div class="meta-card">
+          <i class="fa-regular fa-calendar-days meta-card-icon"></i>
+          <div class="meta-card-txt">
+            <span class="meta-card-lbl">REPORTING PERIOD</span>
+            <span class="meta-card-val" title="5–8 October • 4 days">5&ndash;8 October &bull; 4 days</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. MAIN CONTENT -->
+      <main class="main-content">
+
+        <!-- ROW 1: GOALS & INDIVIDUAL TASK ALLOCATION -->
+        <div class="row-1-grid">
+
+          <!-- PANEL 1: WEEK 7 GOALS & DELIVERY STATUS -->
+          <article class="panel-box">
+            <div class="panel-hdr-navy">
+              <span>WEEK 7 GOALS &amp; DELIVERY STATUS</span>
+            </div>
+            <table class="goals-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%; text-align: center;">#</th>
+                  <th style="width: 68%;">GOAL &amp; DESCRIPTION</th>
+                  <th style="width: 24%; text-align: right;">STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Goal 1 -->
+                <tr>
+                  <td style="text-align: center;">
+                    <div class="goal-num-circle amber" style="margin: 0 auto;">1</div>
+                  </td>
+                  <td>
+                    <div class="goal-desc-wrap">
+                      <h4>Business Web &amp; App UI/UX improvements</h4>
+                      <p>Incorporate screen, workflow and demo suggestions.</p>
+                    </div>
+                  </td>
+                  <td style="text-align: right;">
+                    <span class="goal-status-pill in-progress"><i class="fa-solid fa-ellipsis"></i> IN PROGRESS</span>
+                  </td>
+                </tr>
+
+                <!-- Goal 2 -->
+                <tr>
+                  <td style="text-align: center;">
+                    <div class="goal-num-circle green" style="margin: 0 auto;">2</div>
+                  </td>
+                  <td>
+                    <div class="goal-desc-wrap">
+                      <h4>Self-onboarding planning &amp; prototype development</h4>
+                      <p>Business creation &rarr; Owner account &rarr; Review &amp; terms &rarr; Email magic link.</p>
+                    </div>
+                  </td>
+                  <td style="text-align: right;">
+                    <span class="goal-status-pill completed"><i class="fa-solid fa-circle-check"></i> COMPLETED</span>
+                  </td>
+                </tr>
+
+                <!-- Goal 3 -->
+                <tr>
+                  <td style="text-align: center;">
+                    <div class="goal-num-circle amber" style="margin: 0 auto;">3</div>
+                  </td>
+                  <td>
+                    <div class="goal-desc-wrap">
+                      <h4>Admin Web Business View improvements</h4>
+                      <p>Business list, business profile and branch views.</p>
+                    </div>
+                  </td>
+                  <td style="text-align: right;">
+                    <span class="goal-status-pill in-progress"><i class="fa-solid fa-ellipsis"></i> IN PROGRESS</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- PANEL 2: INDIVIDUAL TASK ALLOCATION — WEEK 7 -->
+          <article class="panel-box">
+            <div class="panel-hdr-navy">
+              <span>INDIVIDUAL TASK ALLOCATION &mdash; WEEK 7</span>
+            </div>
+            <div class="team-alloc-grid">
+              <!-- Sopraj -->
+              <div class="member-col">
+                <div class="member-hdr">
+                  <span class="member-name">Sopraj</span>
+                  <span class="member-hours">31.5 h</span>
+                </div>
+                <div class="member-focus-banner">ASSIGNED TASK FOCUS</div>
+                <ul class="member-bullets">
+                  <li>Service component logic &amp; UI</li>
+                  <li>Module/component documentation &amp; role-based access</li>
+                  <li>Admin/Business subscription flows &amp; settings</li>
+                  <li>Admin payment enhancements</li>
+                  <li>Team B discussion &amp; app demo</li>
+                </ul>
+              </div>
+
+              <!-- Rashmin -->
+              <div class="member-col">
+                <div class="member-hdr">
+                  <span class="member-name">Rashmin</span>
+                  <span class="member-hours">35.5 h</span>
+                </div>
+                <div class="member-focus-banner">ASSIGNED TASK FOCUS</div>
+                <ul class="member-bullets">
+                  <li>App setup: services, lost items, amenities, payments, staff &amp; reports</li>
+                  <li>Settings: booking, account, room, bank &amp; subscription</li>
+                  <li>Dashboard/screen UI &amp; application logic improvements</li>
+                  <li>Demo suggestions, discussion &amp; demo</li>
+                </ul>
+              </div>
+
+              <!-- Althaf -->
+              <div class="member-col">
+                <div class="member-hdr">
+                  <span class="member-name">Althaf</span>
+                  <span class="member-hours">26.5 h</span>
+                </div>
+                <div class="member-focus-banner">ASSIGNED TASK FOCUS</div>
+                <ul class="member-bullets">
+                  <li>Room types, housekeeping &amp; booking/reservation screens</li>
+                  <li>Amenities, lost items &amp; services</li>
+                  <li>Shared UI components</li>
+                  <li>Competitor rate-plan analysis &amp; rate-calendar prototype</li>
+                  <li>Discussion &amp; demo</li>
+                </ul>
+              </div>
+
+              <!-- Joel -->
+              <div class="member-col">
+                <div class="member-hdr">
+                  <span class="member-name">Joel</span>
+                  <span class="member-hours">27.5 h</span>
+                </div>
+                <div class="member-focus-banner">ASSIGNED TASK FOCUS</div>
+                <ul class="member-bullets">
+                  <li>Self-onboarding assets, screens &amp; form logic</li>
+                  <li>Existing-owner &amp; magic-link flow</li>
+                  <li>Demo form &amp; phone validation</li>
+                  <li>Website navigation, mobile improvements &amp; hosting</li>
+                  <li>Admin Business List &amp; branch views</li>
+                  <li>Discussion &amp; demo</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- ROW 2: EFFORT SUMMARY & WEEKLY EFFORT CHART -->
+        <div class="row-2-grid">
+
+          <!-- PANEL 3: PART 2 EFFORT SUMMARY -->
+          <article class="panel-box">
+            <div class="panel-hdr-navy">
+              <span>PART 2 EFFORT SUMMARY</span>
+            </div>
+            <div style="padding: 10px; display: flex; flex-direction: column; justify-content: space-between; flex: 1;">
+              <!-- 5 KPI Cards -->
+              <div class="kpi-summary-strip">
+                <div class="kpi-stat-card">
+                  <div class="kpi-stat-val">560 h</div>
+                  <div class="kpi-stat-lbl">Original Allocation</div>
+                </div>
+                <div class="kpi-stat-card">
+                  <div class="kpi-stat-val">420 h</div>
+                  <div class="kpi-stat-lbl">Through Week 6</div>
+                </div>
+                <div class="kpi-stat-card">
+                  <div class="kpi-stat-val highlight-orange">121 h</div>
+                  <div class="kpi-stat-lbl">Week 7 Effort</div>
+                </div>
+                <div class="kpi-stat-card">
+                  <div class="kpi-stat-val">541 h</div>
+                  <div class="kpi-stat-lbl">Cumulative Effort</div>
+                </div>
+                <div class="kpi-stat-card">
+                  <div class="kpi-stat-val">19 h</div>
+                  <div class="kpi-stat-lbl">Remaining Allocation</div>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="consumed-bar-wrap">
+                <div class="consumed-title-row">
+                  <span>ALLOCATION CONSUMED &mdash; 96.6%</span>
+                  <span style="color: #16a34a;">96.6%</span>
+                </div>
+                <div class="consumed-track">
+                  <div class="consumed-fill"></div>
+                </div>
+                <div class="consumed-sub-note">
+                  541 / 560 hours &bull; Effort usage, not scope completion
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 4: PART 2 WEEKLY EFFORT CHART -->
+          <article class="panel-box">
+            <div class="panel-hdr-navy">
+              <span>PART 2 WEEKLY EFFORT</span>
+            </div>
+            <div style="padding: 8px 12px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+              <div class="chart-container">
+                <span class="chart-y-label">Effort (hours)</span>
+                <div class="chart-y-axis">
+                  <span>150</span>
+                  <span>100</span>
+                  <span>50</span>
+                  <span>0</span>
+                </div>
+
+                <!-- W03: 105h (70%) -->
+                <div class="chart-col">
+                  <span class="chart-val">105 h</span>
+                  <div class="chart-bar blue" style="height: 65px;"></div>
+                  <span class="chart-x-lbl">W03</span>
+                </div>
+
+                <!-- W04: 71h (47%) -->
+                <div class="chart-col">
+                  <span class="chart-val">71 h</span>
+                  <div class="chart-bar blue" style="height: 44px;"></div>
+                  <span class="chart-x-lbl">W04</span>
+                </div>
+
+                <!-- W05: 111h (74%) -->
+                <div class="chart-col">
+                  <span class="chart-val">111 h</span>
+                  <div class="chart-bar blue" style="height: 69px;"></div>
+                  <span class="chart-x-lbl">W05</span>
+                </div>
+
+                <!-- W06: 133h (88%) -->
+                <div class="chart-col">
+                  <span class="chart-val">133 h</span>
+                  <div class="chart-bar blue" style="height: 82px;"></div>
+                  <span class="chart-x-lbl">W06</span>
+                </div>
+
+                <!-- W07: 121h (80%) Highlighted Orange -->
+                <div class="chart-col">
+                  <span class="chart-val highlight">121 h</span>
+                  <div class="chart-bar orange" style="height: 75px;"></div>
+                  <span class="chart-x-lbl">W07</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- ROW 3: OUTCOMES & NEXT FOCUS -->
+        <section class="outcomes-bar">
+          <div class="outcomes-group">
+            <!-- Completed -->
+            <div class="outcome-pill">
+              <div class="outcome-icon-circle green">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div class="outcome-txt">
+                <span class="outcome-title green">Completed</span>
+                <span class="outcome-desc">Self-onboarding planning &amp; prototype.</span>
+              </div>
+            </div>
+
+            <!-- Continue -->
+            <div class="outcome-pill">
+              <div class="outcome-icon-circle orange">
+                <i class="fa-solid fa-gear"></i>
+              </div>
+              <div class="outcome-txt">
+                <span class="outcome-title orange">Continue</span>
+                <span class="outcome-desc">Business Web/App UI/UX and Admin Business View improvements.</span>
+              </div>
+            </div>
+
+            <!-- Next -->
+            <div class="outcome-pill">
+              <div class="outcome-icon-circle blue">
+                <i class="fa-solid fa-file-lines"></i>
+              </div>
+              <div class="outcome-txt">
+                <span class="outcome-title blue">Next</span>
+                <span class="outcome-desc">Review the self-onboarding flow for Team B API development planning.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="outcomes-note-right">
+            <i class="fa-solid fa-chart-column"></i>
+            <span>Friday 9 October excluded.</span>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('OneNex_Phase_2_Team_C_Weekly_Card_09.10.2026.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'OneNex_Phase_2_Team_C_Weekly_Card_09.10.2026.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

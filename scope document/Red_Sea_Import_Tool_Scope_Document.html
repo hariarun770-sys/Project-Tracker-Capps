@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSG Unified Suite — RSG Import Tool Scope & User Journey Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .top-nav-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 24px 32px 16px;
+      justify-content: space-between;
+    }
+
+    /* 1. HEADER SECTION */
+    .doc-hdr {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .suite-badge {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .main-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #0b2d5c;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .sub-headline {
+      font-size: 16px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .target-release-tag {
+      font-size: 13.5px;
+      font-style: italic;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .hdr-right-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .eta-pill {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      color: #15803d;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
+    }
+
+    .company-stamp {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* 2. TOP STEPPER PIPELINE (5 STEPS) */
+    .pipeline-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 17%;
+      position: relative;
+    }
+
+    .step-circle-badge {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 2.5px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      position: relative;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-number-tag {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-circle-badge i {
+      font-size: 24px;
+    }
+
+    /* Step Color Themes */
+    .step-1 { border-color: #d97706; }
+    .step-1 .step-number-tag { background: #d97706; }
+    .step-1 i { color: #d97706; }
+
+    .step-2 { border-color: #b45309; }
+    .step-2 .step-number-tag { background: #b45309; }
+    .step-2 i { color: #b45309; }
+
+    .step-3 { border-color: #0284c7; }
+    .step-3 .step-number-tag { background: #0284c7; }
+    .step-3 i { color: #0284c7; }
+
+    .step-4 { border-color: #0369a1; }
+    .step-4 .step-number-tag { background: #0369a1; }
+    .step-4 i { color: #0369a1; }
+
+    .step-5 { border-color: #0f172a; }
+    .step-5 .step-number-tag { background: #0f172a; }
+    .step-5 i { color: #0f172a; }
+
+    .step-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0b2240;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 10.5px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .pipeline-arrow {
+      font-size: 18px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -30px;
+    }
+
+    /* 3. DETAILED JOURNEY TABLE */
+    .section-title-banner {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 900;
+      color: #0b2d5c;
+      letter-spacing: 0.5px;
+      margin: 4px 0 8px;
+      position: relative;
+    }
+
+    .section-title-banner::before,
+    .section-title-banner::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 38%;
+      height: 1px;
+      background: #cbd5e1;
+    }
+    .section-title-banner::before { left: 0; }
+    .section-title-banner::after { right: 0; }
+
+    .journey-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .journey-table tr {
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .journey-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .journey-table td {
+      padding: 9px 14px;
+      font-size: 11px;
+      vertical-align: middle;
+      line-height: 1.35;
+    }
+
+    .journey-col-step {
+      width: 22%;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      font-weight: 900;
+      color: #0b2240;
+    }
+
+    .journey-step-cell-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-mini-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-mini-circle.c1 { background: #d97706; }
+    .step-mini-circle.c2 { background: #b45309; }
+    .step-mini-circle.c3 { background: #0284c7; }
+    .step-mini-circle.c4 { background: #0369a1; }
+    .step-mini-circle.c5 { background: #0f172a; }
+
+    .journey-icon {
+      font-size: 20px;
+    }
+    .journey-icon.c1 { color: #d97706; }
+    .journey-icon.c2 { color: #b45309; }
+    .journey-icon.c3 { color: #0284c7; }
+    .journey-icon.c4 { color: #0369a1; }
+    .journey-icon.c5 { color: #0f172a; }
+
+    .journey-col-user {
+      width: 26%;
+      border-right: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    .journey-col-system {
+      width: 28%;
+      border-right: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    .journey-col-output {
+      width: 24%;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    .col-hdr-tag {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #0b2240;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+
+    /* 4. MODULE STATUS TABLE */
+    .module-status-section {
+      margin-top: 2px;
+    }
+
+    .module-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .module-table th {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 7px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .module-table td {
+      padding: 7px 14px;
+      font-size: 11px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
+    .module-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .module-name-cell {
+      font-weight: 800;
+      color: #0b2240;
+      width: 22%;
+    }
+
+    .module-purpose-cell {
+      color: #475569;
+      font-weight: 600;
+      width: 58%;
+    }
+
+    .module-status-cell {
+      width: 20%;
+      text-align: right;
+    }
+
+    .badge-in-progress {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-not-started {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-pending {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* FOOTER */
+    .doc-footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <span class="top-nav-title">RSG Unified Suite &bull; Red Sea Import Tool User Journey</span>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Scope Document JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. HEADER SECTION -->
+      <header class="doc-hdr">
+        <div>
+          <div class="suite-badge">RSG UNIFIED SUITE</div>
+          <h1 class="main-title">RSG Import Tool &ndash; User Journey</h1>
+          <div class="sub-headline">One connected pipeline replacing 4 desktop tools</div>
+          <div class="target-release-tag">Target release: July 2026</div>
+        </div>
+
+        <div class="hdr-right-meta">
+          <div class="eta-pill">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>ETA: 16th Oct 2026</span>
+          </div>
+          <div class="company-stamp">Red Sea Global &bull; Modernization Pipeline</div>
+        </div>
+      </header>
+
+      <!-- 2. TOP STEPPER PIPELINE (5 STEPS) -->
+      <section class="pipeline-container">
+        <!-- Step 1 -->
+        <div class="pipeline-step">
+          <div class="step-circle-badge step-1">
+            <div class="step-number-tag">1</div>
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <div class="step-title">Upload &amp; Validate</div>
+          <div class="step-desc">Upload timeslot files and run validation. Download an error report if issues are found.</div>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- Step 2 -->
+        <div class="pipeline-step">
+          <div class="step-circle-badge step-2">
+            <div class="step-number-tag">2</div>
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <div class="step-title">Import</div>
+          <div class="step-desc">Import validated data into the database and review the import summary.</div>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- Step 3 -->
+        <div class="pipeline-step">
+          <div class="step-circle-badge step-3">
+            <div class="step-number-tag">3</div>
+            <i class="fa-regular fa-file-excel"></i>
+          </div>
+          <div class="step-title">Template Generate</div>
+          <div class="step-desc">Generate a formatted Excel template from imported data by month, year, and brand.</div>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- Step 4 -->
+        <div class="pipeline-step">
+          <div class="step-circle-badge step-4">
+            <div class="step-number-tag">4</div>
+            <i class="fa-regular fa-clipboard"></i>
+          </div>
+          <div class="step-title">Excel Validator</div>
+          <div class="step-desc">Validate the Excel file against RSG business rules and download a validation report.</div>
+        </div>
+
+        <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+        <!-- Step 5 -->
+        <div class="pipeline-step">
+          <div class="step-circle-badge step-5">
+            <div class="step-number-tag">5</div>
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <div class="step-title">Bookable Tester</div>
+          <div class="step-desc">Create, patch, and delete a test booking to confirm the data is bookable.</div>
+        </div>
+      </section>
+
+      <!-- 3. DETAILED JOURNEY TABLE -->
+      <section>
+        <div class="section-title-banner">Detailed Journey</div>
+        <table class="journey-table">
+          <tbody>
+            <!-- Row 1 -->
+            <tr>
+              <td class="journey-col-step">
+                <div class="journey-step-cell-content">
+                  <span class="step-mini-circle c1">1</span>
+                  <i class="fa-solid fa-cloud-arrow-up journey-icon c1"></i>
+                  <span>Upload &amp; Validate</span>
+                </div>
+              </td>
+              <td class="journey-col-user">
+                <div class="col-hdr-tag">User does</div>
+                <div>Uploads required timeslot import files.</div>
+              </td>
+              <td class="journey-col-system">
+                <div class="col-hdr-tag">System does</div>
+                <div>Checks file format, required columns, missing data, duplicates, and master-data matching.</div>
+              </td>
+              <td class="journey-col-output">
+                <div class="col-hdr-tag">Output</div>
+                <div>Validation pass to continue, or downloadable error report.</div>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr>
+              <td class="journey-col-step">
+                <div class="journey-step-cell-content">
+                  <span class="step-mini-circle c2">2</span>
+                  <i class="fa-solid fa-database journey-icon c2"></i>
+                  <span>Import</span>
+                </div>
+              </td>
+              <td class="journey-col-user">
+                <div class="col-hdr-tag">User does</div>
+                <div>Confirms the validated upload and starts import.</div>
+              </td>
+              <td class="journey-col-system">
+                <div class="col-hdr-tag">System does</div>
+                <div>Loads valid records into the database, logs results, and tracks failures.</div>
+              </td>
+              <td class="journey-col-output">
+                <div class="col-hdr-tag">Output</div>
+                <div>Import confirmation, import summary, and downloadable report.</div>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr>
+              <td class="journey-col-step">
+                <div class="journey-step-cell-content">
+                  <span class="step-mini-circle c3">3</span>
+                  <i class="fa-regular fa-file-excel journey-icon c3"></i>
+                  <span>Template Generate</span>
+                </div>
+              </td>
+              <td class="journey-col-user">
+                <div class="col-hdr-tag">User does</div>
+                <div>Selects month, year, and brand.</div>
+              </td>
+              <td class="journey-col-system">
+                <div class="col-hdr-tag">System does</div>
+                <div>Builds a formatted Excel template from imported data.</div>
+              </td>
+              <td class="journey-col-output">
+                <div class="col-hdr-tag">Output</div>
+                <div>Downloadable Excel template.</div>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr>
+              <td class="journey-col-step">
+                <div class="journey-step-cell-content">
+                  <span class="step-mini-circle c4">4</span>
+                  <i class="fa-regular fa-clipboard journey-icon c4"></i>
+                  <span>Excel Validator</span>
+                </div>
+              </td>
+              <td class="journey-col-user">
+                <div class="col-hdr-tag">User does</div>
+                <div>Uploads the generated or updated Excel file for checking.</div>
+              </td>
+              <td class="journey-col-system">
+                <div class="col-hdr-tag">System does</div>
+                <div>Validates completeness, formatting, business rules, and booking-related data.</div>
+              </td>
+              <td class="journey-col-output">
+                <div class="col-hdr-tag">Output</div>
+                <div>Validation result and downloadable validation report.</div>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr>
+              <td class="journey-col-step">
+                <div class="journey-step-cell-content">
+                  <span class="step-mini-circle c5">5</span>
+                  <i class="fa-solid fa-pen-to-square journey-icon c5"></i>
+                  <span>Bookable Tester</span>
+                </div>
+              </td>
+              <td class="journey-col-user">
+                <div class="col-hdr-tag">User does</div>
+                <div>Runs a booking readiness test.</div>
+              </td>
+              <td class="journey-col-system">
+                <div class="col-hdr-tag">System does</div>
+                <div>Creates, patches, and deletes a test booking to verify end-to-end usability.</div>
+              </td>
+              <td class="journey-col-output">
+                <div class="col-hdr-tag">Output</div>
+                <div>Pass/fail result and test log.</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. MODULE STATUS TABLE -->
+      <section class="module-status-section">
+        <div class="section-title-banner">Module Status</div>
+        <table class="module-table">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Purpose</th>
+              <th style="text-align: right;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="module-name-cell">Timeslot Import</td>
+              <td class="module-purpose-cell">Upload, validate, and import Excel files with downloadable error report</td>
+              <td class="module-status-cell">
+                <span class="badge-in-progress"><i class="fa-regular fa-clock"></i> IN PROGRESS</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="module-name-cell">Template Generate</td>
+              <td class="module-purpose-cell">Auto-generate formatted Excel template from imported data</td>
+              <td class="module-status-cell">
+                <span class="badge-not-started"><i class="fa-regular fa-circle"></i> NOT STARTED</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="module-name-cell">Excel Validator</td>
+              <td class="module-purpose-cell">Port proven validator logic into the unified .NET Core build</td>
+              <td class="module-status-cell">
+                <span class="badge-not-started"><i class="fa-regular fa-circle"></i> NOT STARTED</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="module-name-cell">Bookable Tester</td>
+              <td class="module-purpose-cell">Port proven tester logic into the unified .NET Core build</td>
+              <td class="module-status-cell">
+                <span class="badge-not-started"><i class="fa-regular fa-circle"></i> NOT STARTED</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="module-name-cell">Package Extension</td>
+              <td class="module-purpose-cell">Additional module &ndash; requirements being defined</td>
+              <td class="module-status-cell">
+                <span class="badge-pending"><i class="fa-solid fa-ellipsis"></i> PENDING</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 5. FOOTER -->
+      <footer class="doc-footer">
+        <div>RSG UNIFIED SUITE &bull; Red Sea Global Modernization &bull; Target Release: July 2026 &bull; Active Milestone: 16 Oct 2026</div>
+        <div>Confidential Internal Use Only &bull; C Apps Engineering</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('Red_Sea_Import_Tool_Scope_Document.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'Red_Sea_Import_Tool_Scope_Document.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

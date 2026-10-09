@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Sea Import Tool — Weekly Project Visibility Card (09 October 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: #0284c7;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .header-titles h1 {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-badge-live {
+      background: #f59e0b;
+      color: #0b1f3a;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+    }
+
+    .eta-header-badge {
+      background: rgba(2, 132, 199, 0.2);
+      border: 1px solid #0284c7;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 2. METADATA ROW */
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.3fr 1.3fr 1fr 1fr;
+      gap: 10px;
+      padding: 8px 24px;
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .meta-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .meta-lbl i { color: #0284c7; }
+
+    .meta-val {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    /* 3. MAIN GRID (6 PANELS) */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      padding: 8px 24px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .panel-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-hdr {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .panel-hdr i { color: #38bdf8; }
+
+    .panel-body {
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      font-size: 10px;
+    }
+
+    /* Process Flow in Panel 1 */
+    .pipeline-preview-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pipe-step-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+
+    .pipe-step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pipe-step-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #0b2240;
+    }
+
+    .pipe-step-badge {
+      margin-left: auto;
+      font-size: 8.5px;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .pipe-step-badge.in-progress { background: #fef3c7; color: #b45309; }
+    .pipe-step-badge.not-started { background: #e0f2fe; color: #0369a1; }
+    .pipe-step-badge.pending { background: #f1f5f9; color: #64748b; }
+
+    /* Key-Value table */
+    .table-compact {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+    }
+    .table-compact th, .table-compact td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .table-compact th {
+      background: #f1f5f9;
+      font-weight: 800;
+      color: #0b2240;
+      text-align: left;
+    }
+
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .bullet-list li {
+      position: relative;
+      padding-left: 10px;
+      line-height: 1.3;
+      color: #334155;
+      font-weight: 600;
+    }
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0284c7;
+      font-weight: 900;
+    }
+
+    /* 4. FOOTER */
+    .footer-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      border-top: 1.5px solid #061528;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <a href="../scope document/Red_Sea_Import_Tool_Scope_Document.html" class="top-nav-link">
+        <i class="fa-solid fa-file-lines"></i> View Scope Document
+      </a>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Visibility Card JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER -->
+      <header class="header-bar">
+        <div class="brand-wrap">
+          <div class="brand-icon">
+            <i class="fa-solid fa-file-import"></i>
+          </div>
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">RSG UNIFIED SUITE &bull; RED SEA IMPORT TOOL &bull; WEEK 38 (09 OCT 2026)</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="status-badge-live">
+            <i class="fa-regular fa-clock"></i>
+            <span>IN PROGRESS</span>
+          </div>
+          <div class="eta-header-badge">
+            <i class="fa-solid fa-calendar-check"></i>
+            <span>ETA: 16th Oct 2026</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. METADATA ROW -->
+      <section class="meta-row">
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-building"></i> Company</span>
+          <span class="meta-val">C Apps</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-handshake"></i> Client</span>
+          <span class="meta-val">Red Sea Global</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-folder-open"></i> Project Name</span>
+          <span class="meta-val">Red Sea Import Tool</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-code-branch"></i> Current Phase</span>
+          <span class="meta-val">Pipeline Modernization</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-calendar"></i> Week No.</span>
+          <span class="meta-val">Week 38</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-calendar-days"></i> Week Ending</span>
+          <span class="meta-val">09 October 2026</span>
+        </div>
+      </section>
+
+      <!-- 3. MAIN GRID -->
+      <main class="main-grid">
+
+        <!-- PANEL 1: PIPELINE WORKSTREAM STATUS -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>1. Pipeline Workstream Status</span>
+          </div>
+          <div class="panel-body">
+            <div class="pipeline-preview-list">
+              <div class="pipe-step-item">
+                <div class="pipe-step-num">1</div>
+                <div class="pipe-step-title">Timeslot Import</div>
+                <span class="pipe-step-badge in-progress">In Progress</span>
+              </div>
+              <div class="pipe-step-item">
+                <div class="pipe-step-num">2</div>
+                <div class="pipe-step-title">Database Import Engine</div>
+                <span class="pipe-step-badge in-progress">In Progress</span>
+              </div>
+              <div class="pipe-step-item">
+                <div class="pipe-step-num">3</div>
+                <div class="pipe-step-title">Template Generate (.NET Core)</div>
+                <span class="pipe-step-badge not-started">Not Started</span>
+              </div>
+              <div class="pipe-step-item">
+                <div class="pipe-step-num">4</div>
+                <div class="pipe-step-title">Excel Validator (Ported Logic)</div>
+                <span class="pipe-step-badge not-started">Not Started</span>
+              </div>
+              <div class="pipe-step-item">
+                <div class="pipe-step-num">5</div>
+                <div class="pipe-step-title">Bookable Tester &amp; Package Ext</div>
+                <span class="pipe-step-badge pending">Pending</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: CURRENT SPRINT FOCUS -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>2. Current Sprint Focus</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li><strong>Timeslot Import:</strong> Implementation of Excel parser with header &amp; data validation.</li>
+              <li><strong>Downloadable Error Report:</strong> Generating structured Excel feedback on import conflicts.</li>
+              <li><strong>Database Schema:</strong> Validated record staging &amp; transaction logging tables.</li>
+              <li><strong>Target Release:</strong> Milestone delivery scheduled for <strong>16th Oct 2026</strong>.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 3: OBJECTIVES & BUSINESS VALUE -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-rocket"></i>
+            <span>3. Objectives &amp; Value</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li><strong>Tool Consolidation:</strong> Replaces 4 disjointed desktop tools into 1 unified cloud-ready pipeline.</li>
+              <li><strong>Reduced Manual Effort:</strong> Eliminates manual spreadsheet copy-pasting for bookings.</li>
+              <li><strong>Data Integrity:</strong> Pre-import schema validation ensures zero corrupt timeslots.</li>
+              <li><strong>End-to-End Verification:</strong> Bookable tester verifies full booking readiness before go-live.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 4: WHAT WAS DELIVERED THIS WEEK -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>4. Delivered This Week</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li>Detailed user journey pipeline architecture finalized.</li>
+              <li>Core file validator rules engine ported into .NET Core staging project.</li>
+              <li>Initial timeslot import model and schema definitions committed.</li>
+              <li>Downloadable Excel error report template structure designed.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 5: KEY RISKS & MITIGATIONS -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>5. Risks &amp; Mitigations</span>
+          </div>
+          <div class="panel-body">
+            <table class="table-compact">
+              <thead>
+                <tr>
+                  <th>Risk / Issue</th>
+                  <th>Severity</th>
+                  <th>Mitigation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Excel format variability across brands</td>
+                  <td style="color:#d97706; font-weight:800;">Medium</td>
+                  <td>Strict header validation &amp; downloadable error report</td>
+                </tr>
+                <tr>
+                  <td>Legacy validator rule edge cases</td>
+                  <td style="color:#2563eb; font-weight:800;">Low</td>
+                  <td>Porting test fixtures from existing desktop tools</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- PANEL 6: TARGET MILESTONES -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-flag-checkered"></i>
+            <span>6. Target Milestones</span>
+          </div>
+          <div class="panel-body">
+            <table class="table-compact">
+              <thead>
+                <tr>
+                  <th>Milestone</th>
+                  <th>Target Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Timeslot Import Engine</td>
+                  <td>12 Oct 2026</td>
+                  <td style="color:#d97706; font-weight:800;">In Progress</td>
+                </tr>
+                <tr>
+                  <td>Validator &amp; Template Gen</td>
+                  <td>14 Oct 2026</td>
+                  <td style="color:#2563eb; font-weight:800;">Planned</td>
+                </tr>
+                <tr>
+                  <td>Release 1.0 Milestone Go-Live</td>
+                  <td><strong>16 Oct 2026</strong></td>
+                  <td style="color:#16a34a; font-weight:800;">ETA: 16th Oct</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </main>
+
+      <!-- 4. FOOTER -->
+      <footer class="footer-bar">
+        <div>C APPS PORTFOLIO &bull; RSG UNIFIED SUITE &bull; RED SEA IMPORT TOOL</div>
+        <div>CONFIDENTIAL INTERNAL USE ONLY &bull; ETA: 16TH OCT 2026</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
