@@ -10,6 +10,7 @@ const DEFAULT_PROJECTS = [
     name: 'OneNex',
     icon: '🍽️',
     release: 'Release 1.2 (Development & Fixes)',
+    eta: '2nd Nov 2026',
     leads: 'Imthath (Lead), Sureka, Nithusan (3 Developers — 91h Capacity)',
     description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
     highlights: 'W07 (09 Oct 2026): Security & performance reached 75%. Localization & Web UI/UX dev complete. Stripe initiated, UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Code freeze target: 23 Oct; Target release: 02 Nov 2026.',
@@ -21,6 +22,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '09 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '2nd Nov 2026',
         manDays: '3 Developers (71.5/91h · 78.6%)',
         consumed: '78.6% Effort Consumed (71.5/91h)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_09.10.2026.html',
@@ -33,6 +35,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '02 Oct 2026',
         status: 'ON TRACK',
         statusClass: 'green',
+        eta: '2nd Nov 2026',
         manDays: '4 Members (120 Man-Days)',
         consumed: '33% Elapsed (40/120 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_02.10.2026.html',
@@ -45,6 +48,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '25 Sep 2026',
         status: 'ON TRACK',
         statusClass: 'green',
+        eta: '2nd Nov 2026',
         manDays: '4 Members (120 Man-Days)',
         consumed: '17% Elapsed (20/120 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_25.09.2026.html',
@@ -57,6 +61,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '11 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '11th Sep 2026',
         manDays: '6 Team Members',
         consumed: '29% Completed (27/93)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_11.09.2026.html',
@@ -70,6 +75,7 @@ const DEFAULT_PROJECTS = [
     name: 'OneNex Phase 2',
     icon: '🏗️',
     release: 'Phase 1 — Foundation Modules',
+    eta: '2nd Nov 2026',
     leads: 'Team B (4 Developers — 3,120h)',
     description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, and Modular Folio & Billing.',
     highlights: 'Sprint 05–09 Oct (W07): Localization & Web UI/UX dev complete; Security & perf at 75%. UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Targets retained for 02 Nov release.',
@@ -81,6 +87,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '09 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '2nd Nov 2026',
         manDays: '3 Developers (71.5/91h Recorded)',
         consumed: '78.6% Recorded Effort (71.5/91h)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html',
@@ -93,6 +100,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '02 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '2nd Nov 2026',
         manDays: '4 Developers (3,120h Capacity)',
         consumed: '13 Days Used (Phase 1: 3/30d)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_02.10.2026.html',
@@ -105,6 +113,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '25 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '2nd Nov 2026',
         manDays: '4 Developers (3,120h Planned)',
         consumed: '8 Days Used (Phase 0: 8/10d)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_25.09.2026.html',
@@ -118,6 +127,7 @@ const DEFAULT_PROJECTS = [
     name: 'Integration Configuration',
     icon: '🔌',
     release: 'Release 01 (Integration Setup & Monitor)',
+    eta: '16th Oct 2026',
     leads: 'Team Althaf (50 Man-Days)',
     description: 'Enterprise Optimo Integration Configuration Module — transitions integration setup from manual / developer-led configuration to a guided, user-managed capability with Integration Hub, Destination Setup, Field Mapping, and Chained Integrations.',
     highlights: 'Week 38 (09 Oct 2026): 48% overall progress, 30/50 man-days consumed (60%). Hub, Type Selection & General Details 100% completed; Configuration (70%), Destination Setup (60%), and Field Mapping (55%) in active development. Target Go-Live: 16 Oct 2026.',
@@ -129,6 +139,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '09 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '16th Oct 2026',
         manDays: '50 Man-Days (Team Althaf)',
         consumed: '60% Consumed (30/50 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_09.10.2026.html',
@@ -141,6 +152,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '11 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
+        eta: '16th Oct 2026',
         manDays: '50 Man-Days (Team Althaf)',
         consumed: '40% Consumed (20/50 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_11.09.2026.html',
@@ -154,6 +166,7 @@ const DEFAULT_PROJECTS = [
     name: 'Deployment Automation',
     icon: '🚀',
     release: 'Phase 1 & 2 (Completed)',
+    eta: '8th Sep 2026',
     leads: 'Gopikrishna (Lead), Piragash, Thenuja (180 Man-Days)',
     description: 'Enterprise Optimo Deployment Tool — automated version upgrades, deployment governance & validation, side-by-side environment comparison, configuration migration, and release pipeline orchestration.',
     highlights: 'Phase 1 & 2 100% Completed (180/180 Man-Days consumed). Handover to Support & Operations planned for 08 Sep 2026. Phase 3 planning pending meeting with Jon.',
@@ -165,6 +178,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '10 Sep 2026',
         status: 'COMPLETED',
         statusClass: 'green',
+        eta: '8th Sep 2026',
         manDays: '3 Team Members (180 Man-Days)',
         consumed: '100% Consumed (180/180 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Deployment_Automation_Weekly_Visibility_Card_10.09.2026.html',
@@ -178,6 +192,7 @@ const DEFAULT_PROJECTS = [
     name: 'Optimo Gov Portal',
     icon: '🏛️',
     release: 'Phase 2 (In Progress)',
+    eta: '24th Oct 2026',
     leads: 'Team Saruja & Team Sajilan (Dedicated), Gopi, Denojan (16 Resources)',
     description: 'Enterprise Municipal & Citizen Self-Service Architecture — customer self-service portals, overview dashboards, public event & program booking, support ticketing, Governance Hub Knowledge Base module, and AskOptimo AI conversational assistant.',
     highlights: 'Phase 1 Foundation Completed. Phase 2 active: 120/150 man-days consumed (80%), AI implementation, Governance Hub Knowledge Base & ticketing complete. Overall progress 70%. Within budget & on track.',
@@ -189,6 +204,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '10 Sep 2026',
         status: 'ON TRACK',
         statusClass: 'green',
+        eta: '24th Oct 2026',
         manDays: '16 Resources (150 Man-Days Phase 2)',
         consumed: '80% Consumed (120/150 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Optimo_Gov_Portal_Weekly_Visibility_Card_10.09.2026.html',
@@ -229,11 +245,12 @@ try {
     'portal_projects_gov_hub_v1',
     'portal_projects_integ_scope_v1',
     'portal_projects_integ_card_oct9_v1',
-    'portal_projects_onenex_w07_oct9_v1'
+    'portal_projects_onenex_w07_oct9_v1',
+    'portal_projects_onenex_w07_updated_v2'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex_w07_updated_v2';
+const STORAGE_KEY = 'portal_projects_eta_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
@@ -355,7 +372,13 @@ function renderProjects(filterText = '', filterStatus = 'all') {
           <h3 style="font-size:18px;">${p.icon || '📁'} ${p.name}</h3>
           <div class="project-meta-sub">${p.release} • ${curWeek.weekEnding} • Week ${curWeek.weekNumber || 1}</div>
         </div>
-        <span class="status-tag ${curWeek.statusClass}" style="font-size:12px; padding:6px 14px;">${curWeek.status}</span>
+        <div class="status-eta-wrap">
+          <span class="status-tag ${curWeek.statusClass}" style="font-size:12px; padding:6px 14px;">${curWeek.status}</span>
+          <span class="project-eta-badge" title="Estimated Delivery / Completion Date">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ETA: ${curWeek.eta || p.eta || '2nd Nov 2026'}
+          </span>
+        </div>
       </div>
       <div class="project-card-body">
         
@@ -732,6 +755,19 @@ function openProjectDetail(projectId, tab = 'weekly') {
   const titleEl = document.getElementById('detailTitle');
   if (titleEl) titleEl.innerText = `${project.name} (${project.release})`;
 
+  // Update Status & ETA in detail header
+  const curWeek = project.weeks[project.selectedWeekIndex || 0] || project.weeks[0];
+  const statusEtaEl = document.getElementById('detailStatusEta');
+  if (statusEtaEl) {
+    statusEtaEl.innerHTML = `
+      <span class="status-tag ${curWeek.statusClass}" style="font-size:11.5px; padding:4px 12px;">${curWeek.status}</span>
+      <span class="project-eta-badge" style="font-size:11px; padding:3px 8px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        ETA: ${curWeek.eta || project.eta || '2nd Nov 2026'}
+      </span>
+    `;
+  }
+
   // Populate Week Dropdown
   const weekSelect = document.getElementById('detailWeekSelect');
   if (weekSelect) {
@@ -783,6 +819,17 @@ function changeDetailWeek(weekIndex) {
   }
   activeProject.selectedWeekIndex = parseInt(weekIndex, 10);
   saveProjects();
+  const curWeek = activeProject.weeks[activeProject.selectedWeekIndex] || activeProject.weeks[0];
+  const statusEtaEl = document.getElementById('detailStatusEta');
+  if (statusEtaEl) {
+    statusEtaEl.innerHTML = `
+      <span class="status-tag ${curWeek.statusClass}" style="font-size:11.5px; padding:4px 12px;">${curWeek.status}</span>
+      <span class="project-eta-badge" style="font-size:11px; padding:3px 8px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        ETA: ${curWeek.eta || activeProject.eta || '2nd Nov 2026'}
+      </span>
+    `;
+  }
   loadDetailFrame();
 }
 
