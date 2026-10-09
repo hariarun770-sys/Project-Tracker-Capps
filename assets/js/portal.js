@@ -12,9 +12,21 @@ const DEFAULT_PROJECTS = [
     release: 'Release 1.2 (Development & Fixes)',
     leads: 'Imthath & Team (4 Developers — 120 Man-Days)',
     description: 'All-in-one Restaurant Management System — connecting in-store operations, staff mobile POS with zero extra hardware, customer QR web ordering, and unified billing.',
-    highlights: 'Release 1.2 Development & Issue Fixing active (28 Sep – 23 Oct). 8 API areas under remediation. Code freeze target: 23 Oct. Production release: 02 Nov 2026.',
+    highlights: 'W07 (09 Oct 2026): Security & performance reached 75%. Localization & Web UI/UX dev complete. Stripe initiated, UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Code freeze target: 23 Oct; Target release: 02 Nov 2026.',
     selectedWeekIndex: 0,
     weeks: [
+      {
+        weekNumber: 7,
+        weekLabel: 'W07 · 09 Oct 2026 (Release 1.2 Dev & Fix)',
+        weekEnding: '09 Oct 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '3 Developers (71.5/91h · 78.6%)',
+        consumed: '78.6% Effort Consumed (71.5/91h)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Weekly_Visibility_Card_09.10.2026.html',
+        scopeUrl: 'scope document/OneNex_Scope_USP_Document.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+      },
       {
         weekNumber: 6,
         weekLabel: 'W06 · 02 Oct 2026 (Release 1.2 Dev & Fix)',
@@ -60,9 +72,21 @@ const DEFAULT_PROJECTS = [
     release: 'Phase 1 — Foundation Modules',
     leads: 'Team B (4 Developers — 3,120h)',
     description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, and Modular Folio & Billing.',
-    highlights: 'Sprint 28 Sep – 02 Oct: Phase 0 Architecture completed (10/10d). Phase 1 underway (3/30d). 8 Identity APIs, 6 Business APIs, Email/SMS/FCM Notification done, Storage Module created, Folio & Billing extracted from Payment.',
+    highlights: 'Sprint 05–09 Oct (W07): Localization & Web UI/UX dev complete; Security & perf at 75%. UK SMS 60%, Business App 50%. 71.5/91h recorded (78.6%). Targets retained for 02 Nov release.',
     selectedWeekIndex: 0,
     weeks: [
+      {
+        weekNumber: 41,
+        weekLabel: 'Sprint 05–09 Oct 2026 (W07 Release 1.2)',
+        weekEnding: '09 Oct 2026',
+        status: 'AT RISK',
+        statusClass: 'amber',
+        manDays: '3 Developers (71.5/91h Recorded)',
+        consumed: '78.6% Recorded Effort (71.5/91h)',
+        weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html',
+        scopeUrl: 'scope document/OneNex_Phase_2_Scope_Architecture.html',
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html'
+      },
       {
         weekNumber: 40,
         weekLabel: 'Sprint 28 Sep – 02 Oct 2026 (Phase 1)',
@@ -203,11 +227,12 @@ try {
     'portal_projects_phase2_oct6_features_v1',
     'portal_projects_all_oct2_v3',
     'portal_projects_gov_hub_v1',
-    'portal_projects_integ_scope_v1'
+    'portal_projects_integ_scope_v1',
+    'portal_projects_integ_card_oct9_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_integ_card_oct9_v1';
+const STORAGE_KEY = 'portal_projects_onenex_w07_oct9_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {

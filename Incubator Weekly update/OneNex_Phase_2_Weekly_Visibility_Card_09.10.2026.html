@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex — Weekly Project Visibility Card (W07 / 09 October 2026)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR (Ignored during JPG export) */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+    }
+
+    .top-nav-link.active-tab {
+      background: #ea580c;
+      color: #ffffff;
+      border-color: #f97316;
+    }
+
+    .top-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .export-btn-top {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ea580c;
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
+      transition: all 0.2s;
+    }
+
+    .export-btn-top:hover {
+      background: #c2410c;
+      transform: translateY(-1px);
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    /* 1536 x 1024 CARD CONTAINER */
+    #card, .report-card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+      padding: 0;
+    }
+
+    /* 1. TOP HEADER BAR */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 8px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #ff5722;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      font-style: italic;
+    }
+
+    .brand-logo-wrap span.nex {
+      color: #ffffff;
+    }
+
+    .divider-vert {
+      width: 1.5px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #ff7043;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .status-badge-amber {
+      background: #ff6b00;
+      color: #ffffff;
+      padding: 6px 20px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 10px rgba(255, 107, 0, 0.35);
+    }
+
+    .status-sub-text {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #ffccbc;
+      letter-spacing: 0.2px;
+    }
+
+    /* 2. PROJECT METADATA ROW (5 Columns) */
+    .project-meta-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+      padding: 7px 22px;
+      gap: 16px;
+    }
+
+    .meta-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-lbl {
+      font-size: 10px;
+      font-weight: 800;
+      color: #0b2d5c;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .meta-val {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.2px;
+    }
+
+    /* 3. DEVELOPER ALLOCATION & RECORDED ACTUAL EFFORT TABLE */
+    .dev-effort-block {
+      margin: 5px 14px 4px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .dev-effort-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      text-align: center;
+      padding: 4px 10px;
+    }
+
+    .dev-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .dev-table th {
+      background: #f1f5f9;
+      color: #0b2d5c;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      letter-spacing: 0.3px;
+      padding: 4.5px 10px;
+      text-align: left;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+    }
+
+    .dev-table th:last-child {
+      border-right: none;
+    }
+
+    .dev-table td {
+      padding: 4px 10px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      color: #1e293b;
+      vertical-align: middle;
+      font-size: 11px;
+    }
+
+    .dev-table td:last-child {
+      border-right: none;
+    }
+
+    .dev-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .dev-name {
+      font-weight: 900;
+      color: #0f172a;
+      width: 16%;
+    }
+
+    .dev-role {
+      font-weight: 600;
+      color: #475569;
+      width: 20%;
+    }
+
+    .dev-actual {
+      font-weight: 900;
+      color: #ea580c;
+      font-size: 12.5px;
+      width: 12%;
+    }
+
+    .dev-cap {
+      font-weight: 600;
+      color: #334155;
+      width: 17%;
+    }
+
+    .dev-ratio {
+      font-weight: 900;
+      color: #ea580c;
+      font-size: 12.5px;
+      width: 13%;
+    }
+
+    .dev-resp {
+      font-size: 10.5px;
+      color: #334155;
+      font-weight: 500;
+      width: 22%;
+    }
+
+    /* 4. MAIN 6-PANEL GRID (2 Rows x 3 Columns) */
+    .panels-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 10px;
+      margin: 0 14px 4px 14px;
+      flex: 1;
+    }
+
+    .panel-box {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-hdr {
+      background: #0b2d5c;
+      color: #ffffff;
+      padding: 4px 10px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-body {
+      padding: 8px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .panel-footer-note {
+      font-size: 8.5px;
+      color: #64748b;
+      font-weight: 500;
+      margin-top: 6px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 3px;
+    }
+
+    /* PANEL 1: PROGRESS BY AREA */
+    .area-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .area-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5px;
+    }
+
+    .area-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .area-status {
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+    .area-status.orange { color: #ea580c; }
+    .area-status.green { color: #15803d; font-weight: 800; }
+
+    /* PANEL 2: RELEASE PLAN */
+    .release-phases-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .release-phase-item {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 8px;
+      align-items: flex-start;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 4px;
+    }
+    .release-phase-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .phase-date-tag {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #ea580c;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .phase-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .phase-main-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0b2d5c;
+    }
+
+    .phase-sub-green {
+      font-size: 9px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    .phase-sub-gray {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* PANEL 3: NEXT WEEK TARGETS */
+    .target-rows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .target-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f8fafc;
+      padding-bottom: 3px;
+    }
+    .target-row:last-child {
+      border-bottom: none;
+    }
+
+    .target-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0b2d5c;
+    }
+
+    .target-pct {
+      font-size: 16px;
+      font-weight: 900;
+      color: #ff6b00;
+      letter-spacing: -0.2px;
+    }
+
+    /* PANEL 4: WHAT CHANGED THIS WEEK */
+    .changed-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+    }
+
+    .changed-item-green {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #15803d;
+    }
+
+    .changed-note-gray {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .changed-bold-header {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0b2d5c;
+      margin-top: 2px;
+    }
+
+    .changed-sub-green {
+      font-size: 9px;
+      font-weight: 700;
+      color: #15803d;
+    }
+
+    .changed-sub-orange {
+      font-size: 9px;
+      font-weight: 700;
+      color: #ea580c;
+    }
+
+    .changed-sub-gray {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .changed-sub-dark {
+      font-size: 9px;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* PANEL 5: RISKS / MANAGEMENT ATTENTION */
+    .risks-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .risk-unit {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5px;
+    }
+
+    .risk-unit-title {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #ea580c;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .risk-unit-desc {
+      font-size: 9.5px;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .action-required-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 4px;
+      padding: 6px 9px;
+      margin-top: 4px;
+    }
+
+    .action-req-title {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #ea580c;
+      text-transform: uppercase;
+      margin-bottom: 1px;
+    }
+
+    .action-req-txt {
+      font-size: 9px;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* PANEL 6: AT A GLANCE */
+    .glance-top-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .glance-metric-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .glance-num {
+      font-size: 27px;
+      font-weight: 900;
+      color: #ff6b00;
+      line-height: 1;
+    }
+
+    .glance-lbl {
+      font-size: 7.5px;
+      font-weight: 800;
+      color: #475569;
+      text-transform: uppercase;
+      margin-top: 2px;
+      line-height: 1.1;
+    }
+
+    .glance-sub-tag {
+      font-size: 7px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    .glance-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 5px;
+    }
+
+    .glance-highlight-bold {
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0b2d5c;
+      margin-bottom: 2px;
+    }
+
+    .glance-bullet-txt {
+      font-size: 8.5px;
+      color: #64748b;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .glance-footer-muted {
+      font-size: 7.5px;
+      color: #94a3b8;
+      font-style: italic;
+      margin-top: 3px;
+    }
+
+    /* FOOTER */
+    .card-bottom-footer {
+      font-size: 9px;
+      color: #64748b;
+      text-align: center;
+      padding: 3px 0 4px 0;
+      font-weight: 500;
+      background: #ffffff;
+      border-top: 1px solid #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar" data-html2canvas-ignore="true">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Project Tracker
+      </a>
+      <a href="OneNex_Weekly_Visibility_Card_09.10.2026.html" class="top-nav-link active-tab">
+        <i class="fa-solid fa-chart-line"></i> W07 · 09 Oct 2026 (Active)
+      </a>
+      <a href="OneNex_Weekly_Visibility_Card_02.10.2026.html" class="top-nav-link">
+        <i class="fa-solid fa-clock-rotate-left"></i> W06 · 02 Oct 2026
+      </a>
+      <a href="OneNex_Release_Timeline.html" class="top-nav-link">
+        <i class="fa-solid fa-calendar-days"></i> Release 1.2 Timeline
+      </a>
+      <a href="../scope document/OneNex_Scope_USP_Document.html" class="top-nav-link">
+        <i class="fa-solid fa-file-lines"></i> Scope &amp; USP Document
+      </a>
+    </div>
+    <div class="top-nav-right">
+      <span style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">OneNex &bull; Week 07 (09 Oct 2026)</span>
+      <button class="export-btn-top" onclick="window.exportCurrentPageToJpg && window.exportCurrentPageToJpg('OneNex_Weekly_Visibility_Card_09.10.2026')">
+        <i class="fa-solid fa-camera"></i> 📸 1-Click Retina JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card" class="report-card">
+
+      <!-- 1. TOP HEADER BAR -->
+      <header class="header-bar">
+        <div class="brand-group">
+          <!-- OneNex Brand Logo -->
+          <div class="brand-logo-wrap">
+            <div class="brand-logo-icon">1</div>
+            <span>ne<span class="nex">Nex</span></span>
+          </div>
+
+          <div class="divider-vert"></div>
+
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">W07 &bull; 05-09 OCTOBER 2026 &bull; WEEK ENDING FRIDAY, 09 OCTOBER</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Amber Status Badge -->
+          <div class="status-badge-amber">
+            AMBER &bull; ATTENTION NEEDED
+          </div>
+          <div class="status-sub-text">
+            Targets retained; provider accounts required
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. PROJECT METADATA ROW (5 Columns) -->
+      <section class="project-meta-row">
+        <div class="meta-col">
+          <div class="meta-lbl">COMPANY</div>
+          <div class="meta-val">CApps</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl">PROJECT</div>
+          <div class="meta-val">OneNex</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl">CURRENT RELEASE</div>
+          <div class="meta-val">Release 1.2</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl">TEAM SIZE</div>
+          <div class="meta-val">3 developers</div>
+        </div>
+        <div class="meta-col">
+          <div class="meta-lbl">TARGET RELEASE</div>
+          <div class="meta-val">02 Nov 2026</div>
+        </div>
+      </section>
+
+      <!-- 3. DEVELOPER ALLOCATION & RECORDED ACTUAL EFFORT TABLE -->
+      <section class="dev-effort-block">
+        <div class="dev-effort-hdr">
+          W07 &bull; DEVELOPER RESPONSIBILITIES &amp; RECORDED ACTUAL EFFORT &bull; 7 HOURS / WORKING DAY
+        </div>
+        <table class="dev-table">
+          <thead>
+            <tr>
+              <th>RESOURCE NAME</th>
+              <th>ROLE</th>
+              <th>ACTUAL HOURS</th>
+              <th>CAPACITY</th>
+              <th>ACTUAL / CAPACITY</th>
+              <th>MAIN RESPONSIBILITY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dev-name">Imthath</td>
+              <td class="dev-role">Developer / Coordinator</td>
+              <td class="dev-actual">17 h</td>
+              <td class="dev-cap">21 h &bull; 2 days leave</td>
+              <td class="dev-ratio">81.0%</td>
+              <td class="dev-resp">Localization, Stripe, UK SMS, Business App</td>
+            </tr>
+            <tr>
+              <td class="dev-name">Sureka</td>
+              <td class="dev-role">Developer</td>
+              <td class="dev-actual">28.5 h</td>
+              <td class="dev-cap">35 h</td>
+              <td class="dev-ratio">81.4%</td>
+              <td class="dev-resp">Business Setup UX; Web UI/UX; testing</td>
+            </tr>
+            <tr>
+              <td class="dev-name">Nithusan</td>
+              <td class="dev-role">Developer</td>
+              <td class="dev-actual">26 h</td>
+              <td class="dev-cap">35 h</td>
+              <td class="dev-ratio">74.3%</td>
+              <td class="dev-resp">Security, performance and API fixes</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. MAIN 6-PANEL GRID -->
+      <main class="panels-grid">
+
+        <!-- PANEL 1: PROGRESS BY AREA -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>1. RELEASE 1.2 &bull; PROGRESS BY AREA</span>
+          </div>
+          <div class="panel-body">
+            <div class="area-list">
+              <div class="area-item">
+                <div class="area-title">Security &amp; performance</div>
+                <div class="area-status orange">75% &bull; in progress</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">Business Setup UX</div>
+                <div class="area-status orange">In progress</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">Business &amp; Customer Web UI/UX</div>
+                <div class="area-status green">Dev complete &bull; testing pending</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">Localization</div>
+                <div class="area-status green">Dev complete &bull; testing pending</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">Stripe</div>
+                <div class="area-status orange">Initiated</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">UK SMS</div>
+                <div class="area-status orange">60% &bull; in progress</div>
+              </div>
+              <div class="area-item">
+                <div class="area-title">Business App</div>
+                <div class="area-status orange">50% &bull; in progress</div>
+              </div>
+            </div>
+            <div class="panel-footer-note">
+              Development completion does not imply QA sign-off.
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: RELEASE PLAN · TARGETS RETAINED -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>2. RELEASE PLAN &bull; TARGETS RETAINED</span>
+          </div>
+          <div class="panel-body">
+            <div class="release-phases-list">
+              <div class="release-phase-item">
+                <div class="phase-date-tag">21-25 SEP</div>
+                <div class="phase-info">
+                  <div class="phase-main-name">Testing and assessment</div>
+                  <div class="phase-sub-green">All eight API reports complete</div>
+                </div>
+              </div>
+
+              <div class="release-phase-item">
+                <div class="phase-date-tag">28 SEP-23 OCT</div>
+                <div class="phase-info">
+                  <div class="phase-main-name">Development and issue fixing</div>
+                  <div class="phase-sub-gray">Code freeze / release candidate &bull; 23 Oct</div>
+                </div>
+              </div>
+
+              <div class="release-phase-item">
+                <div class="phase-date-tag">26-30 OCT</div>
+                <div class="phase-info">
+                  <div class="phase-main-name">QA validation and deployment</div>
+                  <div class="phase-sub-gray">Go/no-go &amp; production deploy &bull; 30 Oct</div>
+                </div>
+              </div>
+
+              <div class="release-phase-item">
+                <div class="phase-date-tag">02 NOV</div>
+                <div class="phase-info">
+                  <div class="phase-main-name">Product release</div>
+                  <div class="phase-sub-gray">Release 1.2 live &bull; target retained</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer-note">
+              Account readiness and testing require close monitoring.
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 3: NEXT WEEK · 12-16 OCTOBER -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>3. NEXT WEEK &bull; 12-16 OCTOBER</span>
+          </div>
+          <div class="panel-body">
+            <div class="target-rows-list">
+              <div class="target-row">
+                <span class="target-name">Security &amp; performance</span>
+                <span class="target-pct">100%</span>
+              </div>
+              <div class="target-row">
+                <span class="target-name">UK SMS</span>
+                <span class="target-pct">100%</span>
+              </div>
+              <div class="target-row">
+                <span class="target-name">Business Setup UX</span>
+                <span class="target-pct">100%</span>
+              </div>
+              <div class="target-row">
+                <span class="target-name">Business App</span>
+                <span class="target-pct">75%</span>
+              </div>
+              <div class="target-row">
+                <span class="target-name">Stripe development</span>
+                <span class="target-pct">50%</span>
+              </div>
+            </div>
+            <div class="panel-footer-note">
+              Targets for next week; completion to be validated.
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 4: WHAT CHANGED THIS WEEK? -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>4. WHAT CHANGED THIS WEEK?</span>
+          </div>
+          <div class="panel-body">
+            <div class="changed-bullets">
+              <div class="changed-item-green">&check; Localization development complete</div>
+              <div class="changed-item-green">&check; Business &amp; Customer Web UI/UX complete</div>
+              <div class="changed-note-gray">Testing pending for both completed areas.</div>
+
+              <div class="changed-bold-header">Security &amp; performance reached 75%.</div>
+              <div class="changed-sub-green">API fixes completed: Admin, Reservation, Resource.</div>
+              <div class="changed-sub-orange">In progress: Business Setup, Shared and Order APIs.</div>
+              <div class="changed-sub-gray">Prior assessment: all eight API reports complete.</div>
+              <div class="changed-sub-dark">Stripe initiated; UK SMS 60%; Business App 50%.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 5: RISKS / MANAGEMENT ATTENTION -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>5. RISKS / MANAGEMENT ATTENTION</span>
+          </div>
+          <div class="panel-body">
+            <div class="risks-container">
+              <div class="risk-unit">
+                <div class="risk-unit-title">APP STORE ACCOUNT</div>
+                <div class="risk-unit-desc">Account / registration required for release readiness.</div>
+              </div>
+
+              <div class="risk-unit">
+                <div class="risk-unit-title">STRIPE ACCOUNT</div>
+                <div class="risk-unit-desc">Account required to support payment integration.</div>
+              </div>
+
+              <div class="risk-unit">
+                <div class="risk-unit-title">TWILIO ACCOUNT</div>
+                <div class="risk-unit-desc">Account required for UK SMS integration.</div>
+              </div>
+
+              <div class="action-required-box">
+                <div class="action-req-title">ACTION REQUIRED</div>
+                <div class="action-req-txt">Provide account access to support the retained targets.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 6: AT A GLANCE · RELEASE 1.2 -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <span>6. AT A GLANCE &bull; RELEASE 1.2</span>
+          </div>
+          <div class="panel-body">
+            <div>
+              <div class="glance-top-row">
+                <div class="glance-metric-col">
+                  <span class="glance-num">75%</span>
+                  <span class="glance-lbl">SECURITY &amp;</span>
+                  <span class="glance-sub-tag">PERFORMANCE</span>
+                </div>
+                <div class="glance-metric-col">
+                  <span class="glance-num">60%</span>
+                  <span class="glance-lbl">UK SMS</span>
+                  <span class="glance-sub-tag">IN PROGRESS</span>
+                </div>
+                <div class="glance-metric-col">
+                  <span class="glance-num">50%</span>
+                  <span class="glance-lbl">BUSINESS APP</span>
+                  <span class="glance-sub-tag">IN PROGRESS</span>
+                </div>
+              </div>
+
+              <div class="glance-details">
+                <div class="glance-highlight-bold">Weekly actual: 71.5 / 91 hours &bull; 78.6%</div>
+                <div class="glance-bullet-txt">Capacity adjusted for Imthath's 2 days of leave.</div>
+                <div class="glance-bullet-txt">Task 370912: effort blank; excluded from hours.</div>
+                <div class="glance-bullet-txt">Nithusan: includes 4 hours with PR pending.</div>
+                <div class="glance-bullet-txt">500 h plan provisional - effort to finish not reported</div>
+                <div class="glance-footer-muted">Actual / capacity % measures recorded effort, not progress.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </main>
+
+      <!-- 5. FOOTER NOTE -->
+      <footer class="card-bottom-footer">
+        Note: This timeline is approximate and may change based on progress, dependencies and team availability.
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina High-Resolution JPG -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+</body>
+</html>
