@@ -140,10 +140,10 @@ const DEFAULT_PROJECTS = [
     name: 'Integration Configuration',
     icon: '🔌',
     release: 'Release 01 (Integration Setup & Monitor)',
-    eta: '16th Oct 2026',
+    eta: '23rd Oct 2026',
     leads: 'Team Althaf (50 Man-Days)',
     description: 'Enterprise Optimo Integration Configuration Module — transitions integration setup from manual / developer-led configuration to a guided, user-managed capability with Integration Hub, Destination Setup, Field Mapping, and Chained Integrations.',
-    highlights: 'Week 38 (09 Oct 2026): 48% overall progress, 30/50 man-days consumed (60%). Hub, Type Selection & General Details 100% completed; Configuration (70%), Destination Setup (60%), and Field Mapping (55%) in active development. Target Go-Live: 16 Oct 2026.',
+    highlights: 'Week 38 (09 Oct 2026): 48% overall progress, 30/50 man-days consumed (60%). Hub, Type Selection & General Details 100% completed; Configuration (70%), Destination Setup (60%), and Field Mapping (55%) in active development. Target Go-Live: 23 Oct 2026.',
     selectedWeekIndex: 0,
     weeks: [
       {
@@ -152,7 +152,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '09 Oct 2026',
         status: 'AT RISK',
         statusClass: 'amber',
-        eta: '16th Oct 2026',
+        eta: '23rd Oct 2026',
         manDays: '50 Man-Days (Team Althaf)',
         consumed: '60% Consumed (30/50 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_09.10.2026.html',
@@ -165,7 +165,7 @@ const DEFAULT_PROJECTS = [
         weekEnding: '11 Sep 2026',
         status: 'AT RISK',
         statusClass: 'amber',
-        eta: '16th Oct 2026',
+        eta: '23rd Oct 2026',
         manDays: '50 Man-Days (Team Althaf)',
         consumed: '40% Consumed (20/50 Man-Days)',
         weeklyUrl: 'Incubator Weekly update/Integration_Configuration_Weekly_Visibility_Card_11.09.2026.html',
@@ -288,11 +288,12 @@ try {
     'portal_projects_onenex_w07_updated_v2',
     'portal_projects_eta_v1',
     'portal_projects_rsg_v1',
-    'portal_projects_onenex2_roadmap_v1'
+    'portal_projects_onenex2_roadmap_v1',
+    'portal_projects_onenex2_eta_june27_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex2_eta_june27_v1';
+const STORAGE_KEY = 'portal_projects_integ_eta_oct23_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
