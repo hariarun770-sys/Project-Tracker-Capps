@@ -251,6 +251,32 @@ const DEFAULT_PROJECTS = [
         timelineUrl: 'Incubator Weekly update/Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.html'
       }
     ]
+  },
+  {
+    id: 'portal-maintenance',
+    name: 'Casual Portal, Reports & Regular Portal Maintenance',
+    icon: '🛠️',
+    release: 'Operations & Reliability (Recurring SLA)',
+    eta: 'Recurring',
+    leads: 'Team Arshad (Casual & Reports), Team Sajilan & Team Anushan (Regular Portal)',
+    description: 'Core platform maintenance, operational stability, and SLA defect resolution across Casual Booking Portal, Financial & Operational Report Modules, and Regular Portal facilities. Supported by 13 dedicated engineers across Team Arshad, Team Sajilan, and Team Anushan.',
+    highlights: 'Week 38 (15 Oct 2026): Active recurring SLA maintenance. Team Arshad actively maintaining Casual Portal and Report Modules (including WCC Aged Debtor and IWC security CRs). Team Sajilan & Team Anushan delivering scheduled bug fixes, testing, and regular portal infrastructure stability. High availability retained (>99.9%).',
+    selectedWeekIndex: 0,
+    weeks: [
+      {
+        weekNumber: 38,
+        weekLabel: 'Week 38 (15 Oct 2026 · Recurring Maintenance)',
+        weekEnding: '16 Oct 2026',
+        status: 'ON TRACK',
+        statusClass: 'green',
+        eta: 'Recurring',
+        manDays: '13 Dedicated Engineers (3 Pods)',
+        consumed: 'Active SLA & Maintenance',
+        weeklyUrl: 'Incubator Weekly update/Portal_Maintenance_Weekly_Visibility_Card_15.10.2026.html',
+        scopeUrl: 'scope document/Portal_Maintenance_Scope_Document.html',
+        timelineUrl: 'Incubator Weekly update/Portal_Maintenance_Weekly_Visibility_Card_15.10.2026.html'
+      }
+    ]
   }
 ];
 
@@ -291,11 +317,12 @@ try {
     'portal_projects_onenex2_roadmap_v1',
     'portal_projects_onenex2_eta_june27_v1',
     'portal_projects_integ_eta_oct23_v1',
-    'portal_projects_onenex2_timeplan_v1'
+    'portal_projects_onenex2_timeplan_v1',
+    'portal_projects_rsg_dev_completed_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_rsg_dev_completed_v1';
+const STORAGE_KEY = 'portal_projects_portal_maint_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {

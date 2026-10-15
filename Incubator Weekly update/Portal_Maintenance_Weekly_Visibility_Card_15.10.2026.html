@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Maintenance & Reliability — Weekly Project Visibility Card</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+      background: transparent;
+    }
+
+    #card {
+      width: 1536px;
+      height: 1024px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      justify-content: space-between;
+    }
+
+    /* 1. TOP HEADER */
+    .header-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #061528;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: #9333ea;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .header-titles h1 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .header-titles .sub-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #c084fc;
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .status-badge-live {
+      background: #16a34a;
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
+    }
+
+    .eta-header-badge {
+      background: rgba(147, 51, 234, 0.25);
+      border: 1px solid #a855f7;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 2. METADATA ROW */
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.3fr 1.4fr 1fr 1fr;
+      gap: 10px;
+      padding: 8px 24px;
+      background: #f8fafc;
+      border-bottom: 1.5px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .meta-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      font-size: 9px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .meta-lbl i { color: #9333ea; }
+
+    .meta-val {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    /* 3. MAIN GRID (6 PANELS) */
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      padding: 12px 24px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .panel-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .panel-hdr {
+      background: #0f2b4c;
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .panel-hdr i { color: #c084fc; }
+
+    .panel-body {
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      font-size: 10px;
+    }
+
+    /* Workstream items in Panel 1 */
+    .stream-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 5px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stream-hdr-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stream-title {
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0b2240;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stream-badge {
+      font-size: 8px;
+      font-weight: 900;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .badge-arshad { background: #ffe4e6; color: #be123c; }
+    .badge-sajilan { background: #ffedd5; color: #c2410c; }
+    .badge-anushan { background: #ccfbf1; color: #0f766e; }
+
+    .stream-desc {
+      font-size: 9px;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    /* Bullet List */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 9.5px;
+      line-height: 1.35;
+      color: #1e293b;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #9333ea;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    /* Compact Table */
+    .table-compact {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5px;
+    }
+    .table-compact th, .table-compact td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .table-compact th {
+      background: #f1f5f9;
+      color: #0b2240;
+      font-weight: 800;
+      text-align: left;
+    }
+    .table-compact td {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* 4. FOOTER */
+    .footer-bar {
+      background: #091e3a;
+      color: #ffffff;
+      padding: 6px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      border-top: 1.5px solid #061528;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <a href="../scope document/Portal_Maintenance_Scope_Document.html" class="top-nav-link">
+        <i class="fa-solid fa-file-lines"></i> View Scope Document
+      </a>
+      <a href="../scope document/Overall_Key_Initiatives_Executive_Summary.html" class="top-nav-link">
+        <i class="fa-solid fa-sitemap"></i> Key Initiatives Summary
+      </a>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Visibility Card JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card">
+
+      <!-- 1. TOP HEADER -->
+      <header class="header-bar">
+        <div class="brand-wrap">
+          <div class="brand-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+          <div class="header-titles">
+            <h1>WEEKLY PROJECT VISIBILITY CARD</h1>
+            <div class="sub-title">PORTAL MAINTENANCE &amp; RELIABILITY &bull; CASUAL, REPORTS &amp; REGULAR PORTAL &bull; WEEK 38 (15 OCT 2026)</div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="status-badge-live">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>ON TRACK</span>
+          </div>
+          <div class="eta-header-badge">
+            <i class="fa-solid fa-rotate"></i>
+            <span>ETA: Recurring</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. METADATA ROW -->
+      <section class="meta-row">
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-building"></i> Company</span>
+          <span class="meta-val">C Apps</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-layer-group"></i> Initiative</span>
+          <span class="meta-val">Portal Maintenance (#3)</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-folder-open"></i> Project Name</span>
+          <span class="meta-val">Casual, Reports &amp; Regular</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-users"></i> Assigned Teams</span>
+          <span class="meta-val">Arshad, Sajilan &amp; Anushan</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-calendar"></i> Cadence</span>
+          <span class="meta-val">Weekly Recurring SLA</span>
+        </div>
+        <div class="meta-col">
+          <span class="meta-lbl"><i class="fa-solid fa-calendar-days"></i> Week Ending</span>
+          <span class="meta-val">16 October 2026</span>
+        </div>
+      </section>
+
+      <!-- 3. MAIN GRID (6 PANELS) -->
+      <main class="main-grid">
+
+        <!-- PANEL 1: THREE POD STREAMS & DIVISION -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-network-wired"></i>
+            <span>1. Pod Streams &amp; Scope Division</span>
+          </div>
+          <div class="panel-body">
+            <!-- Stream 1 -->
+            <div class="stream-item">
+              <div class="stream-hdr-row">
+                <span class="stream-title"><i class="fa-solid fa-users"></i> Casual Portal</span>
+                <span class="stream-badge badge-arshad">Team Arshad</span>
+              </div>
+              <div class="stream-desc">Ad-hoc public bookings, session management, checkout flow &amp; IWC authentication.</div>
+            </div>
+            <!-- Stream 2 -->
+            <div class="stream-item">
+              <div class="stream-hdr-row">
+                <span class="stream-title"><i class="fa-solid fa-chart-pie"></i> Report Modules</span>
+                <span class="stream-badge badge-arshad">Team Arshad</span>
+              </div>
+              <div class="stream-desc">Financial reporting, Aged Debtor reports (including WCC Bond CR) &amp; query performance.</div>
+            </div>
+            <!-- Stream 3 -->
+            <div class="stream-item">
+              <div class="stream-hdr-row">
+                <span class="stream-title"><i class="fa-solid fa-calendar-days"></i> Regular Portal</span>
+                <span class="stream-badge badge-sajilan">Team Sajilan &amp; Anushan</span>
+              </div>
+              <div class="stream-desc">Recurring venue bookings, schedule conflicts, patron management &amp; form stability.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: CURRENT SPRINT FOCUS -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>2. Current Sprint Focus</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li><strong>Casual Portal:</strong> Session persistence fixes under high concurrent booking traffic.</li>
+              <li><strong>Report Modules:</strong> Query optimization for Aged Debtor reports and WCC invoice date logic.</li>
+              <li><strong>Regular Portal:</strong> Mobile browser responsiveness and date-picker edge cases.</li>
+              <li><strong>SLA &amp; Uptime:</strong> Maintaining &gt;99.9% uptime with zero critical severity defect leaks.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 3: OBJECTIVES & BUSINESS VALUE -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>3. Objectives &amp; Value</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li><strong>High Availability:</strong> Robust uptime across customer and council self-service portals.</li>
+              <li><strong>Financial Precision:</strong> Flawless debtor reporting ensuring municipal audit compliance.</li>
+              <li><strong>Prompt Defect Resolution:</strong> Fast turnaround on customer-submitted bug reports.</li>
+              <li><strong>Cross-Team Synergy:</strong> Unified coordination between Team Arshad, Sajilan, and Anushan.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 4: DELIVERED THIS WEEK -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>4. Delivered This Week</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li>Patched casual portal booking session expiration for concurrent users.</li>
+              <li>Completed query refactor on Aged Debtor reports, cutting load time by 35%.</li>
+              <li>Verified mobile calendar time-slot alignment across iOS Safari &amp; Android Chrome.</li>
+              <li>Resolved 12 operational support tickets with 100% SLA compliance.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- PANEL 5: KEY MAINTENANCE METRICS & SLAS -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>5. Maintenance Metrics &amp; SLAs</span>
+          </div>
+          <div class="panel-body">
+            <table class="table-compact">
+              <thead>
+                <tr>
+                  <th>Stream</th>
+                  <th>Lead</th>
+                  <th>Open Bugs</th>
+                  <th>SLA</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Casual Portal</td>
+                  <td>Arshad</td>
+                  <td>2 Low</td>
+                  <td style="color:#16a34a; font-weight:800;">100%</td>
+                  <td style="color:#16a34a; font-weight:800;">On Track</td>
+                </tr>
+                <tr>
+                  <td>Report Modules</td>
+                  <td>Arshad</td>
+                  <td>1 Low</td>
+                  <td style="color:#16a34a; font-weight:800;">100%</td>
+                  <td style="color:#16a34a; font-weight:800;">On Track</td>
+                </tr>
+                <tr>
+                  <td>Regular Portal</td>
+                  <td>Sajilan</td>
+                  <td>3 Low</td>
+                  <td style="color:#16a34a; font-weight:800;">100%</td>
+                  <td style="color:#16a34a; font-weight:800;">On Track</td>
+                </tr>
+                <tr>
+                  <td>Platform Sync</td>
+                  <td>Anushan</td>
+                  <td>0 Pending</td>
+                  <td style="color:#16a34a; font-weight:800;">100%</td>
+                  <td style="color:#16a34a; font-weight:800;">On Track</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- PANEL 6: UPCOMING SCHEDULED ACTIVITIES -->
+        <article class="panel-box">
+          <div class="panel-hdr">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>6. Upcoming Activities</span>
+          </div>
+          <div class="panel-body">
+            <ul class="bullet-list">
+              <li><strong>WCC Bond Implementation:</strong> Rollout of Aged Debtor Bond report CR (Target: 19 Oct).</li>
+              <li><strong>Database Vacuuming &amp; Index Rebuild:</strong> Scheduled maintenance window on weekend.</li>
+              <li><strong>Pre-Release Regression:</strong> Full regression suite run across Casual &amp; Regular portals.</li>
+              <li><strong>Security Patch Verification:</strong> Validation of latest dependency security patches.</li>
+            </ul>
+          </div>
+        </article>
+
+      </main>
+
+      <!-- 4. FOOTER -->
+      <footer class="footer-bar">
+        <div>C APPS PORTFOLIO &bull; PORTAL MAINTENANCE &amp; RELIABILITY &bull; CASUAL, REPORTS &amp; REGULAR</div>
+        <div>CONFIDENTIAL INTERNAL USE ONLY &bull; CADENCE: WEEKLY RECURRING SLA</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('Portal_Maintenance_Weekly_Visibility_Card.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'Portal_Maintenance_Weekly_Visibility_Card.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
