@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneNex | Team B Backend Delivery Plan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1120px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .nav-pill-btn {
+      padding: 6px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #94a3b8;
+      background: #0f172a;
+      border: 1px solid #334155;
+      transition: all 0.2s ease;
+    }
+    .nav-pill-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    .nav-pill-btn:hover:not(.active) {
+      color: #f1f5f9;
+      border-color: #64748b;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    /* CARD CONTAINER */
+    #viewport {
+      width: 1120px;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .delivery-card, .report-card {
+      width: 1120px;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      padding: 22px 26px 20px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: #0f172a;
+    }
+
+    /* 1. HEADER */
+    .plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .logo-num-icon {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #ff7849, #ea580c);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 900;
+      box-shadow: 0 2px 6px rgba(234, 88, 12, 0.4);
+      border: 2px solid #ffffff;
+      position: relative;
+    }
+
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title-row {
+      font-size: 32px;
+      font-weight: 900;
+      color: #071e3d;
+      letter-spacing: -0.8px;
+      line-height: 1;
+    }
+    .logo-title-row span.nex {
+      color: #ea580c;
+    }
+
+    .logo-tagline {
+      font-size: 10px;
+      font-weight: 800;
+      color: #64748b;
+      margin-top: 2px;
+      letter-spacing: 0.2px;
+    }
+
+    .plan-title-block {
+      border-left: 2px solid #cbd5e1;
+      padding-left: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan-main-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #071e3d;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    .plan-subtitle {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #475569;
+      margin-top: 3px;
+    }
+
+    .planning-badge {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      border-radius: 6px;
+      padding: 6px 12px;
+      text-align: right;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #92400e;
+      line-height: 1.3;
+      max-width: 220px;
+    }
+
+    /* 2. MILESTONES RIBBON */
+    .milestones-ribbon {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .milestone-pill {
+      background: #e0f2fe;
+      border: 1.5px solid #bae6fd;
+      border-radius: 6px;
+      padding: 8px 14px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0369a1;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 1px 3px rgba(3, 105, 161, 0.08);
+    }
+
+    /* 3. PHASE 0 & 1 STRIP */
+    .phases-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .phase-strip-box {
+      background: #f0fdfa;
+      border: 1px solid #ccfbf1;
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .phase-strip-hdr {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f766e;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+
+    .phase-strip-desc {
+      font-size: 10px;
+      font-weight: 600;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    /* GENERAL SECTION CARD STYLING */
+    .section-block {
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sec-hdr {
+      padding: 6px 12px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 12.5px;
+      letter-spacing: 0.3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sec-hdr-sub {
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .sec-hdr.green { background: #0d9488; }
+    .sec-hdr.amber { background: #d97706; }
+    .sec-hdr.blue  { background: #2563eb; }
+    .sec-hdr.purple{ background: #7c3aed; }
+    .sec-hdr.teal  { background: #0f766e; }
+    .sec-hdr.wine  { background: #991b1b; }
+    .sec-hdr.navy  { background: #1e3a8a; }
+
+    /* TABLES */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+    }
+
+    .data-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-bottom: 1.5px solid #cbd5e1;
+      text-align: left;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .data-table td {
+      padding: 3.5px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      line-height: 1.25;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr.total-row {
+      background: #f8fafc;
+      font-weight: 900;
+      border-top: 1.5px solid #cbd5e1;
+    }
+    .data-table tr.total-row td {
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .td-id {
+      font-weight: 800;
+      color: #0f766e;
+      white-space: nowrap;
+      width: 70px;
+    }
+    .amber-table .td-id { color: #b45309; }
+    .blue-table .td-id  { color: #1d4ed8; }
+    .purple-table .td-id{ color: #6d28d9; }
+
+    .td-hrs {
+      text-align: right;
+      font-weight: 800;
+      width: 65px;
+      white-space: nowrap;
+    }
+
+    .td-target {
+      text-align: right;
+      font-weight: 700;
+      color: #475569;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    /* NOTES STRIPS BELOW TABLES */
+    .sec-note-strip {
+      padding: 5px 10px;
+      font-size: 9.5px;
+      line-height: 1.35;
+      font-weight: 600;
+      border-top: 1px solid #e2e8f0;
+    }
+    .sec-note-strip.green  { background: #f0fdf4; color: #166534; border-color: #dcfce7; }
+    .sec-note-strip.amber  { background: #fffbeb; color: #92400e; border-color: #fef3c7; }
+    .sec-note-strip.blue   { background: #eff6ff; color: #1e40af; border-color: #dbeafe; }
+    .sec-note-strip.purple { background: #faf5ff; color: #6b21a8; border-color: #f3e8ff; }
+    .sec-note-strip.teal   { background: #f0fdfa; color: #115e59; border-color: #ccfbf1; }
+
+    .sec-note-bullets {
+      padding: 6px 12px;
+      font-size: 9.5px;
+      line-height: 1.4;
+      font-weight: 600;
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .sec-note-bullets li {
+      position: relative;
+      padding-left: 12px;
+    }
+    .sec-note-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+    }
+
+    /* 4. TWO-COL GRID: FOUNDATION & STAYS CORE */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    /* CAPACITY TABLE */
+    .cap-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10px;
+    }
+    .cap-table th {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 800;
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      text-align: left;
+    }
+    .cap-table td {
+      padding: 4px 8px;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .cap-table td.num {
+      text-align: right;
+    }
+
+    /* BOTTOM CONTROLS & GATES ROW */
+    .controls-gates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .control-box-body {
+      padding: 8px 12px;
+      font-size: 10px;
+      line-height: 1.45;
+      font-weight: 600;
+      flex: 1;
+    }
+    .control-box-body.wine { background: #fff1f2; color: #881337; }
+    .control-box-body.navy { background: #eff6ff; color: #1e3a8a; }
+
+    .control-box-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .control-box-body ul li {
+      position: relative;
+      padding-left: 12px;
+    }
+    .control-box-body ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+    }
+
+    /* FOOTER NOTE */
+    .plan-footer-note {
+      text-align: center;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 700;
+      line-height: 1.4;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <a href="OneNex_Phase_2_Team_B_Delivery_Plan.html" class="nav-pill-btn active">
+        <i class="fa-solid fa-calendar-check"></i> Team B Delivery Plan
+      </a>
+      <a href="../scope document/OneNex_2.0_Monthly_Production_Release_Roadmap.html" class="nav-pill-btn">
+        <i class="fa-solid fa-map"></i> OneNex 2.0 Roadmap
+      </a>
+      <a href="../scope document/OneNex_Phase_2_Scope_Architecture.html" class="nav-pill-btn">
+        <i class="fa-solid fa-cubes"></i> Architecture Spec
+      </a>
+      <a href="OneNex_Phase_2_Team_B_Weekly_Visibility_Card_09.10.2026.html" class="nav-pill-btn">
+        <i class="fa-solid fa-chart-line"></i> Team B Card (09 Oct)
+      </a>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Delivery Plan JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="reportCard" class="delivery-card report-card">
+
+      <!-- 1. HEADER SECTION -->
+      <header class="plan-header">
+        <div class="brand-wrap">
+          <div class="brand-logo-badge">
+            <div class="logo-num-icon">1</div>
+            <div class="logo-text-group">
+              <div class="logo-title-row">ne<span class="nex">Nex</span></div>
+              <div class="logo-tagline">The AI Platform for Experience Businesses.</div>
+            </div>
+          </div>
+
+          <div class="plan-title-block">
+            <h1 class="plan-main-title">OneNex | Team B Backend Delivery Plan</h1>
+            <div class="plan-subtitle">AI-assisted delivery &bull; Individual module budgets &bull; Backend scope</div>
+          </div>
+        </div>
+
+        <div class="planning-badge">
+          Planning budgets &bull;<br>Confirm through sprint task estimates
+        </div>
+      </header>
+
+      <!-- 2. MAJOR RELEASE MILESTONES RIBBON -->
+      <section class="milestones-ribbon">
+        <div class="milestone-pill">
+          <i class="fa-solid fa-flag-checkered"></i> 29 JAN 2027 &mdash; CORE FUNCTIONAL QA
+        </div>
+        <div class="milestone-pill">
+          <i class="fa-solid fa-rocket"></i> 26 FEB 2027 &mdash; FIRST PRODUCTION RELEASE
+        </div>
+      </section>
+
+      <!-- 3. PHASE 0 & 1 STRIP -->
+      <section class="phases-strip">
+        <div class="phase-strip-box">
+          <div class="phase-strip-hdr">PHASE 0 | 16&ndash;30 SEP 2026 | Architecture &amp; First Code</div>
+          <div class="phase-strip-desc">Solution structure &bull; Shared kernel &bull; EF Core / Dapper &bull; API base &bull; Code quality &bull; First entity, migration &amp; endpoint</div>
+        </div>
+        <div class="phase-strip-box">
+          <div class="phase-strip-hdr">PHASE 1 | 1 OCT&ndash;12 NOV 2026 | Foundation modules</div>
+          <div class="phase-strip-desc">The hour tables below cover proposed forward work from 15 October; they do not restate historical effort.</div>
+        </div>
+      </section>
+
+      <!-- 4. TWO-COL GRID: FOUNDATION (336 h) & STAYS CORE (792 h) -->
+      <div class="two-col-grid">
+
+        <!-- Left: FOUNDATION — 336 h -->
+        <div class="section-block">
+          <div class="sec-hdr green">
+            <span>FOUNDATION &mdash; 336 h</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:65px;">ID</th>
+                <th>Module</th>
+                <th style="text-align:right; width:65px;">Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-id">PL-C1</td><td>Identity, access &amp; membership</td><td class="td-hrs">48</td></tr>
+              <tr><td class="td-id">PL-C2</td><td>Business setup &amp; guided onboarding</td><td class="td-hrs">60</td></tr>
+              <tr><td class="td-id">PL-C3</td><td>Shared customer / guest CRM</td><td class="td-hrs">36</td></tr>
+              <tr><td class="td-id">PL-C4</td><td>Reservation &amp; resource contracts</td><td class="td-hrs">36</td></tr>
+              <tr><td class="td-id">PL-C5</td><td>Billing &amp; payment foundation</td><td class="td-hrs">36</td></tr>
+              <tr><td class="td-id">PL-C6</td><td>Notifications &amp; communication</td><td class="td-hrs">24</td></tr>
+              <tr><td class="td-id">PL-C7</td><td>Integrations &amp; API platform</td><td class="td-hrs">36</td></tr>
+              <tr><td class="td-id">PL-C8</td><td>Inventory / availability foundation</td><td class="td-hrs">36</td></tr>
+              <tr><td class="td-id">PL-C9</td><td>Audit, security &amp; shared utilities</td><td class="td-hrs">24</td></tr>
+              <tr class="total-row">
+                <td colspan="2">Total</td>
+                <td class="td-hrs">336 h</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="sec-note-strip green">
+            Retain file, PDF, tax, currency, roles and owner onboarding. Budgets assume usable existing foundation; reconcile remaining tasks.
+          </div>
+        </div>
+
+        <!-- Right: PHASE 2 — STAYS CORE — 792 h -->
+        <div class="section-block">
+          <div class="sec-hdr amber">
+            <span>PHASE 2 &mdash; STAYS CORE &mdash; 792 h</span>
+            <span class="sec-hdr-sub">13 NOV&ndash;14 JAN | Core API target: 14 Jan</span>
+          </div>
+          <table class="data-table amber-table">
+            <thead>
+              <tr>
+                <th style="width:85px;">ID</th>
+                <th>Module</th>
+                <th style="text-align:right; width:65px;">Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-id">ST-C1</td><td>Property &amp; accommodation</td><td class="td-hrs">48</td></tr>
+              <tr><td class="td-id">ST-C2</td><td>Room types, rooms &amp; inventory</td><td class="td-hrs">72</td></tr>
+              <tr><td class="td-id">ST-C3</td><td>Rates &amp; availability</td><td class="td-hrs">108</td></tr>
+              <tr><td class="td-id">ST-C4</td><td>Reservations</td><td class="td-hrs">144</td></tr>
+              <tr><td class="td-id">ST-C5</td><td>Front desk operations</td><td class="td-hrs">60</td></tr>
+              <tr><td class="td-id">ST-C6</td><td>Check-in / check-out</td><td class="td-hrs">60</td></tr>
+              <tr><td class="td-id">ST-C7</td><td>Guest management</td><td class="td-hrs">60</td></tr>
+              <tr><td class="td-id">ST-C8</td><td>Basic housekeeping</td><td class="td-hrs">60</td></tr>
+              <tr><td class="td-id">ST-C9</td><td>Folio, billing &amp; payments</td><td class="td-hrs">84</td></tr>
+              <tr><td class="td-id">ST-C9 / NA</td><td>Night audit</td><td class="td-hrs">48</td></tr>
+              <tr><td class="td-id">ST-C5 / REP</td><td>Basic reports</td><td class="td-hrs">48</td></tr>
+              <tr class="total-row">
+                <td colspan="2">Total</td>
+                <td class="td-hrs">792 h</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="sec-note-strip amber">
+            NA and REP are work packages. Core QA: 29 Jan.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 5. FEBRUARY PRODUCTION PACKAGE — 540 h -->
+      <div class="section-block">
+        <div class="sec-hdr blue">
+          <span>FEBRUARY PRODUCTION PACKAGE &mdash; 540 h</span>
+        </div>
+        <table class="data-table blue-table">
+          <thead>
+            <tr>
+              <th style="width:75px;">ID</th>
+              <th>Deliverable</th>
+              <th style="text-align:right; width:75px;">Hours</th>
+              <th style="text-align:right; width:110px;">API target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-id">PL-A1</td><td>Simple loyalty, points &amp; rewards</td><td class="td-hrs">96</td><td class="td-target">29 Jan</td></tr>
+            <tr><td class="td-id">ST-A1</td><td>Direct booking &amp; guest web APIs</td><td class="td-hrs">144</td><td class="td-target">5 Feb</td></tr>
+            <tr><td class="td-id">ST-A2</td><td>OTA &amp; channel management</td><td class="td-hrs">180</td><td class="td-target">12 Feb</td></tr>
+            <tr><td class="td-id">REL-01</td><td>Joint integration, UAT &amp; release support</td><td class="td-hrs">120</td><td class="td-target">26 Feb</td></tr>
+            <tr class="total-row">
+              <td colspan="2">Total</td>
+              <td class="td-hrs">540 h</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sec-note-strip blue">
+          <ul class="sec-note-bullets">
+            <li>Loyalty is included in the FIRST production release.</li>
+            <li>Develop February APIs alongside core as dependencies clear; do not wait until January. Onboarding is covered in PL-C2.</li>
+            <li>OTA allowance assumes one provider connector; confirm supported channels, credentials and certification early.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 6. PHASE 3 — MONTHLY DELIVERY — 1,152 h -->
+      <div class="section-block">
+        <div class="sec-hdr purple">
+          <span>PHASE 3 &mdash; MONTHLY DELIVERY &mdash; 1,152 h</span>
+        </div>
+        <table class="data-table purple-table">
+          <thead>
+            <tr>
+              <th style="width:75px;">ID</th>
+              <th>Module</th>
+              <th style="text-align:right; width:75px;">Hours</th>
+              <th style="text-align:right; width:170px;">Production expectation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-id">ST-A3</td><td>Guest self-service APIs</td><td class="td-hrs">120</td><td class="td-target">26 Mar</td></tr>
+            <tr><td class="td-id">ST-A5</td><td>Advanced housekeeping</td><td class="td-hrs">120</td><td class="td-target">26 Mar</td></tr>
+            <tr><td class="td-id">PL-A2</td><td>Engagement &amp; personalisation</td><td class="td-hrs">72</td><td class="td-target">Mar&ndash;Apr</td></tr>
+            <tr><td class="td-id">ST-A4</td><td>Revenue management</td><td class="td-hrs">96</td><td class="td-target">30 Apr</td></tr>
+            <tr><td class="td-id">ST-A6</td><td>Group &amp; corporate</td><td class="td-hrs">96</td><td class="td-target">30 Apr</td></tr>
+            <tr><td class="td-id">ST-A8</td><td>Advanced folio / financial operations</td><td class="td-hrs">96</td><td class="td-target">Apr target</td></tr>
+            <tr><td class="td-id">PL-A3</td><td>Membership &amp; subscriptions</td><td class="td-hrs">72</td><td class="td-target">28 May</td></tr>
+            <tr><td class="td-id">ST-A7</td><td>Meetings, events &amp; banquets</td><td class="td-hrs">120</td><td class="td-target">28 May</td></tr>
+            <tr><td class="td-id">ST-A9</td><td>Maintenance &amp; engineering</td><td class="td-hrs">72</td><td class="td-target">May target</td></tr>
+            <tr><td class="td-id">ST-A10</td><td>Multi-property &amp; Stays analytics</td><td class="td-hrs">96</td><td class="td-target">25 Jun</td></tr>
+            <tr><td class="td-id">PL-A4</td><td>Gift cards &amp; stored value</td><td class="td-hrs">48</td><td class="td-target">Jun target</td></tr>
+            <tr><td class="td-id">PL-A5</td><td>AI copilot &amp; automation</td><td class="td-hrs">72</td><td class="td-target">25 Jun</td></tr>
+            <tr><td class="td-id">PL-A6</td><td>Shared analytics &amp; forecasting</td><td class="td-hrs">72</td><td class="td-target">25 Jun</td></tr>
+            <tr class="total-row">
+              <td colspan="2">TOTAL</td>
+              <td class="td-hrs">1,152 h</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sec-note-strip purple">
+          Later module budgets require scope-level validation. Bring delivery forward when validated capacity permits; retain all capabilities.
+        </div>
+      </div>
+
+      <!-- 7. TEAM CAPACITY & PROTECTED CONTINGENCY -->
+      <div class="section-block">
+        <div class="sec-hdr teal">
+          <span>TEAM CAPACITY &amp; PROTECTED CONTINGENCY</span>
+          <span class="sec-hdr-sub">4 &times; 6 &times; 5 = 120 h/week | Delivery ceiling 96 h | Reserve 24 h</span>
+        </div>
+        <table class="cap-table">
+          <thead>
+            <tr>
+              <th>Period</th>
+              <th style="text-align:right;">Gross capacity</th>
+              <th style="text-align:right;">20% reserve</th>
+              <th style="text-align:right;">Planned work</th>
+              <th style="text-align:right;">Unallocated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15 Oct&ndash;26 Feb</td>
+              <td class="num">2,328 h</td>
+              <td class="num">465.6 h</td>
+              <td class="num">1,668 h</td>
+              <td class="num">194.4 h</td>
+            </tr>
+            <tr>
+              <td>1 Mar&ndash;25 Jun</td>
+              <td class="num">2,040 h</td>
+              <td class="num">408 h</td>
+              <td class="num">1,632 h</td>
+              <td class="num">0 h</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sec-note-strip teal">
+          <ul class="sec-note-bullets">
+            <li>Feb plan: 336 foundation + 792 core + 420 release APIs + 120 release support = 1,668 h.</li>
+            <li>Mar&ndash;Jun: 1,152 modules + 384 Events discovery/start allowance + 96 production support = 1,632 h.</li>
+            <li>Weekday ceilings only. Deduct holidays and leave before commitment; March&ndash;June needs an availability check. Events allowance is not a full engine estimate.</li>
+            <li>Whole-period fit does not validate every milestone; confirm dependency and sprint loading.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 8. DELIVERY CONTROLS & API & RELEASE GATES -->
+      <div class="controls-gates-grid">
+
+        <!-- Left: Delivery Controls -->
+        <div class="section-block">
+          <div class="sec-hdr wine">
+            <span>DELIVERY CONTROLS</span>
+          </div>
+          <div class="control-box-body wine">
+            <ul>
+              <li>1&ndash;3 h tasks</li>
+              <li>Weekly remaining-hours review</li>
+              <li>Reuse shared services</li>
+              <li>AI-generated code reviewed</li>
+              <li>Module tests and documentation included</li>
+              <li>No scope removed</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: API & Release Gates -->
+        <div class="section-block">
+          <div class="sec-hdr navy">
+            <span>API &amp; RELEASE GATES</span>
+          </div>
+          <div class="control-box-body navy">
+            <ul>
+              <li>Contract &rarr; test API &rarr; Team C integration &rarr; joint validation</li>
+              <li>Incremental handovers; final monthly APIs at least 2 weeks before release. Earlier delivery welcome after validation.</li>
+              <li>Team C frontend and Architecture &amp; Release capacity scheduled separately.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 9. FOOTER NOTE -->
+      <footer class="plan-footer-note">
+        Indicative capacity allocations, not measured AI productivity.<br>
+        Confirm task estimates each sprint; escalate any excess without consuming protected contingency.
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('OneNex_Team_B_Backend_Delivery_Plan.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('reportCard') || document.querySelector('.report-card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'OneNex_Team_B_Backend_Delivery_Plan.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

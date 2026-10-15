@@ -165,8 +165,11 @@
         <button class="scope-tab-btn active" id="tabRoadmap" onclick="switchScope('roadmap')">
           <i class="fa-solid fa-map"></i> 1. OneNex 2.0 Release Roadmap
         </button>
+        <button class="scope-tab-btn" id="tabTimeplan" onclick="switchScope('timeplan')">
+          <i class="fa-solid fa-calendar-check"></i> 2. Team B Delivery Timeplan
+        </button>
         <button class="scope-tab-btn" id="tabArch" onclick="switchScope('arch')">
-          <i class="fa-solid fa-cubes"></i> 2. Foundation Microservices Architecture
+          <i class="fa-solid fa-cubes"></i> 3. Microservices Architecture Spec
         </button>
       </div>
     </div>
@@ -183,7 +186,12 @@
       <iframe class="card-frame" id="frameRoadmap" src="OneNex_2.0_Monthly_Production_Release_Roadmap.html"></iframe>
     </div>
 
-    <!-- Pane 2: Foundation Microservices Architecture Spec -->
+    <!-- Pane 2: Team B Backend Delivery Plan (New Timeplan) -->
+    <div class="scope-pane" id="paneTimeplan">
+      <iframe class="card-frame" id="frameTimeplan" src="../Incubator Weekly update/OneNex_Phase_2_Team_B_Delivery_Plan.html" style="height:1400px;"></iframe>
+    </div>
+
+    <!-- Pane 3: Foundation Microservices Architecture Spec -->
     <div class="scope-pane" id="paneArch">
       <iframe class="card-frame" id="frameArch" src="OneNex_Phase_2_Scope_Architecture.html"></iframe>
     </div>
@@ -194,6 +202,7 @@
 
     const tabMap = {
       roadmap: { tabId: 'tabRoadmap', paneId: 'paneRoadmap', frameId: 'frameRoadmap', btnText: 'Export Roadmap JPG' },
+      timeplan: { tabId: 'tabTimeplan', paneId: 'paneTimeplan', frameId: 'frameTimeplan', btnText: 'Export Delivery Plan JPG' },
       arch: { tabId: 'tabArch', paneId: 'paneArch', frameId: 'frameArch', btnText: 'Export Architecture Spec JPG' }
     };
 

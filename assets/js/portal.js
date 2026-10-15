@@ -78,7 +78,7 @@ const DEFAULT_PROJECTS = [
     eta: 'June 2027',
     leads: 'Team B (4 Devs · Foundation Modules) & Team C (Joel, Sopraj, Rashmin, Althaf · Hotel PMS)',
     description: 'Enterprise Microservices Architecture & Foundation Modules — Identity & Auth, Business Core, Multi-Channel Notification, Storage Service, Modular Folio & Billing, plus Hotel PMS R&D and Prototype Development.',
-    highlights: 'W07 (09 Oct 2026): Dual-workstream active. Team B (4 Devs): Admin Business Creation & Identity APIs complete; Business Access Module planned. Team C (Joel, Sopraj, Rashmin, Althaf): Hotel PMS R&D 541/560h consumed (96.6%); Self-onboarding prototype complete. Production Roadmap spans Jan–Jun 2027 with final Release 5 live target in June 2027.',
+    highlights: 'W07 (09 Oct 2026): Dual-workstream active. Team B baselined new Backend Delivery Plan: Foundation (336h), Stays Core (792h), Feb Package (540h), Monthly Delivery (1,152h) through Jun 2027 with 20% protected reserve. Team C: Hotel PMS R&D 541/560h (96.6%). Core QA: 29 Jan; First Production Release: 26 Feb 2027.',
     selectedWeekIndex: 0,
     weeks: [
       {
@@ -92,7 +92,7 @@ const DEFAULT_PROJECTS = [
         consumed: 'Phase 1: 8/30d Used (22d Remaining)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Weekly_Visibility_Card_09.10.2026.html',
         scopeUrl: 'scope document/OneNex_Phase_2_Scope_Hub.html',
-        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html'
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Delivery_Plan.html'
       },
       {
         weekNumber: 7,
@@ -105,7 +105,7 @@ const DEFAULT_PROJECTS = [
         consumed: '96.6% Consumed (541/560h · 121h W7)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_C_Weekly_Visibility_Card_09.10.2026.html',
         scopeUrl: 'scope document/OneNex_Phase_2_Scope_Hub.html',
-        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_09.10.2026.html'
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Delivery_Plan.html'
       },
       {
         weekNumber: 40,
@@ -118,7 +118,7 @@ const DEFAULT_PROJECTS = [
         consumed: '13 Days Used (Phase 1: 3/30d)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_02.10.2026.html',
         scopeUrl: 'scope document/OneNex_Phase_2_Scope_Hub.html',
-        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_02.10.2026.html'
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Delivery_Plan.html'
       },
       {
         weekNumber: 39,
@@ -131,7 +131,7 @@ const DEFAULT_PROJECTS = [
         consumed: '8 Days Used (Phase 0: 8/10d)',
         weeklyUrl: 'Incubator Weekly update/OneNex_Phase_2_Weekly_Visibility_Card_25.09.2026.html',
         scopeUrl: 'scope document/OneNex_Phase_2_Scope_Hub.html',
-        timelineUrl: 'Incubator Weekly update/OneNex_Release_Timeline.html'
+        timelineUrl: 'Incubator Weekly update/OneNex_Phase_2_Team_B_Delivery_Plan.html'
       }
     ]
   },
@@ -289,11 +289,12 @@ try {
     'portal_projects_eta_v1',
     'portal_projects_rsg_v1',
     'portal_projects_onenex2_roadmap_v1',
-    'portal_projects_onenex2_eta_june27_v1'
+    'portal_projects_onenex2_eta_june27_v1',
+    'portal_projects_integ_eta_oct23_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_integ_eta_oct23_v1';
+const STORAGE_KEY = 'portal_projects_onenex2_timeplan_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {
