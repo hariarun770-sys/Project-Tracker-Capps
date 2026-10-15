@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Key Initiatives for Customer Success — Overall Project Summary</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0b1329;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    /* TOP UTILITY / NAV BAR */
+    .top-nav-bar {
+      width: 1536px;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .top-nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #ffffff;
+    }
+
+    .top-nav-title {
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .btn-export-retina {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .btn-export-retina:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+      transform: translateY(-1px);
+    }
+
+    /* VIEWPORT & MASTER CARD CONTAINER */
+    #viewport {
+      width: 1536px;
+      min-width: 1536px;
+      display: flex;
+      justify-content: center;
+    }
+
+    #card, .summary-card {
+      width: 1536px;
+      height: 1024px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      color: #0f172a;
+      padding: 18px 24px 14px 24px;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* 1. TOP HEADER BANNER */
+    .top-header-banner {
+      background: linear-gradient(135deg, #0b2240 0%, #113665 60%, #1e4976 100%);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(11, 34, 64, 0.25);
+    }
+
+    .header-titles h1 {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .header-titles p {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #cbd5e1;
+      margin-top: 3px;
+    }
+
+    .header-brand-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: right;
+    }
+
+    .brand-icon-people {
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #38bdf8;
+    }
+
+    .brand-text-block {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-main-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .brand-sub-tags {
+      font-size: 10px;
+      font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 0.5px;
+    }
+
+    /* 2. TOP GRID: 10 STRATEGIC INITIATIVES (5 COLUMNS x 2 ROWS) */
+    .initiatives-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 8px;
+    }
+
+    .init-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 7px 9px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      position: relative;
+      height: 168px;
+    }
+
+    .init-top-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .init-badge-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .init-title-group {
+      flex: 1;
+    }
+    .init-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.15;
+    }
+    .init-desc {
+      font-size: 8.5px;
+      font-weight: 500;
+      color: #475569;
+      margin-top: 2px;
+      line-height: 1.25;
+    }
+
+    .init-icon-graphic {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .init-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+      margin-top: 3px;
+      overflow-y: auto;
+    }
+    .init-checklist li {
+      font-size: 8.5px;
+      color: #1e293b;
+      font-weight: 600;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .init-checklist li i {
+      font-size: 8px;
+      flex-shrink: 0;
+    }
+
+    /* CARD COLOR PALETTES */
+    .c-blue .init-badge-num { background: #0284c7; }
+    .c-blue .init-icon-graphic { background: #e0f2fe; color: #0284c7; }
+    .c-blue .init-checklist i { color: #0284c7; }
+
+    .c-green .init-badge-num { background: #16a34a; }
+    .c-green .init-icon-graphic { background: #dcfce7; color: #16a34a; }
+    .c-green .init-checklist i { color: #16a34a; }
+
+    .c-purple .init-badge-num { background: #9333ea; }
+    .c-purple .init-icon-graphic { background: #f3e8ff; color: #9333ea; }
+    .c-purple .init-checklist i { color: #9333ea; }
+
+    .c-amber .init-badge-num { background: #d97706; }
+    .c-amber .init-icon-graphic { background: #fef3c7; color: #d97706; }
+    .c-amber .init-checklist i { color: #d97706; }
+
+    .c-rose .init-badge-num { background: #e11d48; }
+    .c-rose .init-icon-graphic { background: #ffe4e6; color: #e11d48; }
+    .c-rose .init-checklist i { color: #e11d48; }
+
+    .c-teal .init-badge-num { background: #0d9488; }
+    .c-teal .init-icon-graphic { background: #ccfbf1; color: #0d9488; }
+    .c-teal .init-checklist i { color: #0d9488; }
+
+    .c-orange .init-badge-num { background: #ea580c; }
+    .c-orange .init-icon-graphic { background: #ffedd5; color: #ea580c; }
+    .c-orange .init-checklist i { color: #ea580c; }
+
+    .c-sky .init-badge-num { background: #0284c7; }
+    .c-sky .init-icon-graphic { background: #e0f2fe; color: #0284c7; }
+    .c-sky .init-checklist i { color: #0284c7; }
+
+    .c-emerald .init-badge-num { background: #059669; }
+    .c-emerald .init-icon-graphic { background: #d1fae5; color: #059669; }
+    .c-emerald .init-checklist i { color: #059669; }
+
+    .c-violet .init-badge-num { background: #7c3aed; }
+    .c-violet .init-icon-graphic { background: #ede9fe; color: #7c3aed; }
+    .c-violet .init-checklist i { color: #7c3aed; }
+
+    /* 3. MIDDLE TEAMS HEADER STRIP */
+    .teams-section-hdr {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 4px;
+      margin-top: 2px;
+    }
+    .teams-section-hdr h2 {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0b2240;
+      letter-spacing: -0.3px;
+    }
+    .teams-section-hdr span {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* 4. BOTTOM GRID: 7 CROSS-FUNCTIONAL TEAMS */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-gap: 8px;
+    }
+
+    .team-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      overflow: hidden;
+      height: 310px;
+    }
+
+    .team-card-hdr {
+      padding: 6px 8px;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .team-card-hdr.blue   { background: #0284c7; }
+    .team-card-hdr.green  { background: #16a34a; }
+    .team-card-hdr.purple { background: #9333ea; }
+    .team-card-hdr.orange { background: #ea580c; }
+    .team-card-hdr.teal   { background: #0d9488; }
+    .team-card-hdr.rose   { background: #e11d48; }
+    .team-card-hdr.gold   { background: #d97706; }
+
+    .team-card-body {
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .team-roster {
+      font-size: 8.5px;
+      color: #334155;
+      line-height: 1.25;
+      border-bottom: 1px dashed #e2e8f0;
+      padding-bottom: 4px;
+    }
+    .team-roster strong {
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .team-projects-title {
+      font-size: 8px;
+      font-weight: 900;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .team-projects-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .team-project-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 4px;
+      font-size: 8px;
+      line-height: 1.2;
+    }
+    .project-name {
+      color: #1e293b;
+      font-weight: 600;
+      flex: 1;
+    }
+    .project-name::before {
+      content: "• ";
+      color: #64748b;
+      font-weight: 900;
+    }
+
+    .eta-pill {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 3px;
+      white-space: nowrap;
+      text-align: right;
+    }
+    .eta-completed  { background: #dcfce7; color: #166534; }
+    .eta-recurring  { background: #f1f5f9; color: #475569; }
+    .eta-target     { background: #ffedd5; color: #9a3412; font-weight: 900; }
+    .eta-pending    { background: #e0f2fe; color: #075985; }
+    .eta-ongoing    { background: #f3e8ff; color: #6b21a8; }
+
+    /* 5. FOOTER VALUE PILLARS */
+    .pillars-footer {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .pillar-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #1e293b;
+    }
+    .pillar-icon-box {
+      width: 22px;
+      height: 22px;
+      background: #0b2240;
+      color: #ffffff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP UTILITY / NAV BAR -->
+  <div class="top-nav-bar">
+    <div class="top-nav-left">
+      <a href="../index.html" class="top-nav-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio Tracker
+      </a>
+      <span class="top-nav-title">
+        <i class="fa-solid fa-sitemap"></i> Key Initiatives &amp; Delivery Teams Portfolio Baseline
+      </span>
+    </div>
+    <div>
+      <button class="btn-export-retina" onclick="exportCardToJpg()">
+        <i class="fa-solid fa-camera"></i> Export Portfolio Summary JPG
+      </button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="card" class="summary-card">
+
+      <!-- 1. TOP HEADER BANNER -->
+      <header class="top-header-banner">
+        <div class="header-titles">
+          <h1>Our Key Initiatives for Customer Success</h1>
+          <p>Enhancing booking experiences, improving efficiency and delivering reliable, scalable and secure solutions.</p>
+        </div>
+
+        <div class="header-brand-right">
+          <div class="brand-icon-people">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="brand-text-block">
+            <span class="brand-main-name">Real Solutions for Real Communities</span>
+            <span class="brand-sub-tags">People &bull; Places &bull; Events</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 2. TOP GRID: 10 KEY STRATEGIC INITIATIVES -->
+      <section class="initiatives-grid">
+
+        <!-- 1. Booking Portal Phase 2 Development -->
+        <article class="init-card c-blue">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">1</div>
+              <div class="init-title-group">
+                <div class="init-title">Booking Portal Phase 2 Development</div>
+                <div class="init-desc">Enhancing the booking experience with new features, better self-service and improved administration.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Customer Management</li>
+            <li><i class="fa-solid fa-circle-check"></i> Overview / Dashboard</li>
+            <li><i class="fa-solid fa-circle-check"></i> Venues &amp; Facilities Setup</li>
+            <li><i class="fa-solid fa-circle-check"></i> Site Template</li>
+            <li><i class="fa-solid fa-circle-check"></i> Bulk Event Extension</li>
+            <li><i class="fa-solid fa-circle-check"></i> SQLD Booking Form migration</li>
+            <li><i class="fa-solid fa-circle-check"></i> SQLD Enquiry Form migration</li>
+            <li><i class="fa-solid fa-circle-check"></i> Other ongoing Phase 2 development</li>
+          </ul>
+        </article>
+
+        <!-- 2. Platform Modernization & Migration -->
+        <article class="init-card c-green">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">2</div>
+              <div class="init-title-group">
+                <div class="init-title">Platform Modernization &amp; Migration</div>
+                <div class="init-desc">Upgrading our technology to a modern, secure and scalable platform for long-term value.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> .NET Core migration for front-end applications</li>
+            <li><i class="fa-solid fa-circle-check"></i> Binary Serialization</li>
+            <li><i class="fa-solid fa-circle-check"></i> Modernization of existing systems</li>
+          </ul>
+        </article>
+
+        <!-- 3. Portal Maintenance & Reliability -->
+        <article class="init-card c-purple">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">3</div>
+              <div class="init-title-group">
+                <div class="init-title">Portal Maintenance &amp; Reliability</div>
+                <div class="init-desc">Keeping our portals and services stable, secure and performing well for our customers.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-gear"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Sydney Web Portal maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Casual Portal maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Regular Portal maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Report module maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Data import tool maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Ongoing bug fixes and testing</li>
+          </ul>
+        </article>
+
+        <!-- 4. Automation & AI -->
+        <article class="init-card c-amber">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">4</div>
+              <div class="init-title-group">
+                <div class="init-title">Automation &amp; AI</div>
+                <div class="init-desc">Improving delivery speed, reducing manual effort and introducing AI-driven capabilities.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-lightbulb"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Deployment Automation &ndash; Phase 2</li>
+            <li><i class="fa-solid fa-circle-check"></i> AI Implementation for Booking Portal Phase 2</li>
+          </ul>
+        </article>
+
+        <!-- 5. NSW Customer Enhancements -->
+        <article class="init-card c-rose">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">5</div>
+              <div class="init-title-group">
+                <div class="init-title">NSW Customer Enhancements</div>
+                <div class="init-desc">Adding new functionality to support NSW customers and expand booking capabilities.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-people-group"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Gift Voucher implementation (for NSW demo)</li>
+            <li><i class="fa-solid fa-circle-check"></i> NSW Seasonal Pass functionality</li>
+          </ul>
+        </article>
+
+        <!-- 6. Security & Authentication -->
+        <article class="init-card c-teal">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">6</div>
+              <div class="init-title-group">
+                <div class="init-title">Security &amp; Authentication</div>
+                <div class="init-desc">Strengthening security and protecting customer data.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> MFA authentication for IWC Booking Portal</li>
+            <li><i class="fa-solid fa-circle-check"></i> Salesforce &amp; Cognito integration maintenance</li>
+            <li><i class="fa-solid fa-circle-check"></i> Ongoing security enhancements</li>
+          </ul>
+        </article>
+
+        <!-- 7. Integration, Data Quality & Import Solutions -->
+        <article class="init-card c-orange">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">7</div>
+              <div class="init-title-group">
+                <div class="init-title">Integration, Data Quality &amp; Imports</div>
+                <div class="init-desc">Ensuring accurate data and seamless integrations across systems.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-database"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Integration configuration setup and monitoring</li>
+            <li><i class="fa-solid fa-circle-check"></i> Red Sea data validation and correction</li>
+            <li><i class="fa-solid fa-circle-check"></i> RSG import tool development</li>
+            <li><i class="fa-solid fa-circle-check"></i> Data import tool maintenance</li>
+          </ul>
+        </article>
+
+        <!-- 8. Client-Specific Enhancements & CRs -->
+        <article class="init-card c-sky">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">8</div>
+              <div class="init-title-group">
+                <div class="init-title">Client-Specific Enhancements &amp; CRs</div>
+                <div class="init-desc">Delivering customer-driven improvements and responding to change requests.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-list-check"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> COGG change requests</li>
+            <li><i class="fa-solid fa-circle-check"></i> NSC Booking Portal bug fixes and testing</li>
+            <li><i class="fa-solid fa-circle-check"></i> DAD public event booking portal improvements</li>
+            <li><i class="fa-solid fa-circle-check"></i> Other client-specific enhancements</li>
+          </ul>
+        </article>
+
+        <!-- 9. Client Hub & Support Experience -->
+        <article class="init-card c-emerald">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">9</div>
+              <div class="init-title-group">
+                <div class="init-title">Client Hub &amp; Support Experience</div>
+                <div class="init-desc">Improving support visibility and delivering a better customer support experience.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Client Hub implementation &ndash; Admin Panel for Support Ticket</li>
+          </ul>
+        </article>
+
+        <!-- 10. Specialized Booking Capabilities -->
+        <article class="init-card c-violet">
+          <div>
+            <div class="init-top-row">
+              <div class="init-badge-num">10</div>
+              <div class="init-title-group">
+                <div class="init-title">Specialized Booking Capabilities</div>
+                <div class="init-desc">Supporting more complex and diverse event and venue use cases.</div>
+              </div>
+              <div class="init-icon-graphic">
+                <i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <ul class="init-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> Bulk event extension</li>
+            <li><i class="fa-solid fa-circle-check"></i> DAD public event booking portal</li>
+            <li><i class="fa-solid fa-circle-check"></i> Additional booking functionality enhancements</li>
+          </ul>
+        </article>
+
+      </section>
+
+      <!-- 3. MIDDLE TEAMS HEADER STRIP -->
+      <div class="teams-section-hdr">
+        <h2>Our Teams and Current Projects</h2>
+        <span>Cross-functional teams working together to deliver our key initiatives.</span>
+      </div>
+
+      <!-- 4. BOTTOM GRID: 7 CROSS-FUNCTIONAL TEAMS -->
+      <section class="teams-grid">
+
+        <!-- Team Paul -->
+        <article class="team-card">
+          <div class="team-card-hdr blue">
+            <i class="fa-solid fa-users"></i> Team Paul
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Paul</div>
+              <div><strong>Members:</strong> Anojan, Divyesh, Thenuja</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">Sydney Web Portal Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Binary Serialization</span>
+                <span class="eta-pill eta-completed">Completed (PR)</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">.NET Core Migration for front-end apps</span>
+                <span class="eta-pill eta-completed">Completed (Val)</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Gov Portal Phase 2 &ndash; RunSheet Implementation</span>
+                <span class="eta-pill eta-target">16 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Bulk Event Extension</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Gopi -->
+        <article class="team-card">
+          <div class="team-card-hdr green">
+            <i class="fa-solid fa-users"></i> Team Gopi
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Gopi</div>
+              <div><strong>Members:</strong> Branavan, Kajitha, Piragash</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">Deployment Automation &ndash; Phase 2</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">AI Implementation for Booking Portal Phase 2</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Gift Voucher Implementation (for NSW Demo)</span>
+                <span class="eta-pill eta-target">13 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">COGG Change Requests</span>
+                <span class="eta-pill eta-target">13 Oct</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Saruja -->
+        <article class="team-card">
+          <div class="team-card-hdr purple">
+            <i class="fa-solid fa-users"></i> Team Saruja
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Saruja</div>
+              <div><strong>Members:</strong> Akeel, Thanaledsumy, Janusika, Thayuran</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">Customer Management</span>
+                <span class="eta-pill eta-target">24 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Overview / Dashboard</span>
+                <span class="eta-pill eta-target">24 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Salesforce &amp; Cognito Integration Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Red Sea Data Validation and Correction</span>
+                <span class="eta-pill eta-target">16 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Red Sea Import Tool Development</span>
+                <span class="eta-pill eta-target">16 Oct</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Sajilan -->
+        <article class="team-card">
+          <div class="team-card-hdr orange">
+            <i class="fa-solid fa-users"></i> Team Sajilan
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Sajilan</div>
+              <div><strong>Members:</strong> Lakshiga, Rengheson, Jenitta, Krishalini</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">DAD Public Event Booking Portal</span>
+                <span class="eta-pill eta-target">16 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Regular Portal Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Event and Programs</span>
+                <span class="eta-pill eta-pending">TBD on 14 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">NSC &ndash; Booking Portal Bug Fixes &amp; Testing</span>
+                <span class="eta-pill eta-ongoing">Ongoing</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Anushan -->
+        <article class="team-card">
+          <div class="team-card-hdr teal">
+            <i class="fa-solid fa-users"></i> Team Anushan
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Anushan</div>
+              <div><strong>Members:</strong> Kajavathanan, Thuvakeran, Pravika, Shangave</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">SQLD Booking Form migration</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">SQLD Enquiry Form migration</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Regular Portal Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Integration Configuration Setup &amp; Monitoring</span>
+                <span class="eta-pill eta-target">16 Oct / 23 Oct</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Arshad -->
+        <article class="team-card">
+          <div class="team-card-hdr rose">
+            <i class="fa-solid fa-users"></i> Team Arshad
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Arshad</div>
+              <div><strong>Members:</strong> Nelaxshan, Thiviya, Reka, Zaxsan</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">Casual Portal Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Report Module Maintenance</span>
+                <span class="eta-pill eta-recurring">Recurring</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">MFA Authentication CR for IWC Booking Portal</span>
+                <span class="eta-pill eta-target">12 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Booking Portal Phase 2 &ndash; Venues &amp; Facilities Setup</span>
+                <span class="eta-pill eta-target">9 Nov</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">WCC &ndash; Include Bond in Aged Debtor Invoice Date Report</span>
+                <span class="eta-pill eta-target">19 Oct</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Team Denojan -->
+        <article class="team-card">
+          <div class="team-card-hdr gold">
+            <i class="fa-solid fa-users"></i> Team Denojan
+          </div>
+          <div class="team-card-body">
+            <div class="team-roster">
+              <div><strong>Lead:</strong> Denojan</div>
+              <div><strong>Members:</strong> Aruran, Ladhurshika, Anuja, Mareenraj, Abilasha</div>
+            </div>
+            <div class="team-projects-title">
+              <span>Current Projects</span>
+              <span>ETA</span>
+            </div>
+            <ul class="team-projects-list">
+              <li class="team-project-row">
+                <span class="project-name">Client Hub Implementation</span>
+                <span class="eta-pill eta-ongoing">R&amp;D Ongoing</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">NSW Seasonal Pass Functionality Implementation</span>
+                <span class="eta-pill eta-target">14 Oct</span>
+              </li>
+              <li class="team-project-row">
+                <span class="project-name">Site Template for Booking Portal</span>
+                <span class="eta-pill eta-completed">Completed</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- 5. FOOTER VALUE PILLARS RIBBON -->
+      <footer class="pillars-footer">
+        <div class="pillar-item">
+          <div class="pillar-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+          <span>Better Customer Experiences</span>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon-box"><i class="fa-solid fa-sliders"></i></div>
+          <span>More Efficient Operations</span>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+          <span>More Reliable and Secure Platforms</span>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon-box"><i class="fa-solid fa-users-viewfinder"></i></div>
+          <span>Expanded Booking Capabilities and Revenue</span>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon-box"><i class="fa-solid fa-handshake"></i></div>
+          <span>Stronger Long-Term Partnerships</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Exporter Scripts for 1-Click Retina JPG Export -->
+  <script src="../assets/js/html2canvas.min.js"></script>
+  <script src="../assets/js/exporter.js"></script>
+  <script>
+    function exportCardToJpg() {
+      if (typeof window.takeCardSnapshot === 'function') {
+        window.takeCardSnapshot('Our_Key_Initiatives_Executive_Summary.jpg');
+      } else if (window.html2canvas) {
+        const card = document.getElementById('card');
+        html2canvas(card, { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' }).then(canvas => {
+          const a = document.createElement('a');
+          a.download = 'Our_Key_Initiatives_Executive_Summary.jpg';
+          a.href = canvas.toDataURL('image/jpeg', 0.95);
+          a.click();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
