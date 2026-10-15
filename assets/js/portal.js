@@ -234,18 +234,18 @@ const DEFAULT_PROJECTS = [
     eta: '16th Oct 2026',
     leads: 'RSG Unified Suite Core Engineering',
     description: 'Enterprise Red Sea Global Import Tool — modernizes and consolidates 4 legacy desktop tools into a single connected, cloud-ready .NET Core pipeline featuring Timeslot Import, Template Generation, Excel Validator, and Bookable Tester.',
-    highlights: 'Week 38 (09 Oct 2026): End-to-end pipeline user journey finalized. Timeslot import parser & validation rules in active development with downloadable error reporting. Porting desktop validator logic into .NET Core. Target Delivery ETA: 16th Oct 2026.',
+    highlights: 'Week 38 (15 Oct 2026): Development Completed ahead of schedule! Timeslot import parser, template generator, validation rules, and downloadable error reporting finalized in .NET Core. Handed over for QA/UAT verification against 16th Oct ETA.',
     selectedWeekIndex: 0,
     weeks: [
       {
         weekNumber: 38,
-        weekLabel: 'Week 38 (09 Oct 2026 · Release 1.0)',
-        weekEnding: '09 Oct 2026',
-        status: 'IN PROGRESS',
-        statusClass: 'blue',
+        weekLabel: 'Week 38 (15 Oct 2026 · Release 1.0)',
+        weekEnding: '16 Oct 2026',
+        status: 'DEV COMPLETED',
+        statusClass: 'green',
         eta: '16th Oct 2026',
         manDays: 'Unified Suite Core Team',
-        consumed: 'Timeslot Import Active',
+        consumed: '100% Dev Completed',
         weeklyUrl: 'Incubator Weekly update/Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.html',
         scopeUrl: 'scope document/Red_Sea_Import_Tool_Scope_Document.html',
         timelineUrl: 'Incubator Weekly update/Red_Sea_Import_Tool_Weekly_Visibility_Card_09.10.2026.html'
@@ -290,11 +290,12 @@ try {
     'portal_projects_rsg_v1',
     'portal_projects_onenex2_roadmap_v1',
     'portal_projects_onenex2_eta_june27_v1',
-    'portal_projects_integ_eta_oct23_v1'
+    'portal_projects_integ_eta_oct23_v1',
+    'portal_projects_onenex2_timeplan_v1'
   ].forEach(k => localStorage.removeItem(k));
 } catch(e) {}
 
-const STORAGE_KEY = 'portal_projects_onenex2_timeplan_v1';
+const STORAGE_KEY = 'portal_projects_rsg_dev_completed_v1';
 let PROJECTS = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 if (!Array.isArray(PROJECTS) || PROJECTS.length === 0) {

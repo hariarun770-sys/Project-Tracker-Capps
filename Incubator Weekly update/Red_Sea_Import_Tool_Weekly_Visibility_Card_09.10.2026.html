@@ -152,8 +152,8 @@
     }
 
     .status-badge-live {
-      background: #f59e0b;
-      color: #0b1f3a;
+      background: #16a34a;
+      color: #ffffff;
       padding: 6px 16px;
       border-radius: 20px;
       font-size: 13px;
@@ -163,7 +163,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
     }
 
     .eta-header-badge {
@@ -306,6 +306,7 @@
     .pipe-step-badge.in-progress { background: #fef3c7; color: #b45309; }
     .pipe-step-badge.not-started { background: #e0f2fe; color: #0369a1; }
     .pipe-step-badge.pending { background: #f1f5f9; color: #64748b; }
+    .pipe-step-badge.completed { background: #dcfce7; color: #166534; }
 
     /* Key-Value table */
     .table-compact {
@@ -396,8 +397,8 @@
 
         <div class="header-right">
           <div class="status-badge-live">
-            <i class="fa-regular fa-clock"></i>
-            <span>IN PROGRESS</span>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>DEV COMPLETED</span>
           </div>
           <div class="eta-header-badge">
             <i class="fa-solid fa-calendar-check"></i>
@@ -448,27 +449,27 @@
               <div class="pipe-step-item">
                 <div class="pipe-step-num">1</div>
                 <div class="pipe-step-title">Timeslot Import</div>
-                <span class="pipe-step-badge in-progress">In Progress</span>
+                <span class="pipe-step-badge completed">Completed</span>
               </div>
               <div class="pipe-step-item">
                 <div class="pipe-step-num">2</div>
                 <div class="pipe-step-title">Database Import Engine</div>
-                <span class="pipe-step-badge in-progress">In Progress</span>
+                <span class="pipe-step-badge completed">Completed</span>
               </div>
               <div class="pipe-step-item">
                 <div class="pipe-step-num">3</div>
                 <div class="pipe-step-title">Template Generate (.NET Core)</div>
-                <span class="pipe-step-badge not-started">Not Started</span>
+                <span class="pipe-step-badge completed">Completed</span>
               </div>
               <div class="pipe-step-item">
                 <div class="pipe-step-num">4</div>
                 <div class="pipe-step-title">Excel Validator (Ported Logic)</div>
-                <span class="pipe-step-badge not-started">Not Started</span>
+                <span class="pipe-step-badge completed">Completed</span>
               </div>
               <div class="pipe-step-item">
                 <div class="pipe-step-num">5</div>
                 <div class="pipe-step-title">Bookable Tester &amp; Package Ext</div>
-                <span class="pipe-step-badge pending">Pending</span>
+                <span class="pipe-step-badge completed">Dev Complete</span>
               </div>
             </div>
           </div>
@@ -572,17 +573,17 @@
                 <tr>
                   <td>Timeslot Import Engine</td>
                   <td>12 Oct 2026</td>
-                  <td style="color:#d97706; font-weight:800;">In Progress</td>
+                  <td style="color:#16a34a; font-weight:800;">Completed</td>
                 </tr>
                 <tr>
                   <td>Validator &amp; Template Gen</td>
                   <td>14 Oct 2026</td>
-                  <td style="color:#2563eb; font-weight:800;">Planned</td>
+                  <td style="color:#16a34a; font-weight:800;">Completed</td>
                 </tr>
                 <tr>
                   <td>Release 1.0 Milestone Go-Live</td>
                   <td><strong>16 Oct 2026</strong></td>
-                  <td style="color:#16a34a; font-weight:800;">ETA: 16th Oct</td>
+                  <td style="color:#16a34a; font-weight:800;">Dev Completed</td>
                 </tr>
               </tbody>
             </table>
